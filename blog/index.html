@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Educational Content | Quantum Shield Labs</title>
+    <meta name="description" content="Expert insights on quantum security, cybersecurity, and emerging tech threats">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css">
+    <link rel="stylesheet" href="../css/styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        body {
+            background: linear-gradient(to bottom, #0f172a, #000);
+            color: white;
+            font-family: 'Inter', sans-serif;
+        }
+        
+        .blog-post-card {
+            background: rgba(30, 41, 59, 0.3);
+            backdrop-filter: blur(10px);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .blog-post-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(59, 130, 246, 0.1);
+        }
+        
+        .tag {
+            background: rgba(59, 130, 246, 0.2);
+            color: #93c5fd;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation (matches your main site) -->
+    <nav class="fixed w-full z-50 py-4 px-6 bg-black/80 backdrop-blur-lg">
+        <div class="container mx-auto flex justify-between items-center">
+            <a href="../index.html" class="flex items-center space-x-2">
+                <i class="fas fa-shield-alt text-blue-500 text-2xl"></i>
+                <span class="text-xl font-bold">Quantum Shield Labs</span>
+            </a>
+            
+            <div class="hidden md:flex space-x-8">
+                <a href="../index.html#services" class="hover:text-blue-500 transition">Services</a>
+                <a href="../index.html#projects" class="hover:text-blue-500 transition">Projects</a>
+                <a href="../index.html#about" class="hover:text-blue-500 transition">About</a>
+                <a href="../index.html#contact" class="hover:text-blue-500 transition">Contact</a>
+                <a href="../index.html" class="hover:text-blue-500 transition">Home</a>
+            </div>
+            
+            <button id="mobile-menu-button" class="md:hidden text-white focus:outline-none">
+                <i class="fas fa-bars text-xl"></i>
+            </button>
+        </div>
+        
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="md:hidden hidden bg-gray-900 bg-opacity-95 backdrop-blur-lg">
+            <div class="container mx-auto px-4 py-4 flex flex-col space-y-4">
+                <a href="../index.html#services" class="block py-2 hover:text-blue-500 transition">Services</a>
+                <a href="../index.html#projects" class="block py-2 hover:text-blue-500 transition">Projects</a>
+                <a href="../index.html#about" class="block py-2 hover:text-blue-500 transition">About</a>
+                <a href="../index.html#contact" class="block py-2 hover:text-blue-500 transition">Contact</a>
+                <a href="../index.html" class="block py-2 hover:text-blue-500 transition">Home</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section (matches your site style) -->
+    <section class="pt-24 pb-12 bg-gradient-to-br from-blue-900/40 via-black/60 to-purple-900/40">
+        <div class="container mx-auto px-4 text-center">
+            <i class="fas fa-graduation-cap text-blue-500 text-5xl mb-6"></i>
+            <h1 class="text-4xl md:text-6xl font-bold mb-6 bg-gradient-to-r from-blue-500 to-purple-500 bg-clip-text text-transparent">
+                Educational Content
+            </h1>
+            <p class="text-xl text-gray-300 max-w-3xl mx-auto">
+                Expert insights on quantum security threats, cybersecurity best practices, 
+                and strategic guidance for the quantum age.
+            </p>
+        </div>
+    </section>
+
+    <!-- Blog Posts Section -->
+    <section class="py-16">
+        <div class="container mx-auto px-4">
+            <div id="blog-posts" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Blog posts will be inserted here by JavaScript -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer (matches your main site) -->
+    <footer class="bg-black/50 backdrop-blur-lg py-8">
+        <div class="container mx-auto px-4">
+            <div class="flex flex-col md:flex-row justify-between items-center">
+                <div class="flex items-center space-x-2 mb-4 md:mb-0">
+                    <i class="fas fa-shield-alt text-blue-500 text-xl"></i>
+                    <span class="text-lg font-semibold">Quantum Shield Labs</span>
+                </div>
+                <div class="flex space-x-6">
+                    <a href="https://github.com/mbennett-labs" class="hover:text-blue-500 transition">
+                        <i class="fab fa-github text-xl"></i>
+                    </a>
+                    <a href="https://www.linkedin.com/in/michael-bennett-a29a93103/" class="hover:text-blue-500 transition">
+                        <i class="fab fa-linkedin text-xl"></i>
+                    </a>
+                </div>
+            </div>
+            <div class="mt-8 text-center text-gray-400">
+                <p>&copy; 2025 Quantum Shield Labs. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="blog-loader.js"></script>
+    <script>
+        // Mobile menu functionality (matches your main site)
+        const mobileMenuButton = document.getElementById('mobile-menu-button');
+        const mobileMenu = document.getElementById('mobile-menu');
+        
+        mobileMenuButton.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+            const icon = mobileMenuButton.querySelector('i');
+            if (mobileMenu.classList.contains('hidden
