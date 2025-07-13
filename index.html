@@ -3,1069 +3,431 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Quantum Shield Labs - Advanced Security Solutions</title>
-    <meta name="description" content="Quantum Shield Labs provides advanced cybersecurity, blockchain, and AI-driven security solutions for the quantum age.">
+    <title>QSL Contact Form - Formspree Integration</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css">
-    <link rel="stylesheet" href="css/styles.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        /* Base styles */
         body {
             background: linear-gradient(to bottom, #0f172a, #000);
             color: white;
             font-family: 'Inter', sans-serif;
         }
         
-        .hero {
-            min-height: 100vh;
-            background: linear-gradient(to bottom right, rgba(30, 58, 138, 0.4), rgba(0, 0, 0, 0.8)), url('https://images.unsplash.com/photo-1639322537228-f710d846310a?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80');
-            background-size: cover;
-            background-position: center;
+        .form-error {
+            border-color: #ef4444 !important;
+            box-shadow: 0 0 0 3px rgba(239, 68, 68, 0.1) !important;
         }
         
-        .service-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 25px rgba(59, 130, 246, 0.1);
+        .form-success {
+            border-color: #10b981 !important;
+            box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.1) !important;
         }
         
-        .navbar {
-            transition: all 0.3s ease;
+        .shake {
+            animation: shake 0.5s ease-in-out;
         }
         
-        .navbar-scrolled {
-            background-color: rgba(0, 0, 0, 0.8);
-            backdrop-filter: blur(10px);
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            25% { transform: translateX(-5px); }
+            75% { transform: translateX(5px); }
         }
         
-        .animate-fade-in {
-            animation: fadeIn 1s ease-in-out;
+        .fade-in {
+            animation: fadeIn 0.5s ease-in-out;
         }
         
         @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(20px); }
+            from { opacity: 0; transform: translateY(10px); }
             to { opacity: 1; transform: translateY(0); }
-        }
-        
-        .profile-image {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
-
-        .project-card {
-            height: 100%;
-            display: flex;
-            flex-direction: column;
-        }
-        
-        .project-img-container {
-            height: 220px;
-            overflow: hidden;
-            position: relative;
-        }
-        
-        .project-img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
-        
-        .project-content {
-            flex-grow: 1;
-            display: flex;
-            flex-direction: column;
-        }
-        
-        .project-description {
-            flex-grow: 1;
-        }
-
-        .launch-banner {
-            background: linear-gradient(270deg, #2563eb, #1e40af);
-            background-size: 200% 200%;
-            animation: gradientAnimation 3s ease infinite;
-        }
-        
-        @keyframes gradientAnimation {
-            0% {background-position: 0% 50%}
-            50% {background-position: 100% 50%}
-            100% {background-position: 0% 50%}
-        }
-        
-        @media (min-width: 768px) {
-            .project-grid > * {
-                display: flex;
-                flex-direction: column;
-            }
         }
     </style>
 </head>
-<body>
-    <!-- Launch Announcement Banner -->
-    <div class="launch-banner text-white py-3 px-4 text-center shadow-lg">
-        <div class="container mx-auto flex flex-col md:flex-row justify-center items-center space-y-2 md:space-y-0 md:space-x-4">
-            <div class="flex items-center">
-                <i class="fas fa-rocket mr-2"></i>
-                <p class="font-medium">Quantum Shield Labs is preparing for official launch in Q3 2025</p>
+<body class="p-8">
+    <div class="max-w-4xl mx-auto">
+        <h1 class="text-3xl font-bold text-center mb-8">
+            <i class="fas fa-shield-alt text-blue-500 mr-3"></i>
+            QSL Contact Form - Formspree Integration
+        </h1>
+        
+        <!-- Contact Section -->
+        <section id="contact" class="py-20">
+            <div class="container mx-auto px-4">
+                <h2 class="text-3xl md:text-4xl font-bold text-center mb-6">Contact Us</h2>
+                <p class="text-center text-gray-300 mb-6 max-w-3xl mx-auto">
+                    Interested in our early access program? Get in touch with our team to discuss your security needs.
+                </p>
+                <div class="text-center max-w-3xl mx-auto bg-blue-900 bg-opacity-10 rounded-lg p-4 mb-12">
+                    <i class="fas fa-info-circle text-blue-400 mr-2"></i>
+                    <span class="text-blue-300">Currently accepting a limited number of early access partnerships.</span>
+                </div>
+                
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 max-w-5xl mx-auto">
+                    <!-- Contact Info -->
+                    <div class="space-y-8">
+                        <div class="flex items-start space-x-4">
+                            <div class="p-3 bg-blue-500 bg-opacity-10 rounded-lg">
+                                <i class="fas fa-phone text-blue-500 text-xl"></i>
+                            </div>
+                            <div>
+                                <h3 class="text-xl font-semibold mb-2">Phone</h3>
+                                <p class="text-gray-300">(240) 659-8286</p>
+                            </div>
+                        </div>
+                        
+                        <div class="flex items-start space-x-4">
+                            <div class="p-3 bg-blue-500 bg-opacity-10 rounded-lg">
+                                <i class="fas fa-envelope text-blue-500 text-xl"></i>
+                            </div>
+                            <div>
+                                <h3 class="text-xl font-semibold mb-2">Email</h3>
+                                <p class="text-gray-300">michael@quantumshieldlabs.dev</p>
+                            </div>
+                        </div>
+
+                        <div class="flex items-start space-x-4">
+                            <div class="p-3 bg-blue-500 bg-opacity-10 rounded-lg">
+                                <i class="fas fa-map-marker-alt text-blue-500 text-xl"></i>
+                            </div>
+                            <div>
+                                <h3 class="text-xl font-semibold mb-2">Location</h3>
+                                <p class="text-gray-300">6814 Westmoreland Ave<br>Takoma Park, Maryland 20912</p>
+                            </div>
+                        </div>
+                        
+                        <!-- Business Hours -->
+                        <div class="mt-8 bg-gray-800 bg-opacity-20 rounded-lg p-6">
+                            <h3 class="text-xl font-semibold mb-4">Business Hours</h3>
+                            <ul class="space-y-2 text-gray-300">
+                                <li class="flex justify-between">
+                                    <span>Monday - Friday:</span>
+                                    <span>9:00 AM - 6:00 PM EST</span>
+                                </li>
+                                <li class="flex justify-between">
+                                    <span>Saturday:</span>
+                                    <span>10:00 AM - 4:00 PM EST</span>
+                                </li>
+                                <li class="flex justify-between">
+                                    <span>Sunday:</span>
+                                    <span>Closed</span>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- Early Access Form with Formspree -->
+                    <div class="bg-gray-900 bg-opacity-20 backdrop-blur-lg rounded-xl p-6 shadow-lg">
+                        <div class="mb-6 bg-blue-900 bg-opacity-20 rounded-lg p-4 border-l-4 border-blue-500">
+                            <h3 class="font-semibold text-lg mb-2">Early Access Application</h3>
+                            <p class="text-gray-300 text-sm">
+                                We're selectively accepting early access partners while we prepare for our full launch. 
+                                Tell us about your organization's security needs below.
+                            </p>
+                        </div>
+                        
+                        <!-- Status Messages -->
+                        <div id="form-messages" class="mb-4"></div>
+                        
+                        <!-- REPLACE 'YOUR_FORM_ID' WITH YOUR ACTUAL FORMSPREE FORM ID -->
+                        <form 
+                            action="https://formspree.io/f/YOUR_FORM_ID" 
+                            method="POST" 
+                            class="space-y-6" 
+                            id="contact-form"
+                        >
+                            <!-- Hidden fields for Formspree -->
+                            <input type="hidden" name="_subject" value="QSL Early Access Application">
+                            <input type="hidden" name="_next" value="thank-you">
+                            <input type="hidden" name="_captcha" value="false">
+                            
+                            <div>
+                                <label for="name" class="block text-sm font-medium mb-2">Name *</label>
+                                <input
+                                    id="name"
+                                    name="name"
+                                    type="text"
+                                    required
+                                    class="w-full px-4 py-3 bg-gray-800 bg-opacity-50 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all duration-300"
+                                    placeholder="Your name"
+                                />
+                                <div class="error-message text-red-400 text-sm mt-1 hidden"></div>
+                            </div>
+                            
+                            <div>
+                                <label for="email" class="block text-sm font-medium mb-2">Email *</label>
+                                <input
+                                    id="email"
+                                    name="email"
+                                    type="email"
+                                    required
+                                    class="w-full px-4 py-3 bg-gray-800 bg-opacity-50 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all duration-300"
+                                    placeholder="your@email.com"
+                                />
+                                <div class="error-message text-red-400 text-sm mt-1 hidden"></div>
+                            </div>
+                            
+                            <div>
+                                <label for="company" class="block text-sm font-medium mb-2">Company</label>
+                                <input
+                                    id="company"
+                                    name="company"
+                                    type="text"
+                                    class="w-full px-4 py-3 bg-gray-800 bg-opacity-50 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all duration-300"
+                                    placeholder="Your organization"
+                                />
+                                <div class="error-message text-red-400 text-sm mt-1 hidden"></div>
+                            </div>
+                            
+                            <div>
+                                <label for="message" class="block text-sm font-medium mb-2">Security Needs *</label>
+                                <textarea
+                                    id="message"
+                                    name="message"
+                                    required
+                                    class="w-full px-4 py-3 bg-gray-800 bg-opacity-50 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 h-32 transition-all duration-300"
+                                    placeholder="Briefly describe your security challenges and requirements"
+                                ></textarea>
+                                <div class="error-message text-red-400 text-sm mt-1 hidden"></div>
+                            </div>
+                            
+                            <button
+                                type="submit"
+                                id="submit-btn"
+                                class="w-full bg-blue-600 hover:bg-blue-700 text-white py-3 rounded-lg font-semibold transition-all duration-300 transform hover:scale-105"
+                            >
+                                <span id="btn-text">Apply for Early Access</span>
+                                <i id="btn-spinner" class="fas fa-spinner fa-spin ml-2 hidden"></i>
+                            </button>
+                        </form>
+                    </div>
+                </div>
             </div>
-            <a href="#contact" class="inline-block bg-white bg-opacity-20 hover:bg-opacity-30 px-4 py-1 rounded-full text-sm transition">
-                Join Early Access
-            </a>
-        </div>
+        </section>
     </div>
-
-    <!-- Navigation -->
-    <nav id="navbar" class="fixed w-full z-50 py-4 px-6">
-        <div class="container mx-auto flex justify-between items-center">
-            <a href="#" class="flex items-center space-x-2">
-                <i class="fas fa-shield-alt text-blue-500 text-2xl"></i>
-                <span class="text-xl font-bold">Quantum Shield Labs</span>
-            </a>
-            
-            <div class="hidden md:flex space-x-8">
-                <a href="#services" class="hover:text-blue-500 transition">Services</a>
-                <a href="#projects" class="hover:text-blue-500 transition">Projects</a>
-                <a href="#about" class="hover:text-blue-500 transition">About</a>
-                <a href="#resources" class="hover:text-blue-500 transition">Resources</a>
-                <a href="https://quantumshieldlabs.dev/blog/" class="hover:text-blue-500 transition flex items-center">
-                    <i class="fas fa-graduation-cap mr-2"></i>Educational Content
-                </a>
-                <a href="#roadmap" class="hover:text-blue-500 transition">Launch Roadmap</a>
-                <a href="#contact" class="hover:text-blue-500 transition">Contact</a>
-            </div>
-            
-            <button id="mobile-menu-button" class="md:hidden text-white focus:outline-none">
-                <i class="fas fa-bars text-xl"></i>
-            </button>
-        </div>
-        
-        <!-- Mobile Menu -->
-        <div id="mobile-menu" class="md:hidden hidden bg-gray-900 bg-opacity-95 backdrop-blur-lg">
-            <div class="container mx-auto px-4 py-4 flex flex-col space-y-4">
-                <a href="#services" class="block py-2 hover:text-blue-500 transition">Services</a>
-                <a href="#projects" class="block py-2 hover:text-blue-500 transition">Projects</a>
-                <a href="#about" class="block py-2 hover:text-blue-500 transition">About</a>
-                <a href="#resources" class="block py-2 hover:text-blue-500 transition">Resources</a>
-                <a href="https://quantumshieldlabs.dev/blog/" class="block py-2 hover:text-blue-500 transition flex items-center">
-                    <i class="fas fa-graduation-cap mr-2"></i>Educational Content
-                </a>
-                <a href="#roadmap" class="block py-2 hover:text-blue-500 transition">Launch Roadmap</a>
-                <a href="#contact" class="block py-2 hover:text-blue-500 transition">Contact</a>
-            </div>
-        </div>
-    </nav>
-
-    <!-- Hero Section -->
-    <section class="hero flex items-center justify-center">
-        <div class="container mx-auto px-4 text-center">
-            <div class="animate-fade-in">
-                <i class="fas fa-shield-alt text-blue-500 text-6xl mb-8"></i>
-                <h1 class="text-5xl md:text-7xl font-bold mb-6 bg-clip-text text-transparent bg-gradient-to-r from-blue-500 to-purple-500">
-                    Quantum Shield Labs
-                </h1>
-                <h2 class="text-2xl md:text-3xl font-semibold mb-6 text-blue-200">
-                    Advanced Security Solutions for the Quantum Age
-                </h2>
-                <p class="text-xl md:text-2xl text-gray-300 mb-12 max-w-3xl mx-auto">
-                    Cybersecurity, blockchain, and AI expertise to protect your digital assets in an evolving technological landscape.
-                </p>
-                
-                <div class="flex flex-col md:flex-row items-center justify-center space-y-4 md:space-y-0 md:space-x-6">
-                    <a href="#services" class="inline-block bg-blue-600 hover:bg-blue-700 text-white px-8 py-4 rounded-full text-lg font-semibold mx-auto transition transform hover:scale-105 shadow-lg hover:shadow-blue-500/30">
-                        <span class="flex items-center justify-center">
-                            <span>Explore Our Services</span>
-                            <i class="fas fa-arrow-right ml-2"></i>
-                        </span>
-                    </a>
-                    <a href="#roadmap" class="inline-block bg-transparent border-2 border-blue-400 hover:border-blue-300 text-white px-8 py-4 rounded-full text-lg font-semibold mx-auto transition transform hover:scale-105">
-                        <span class="flex items-center justify-center">
-                            <span>View Launch Timeline</span>
-                            <i class="fas fa-calendar-alt ml-2"></i>
-                        </span>
-                    </a>
-                </div>
-            </div>
-        </div>
-        
-        <!-- Scroll indicator -->
-        <div class="absolute bottom-8 left-0 right-0 flex justify-center animate-bounce">
-            <div class="w-8 h-12 rounded-full border-2 border-white/30 flex justify-center">
-                <div class="w-1 h-3 bg-white/60 rounded-full mt-2 animate-pulse"></div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Services Section -->
-    <section id="services" class="py-20 bg-black bg-opacity-30">
-        <div class="container mx-auto px-4">
-            <div class="max-w-4xl mx-auto text-center mb-16">
-                <h2 class="text-3xl md:text-4xl font-bold mb-6">Our Services</h2>
-                <p class="text-gray-300 text-lg">
-                    Cutting-edge solutions designed to protect your digital assets and infrastructure 
-                    from emerging cybersecurity threats in the quantum era.
-                </p>
-            </div>
-            
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-5xl mx-auto">
-                <div class="service-card bg-gradient-to-br from-gray-900 to-gray-800 bg-opacity-70 backdrop-blur-lg rounded-xl overflow-hidden shadow-lg transition-all duration-300">
-                    <div class="p-6">
-                        <div class="flex items-start">
-                            <div class="p-3 bg-blue-500 bg-opacity-10 rounded-lg">
-                                <i class="fas fa-shield-alt text-blue-500 text-xl"></i>
-                            </div>
-                            <div class="ml-4">
-                                <h3 class="text-xl font-semibold mb-2">Security Consulting</h3>
-                                <p class="text-gray-400">Comprehensive risk assessments and penetration testing to identify and address vulnerabilities.</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="service-card bg-gradient-to-br from-gray-900 to-gray-800 bg-opacity-70 backdrop-blur-lg rounded-xl overflow-hidden shadow-lg transition-all duration-300">
-                    <div class="p-6">
-                        <div class="flex items-start">
-                            <div class="p-3 bg-blue-500 bg-opacity-10 rounded-lg">
-                                <i class="fas fa-database text-blue-500 text-xl"></i>
-                            </div>
-                            <div class="ml-4">
-                                <h3 class="text-xl font-semibold mb-2">Blockchain Integration</h3>
-                                <p class="text-gray-400">Expert implementation of secure blockchain solutions to enhance transactional integrity.</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="service-card bg-gradient-to-br from-gray-900 to-gray-800 bg-opacity-70 backdrop-blur-lg rounded-xl overflow-hidden shadow-lg transition-all duration-300">
-                    <div class="p-6">
-                        <div class="flex items-start">
-                            <div class="p-3 bg-blue-500 bg-opacity-10 rounded-lg">
-                                <i class="fas fa-brain text-blue-500 text-xl"></i>
-                            </div>
-                            <div class="ml-4">
-                                <h3 class="text-xl font-semibold mb-2">AI-Driven Security</h3>
-                                <p class="text-gray-400">Intelligent threat detection and response systems powered by machine learning algorithms.</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="service-card bg-gradient-to-br from-gray-900 to-gray-800 bg-opacity-70 backdrop-blur-lg rounded-xl overflow-hidden shadow-lg transition-all duration-300">
-                    <div class="p-6">
-                        <div class="flex items-start">
-                            <div class="p-3 bg-blue-500 bg-opacity-10 rounded-lg">
-                                <i class="fas fa-lock text-blue-500 text-xl"></i>
-                            </div>
-                            <div class="ml-4">
-                                <h3 class="text-xl font-semibold mb-2">Quantum Resistance</h3>
-                                <p class="text-gray-400">Future-proof security measures designed to withstand quantum computing threats.</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="mt-16 text-center">
-                <a href="#contact" class="inline-block px-8 py-4 bg-blue-600 hover:bg-blue-700 text-white rounded-lg transition shadow-lg hover:shadow-blue-500/30">
-                    Request a Consultation
-                </a>
-            </div>
-        </div>
-    </section>
-
-    <!-- Projects Section -->
-    <section id="projects" class="py-20">
-        <div class="container mx-auto px-4">
-            <h2 class="text-3xl md:text-4xl font-bold text-center mb-6">Featured Projects</h2>
-            <p class="text-center text-gray-300 mb-16 max-w-3xl mx-auto">
-                Explore our successful implementations that have transformed security postures and operational efficiencies.
-            </p>
-            
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 project-grid">
-                <div class="project-card bg-gray-900/30 rounded-xl overflow-hidden shadow-lg hover:shadow-blue-500/10 transition-all duration-300 transform hover:-translate-y-2">
-                    <div class="project-img-container">
-                        <img src="https://images.unsplash.com/photo-1558494949-ef010cbdcc31?q=80&w=2940&auto=format&fit=crop" alt="AI Calendar Assistant" class="project-img">
-                        <div class="absolute inset-0 bg-gradient-to-t from-gray-900 via-gray-900/60 to-transparent"></div>
-                    </div>
-                    <div class="p-6 project-content">
-                        <h3 class="text-xl font-semibold mb-2">AI Calendar Assistant</h3>
-                        <p class="text-gray-300 text-sm mb-4 project-description">Production AI assistant using HuggingFace transformers for intelligent appointment parsing with 70% confidence.</p>
-                        
-                        <div>
-                            <div class="flex flex-wrap gap-2 mb-4">
-                                <span class="text-xs bg-blue-500/20 text-blue-300 px-2 py-1 rounded-full">Python</span>
-                                <span class="text-xs bg-blue-500/20 text-blue-300 px-2 py-1 rounded-full">HuggingFace</span>
-                                <span class="text-xs bg-blue-500/20 text-blue-300 px-2 py-1 rounded-full">AI/ML</span>
-                            </div>
-                            
-                            <a href="https://github.com/mbennett-labs/ai-assistant-michael" class="flex items-center text-blue-500 hover:text-blue-400 transition-all duration-300">
-                                <span>View Project</span> <i class="fas fa-arrow-right ml-2"></i>
-                            </a>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="project-card bg-gray-900/30 rounded-xl overflow-hidden shadow-lg hover:shadow-blue-500/10 transition-all duration-300 transform hover:-translate-y-2">
-                    <div class="project-img-container">
-                        <img src="https://images.unsplash.com/photo-1639762681057-408e52192e55?q=80&w=2832&auto=format&fit=crop" alt="Ethereum Smart Contracts" class="project-img">
-                        <div class="absolute inset-0 bg-gradient-to-t from-gray-900 via-gray-900/60 to-transparent"></div>
-                    </div>
-                    <div class="p-6 project-content">
-                        <h3 class="text-xl font-semibold mb-2">Ethereum Smart Contracts</h3>
-                        <p class="text-gray-300 text-sm mb-4 project-description">Collection of Ethereum smart contracts with security best practices and gas optimization.</p>
-                        
-                        <div>
-                            <div class="flex flex-wrap gap-2 mb-4">
-                                <span class="text-xs bg-blue-500/20 text-blue-300 px-2 py-1 rounded-full">Blockchain</span>
-                                <span class="text-xs bg-blue-500/20 text-blue-300 px-2 py-1 rounded-full">Solidity</span>
-                                <span class="text-xs bg-blue-500/20 text-blue-300 px-2 py-1 rounded-full">Web3</span>
-                            </div>
-                            
-                            <a href="https://github.com/mbennett-labs/ethereum-smart-contracts" class="flex items-center text-blue-500 hover:text-blue-400 transition-all duration-300">
-                                <span>View Project</span> <i class="fas fa-arrow-right ml-2"></i>
-                            </a>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="project-card bg-gray-900/30 rounded-xl overflow-hidden shadow-lg hover:shadow-blue-500/10 transition-all duration-300 transform hover:-translate-y-2">
-                    <div class="project-img-container">
-                        <img src="https://images.unsplash.com/photo-1614064641938-3bbee52942c7?q=80&w=2940&auto=format&fit=crop" alt="Celestia Light Node" class="project-img">
-                        <div class="absolute inset-0 bg-gradient-to-t from-gray-900 via-gray-900/60 to-transparent"></div>
-                    </div>
-                    <div class="p-6 project-content">
-                        <h3 class="text-xl font-semibold mb-2">Celestia Light Node</h3>
-                        <p class="text-gray-300 text-sm mb-4 project-description">Resource-optimized Celestia Light Node implementation with custom monitoring dashboard.</p>
-                        
-                        <div>
-                            <div class="flex flex-wrap gap-2 mb-4">
-                                <span class="text-xs bg-blue-500/20 text-blue-300 px-2 py-1 rounded-full">Go</span>
-                                <span class="text-xs bg-blue-500/20 text-blue-300 px-2 py-1 rounded-full">Node.js</span>
-                                <span class="text-xs bg-blue-500/20 text-blue-300 px-2 py-1 rounded-full">Blockchain</span>
-                            </div>
-                            
-                            <a href="https://github.com/mbennett-labs/celestia-node-project" class="flex items-center text-blue-500 hover:text-blue-400 transition-all duration-300">
-                                <span>View Project</span> <i class="fas fa-arrow-right ml-2"></i>
-                            </a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="text-center mt-12">
-                <a href="https://github.com/mbennett-labs" class="px-6 py-3 bg-gradient-to-r from-blue-600 to-blue-500 hover:from-blue-700 hover:to-blue-600 text-white rounded-lg shadow-lg hover:shadow-blue-500/30 transition">
-                    View All Projects
-                </a>
-            </div>
-        </div>
-    </section>
-
-    <!-- About Section -->
-    <section id="about" class="py-20 bg-black bg-opacity-30">
-        <div class="container mx-auto px-4">
-            <div class="max-w-4xl mx-auto text-center mb-16">
-                <h2 class="text-3xl md:text-4xl font-bold mb-6">About Us</h2>
-                <p class="text-xl text-gray-300 mb-8">
-                    Quantum Shield Labs was established with a vision to redefine cybersecurity in the age of quantum computing.
-                </p>
-                <div class="bg-gray-900 bg-opacity-50 backdrop-blur-lg rounded-xl p-8 shadow-lg">
-                    <p class="text-gray-300 leading-relaxed">
-                        Founded by seasoned security professionals, we combine expertise in cryptography, blockchain technology, and artificial intelligence to create comprehensive security solutions.
-                    </p>
-                </div>
-            </div>
-            
-            <div class="max-w-4xl mx-auto bg-gray-900/30 backdrop-blur-lg rounded-xl p-8 mb-16">
-                <div class="flex flex-col md:flex-row items-center gap-8">
-                    <div class="md:w-1/3 flex justify-center">
-                        <div class="w-48 h-48 rounded-full overflow-hidden border-4 border-blue-600/30">
-                            <img src="profile2.jpg" alt="Michael Bennett" class="profile-image">
-                        </div>
-                    </div>
-                    <div class="md:w-2/3">
-                        <h3 class="text-2xl font-semibold mb-3">Our Founder</h3>
-                        <p class="text-gray-300 mb-4">
-                            Michael Bennett brings a unique perspective through his diverse career background, including Executive Chef experience and skilled trades.
-                        </p>
-                        <p class="text-gray-300">
-                            This unconventional journey equipped him with distinctive problem-solving approaches that drive innovative security solutions.
-                        </p>
-                        <div class="mt-4">
-                            <a href="https://github.com/mbennett-labs" class="text-blue-400 hover:text-blue-300 flex items-center">
-                                <i class="fab fa-github mr-2"></i> View GitHub Profile
-                            </a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="mb-20">
-                <h3 class="text-2xl font-semibold text-center mb-12">Our Core Values</h3>
-                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-                    <div class="bg-gradient-to-br from-gray-900 to-gray-800 bg-opacity-20 backdrop-blur-lg rounded-xl p-6 shadow-lg hover:shadow-blue-500/10 transition-all duration-300 transform hover:-translate-y-1">
-                        <div class="p-3 bg-blue-500 bg-opacity-10 rounded-lg w-fit mb-4">
-                            <i class="fas fa-shield-alt text-blue-500 text-xl"></i>
-                        </div>
-                        <h4 class="text-xl font-semibold mb-3">Integrity</h4>
-                        <p class="text-gray-400">Unwavering ethical standards and transparency in all engagements.</p>
-                    </div>
-                    
-                    <div class="bg-gradient-to-br from-gray-900 to-gray-800 bg-opacity-20 backdrop-blur-lg rounded-xl p-6 shadow-lg hover:shadow-blue-500/10 transition-all duration-300 transform hover:-translate-y-1">
-                        <div class="p-3 bg-blue-500 bg-opacity-10 rounded-lg w-fit mb-4">
-                            <i class="fas fa-code text-blue-500 text-xl"></i>
-                        </div>
-                        <h4 class="text-xl font-semibold mb-3">Innovation</h4>
-                        <p class="text-gray-400">Continuously pioneering solutions to stay ahead of evolving threats.</p>
-                    </div>
-                    
-                    <div class="bg-gradient-to-br from-gray-900 to-gray-800 bg-opacity-20 backdrop-blur-lg rounded-xl p-6 shadow-lg hover:shadow-blue-500/10 transition-all duration-300 transform hover:-translate-y-1">
-                        <div class="p-3 bg-blue-500 bg-opacity-10 rounded-lg w-fit mb-4">
-                            <i class="fas fa-chart-bar text-blue-500 text-xl"></i>
-                        </div>
-                        <h4 class="text-xl font-semibold mb-3">Excellence</h4>
-                        <p class="text-gray-400">Committed to delivering superior quality in every service and solution.</p>
-                    </div>
-                    
-                    <div class="bg-gradient-to-br from-gray-900 to-gray-800 bg-opacity-20 backdrop-blur-lg rounded-xl p-6 shadow-lg hover:shadow-blue-500/10 transition-all duration-300 transform hover:-translate-y-1">
-                        <div class="p-3 bg-blue-500 bg-opacity-10 rounded-lg w-fit mb-4">
-                            <i class="fas fa-clock text-blue-500 text-xl"></i>
-                        </div>
-                        <h4 class="text-xl font-semibold mb-3">Responsiveness</h4>
-                        <p class="text-gray-400">Security concerns need immediate attention and swift resolution.</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Resources Section -->
-    <section id="resources" class="py-20">
-        <div class="container mx-auto px-4">
-            <div class="max-w-4xl mx-auto text-center mb-12">
-                <h2 class="text-3xl md:text-4xl font-bold mb-6">Resources</h2>
-                <p class="text-lg text-gray-300">
-                    Our resource center is under development. We'll be publishing guides, whitepapers, and tools to help address cybersecurity challenges.
-                </p>
-            </div>
-            
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-5xl mx-auto">
-                <div class="bg-gray-900/30 backdrop-blur-lg rounded-xl overflow-hidden shadow-lg transition-all duration-300 flex flex-col">
-                    <div class="p-6">
-                        <div class="bg-blue-500/10 w-16 h-16 rounded-full flex items-center justify-center mb-6 mx-auto">
-                            <i class="fas fa-file-alt text-blue-500 text-2xl"></i>
-                        </div>
-                        <h3 class="text-xl font-semibold text-center mb-2">Whitepapers</h3>
-                        <p class="text-gray-400 text-center mb-4">In-depth research and analysis of quantum cryptography and blockchain vulnerabilities.</p>
-                        <div class="bg-blue-600/10 rounded-lg p-3 text-center text-blue-300">
-                            <i class="fas fa-clock mr-2"></i> Coming Q3 2025
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="bg-gray-900/30 backdrop-blur-lg rounded-xl overflow-hidden shadow-lg transition-all duration-300 flex flex-col">
-                    <div class="p-6">
-                        <div class="bg-blue-500/10 w-16 h-16 rounded-full flex items-center justify-center mb-6 mx-auto">
-                            <i class="fas fa-video text-blue-500 text-2xl"></i>
-                        </div>
-                        <h3 class="text-xl font-semibold text-center mb-2">Webinars</h3>
-                        <p class="text-gray-400 text-center mb-4">Educational webinars on emerging security threats and quantum-resistant implementations.</p>
-                        <div class="bg-blue-600/10 rounded-lg p-3 text-center text-blue-300">
-                            <i class="fas fa-clock mr-2"></i> Coming Q3 2025
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="bg-gray-900/30 backdrop-blur-lg rounded-xl overflow-hidden shadow-lg transition-all duration-300 flex flex-col">
-                    <div class="p-6">
-                        <div class="bg-blue-500/10 w-16 h-16 rounded-full flex items-center justify-center mb-6 mx-auto">
-                            <i class="fas fa-tools text-blue-500 text-2xl"></i>
-                        </div>
-                        <h3 class="text-xl font-semibold text-center mb-2">Security Tools</h3>
-                        <p class="text-gray-400 text-center mb-4">Open-source security assessment tools and quantum-resistant implementation frameworks.</p>
-                        <div class="bg-blue-600/10 rounded-lg p-3 text-center text-blue-300">
-                            <i class="fas fa-clock mr-2"></i> Coming Q3 2025
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Launch Roadmap Section -->
-    <section id="roadmap" class="py-20 bg-black bg-opacity-30">
-        <div class="container mx-auto px-4">
-            <div class="max-w-4xl mx-auto text-center mb-16">
-                <h2 class="text-3xl md:text-4xl font-bold mb-6">Launch Roadmap</h2>
-                <p class="text-gray-300 text-lg">
-                    Our strategic journey to full operational capability, delivering cutting-edge security solutions to our clients.
-                </p>
-            </div>
-            
-            <div class="max-w-5xl mx-auto">
-                <!-- Timeline -->
-                <div class="relative">
-                    <!-- Timeline line -->
-                    <div class="absolute top-0 left-1/2 w-1 h-full bg-blue-500 bg-opacity-30 transform -translate-x-1/2"></div>
-                    
-                    <!-- Phase 1 -->
-                    <div class="relative z-10 mb-12">
-                        <div class="flex flex-col md:flex-row items-center">
-                            <div class="flex items-center justify-center order-1 md:order-1 w-full md:w-1/2 mb-6 md:mb-0 md:pr-10 text-right">
-                                <div class="bg-gray-900 bg-opacity-70 backdrop-blur-lg p-6 rounded-xl shadow-lg border-l-4 border-blue-400 ml-auto">
-                                    <h3 class="text-xl font-semibold mb-2 text-blue-400">Phase 1: Foundation</h3>
-                                    <p class="text-sm text-blue-300">Q1 2025 - Completed</p>
-                                    <p class="text-gray-300 mt-3">Team formation, core infrastructure development, and initial service offering design.</p>
-                                </div>
-                            </div>
-                            <div class="absolute left-1/2 transform -translate-x-1/2 flex items-center justify-center">
-                                <div class="w-12 h-12 bg-blue-600 border-4 border-gray-900 rounded-full flex items-center justify-center text-white font-bold text-lg">
-                                    1
-                                </div>
-                            </div>
-                            <div class="w-full md:w-1/2 order-2 md:pl-10 invisible md:visible"></div>
-                        </div>
-                    </div>
-                    
-                    <!-- Phase 2 -->
-                    <div class="relative z-10 mb-12">
-                        <div class="flex flex-col md:flex-row items-center">
-                            <div class="w-full md:w-1/2 order-2 md:order-1 md:pr-10 invisible md:visible"></div>
-                            <div class="absolute left-1/2 transform -translate-x-1/2 flex items-center justify-center">
-                                <div class="w-12 h-12 bg-blue-600 border-4 border-gray-900 rounded-full flex items-center justify-center text-white font-bold text-lg">
-                                    2
-                                </div>
-                            </div>
-                            <div class="flex items-center justify-center order-1 md:order-2 w-full md:w-1/2 mb-6 md:mb-0 md:pl-10">
-                                <div class="bg-gray-900 bg-opacity-70 backdrop-blur-lg p-6 rounded-xl shadow-lg border-r-4 border-blue-400">
-                                    <h3 class="text-xl font-semibold mb-2 text-blue-400">Phase 2: Early Access</h3>
-                                    <p class="text-sm text-green-400">Q2 2025 - Current Phase</p>
-                                    <p class="text-gray-300 mt-3">Limited client onboarding, security consulting services, and solution framework testing.</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <!-- Phase 3 -->
-                    <div class="relative z-10 mb-12">
-                        <div class="flex flex-col md:flex-row items-center">
-                            <div class="flex items-center justify-center order-1 md:order-1 w-full md:w-1/2 mb-6 md:mb-0 md:pr-10 text-right">
-                                <div class="bg-gray-900 bg-opacity-70 backdrop-blur-lg p-6 rounded-xl shadow-lg border-l-4 border-gray-600 ml-auto opacity-80">
-                                    <h3 class="text-xl font-semibold mb-2 text-gray-400">Phase 3: Beta Launch</h3>
-                                    <p class="text-sm text-gray-400">Q3 2025</p>
-                                    <p class="text-gray-400 mt-3">Expanded service offerings, partnership announcements, and client case studies.</p>
-                                </div>
-                            </div>
-                            <div class="absolute left-1/2 transform -translate-x-1/2 flex items-center justify-center">
-                                <div class="w-12 h-12 bg-gray-700 border-4 border-gray-900 rounded-full flex items-center justify-center text-white font-bold text-lg">
-                                    3
-                                </div>
-                            </div>
-                            <div class="w-full md:w-1/2 order-2 md:pl-10 invisible md:visible"></div>
-                        </div>
-                    </div>
-                    
-                    <!-- Phase 4 -->
-                    <div class="relative z-10">
-                        <div class="flex flex-col md:flex-row items-center">
-                            <div class="w-full md:w-1/2 order-2 md:order-1 md:pr-10 invisible md:visible"></div>
-                            <div class="absolute left-1/2 transform -translate-x-1/2 flex items-center justify-center">
-                                <div class="w-12 h-12 bg-gray-700 border-4 border-gray-900 rounded-full flex items-center justify-center text-white font-bold text-lg">
-                                    4
-                                </div>
-                            </div>
-                            <div class="flex items-center justify-center order-1 md:order-2 w-full md:w-1/2 mb-6 md:mb-0 md:pl-10">
-                                <div class="bg-gray-900 bg-opacity-70 backdrop-blur-lg p-6 rounded-xl shadow-lg border-r-4 border-gray-600 opacity-80">
-                                    <h3 class="text-xl font-semibold mb-2 text-gray-400">Phase 4: Full Launch</h3>
-                                    <p class="text-sm text-gray-400">Q4 2025</p>
-                                    <p class="text-gray-400 mt-3">Complete service portfolio, global client support, and industry conference participation.</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                
-                <!-- Call to Action -->
-                <div class="mt-20 text-center">
-                    <h3 class="text-2xl font-semibold mb-6">Ready to Join Our Journey?</h3>
-                    <a href="#contact" class="inline-block bg-blue-600 hover:bg-blue-700 text-white px-8 py-4 rounded-lg shadow-lg hover:shadow-blue-500/30 transition">
-                        Apply for Early Access
-                    </a>
-                </div>
-            </div>
-        </div>
-    </section>
-</section>
-<!-- Enhanced Contact Section for index.html with Working Formspree Integration -->
-<!-- Replace your existing contact section with this complete section -->
-
-<section id="contact" class="py-20">
-    <div class="container mx-auto px-4">
-        <h2 class="text-3xl md:text-4xl font-bold text-center mb-6">Contact Us</h2>
-        <p class="text-center text-gray-300 mb-6 max-w-3xl mx-auto">
-            Interested in our early access program? Get in touch with our team to discuss your security needs.
-        </p>
-        <div class="text-center max-w-3xl mx-auto bg-blue-900 bg-opacity-10 rounded-lg p-4 mb-12">
-            <i class="fas fa-info-circle text-blue-400 mr-2"></i>
-            <span class="text-blue-300">Currently accepting a limited number of early access partnerships.</span>
-        </div>
-        
-        <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 max-w-5xl mx-auto">
-            <!-- Contact Information -->
-            <div class="space-y-8">
-                <div class="flex items-start space-x-4">
-                    <div class="p-3 bg-blue-500 bg-opacity-10 rounded-lg">
-                        <i class="fas fa-phone text-blue-500 text-xl"></i>
-                    </div>
-                    <div>
-                        <h3 class="text-xl font-semibold mb-2">Phone</h3>
-                        <p class="text-gray-300">(240) 659-8286</p>
-                    </div>
-                </div>
-                
-                <div class="flex items-start space-x-4">
-                    <div class="p-3 bg-blue-500 bg-opacity-10 rounded-lg">
-                        <i class="fas fa-envelope text-blue-500 text-xl"></i>
-                    </div>
-                    <div>
-                        <h3 class="text-xl font-semibold mb-2">Email</h3>
-                        <p class="text-gray-300">michael@quantumshieldlabs.dev</p>
-                    </div>
-                </div>
-
-                <div class="flex items-start space-x-4">
-                    <div class="p-3 bg-blue-500 bg-opacity-10 rounded-lg">
-                        <i class="fas fa-map-marker-alt text-blue-500 text-xl"></i>
-                    </div>
-                    <div>
-                        <h3 class="text-xl font-semibold mb-2">Location</h3>
-                        <p class="text-gray-300">6814 Westmoreland Ave<br>Takoma Park, Maryland 20912</p>
-                    </div>
-                </div>
-                
-                <!-- Business Hours -->
-                <div class="mt-8 bg-gray-800 bg-opacity-20 rounded-lg p-6">
-                    <h3 class="text-xl font-semibold mb-4">Business Hours</h3>
-                    <ul class="space-y-2 text-gray-300">
-                        <li class="flex justify-between">
-                            <span>Monday - Friday:</span>
-                            <span>9:00 AM - 6:00 PM EST</span>
-                        </li>
-                        <li class="flex justify-between">
-                            <span>Saturday:</span>
-                            <span>10:00 AM - 4:00 PM EST</span>
-                        </li>
-                        <li class="flex justify-between">
-                            <span>Sunday:</span>
-                            <span>Closed</span>
-                        </li>
-                    </ul>
-                </div>
-
-                <!-- Lead Magnet -->
-                <div class="bg-gradient-to-r from-blue-900/30 to-purple-900/30 rounded-lg p-6">
-                    <h3 class="text-lg font-semibold mb-2">Free Security Assessment</h3>
-                    <p class="text-gray-300 text-sm mb-4">
-                        Get a complimentary quantum readiness evaluation for your organization.
-                    </p>
-                    <ul class="text-gray-300 text-sm space-y-1">
-                        <li>✓ Current vulnerability analysis</li>
-                        <li>✓ Quantum threat timeline</li>
-                        <li>✓ Mitigation strategy roadmap</li>
-                    </ul>
-                </div>
-            </div>
-
-            <!-- Working Formspree Contact Form -->
-            <div class="bg-gray-900 bg-opacity-20 backdrop-blur-lg rounded-xl p-6 shadow-lg">
-                <div class="mb-6 bg-blue-900 bg-opacity-20 rounded-lg p-4 border-l-4 border-blue-500">
-                    <h3 class="font-semibold text-lg mb-2">Early Access Application</h3>
-                    <p class="text-gray-300 text-sm">
-                        Help us understand your security needs to provide the most relevant consultation.
-                    </p>
-                </div>
-                
-                <!-- Working Formspree Form -->
-                <form action="https://formspree.io/f/mjkrqvqj" method="POST" class="space-y-6" id="enhanced-contact-form">
-                    <!-- Hidden fields for better email formatting -->
-                    <input type="hidden" name="_subject" value="QSL Early Access Application - New Lead">
-                    <input type="hidden" name="_next" value="https://quantumshieldlabs.dev/thank-you.html">
-                    <input type="hidden" name="_cc" value="michael@quantumshieldlabs.dev">
-                    
-                    <!-- Basic Information -->
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                        <div>
-                            <label for="name" class="block text-sm font-medium mb-2">Name *</label>
-                            <input
-                                id="name"
-                                name="name"
-                                type="text"
-                                required
-                                class="w-full px-4 py-3 bg-gray-800/50 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 border border-gray-600 text-white placeholder-gray-400"
-                                placeholder="Your name"
-                            />
-                        </div>
-                        
-                        <div>
-                            <label for="title" class="block text-sm font-medium mb-2">Job Title</label>
-                            <input
-                                id="title"
-                                name="title"
-                                type="text"
-                                class="w-full px-4 py-3 bg-gray-800/50 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 border border-gray-600 text-white placeholder-gray-400"
-                                placeholder="CTO, CISO, etc."
-                            />
-                        </div>
-                    </div>
-                    
-                    <div>
-                        <label for="email" class="block text-sm font-medium mb-2">Business Email *</label>
-                        <input
-                            id="email"
-                            name="email"
-                            type="email"
-                            required
-                            class="w-full px-4 py-3 bg-gray-800/50 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 border border-gray-600 text-white placeholder-gray-400"
-                            placeholder="you@company.com"
-                        />
-                    </div>
-                    
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                        <div>
-                            <label for="company" class="block text-sm font-medium mb-2">Company *</label>
-                            <input
-                                id="company"
-                                name="company"
-                                type="text"
-                                required
-                                class="w-full px-4 py-3 bg-gray-800/50 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 border border-gray-600 text-white placeholder-gray-400"
-                                placeholder="Your organization"
-                            />
-                        </div>
-                        
-                        <div>
-                            <label for="phone" class="block text-sm font-medium mb-2">Phone</label>
-                            <input
-                                id="phone"
-                                name="phone"
-                                type="tel"
-                                class="w-full px-4 py-3 bg-gray-800/50 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 border border-gray-600 text-white placeholder-gray-400"
-                                placeholder="(555) 123-4567"
-                            />
-                        </div>
-                    </div>
-                    
-                    <!-- Qualification Questions -->
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                        <div>
-                            <label for="industry" class="block text-sm font-medium mb-2">Industry *</label>
-                            <select
-                                name="industry"
-                                id="industry"
-                                required
-                                class="w-full px-4 py-3 bg-gray-800/50 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 border border-gray-600 text-white"
-                            >
-                                <option value="">Select your industry</option>
-                                <option value="healthcare">Healthcare</option>
-                                <option value="financial-services">Financial Services</option>
-                                <option value="government">Government</option>
-                                <option value="technology">Technology</option>
-                                <option value="manufacturing">Manufacturing</option>
-                                <option value="critical-infrastructure">Critical Infrastructure</option>
-                                <option value="defense">Defense/Aerospace</option>
-                                <option value="other">Other</option>
-                            </select>
-                        </div>
-                        
-                        <div>
-                            <label for="company_size" class="block text-sm font-medium mb-2">Company Size</label>
-                            <select
-                                name="company_size"
-                                id="company_size"
-                                class="w-full px-4 py-3 bg-gray-800/50 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 border border-gray-600 text-white"
-                            >
-                                <option value="">Select company size</option>
-                                <option value="1-10">1-10 employees</option>
-                                <option value="11-50">11-50 employees</option>
-                                <option value="51-200">51-200 employees</option>
-                                <option value="201-500">201-500 employees</option>
-                                <option value="501-1000">501-1,000 employees</option>
-                                <option value="1000+">1,000+ employees</option>
-                            </select>
-                        </div>
-                    </div>
-                    
-                    <div>
-                        <label for="message" class="block text-sm font-medium mb-2">Primary Security Concerns *</label>
-                        <textarea
-                            name="message"
-                            id="message"
-                            required
-                            class="w-full px-4 py-3 bg-gray-800/50 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 h-24 border border-gray-600 text-white placeholder-gray-400"
-                            placeholder="What are your main security challenges? (e.g., quantum threat preparation, compliance requirements, data protection)"
-                        ></textarea>
-                    </div>
-                    
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                        <div>
-                            <label for="timeline" class="block text-sm font-medium mb-2">Implementation Timeline</label>
-                            <select
-                                name="timeline"
-                                id="timeline"
-                                class="w-full px-4 py-3 bg-gray-800/50 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 border border-gray-600 text-white"
-                            >
-                                <option value="">Select timeline</option>
-                                <option value="immediate">Immediate (within 3 months)</option>
-                                <option value="short-term">Short-term (3-6 months)</option>
-                                <option value="medium-term">Medium-term (6-12 months)</option>
-                                <option value="long-term">Long-term (12+ months)</option>
-                                <option value="research">Research/Planning phase</option>
-                            </select>
-                        </div>
-                        
-                        <div>
-                            <label for="budget" class="block text-sm font-medium mb-2">Budget Range</label>
-                            <select
-                                name="budget"
-                                id="budget"
-                                class="w-full px-4 py-3 bg-gray-800/50 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 border border-gray-600 text-white"
-                            >
-                                <option value="">Prefer not to specify</option>
-                                <option value="under-25k">Under $25,000</option>
-                                <option value="25k-50k">$25,000 - $50,000</option>
-                                <option value="50k-100k">$50,000 - $100,000</option>
-                                <option value="100k-250k">$100,000 - $250,000</option>
-                                <option value="250k+">$250,000+</option>
-                            </select>
-                        </div>
-                    </div>
-
-                    <!-- Interest Areas -->
-                    <div>
-                        <label class="block text-sm font-medium mb-3">Areas of Interest (Check all that apply)</label>
-                        <div class="grid grid-cols-2 gap-3 text-sm">
-                            <label class="flex items-center">
-                                <input type="checkbox" name="interests" value="quantum-resistant-crypto" class="mr-2 bg-gray-800 border-gray-600 text-blue-600 focus:ring-blue-500">
-                                <span class="text-gray-300">Quantum-resistant cryptography</span>
-                            </label>
-                            <label class="flex items-center">
-                                <input type="checkbox" name="interests" value="security-assessment" class="mr-2 bg-gray-800 border-gray-600 text-blue-600 focus:ring-blue-500">
-                                <span class="text-gray-300">Security assessments</span>
-                            </label>
-                            <label class="flex items-center">
-                                <input type="checkbox" name="interests" value="compliance" class="mr-2 bg-gray-800 border-gray-600 text-blue-600 focus:ring-blue-500">
-                                <span class="text-gray-300">Compliance consulting</span>
-                            </label>
-                            <label class="flex items-center">
-                                <input type="checkbox" name="interests" value="ai-security" class="mr-2 bg-gray-800 border-gray-600 text-blue-600 focus:ring-blue-500">
-                                <span class="text-gray-300">AI security</span>
-                            </label>
-                            <label class="flex items-center">
-                                <input type="checkbox" name="interests" value="blockchain" class="mr-2 bg-gray-800 border-gray-600 text-blue-600 focus:ring-blue-500">
-                                <span class="text-gray-300">Blockchain integration</span>
-                            </label>
-                            <label class="flex items-center">
-                                <input type="checkbox" name="interests" value="training" class="mr-2 bg-gray-800 border-gray-600 text-blue-600 focus:ring-blue-500">
-                                <span class="text-gray-300">Security training</span>
-                            </label>
-                        </div>
-                    </div>
-                    
-                    <!-- Submit Button -->
-                    <button
-                        type="submit"
-                        class="w-full bg-blue-600 hover:bg-blue-700 text-white py-3 rounded-lg font-semibold transition flex items-center justify-center"
-                        id="submit-btn"
-                    >
-                        <i class="fas fa-shield-alt mr-2"></i>
-                        Apply for Early Access
-                    </button>
-                    
-                    <p class="text-xs text-gray-400 text-center">
-                        By submitting this form, you agree to receive communications from Quantum Shield Labs regarding our services. We respect your privacy and will never share your information.
-                    </p>
-                </form>
-            </div>
-        </div>
-    </div>
-</section>
-
-<script>
-// Enhanced form submission handling
-document.getElementById('enhanced-contact-form').addEventListener('submit', function(e) {
-    const submitBtn = document.getElementById('submit-btn');
-    const originalText = submitBtn.innerHTML;
-    
-    submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin mr-2"></i> Submitting Application...';
-    submitBtn.disabled = true;
-    
-    // Form will be handled by Formspree
-    // This just provides user feedback
-    setTimeout(() => {
-        if (!window.location.href.includes('thank-you')) {
-            submitBtn.innerHTML = originalText;
-            submitBtn.disabled = false;
-        }
-    }, 3000);
-});
-
-// Lead scoring client-side (for analytics)
-function calculateLeadScore() {
-    let score = 0;
-    
-    // Industry scoring
-    const industry = document.getElementById('industry').value;
-    if (['healthcare', 'financial-services', 'government', 'defense'].includes(industry)) {
-        score += 30;
-    } else if (['technology', 'critical-infrastructure'].includes(industry)) {
-        score += 20;
-    }
-    
-    // Company size scoring
-    const companySize = document.getElementById('company_size').value;
-    if (['201-500', '501-1000', '1000+'].includes(companySize)) {
-        score += 25;
-    } else if (['51-200'].includes(companySize)) {
-        score += 15;
-    }
-    
-    // Timeline scoring
-    const timeline = document.getElementById('timeline').value;
-    if (['immediate', 'short-term'].includes(timeline)) {
-        score += 20;
-    } else if (timeline === 'medium-term') {
-        score += 10;
-    }
-    
-    // Budget scoring
-    const budget = document.getElementById('budget').value;
-    if (['100k-250k', '250k+'].includes(budget)) {
-        score += 25;
-    } else if (['50k-100k'].includes(budget)) {
-        score += 15;
-    }
-    
-    return score;
-}
-
-// Track lead score for analytics
-document.getElementById('enhanced-contact-form').addEventListener('change', function() {
-    const score = calculateLeadScore();
-    // Send to analytics if you have tracking set up
-    if (typeof gtag !== 'undefined') {
-        gtag('event', 'lead_score_change', {
-            'lead_score': score,
-            'score_category': score >= 70 ? 'high' : score >= 40 ? 'medium' : 'low'
-        });
-    }
-});
-</script>
-
-    <!-- Footer -->
-    <footer class="bg-black bg-opacity-50 backdrop-blur-lg py-8">
-        <div class="container mx-auto px-4">
-            <div class="flex flex-col md:flex-row justify-between items-center">
-                <div class="flex items-center space-x-2 mb-4 md:mb-0">
-                    <i class="fas fa-shield-alt text-blue-500 text-xl"></i>
-                    <span class="text-lg font-semibold">Quantum Shield Labs</span>
-                </div>
-                <div class="flex space-x-6">
-                    <a href="https://github.com/mbennett-labs" class="hover:text-blue-500 transition" aria-label="GitHub">
-                        <i class="fab fa-github text-xl"></i>
-                    </a>
-                    <a href="https://www.linkedin.com/in/michael-bennett-a29a93103/" class="hover:text-blue-500 transition" aria-label="LinkedIn">
-                        <i class="fab fa-linkedin text-xl"></i>
-                    </a>
-                    <a href="#" class="hover:text-blue-500 transition" aria-label="Twitter">
-                        <i class="fab fa-twitter text-xl"></i>
-                    </a>
-                </div>
-            </div>
-            <div class="mt-8 text-center text-gray-400">
-                <p>&copy; 2025 Quantum Shield Labs. All rights reserved.</p>
-                <p class="mt-2 text-sm text-gray-500">
-                    <i class="fas fa-rocket mr-1"></i> Currently in pre-launch phase. Full launch expected Q3 2025.
-                </p>
-            </div>
-        </div>
-    </footer>
 
     <script>
-        // Navigation scroll effect
-        const navbar = document.getElementById('navbar');
-        window.addEventListener('scroll', () => {
-            if (window.scrollY > 50) {
-                navbar.classList.add('navbar-scrolled');
-            } else {
-                navbar.classList.remove('navbar-scrolled');
+        class FormspreeContactForm {
+            constructor() {
+                this.form = document.getElementById('contact-form');
+                this.submitBtn = document.getElementById('submit-btn');
+                this.btnText = document.getElementById('btn-text');
+                this.btnSpinner = document.getElementById('btn-spinner');
+                this.messagesContainer = document.getElementById('form-messages');
+                
+                this.init();
             }
-        });
-        
-        // Mobile menu toggle
-        const mobileMenuButton = document.getElementById('mobile-menu-button');
-        const mobileMenu = document.getElementById('mobile-menu');
-        mobileMenuButton.addEventListener('click', () => {
-            mobileMenu.classList.toggle('hidden');
-            // Change icon based on menu state
-            const icon = mobileMenuButton.querySelector('i');
-            if (mobileMenu.classList.contains('hidden')) {
-                icon.classList.remove('fa-times');
-                icon.classList.add('fa-bars');
-            } else {
-                icon.classList.remove('fa-bars');
-                icon.classList.add('fa-times');
+            
+            init() {
+                // Form submission handler
+                this.form.addEventListener('submit', (e) => this.handleSubmit(e));
+                
+                // Real-time validation
+                const inputs = this.form.querySelectorAll('input, textarea');
+                inputs.forEach(input => {
+                    input.addEventListener('blur', () => this.validateField(input));
+                    input.addEventListener('input', () => this.clearFieldError(input));
+                });
             }
-        });
-        
-        // Close mobile menu when clicking on a link
-        const mobileLinks = mobileMenu.querySelectorAll('a');
-        mobileLinks.forEach(link => {
-            link.addEventListener('click', () => {
-                mobileMenu.classList.add('hidden');
-                const icon = mobileMenuButton.querySelector('i');
-                icon.classList.remove('fa-times');
-                icon.classList.add('fa-bars');
-            });
-        });
-        
-        // Smooth scrolling for navigation links
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
+            
+            async handleSubmit(e) {
                 e.preventDefault();
                 
-                const targetId = this.getAttribute('href');
-                if (targetId === '#') return;
+                // Clear previous messages
+                this.clearMessages();
                 
-                const targetElement = document.querySelector(targetId);
-                if (targetElement) {
-                    window.scrollTo({
-                        top: targetElement.offsetTop - 80, // Offset for fixed navbar
-                        behavior: 'smooth'
-                    });
+                // Validate all fields
+                if (!this.validateForm()) {
+                    this.showError('Please fix the errors above and try again.');
+                    return;
                 }
-            });
-        });
-
-        // Contact form handling
-        const contactForm = document.getElementById('contact-form');
-        if (contactForm) {
-            contactForm.addEventListener('submit', function(e) {
-                e.preventDefault();
                 
-                const submitButton = this.querySelector('button[type="submit"]');
-                const originalText = submitButton.innerHTML;
-                submitButton.innerHTML = '<i class="fas fa-spinner fa-spin mr-2"></i> Sending...';
-                submitButton.disabled = true;
+                // Show loading state
+                this.setLoadingState(true);
                 
-                // Simulate form submission
+                try {
+                    // Submit to Formspree
+                    const response = await fetch(this.form.action, {
+                        method: 'POST',
+                        body: new FormData(this.form),
+                        headers: {
+                            'Accept': 'application/json'
+                        }
+                    });
+                    
+                    if (response.ok) {
+                        this.showSuccess();
+                        this.form.reset();
+                        this.clearAllFieldStates();
+                    } else {
+                        const data = await response.json();
+                        if (data.errors) {
+                            this.handleFormspreeErrors(data.errors);
+                        } else {
+                            throw new Error('Form submission failed');
+                        }
+                    }
+                    
+                } catch (error) {
+                    console.error('Form submission error:', error);
+                    this.showError('There was an error sending your message. Please try again or contact us directly at michael@quantumshieldlabs.dev');
+                } finally {
+                    this.setLoadingState(false);
+                }
+            }
+            
+            validateForm() {
+                const requiredFields = this.form.querySelectorAll('[required]');
+                let isValid = true;
+                
+                requiredFields.forEach(field => {
+                    if (!this.validateField(field)) {
+                        isValid = false;
+                    }
+                });
+                
+                return isValid;
+            }
+            
+            validateField(field) {
+                const value = field.value.trim();
+                let isValid = true;
+                let errorMessage = '';
+                
+                // Required field validation
+                if (field.hasAttribute('required') && !value) {
+                    errorMessage = `${this.getFieldLabel(field)} is required.`;
+                    isValid = false;
+                }
+                
+                // Email validation
+                if (field.type === 'email' && value) {
+                    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+                    if (!emailRegex.test(value)) {
+                        errorMessage = 'Please enter a valid email address.';
+                        isValid = false;
+                    }
+                }
+                
+                // Minimum length for message
+                if (field.name === 'message' && value && value.length < 10) {
+                    errorMessage = 'Please provide more details (at least 10 characters).';
+                    isValid = false;
+                }
+                
+                this.showFieldError(field, errorMessage);
+                return isValid;
+            }
+            
+            handleFormspreeErrors(errors) {
+                errors.forEach(error => {
+                    if (error.field) {
+                        const field = this.form.querySelector(`[name="${error.field}"]`);
+                        if (field) {
+                            this.showFieldError(field, error.message);
+                        }
+                    }
+                });
+                
+                this.showError('Please fix the errors above and try again.');
+            }
+            
+            getFieldLabel(field) {
+                const label = this.form.querySelector(`label[for="${field.id}"]`);
+                return label ? label.textContent.replace('*', '').trim() : field.name;
+            }
+            
+            showFieldError(field, message) {
+                const errorDiv = field.parentNode.querySelector('.error-message');
+                
+                if (message) {
+                    field.classList.add('form-error');
+                    field.classList.remove('form-success');
+                    errorDiv.textContent = message;
+                    errorDiv.classList.remove('hidden');
+                    field.parentNode.classList.add('shake');
+                    setTimeout(() => field.parentNode.classList.remove('shake'), 500);
+                } else {
+                    field.classList.remove('form-error');
+                    if (field.value.trim()) {
+                        field.classList.add('form-success');
+                    }
+                    errorDiv.classList.add('hidden');
+                }
+            }
+            
+            clearFieldError(field) {
+                if (field.value.trim()) {
+                    field.classList.remove('form-error');
+                    const errorDiv = field.parentNode.querySelector('.error-message');
+                    errorDiv.classList.add('hidden');
+                }
+            }
+            
+            clearAllFieldStates() {
+                const fields = this.form.querySelectorAll('input, textarea');
+                fields.forEach(field => {
+                    field.classList.remove('form-success', 'form-error');
+                    const errorDiv = field.parentNode.querySelector('.error-message');
+                    errorDiv.classList.add('hidden');
+                });
+            }
+            
+            setLoadingState(loading) {
+                this.submitBtn.disabled = loading;
+                
+                if (loading) {
+                    this.btnText.textContent = 'Sending...';
+                    this.btnSpinner.classList.remove('hidden');
+                    this.submitBtn.classList.add('opacity-75', 'cursor-not-allowed');
+                } else {
+                    this.btnText.textContent = 'Apply for Early Access';
+                    this.btnSpinner.classList.add('hidden');
+                    this.submitBtn.classList.remove('opacity-75', 'cursor-not-allowed');
+                }
+            }
+            
+            showSuccess() {
+                this.messagesContainer.innerHTML = `
+                    <div class="bg-green-900 bg-opacity-20 border border-green-500 text-green-300 px-4 py-3 rounded-lg fade-in">
+                        <div class="flex items-center">
+                            <i class="fas fa-check-circle mr-3 text-green-400"></i>
+                            <div>
+                                <h4 class="font-semibold">Message Sent Successfully!</h4>
+                                <p class="text-sm">Thank you for your interest in Quantum Shield Labs. We'll get back to you within 24 hours.</p>
+                            </div>
+                        </div>
+                    </div>
+                `;
+                
+                // Clear success message after 10 seconds
                 setTimeout(() => {
-                    submitButton.innerHTML = '<i class="fas fa-check mr-2"></i> Message Sent!';
-                    setTimeout(() => {
-                        submitButton.innerHTML = originalText;
-                        submitButton.disabled = false;
-                        contactForm.reset();
-                    }, 2000);
-                }, 1500);
-            });
+                    this.clearMessages();
+                }, 10000);
+            }
+            
+            showError(message) {
+                this.messagesContainer.innerHTML = `
+                    <div class="bg-red-900 bg-opacity-20 border border-red-500 text-red-300 px-4 py-3 rounded-lg fade-in">
+                        <div class="flex items-center">
+                            <i class="fas fa-exclamation-triangle mr-3 text-red-400"></i>
+                            <div>
+                                <h4 class="font-semibold">Error</h4>
+                                <p class="text-sm">${message}</p>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            }
+            
+            clearMessages() {
+                this.messagesContainer.innerHTML = '';
+            }
         }
+        
+        // Initialize the contact form when the page loads
+        document.addEventListener('DOMContentLoaded', () => {
+            new FormspreeContactForm();
+        });
     </script>
 </body>
 </html>
