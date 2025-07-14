@@ -597,475 +597,386 @@
 <!-- Enhanced Contact Section for index.html with Working Formspree Integration -->
 <!-- Replace your existing contact section with this complete section -->
 
-<section id="contact" class="py-20">
-    <div class="container mx-auto px-4">
-        <h2 class="text-3xl md:text-4xl font-bold text-center mb-6">Contact Us</h2>
-        <p class="text-center text-gray-300 mb-6 max-w-3xl mx-auto">
-            Interested in our early access program? Get in touch with our team to discuss your security needs.
-        </p>
-        <div class="text-center max-w-3xl mx-auto bg-blue-900 bg-opacity-10 rounded-lg p-4 mb-12">
-            <i class="fas fa-info-circle text-blue-400 mr-2"></i>
-            <span class="text-blue-300">Currently accepting a limited number of early access partnerships.</span>
-        </div>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Themed Contact Form - Quantum Shield Labs</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* Match your website's exact styling */
+        body {
+            background: linear-gradient(to bottom, #0f172a, #000);
+            color: white;
+            font-family: 'Inter', sans-serif;
+            padding: 2rem;
+        }
+
+        /* Form styling that matches your dark website theme */
+        .form-input {
+            background-color: rgba(15, 23, 42, 0.8) !important; /* Dark blue-black like your site */
+            backdrop-filter: blur(10px);
+            border: 2px solid rgba(59, 130, 246, 0.2) !important; /* Subtle blue border */
+            color: white !important;
+            border-radius: 0.5rem;
+            padding: 0.75rem 1rem;
+            width: 100%;
+            transition: all 0.3s ease;
+            font-size: 1rem;
+        }
+
+        .form-input:focus {
+            outline: none !important;
+            border-color: #3b82f6 !important; /* Blue focus like your buttons */
+            box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1) !important;
+            background-color: rgba(15, 23, 42, 0.9) !important;
+            backdrop-filter: blur(15px);
+        }
+
+        .form-input::placeholder {
+            color: rgba(156, 163, 175, 0.6) !important; /* Softer placeholder */
+        }
+
+        .form-select {
+            background-color: rgba(15, 23, 42, 0.8) !important; /* Match your site */
+            backdrop-filter: blur(10px);
+            border: 2px solid rgba(59, 130, 246, 0.2) !important;
+            color: white !important;
+            border-radius: 0.5rem;
+            padding: 0.75rem 1rem;
+            width: 100%;
+            transition: all 0.3s ease;
+        }
+
+        .form-select:focus {
+            outline: none !important;
+            border-color: #3b82f6 !important;
+            box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1) !important;
+            backdrop-filter: blur(15px);
+        }
+
+        .form-select option {
+            background-color: #1e293b; /* Dark options */
+            color: white;
+        }
+
+        .checkbox-themed {
+            accent-color: #3b82f6; /* Blue like your buttons */
+            transform: scale(1.2);
+            background-color: rgba(15, 23, 42, 0.8);
+        }
+
+        /* Button that matches your existing buttons */
+        .submit-btn-themed {
+            background: linear-gradient(135deg, #3b82f6, #1d4ed8);
+            border: none;
+            padding: 0.75rem 1.5rem;
+            border-radius: 0.5rem;
+            color: white;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            width: 100%;
+            backdrop-filter: blur(10px);
+        }
+
+        .submit-btn-themed:hover {
+            background: linear-gradient(135deg, #1d4ed8, #1e40af);
+            transform: translateY(-2px) scale(1.02);
+            box-shadow: 0 10px 20px rgba(59, 130, 246, 0.3);
+        }
+
+        .submit-btn-themed:disabled {
+            opacity: 0.7;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        /* Labels that match your text */
+        .form-label {
+            color: white;
+            font-weight: 500;
+            margin-bottom: 0.5rem;
+            display: block;
+            font-size: 0.875rem;
+        }
+
+        /* Container that blends with your sections */
+        .form-container {
+            background: rgba(17, 24, 39, 0.2); /* Match your bg-gray-900/20 */
+            backdrop-filter: blur(10px);
+            border-radius: 1rem;
+            padding: 1.5rem;
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+        }
+    </style>
+</head>
+<body>
+    <div class="max-w-4xl mx-auto">
+        <h1 class="text-3xl font-bold text-center mb-8">Contact Form - Website Theme</h1>
         
-        <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 max-w-5xl mx-auto">
-            <!-- Contact Information -->
-            <div class="space-y-8">
-                <div class="flex items-start space-x-4">
-                    <div class="p-3 bg-blue-500 bg-opacity-10 rounded-lg">
-                        <i class="fas fa-phone text-blue-500 text-xl"></i>
-                    </div>
-                    <div>
-                        <h3 class="text-xl font-semibold mb-2">Phone</h3>
-                        <p class="text-gray-300">(240) 659-8286</p>
-                    </div>
-                </div>
-                
-                <div class="flex items-start space-x-4">
-                    <div class="p-3 bg-blue-500 bg-opacity-10 rounded-lg">
-                        <i class="fas fa-envelope text-blue-500 text-xl"></i>
-                    </div>
-                    <div>
-                        <h3 class="text-xl font-semibold mb-2">Email</h3>
-                        <p class="text-gray-300">michael@quantumshieldlabs.dev</p>
-                    </div>
-                </div>
-
-                <div class="flex items-start space-x-4">
-                    <div class="p-3 bg-blue-500 bg-opacity-10 rounded-lg">
-                        <i class="fas fa-map-marker-alt text-blue-500 text-xl"></i>
-                    </div>
-                    <div>
-                        <h3 class="text-xl font-semibold mb-2">Location</h3>
-                        <p class="text-gray-300">6814 Westmoreland Ave<br>Takoma Park, Maryland 20912</p>
-                    </div>
-                </div>
-                
-                <!-- Business Hours -->
-                <div class="mt-8 bg-gray-800 bg-opacity-20 rounded-lg p-6">
-                    <h3 class="text-xl font-semibold mb-4">Business Hours</h3>
-                    <ul class="space-y-2 text-gray-300">
-                        <li class="flex justify-between">
-                            <span>Monday - Friday:</span>
-                            <span>9:00 AM - 6:00 PM EST</span>
-                        </li>
-                        <li class="flex justify-between">
-                            <span>Saturday:</span>
-                            <span>10:00 AM - 4:00 PM EST</span>
-                        </li>
-                        <li class="flex justify-between">
-                            <span>Sunday:</span>
-                            <span>Closed</span>
-                        </li>
-                    </ul>
-                </div>
-
-                <!-- Lead Magnet -->
-                <div class="bg-gradient-to-r from-blue-900/30 to-purple-900/30 rounded-lg p-6">
-                    <h3 class="text-lg font-semibold mb-2">Free Security Assessment</h3>
-                    <p class="text-gray-300 text-sm mb-4">
-                        Get a complimentary quantum readiness evaluation for your organization.
-                    </p>
-                    <ul class="text-gray-300 text-sm space-y-1">
-                        <li>✓ Current vulnerability analysis</li>
-                        <li>✓ Quantum threat timeline</li>
-                        <li>✓ Mitigation strategy roadmap</li>
-                    </ul>
-                </div>
+        <!-- Contact Form with Website Theme -->
+        <div class="form-container">
+            <div class="mb-6 bg-blue-900 bg-opacity-20 rounded-lg p-4 border-l-4 border-blue-500">
+                <h3 class="font-semibold text-lg mb-2 text-white">Early Access Application</h3>
+                <p class="text-gray-300 text-sm">
+                    Help us understand your security needs to provide the most relevant consultation.
+                </p>
             </div>
-
-            <!-- Working Formspree Contact Form -->
-            <div class="bg-gray-900 bg-opacity-20 backdrop-blur-lg rounded-xl p-6 shadow-lg">
-                <div class="mb-6 bg-blue-900 bg-opacity-20 rounded-lg p-4 border-l-4 border-blue-500">
-                    <h3 class="font-semibold text-lg mb-2">Early Access Application</h3>
-                    <p class="text-gray-300 text-sm">
-                        Help us understand your security needs to provide the most relevant consultation.
-                    </p>
-                </div>
+            
+            <!-- Themed Form -->
+            <form action="https://formspree.io/f/mjkrqvqj" method="POST" class="space-y-6" id="themed-contact-form">
+                <!-- Hidden fields -->
+                <input type="hidden" name="_subject" value="QSL Early Access Application - New Lead">
+                <input type="hidden" name="_next" value="https://quantumshieldlabs.dev/thank-you.html">
+                <input type="hidden" name="_cc" value="michael@quantumshieldlabs.dev">
                 
-                <!-- Working Formspree Form -->
-                <form action="https://formspree.io/f/mjkrqvqj" method="POST" class="space-y-6" id="enhanced-contact-form">
-                    <!-- Hidden fields for better email formatting -->
-                    <input type="hidden" name="_subject" value="QSL Early Access Application - New Lead">
-                    <input type="hidden" name="_next" value="https://quantumshieldlabs.dev/thank-you.html">
-                    <input type="hidden" name="_cc" value="michael@quantumshieldlabs.dev">
-                    
-                    <!-- Basic Information -->
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                        <div>
-                            <label for="name" class="block text-sm font-medium mb-2">Name *</label>
-                            <input
-                                id="name"
-                                name="name"
-                                type="text"
-                                required
-                                class="w-full px-4 py-3 bg-gray-800/50 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 border border-gray-600 text-white placeholder-gray-400"
-                                placeholder="Your name"
-                            />
-                        </div>
-                        
-                        <div>
-                            <label for="title" class="block text-sm font-medium mb-2">Job Title</label>
-                            <input
-                                id="title"
-                                name="title"
-                                type="text"
-                                class="w-full px-4 py-3 bg-gray-800/50 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 border border-gray-600 text-white placeholder-gray-400"
-                                placeholder="CTO, CISO, etc."
-                            />
-                        </div>
-                    </div>
-                    
+                <!-- Basic Information -->
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                     <div>
-                        <label for="email" class="block text-sm font-medium mb-2">Business Email *</label>
+                        <label for="name" class="form-label">Name *</label>
                         <input
-                            id="email"
-                            name="email"
-                            type="email"
+                            id="name"
+                            name="name"
+                            type="text"
                             required
-                            class="w-full px-4 py-3 bg-gray-800/50 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 border border-gray-600 text-white placeholder-gray-400"
-                            placeholder="you@company.com"
+                            class="form-input"
+                            placeholder="Your name"
                         />
                     </div>
                     
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                        <div>
-                            <label for="company" class="block text-sm font-medium mb-2">Company *</label>
-                            <input
-                                id="company"
-                                name="company"
-                                type="text"
-                                required
-                                class="w-full px-4 py-3 bg-gray-800/50 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 border border-gray-600 text-white placeholder-gray-400"
-                                placeholder="Your organization"
-                            />
-                        </div>
-                        
-                        <div>
-                            <label for="phone" class="block text-sm font-medium mb-2">Phone</label>
-                            <input
-                                id="phone"
-                                name="phone"
-                                type="tel"
-                                class="w-full px-4 py-3 bg-gray-800/50 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 border border-gray-600 text-white placeholder-gray-400"
-                                placeholder="(555) 123-4567"
-                            />
-                        </div>
-                    </div>
-                    
-                    <!-- Qualification Questions -->
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                        <div>
-                            <label for="industry" class="block text-sm font-medium mb-2">Industry *</label>
-                            <select
-                                name="industry"
-                                id="industry"
-                                required
-                                class="w-full px-4 py-3 bg-gray-800/50 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 border border-gray-600 text-white"
-                            >
-                                <option value="">Select your industry</option>
-                                <option value="healthcare">Healthcare</option>
-                                <option value="financial-services">Financial Services</option>
-                                <option value="government">Government</option>
-                                <option value="technology">Technology</option>
-                                <option value="manufacturing">Manufacturing</option>
-                                <option value="critical-infrastructure">Critical Infrastructure</option>
-                                <option value="defense">Defense/Aerospace</option>
-                                <option value="other">Other</option>
-                            </select>
-                        </div>
-                        
-                        <div>
-                            <label for="company_size" class="block text-sm font-medium mb-2">Company Size</label>
-                            <select
-                                name="company_size"
-                                id="company_size"
-                                class="w-full px-4 py-3 bg-gray-800/50 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 border border-gray-600 text-white"
-                            >
-                                <option value="">Select company size</option>
-                                <option value="1-10">1-10 employees</option>
-                                <option value="11-50">11-50 employees</option>
-                                <option value="51-200">51-200 employees</option>
-                                <option value="201-500">201-500 employees</option>
-                                <option value="501-1000">501-1,000 employees</option>
-                                <option value="1000+">1,000+ employees</option>
-                            </select>
-                        </div>
-                    </div>
-                    
                     <div>
-                        <label for="message" class="block text-sm font-medium mb-2">Primary Security Concerns *</label>
-                        <textarea
-                            name="message"
-                            id="message"
+                        <label for="title" class="form-label">Job Title</label>
+                        <input
+                            id="title"
+                            name="title"
+                            type="text"
+                            class="form-input"
+                            placeholder="CTO, CISO, etc."
+                        />
+                    </div>
+                </div>
+                
+                <div>
+                    <label for="email" class="form-label">Business Email *</label>
+                    <input
+                        id="email"
+                        name="email"
+                        type="email"
+                        required
+                        class="form-input"
+                        placeholder="you@company.com"
+                    />
+                </div>
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div>
+                        <label for="company" class="form-label">Company *</label>
+                        <input
+                            id="company"
+                            name="company"
+                            type="text"
                             required
-                            class="w-full px-4 py-3 bg-gray-800/50 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 h-24 border border-gray-600 text-white placeholder-gray-400"
-                            placeholder="What are your main security challenges? (e.g., quantum threat preparation, compliance requirements, data protection)"
-                        ></textarea>
+                            class="form-input"
+                            placeholder="Your organization"
+                        />
                     </div>
                     
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                        <div>
-                            <label for="timeline" class="block text-sm font-medium mb-2">Implementation Timeline</label>
-                            <select
-                                name="timeline"
-                                id="timeline"
-                                class="w-full px-4 py-3 bg-gray-800/50 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 border border-gray-600 text-white"
-                            >
-                                <option value="">Select timeline</option>
-                                <option value="immediate">Immediate (within 3 months)</option>
-                                <option value="short-term">Short-term (3-6 months)</option>
-                                <option value="medium-term">Medium-term (6-12 months)</option>
-                                <option value="long-term">Long-term (12+ months)</option>
-                                <option value="research">Research/Planning phase</option>
-                            </select>
-                        </div>
-                        
-                        <div>
-                            <label for="budget" class="block text-sm font-medium mb-2">Budget Range</label>
-                            <select
-                                name="budget"
-                                id="budget"
-                                class="w-full px-4 py-3 bg-gray-800/50 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 border border-gray-600 text-white"
-                            >
-                                <option value="">Prefer not to specify</option>
-                                <option value="under-25k">Under $25,000</option>
-                                <option value="25k-50k">$25,000 - $50,000</option>
-                                <option value="50k-100k">$50,000 - $100,000</option>
-                                <option value="100k-250k">$100,000 - $250,000</option>
-                                <option value="250k+">$250,000+</option>
-                            </select>
-                        </div>
-                    </div>
-
-                    <!-- Interest Areas -->
                     <div>
-                        <label class="block text-sm font-medium mb-3">Areas of Interest (Check all that apply)</label>
-                        <div class="grid grid-cols-2 gap-3 text-sm">
-                            <label class="flex items-center">
-                                <input type="checkbox" name="interests" value="quantum-resistant-crypto" class="mr-2 bg-gray-800 border-gray-600 text-blue-600 focus:ring-blue-500">
-                                <span class="text-gray-300">Quantum-resistant cryptography</span>
-                            </label>
-                            <label class="flex items-center">
-                                <input type="checkbox" name="interests" value="security-assessment" class="mr-2 bg-gray-800 border-gray-600 text-blue-600 focus:ring-blue-500">
-                                <span class="text-gray-300">Security assessments</span>
-                            </label>
-                            <label class="flex items-center">
-                                <input type="checkbox" name="interests" value="compliance" class="mr-2 bg-gray-800 border-gray-600 text-blue-600 focus:ring-blue-500">
-                                <span class="text-gray-300">Compliance consulting</span>
-                            </label>
-                            <label class="flex items-center">
-                                <input type="checkbox" name="interests" value="ai-security" class="mr-2 bg-gray-800 border-gray-600 text-blue-600 focus:ring-blue-500">
-                                <span class="text-gray-300">AI security</span>
-                            </label>
-                            <label class="flex items-center">
-                                <input type="checkbox" name="interests" value="blockchain" class="mr-2 bg-gray-800 border-gray-600 text-blue-600 focus:ring-blue-500">
-                                <span class="text-gray-300">Blockchain integration</span>
-                            </label>
-                            <label class="flex items-center">
-                                <input type="checkbox" name="interests" value="training" class="mr-2 bg-gray-800 border-gray-600 text-blue-600 focus:ring-blue-500">
-                                <span class="text-gray-300">Security training</span>
-                            </label>
-                        </div>
+                        <label for="phone" class="form-label">Phone</label>
+                        <input
+                            id="phone"
+                            name="phone"
+                            type="tel"
+                            class="form-input"
+                            placeholder="(555) 123-4567"
+                        />
+                    </div>
+                </div>
+                
+                <!-- Qualification Questions -->
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div>
+                        <label for="industry" class="form-label">Industry *</label>
+                        <select
+                            name="industry"
+                            id="industry"
+                            required
+                            class="form-select"
+                        >
+                            <option value="">Select your industry</option>
+                            <option value="healthcare">Healthcare</option>
+                            <option value="financial-services">Financial Services</option>
+                            <option value="government">Government</option>
+                            <option value="technology">Technology</option>
+                            <option value="manufacturing">Manufacturing</option>
+                            <option value="critical-infrastructure">Critical Infrastructure</option>
+                            <option value="defense">Defense/Aerospace</option>
+                            <option value="other">Other</option>
+                        </select>
                     </div>
                     
-                    <!-- Submit Button -->
-                    <button
-                        type="submit"
-                        class="w-full bg-blue-600 hover:bg-blue-700 text-white py-3 rounded-lg font-semibold transition flex items-center justify-center"
-                        id="submit-btn"
-                    >
-                        <i class="fas fa-shield-alt mr-2"></i>
-                        Apply for Early Access
-                    </button>
+                    <div>
+                        <label for="company_size" class="form-label">Company Size</label>
+                        <select
+                            name="company_size"
+                            id="company_size"
+                            class="form-select"
+                        >
+                            <option value="">Select company size</option>
+                            <option value="1-10">1-10 employees</option>
+                            <option value="11-50">11-50 employees</option>
+                            <option value="51-200">51-200 employees</option>
+                            <option value="201-500">201-500 employees</option>
+                            <option value="501-1000">501-1,000 employees</option>
+                            <option value="1000+">1,000+ employees</option>
+                        </select>
+                    </div>
+                </div>
+                
+                <div>
+                    <label for="message" class="form-label">Primary Security Concerns *</label>
+                    <textarea
+                        name="message"
+                        id="message"
+                        required
+                        class="form-input"
+                        style="height: 120px; resize: vertical;"
+                        placeholder="What are your main security challenges? (e.g., quantum threat preparation, compliance requirements, data protection)"
+                    ></textarea>
+                </div>
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div>
+                        <label for="timeline" class="form-label">Implementation Timeline</label>
+                        <select
+                            name="timeline"
+                            id="timeline"
+                            class="form-select"
+                        >
+                            <option value="">Select timeline</option>
+                            <option value="immediate">Immediate (within 3 months)</option>
+                            <option value="short-term">Short-term (3-6 months)</option>
+                            <option value="medium-term">Medium-term (6-12 months)</option>
+                            <option value="long-term">Long-term (12+ months)</option>
+                            <option value="research">Research/Planning phase</option>
+                        </select>
+                    </div>
                     
-                    <p class="text-xs text-gray-400 text-center">
-                        By submitting this form, you agree to receive communications from Quantum Shield Labs regarding our services. We respect your privacy and will never share your information.
-                    </p>
-                </form>
-            </div>
+                    <div>
+                        <label for="budget" class="form-label">Budget Range</label>
+                        <select
+                            name="budget"
+                            id="budget"
+                            class="form-select"
+                        >
+                            <option value="">Prefer not to specify</option>
+                            <option value="under-25k">Under $25,000</option>
+                            <option value="25k-50k">$25,000 - $50,000</option>
+                            <option value="50k-100k">$50,000 - $100,000</option>
+                            <option value="100k-250k">$100,000 - $250,000</option>
+                            <option value="250k+">$250,000+</option>
+                        </select>
+                    </div>
+                </div>
+
+                <!-- Interest Areas -->
+                <div>
+                    <label class="form-label">Areas of Interest (Check all that apply)</label>
+                    <div class="grid grid-cols-2 gap-3 text-sm mt-3">
+                        <label class="flex items-center text-gray-300">
+                            <input type="checkbox" name="interests" value="quantum-resistant-crypto" class="checkbox-themed mr-3">
+                            <span>Quantum-resistant cryptography</span>
+                        </label>
+                        <label class="flex items-center text-gray-300">
+                            <input type="checkbox" name="interests" value="security-assessment" class="checkbox-themed mr-3">
+                            <span>Security assessments</span>
+                        </label>
+                        <label class="flex items-center text-gray-300">
+                            <input type="checkbox" name="interests" value="compliance" class="checkbox-themed mr-3">
+                            <span>Compliance consulting</span>
+                        </label>
+                        <label class="flex items-center text-gray-300">
+                            <input type="checkbox" name="interests" value="ai-security" class="checkbox-themed mr-3">
+                            <span>AI security</span>
+                        </label>
+                        <label class="flex items-center text-gray-300">
+                            <input type="checkbox" name="interests" value="blockchain" class="checkbox-themed mr-3">
+                            <span>Blockchain integration</span>
+                        </label>
+                        <label class="flex items-center text-gray-300">
+                            <input type="checkbox" name="interests" value="training" class="checkbox-themed mr-3">
+                            <span>Security training</span>
+                        </label>
+                    </div>
+                </div>
+                
+                <!-- Submit Button -->
+                <button
+                    type="submit"
+                    class="submit-btn-themed"
+                    id="submit-btn"
+                >
+                    <i class="fas fa-shield-alt mr-2"></i>
+                    Apply for Early Access
+                </button>
+                
+                <p class="text-xs text-gray-400 text-center">
+                    By submitting this form, you agree to receive communications from Quantum Shield Labs regarding our services. We respect your privacy and will never share your information.
+                </p>
+            </form>
+        </div>
+
+        <!-- Comparison Section -->
+        <div class="mt-8 bg-gray-800 bg-opacity-50 rounded-lg p-6">
+            <h3 class="text-lg font-bold mb-4">Theme Comparison</h3>
+            <p class="text-gray-300 mb-4">Notice how this form now matches your website's dark theme:</p>
+            <ul class="text-gray-300 space-y-2">
+                <li>✓ Dark blue-black backgrounds (like your site)</li>
+                <li>✓ Subtle blue borders (matches your brand)</li>
+                <li>✓ Backdrop blur effects (modern glass look)</li>
+                <li>✓ Blue button gradient (matches your existing buttons)</li>
+                <li>✓ Proper text contrast on dark backgrounds</li>
+            </ul>
         </div>
     </div>
-</section>
-
-<script>
-// Enhanced form submission handling
-document.getElementById('enhanced-contact-form').addEventListener('submit', function(e) {
-    const submitBtn = document.getElementById('submit-btn');
-    const originalText = submitBtn.innerHTML;
-    
-    submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin mr-2"></i> Submitting Application...';
-    submitBtn.disabled = true;
-    
-    // Form will be handled by Formspree
-    // This just provides user feedback
-    setTimeout(() => {
-        if (!window.location.href.includes('thank-you')) {
-            submitBtn.innerHTML = originalText;
-            submitBtn.disabled = false;
-        }
-    }, 3000);
-});
-
-// Lead scoring client-side (for analytics)
-function calculateLeadScore() {
-    let score = 0;
-    
-    // Industry scoring
-    const industry = document.getElementById('industry').value;
-    if (['healthcare', 'financial-services', 'government', 'defense'].includes(industry)) {
-        score += 30;
-    } else if (['technology', 'critical-infrastructure'].includes(industry)) {
-        score += 20;
-    }
-    
-    // Company size scoring
-    const companySize = document.getElementById('company_size').value;
-    if (['201-500', '501-1000', '1000+'].includes(companySize)) {
-        score += 25;
-    } else if (['51-200'].includes(companySize)) {
-        score += 15;
-    }
-    
-    // Timeline scoring
-    const timeline = document.getElementById('timeline').value;
-    if (['immediate', 'short-term'].includes(timeline)) {
-        score += 20;
-    } else if (timeline === 'medium-term') {
-        score += 10;
-    }
-    
-    // Budget scoring
-    const budget = document.getElementById('budget').value;
-    if (['100k-250k', '250k+'].includes(budget)) {
-        score += 25;
-    } else if (['50k-100k'].includes(budget)) {
-        score += 15;
-    }
-    
-    return score;
-}
-
-// Track lead score for analytics
-document.getElementById('enhanced-contact-form').addEventListener('change', function() {
-    const score = calculateLeadScore();
-    // Send to analytics if you have tracking set up
-    if (typeof gtag !== 'undefined') {
-        gtag('event', 'lead_score_change', {
-            'lead_score': score,
-            'score_category': score >= 70 ? 'high' : score >= 40 ? 'medium' : 'low'
-        });
-    }
-});
-</script>
-
-    <!-- Footer -->
-    <footer class="bg-black bg-opacity-50 backdrop-blur-lg py-8">
-        <div class="container mx-auto px-4">
-            <div class="flex flex-col md:flex-row justify-between items-center">
-                <div class="flex items-center space-x-2 mb-4 md:mb-0">
-                    <i class="fas fa-shield-alt text-blue-500 text-xl"></i>
-                    <span class="text-lg font-semibold">Quantum Shield Labs</span>
-                </div>
-                <div class="flex space-x-6">
-                    <a href="https://github.com/mbennett-labs" class="hover:text-blue-500 transition" aria-label="GitHub">
-                        <i class="fab fa-github text-xl"></i>
-                    </a>
-                    <a href="https://www.linkedin.com/in/michael-bennett-a29a93103/" class="hover:text-blue-500 transition" aria-label="LinkedIn">
-                        <i class="fab fa-linkedin text-xl"></i>
-                    </a>
-                    <a href="#" class="hover:text-blue-500 transition" aria-label="Twitter">
-                        <i class="fab fa-twitter text-xl"></i>
-                    </a>
-                </div>
-            </div>
-            <div class="mt-8 text-center text-gray-400">
-                <p>&copy; 2025 Quantum Shield Labs. All rights reserved.</p>
-                <p class="mt-2 text-sm text-gray-500">
-                    <i class="fas fa-rocket mr-1"></i> Currently in pre-launch phase. Full launch expected Q3 2025.
-                </p>
-            </div>
-        </div>
-    </footer>
 
     <script>
-        // Navigation scroll effect
-        const navbar = document.getElementById('navbar');
-        window.addEventListener('scroll', () => {
-            if (window.scrollY > 50) {
-                navbar.classList.add('navbar-scrolled');
-            } else {
-                navbar.classList.remove('navbar-scrolled');
-            }
-        });
-        
-        // Mobile menu toggle
-        const mobileMenuButton = document.getElementById('mobile-menu-button');
-        const mobileMenu = document.getElementById('mobile-menu');
-        mobileMenuButton.addEventListener('click', () => {
-            mobileMenu.classList.toggle('hidden');
-            // Change icon based on menu state
-            const icon = mobileMenuButton.querySelector('i');
-            if (mobileMenu.classList.contains('hidden')) {
-                icon.classList.remove('fa-times');
-                icon.classList.add('fa-bars');
-            } else {
-                icon.classList.remove('fa-bars');
-                icon.classList.add('fa-times');
-            }
-        });
-        
-        // Close mobile menu when clicking on a link
-        const mobileLinks = mobileMenu.querySelectorAll('a');
-        mobileLinks.forEach(link => {
-            link.addEventListener('click', () => {
-                mobileMenu.classList.add('hidden');
-                const icon = mobileMenuButton.querySelector('i');
-                icon.classList.remove('fa-times');
-                icon.classList.add('fa-bars');
-            });
-        });
-        
-        // Smooth scrolling for navigation links
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                
-                const targetId = this.getAttribute('href');
-                if (targetId === '#') return;
-                
-                const targetElement = document.querySelector(targetId);
-                if (targetElement) {
-                    window.scrollTo({
-                        top: targetElement.offsetTop - 80, // Offset for fixed navbar
-                        behavior: 'smooth'
-                    });
+        // Enhanced form submission handling
+        document.getElementById('themed-contact-form').addEventListener('submit', function(e) {
+            const submitBtn = document.getElementById('submit-btn');
+            const originalText = submitBtn.innerHTML;
+            
+            submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin mr-2"></i> Submitting Application...';
+            submitBtn.disabled = true;
+            
+            // Form will be handled by Formspree
+            setTimeout(() => {
+                if (!window.location.href.includes('thank-you')) {
+                    submitBtn.innerHTML = originalText;
+                    submitBtn.disabled = false;
                 }
-            });
+            }, 3000);
         });
 
-        // Contact form handling
-        const contactForm = document.getElementById('contact-form');
-        if (contactForm) {
-            contactForm.addEventListener('submit', function(e) {
-                e.preventDefault();
+        // Real-time input testing
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('Themed form loaded successfully');
+            
+            // Test each input field
+            const inputs = document.querySelectorAll('.form-input, .form-select');
+            inputs.forEach((input, index) => {
+                input.addEventListener('focus', function() {
+                    console.log(`Input ${index + 1} focused`);
+                });
                 
-                const submitButton = this.querySelector('button[type="submit"]');
-                const originalText = submitButton.innerHTML;
-                submitButton.innerHTML = '<i class="fas fa-spinner fa-spin mr-2"></i> Sending...';
-                submitButton.disabled = true;
-                
-                // Simulate form submission
-                setTimeout(() => {
-                    submitButton.innerHTML = '<i class="fas fa-check mr-2"></i> Message Sent!';
-                    setTimeout(() => {
-                        submitButton.innerHTML = originalText;
-                        submitButton.disabled = false;
-                        contactForm.reset();
-                    }, 2000);
-                }, 1500);
+                input.addEventListener('input', function() {
+                    console.log(`Input ${index + 1} value:`, this.value);
+                });
             });
-        }
+        });
     </script>
 </body>
 </html>
