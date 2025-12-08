@@ -555,6 +555,29 @@
                     <p><strong>Expert Quotes:</strong> Professor Sir Peter Knight (UK quantum scientist), Marin Ivezic (Applied Quantum)</p>
                 </div>
 
+                <!-- Comments Section -->
+                <div class="comments-section" style="margin-top: 4rem; padding-top: 3rem; border-top: 1px solid rgba(59, 130, 246, 0.3);">
+                    <h3 style="color: #3b82f6; font-size: 1.5rem; font-weight: 600; margin-bottom: 1.5rem;">
+                        <i class="fas fa-comments mr-2"></i>Join the Discussion
+                    </h3>
+                    <p style="color: #94a3b8; margin-bottom: 1.5rem;">Share your thoughts on quantum computing and its impact on healthcare security.</p>
+                    
+                    <div id="disqus_thread"></div>
+                    <script>
+                        var disqus_config = function () {
+                            this.page.url = 'https://quantumshieldlabs.dev/blog/quantum-revolution-eclipse-ai.html';
+                            this.page.identifier = 'quantum-revolution-eclipse-ai';
+                        };
+                        (function() {
+                            var d = document, s = d.createElement('script');
+                            s.src = 'https://quantumshieldlabs-1.disqus.com/embed.js';
+                            s.setAttribute('data-timestamp', +new Date());
+                            (d.head || d.body).appendChild(s);
+                        })();
+                    </script>
+                    <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+                </div>
+
             </div>
         </div>
     </article>
@@ -578,6 +601,9 @@
             </div>
         </div>
     </footer>
+
+    <!-- Disqus Comment Count Script -->
+    <script id="dsq-count-scr" src="//quantumshieldlabs-1.disqus.com/count.js" async></script>
 
 </body>
 </html>
