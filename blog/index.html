@@ -172,6 +172,7 @@
         
         .featured-post .blog-image {
             height: 300px;
+            background: linear-gradient(135deg, #1e3a8a, #7c3aed);
         }
         
         .featured-post .blog-content {
@@ -196,6 +197,22 @@
             margin-bottom: 1rem;
             display: inline-block;
             width: fit-content;
+        }
+        
+        .new-badge {
+            background: linear-gradient(135deg, #10b981, #059669);
+            color: white;
+            padding: 0.25rem 0.75rem;
+            border-radius: 1rem;
+            font-size: 0.7rem;
+            font-weight: bold;
+            margin-left: 0.5rem;
+            animation: pulse 2s infinite;
+        }
+        
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.7; }
         }
         
         @media (max-width: 768px) {
@@ -225,18 +242,18 @@
     <!-- Navigation -->
     <nav class="fixed w-full z-50 py-4 px-6 bg-black/80 backdrop-blur-lg">
         <div class="container mx-auto flex justify-between items-center">
-            <a href="../index.html" class="flex items-center space-x-2">
+            <a href="https://quantumshieldlabs.dev/" class="flex items-center space-x-2">
                 <i class="fas fa-shield-alt text-blue-500 text-2xl"></i>
                 <span class="text-xl font-bold">Quantum Shield Labs</span>
             </a>
             
             <div class="hidden md:flex space-x-8">
-                <a href="../index.html#services" class="hover:text-blue-500 transition">Services</a>
-                <a href="../index.html#projects" class="hover:text-blue-500 transition">Projects</a>
-                <a href="../index.html#about" class="hover:text-blue-500 transition">About</a>
-                <a href="../index.html#contact" class="hover:text-blue-500 transition">Contact</a>
-                <a href="index.html" class="text-blue-500">Educational Content</a>
-                <a href="../index.html" class="hover:text-blue-500 transition">Home</a>
+                <a href="https://quantumshieldlabs.dev/#services" class="hover:text-blue-500 transition">Services</a>
+                <a href="https://quantumshieldlabs.dev/#projects" class="hover:text-blue-500 transition">Projects</a>
+                <a href="https://quantumshieldlabs.dev/#about" class="hover:text-blue-500 transition">About</a>
+                <a href="https://quantumshieldlabs.dev/#contact" class="hover:text-blue-500 transition">Contact</a>
+                <a href="https://quantumshieldlabs.dev/blog/" class="text-blue-500">Educational Content</a>
+                <a href="https://quantumshieldlabs.dev/" class="hover:text-blue-500 transition">Home</a>
             </div>
             
             <button class="md:hidden text-white focus:outline-none">
@@ -257,23 +274,44 @@
         </header>
 
         <div class="blog-grid">
-            <!-- Featured Post: Healthcare AI Security -->
+            <!-- NEW Featured Post: Quantum Revolution Eclipse AI -->
             <article class="blog-card featured-post">
+                <div class="blog-image">
+                    <i class="fas fa-atom" style="font-size: 5rem;"></i>
+                </div>
+                <div class="blog-content">
+                    <div class="featured-badge">Featured Article</div>
+                    <span class="new-badge">NEW</span>
+                    <div class="blog-meta">
+                        <span class="blog-category">Quantum Computing</span>
+                        <span>December 8, 2025</span>
+                    </div>
+                    <h3>Quantum Computing: The Revolution That Will Eclipse AI</h3>
+                    <p class="blog-excerpt">
+                        While the world obsesses over AI, a far more fundamental shift is quietly gaining momentum. Google's Willow chip just solved a problem in 5 minutes that would take classical computers 10 septillion years. Here's why quantum computing—not AI—will define the next era of technology.
+                    </p>
+                    <a href="quantum-revolution-eclipse-ai.html" class="blog-read-more">
+                        Read Full Analysis <i class="fas fa-arrow-right"></i>
+                    </a>
+                </div>
+            </article>
+
+            <!-- Healthcare AI Security Post -->
+            <article class="blog-card">
                 <div class="blog-image">
                     <i class="fas fa-hospital-alt"></i>
                 </div>
                 <div class="blog-content">
-                    <div class="featured-badge">Featured Article</div>
                     <div class="blog-meta">
                         <span class="blog-category">Healthcare AI Security</span>
                         <span>July 1, 2025</span>
                     </div>
                     <h3>Healthcare AI Security: The Hidden Vulnerabilities</h3>
                     <p class="blog-excerpt">
-                        Healthcare AI systems are revolutionizing patient care, but they're also creating unprecedented security risks that most organizations haven't fully addressed. A comprehensive analysis of vulnerabilities, real-world incidents, and strategic security frameworks.
+                        Healthcare AI systems are revolutionizing patient care, but they're also creating unprecedented security risks that most organizations haven't fully addressed.
                     </p>
                     <a href="healthcare-ai-security-blog.html" class="blog-read-more">
-                        Read Full Analysis <i class="fas fa-arrow-right"></i>
+                        Read Analysis <i class="fas fa-arrow-right"></i>
                     </a>
                 </div>
             </article>
@@ -290,7 +328,7 @@
                     </div>
                     <h3>Trump's Quantum Security Policy Reversal: What It Means for Business</h3>
                     <p class="blog-excerpt">
-                        President Trump's new cybersecurity executive order has dramatically scaled back post-quantum cryptography mandates. Analysis of policy changes and implications for organizational security strategies.
+                        President Trump's new cybersecurity executive order has dramatically scaled back post-quantum cryptography mandates. Analysis of policy changes and implications.
                     </p>
                     <a href="trump_policy_complete_post.html" class="blog-read-more">
                         Read Analysis <i class="fas fa-arrow-right"></i>
@@ -301,7 +339,7 @@
             <!-- Quantum Reality Check Post -->
             <article class="blog-card">
                 <div class="blog-image">
-                    <i class="fas fa-atom"></i>
+                    <i class="fas fa-microscope"></i>
                 </div>
                 <div class="blog-content">
                     <div class="blog-meta">
@@ -330,7 +368,7 @@
                     </div>
                     <h3>The Dawn of Quantum Encryption: Why Your Business Needs Quantum-Ready Security</h3>
                     <p class="blog-excerpt">
-                        Understanding the quantum revolution and how it will transform cybersecurity forever. A comprehensive guide to quantum encryption and why businesses can't afford to wait.
+                        Understanding the quantum revolution and how it will transform cybersecurity forever. A comprehensive guide to quantum encryption.
                     </p>
                     <a href="quantum-encryption-guide.html" class="blog-read-more">
                         Read Guide <i class="fas fa-arrow-right"></i>
@@ -340,7 +378,7 @@
         </div>
 
         <nav class="navigation">
-            <a href="../index.html" class="nav-link">
+            <a href="https://quantumshieldlabs.dev/" class="nav-link">
                 <i class="fas fa-home"></i>
                 <span>Back to Home</span>
             </a>
