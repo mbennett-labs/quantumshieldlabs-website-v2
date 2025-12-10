@@ -4,6 +4,16 @@
 
 const blogPosts = [
     {
+    title: "Pentagon's Quantum Scramble: What SandboxAQ's DoD Contract Means for Healthcare",
+    date: "2025-12-10",
+    category: "Quantum Security News",
+    excerpt: "The Pentagon just contracted SandboxAQ for cryptographic discovery across military systems. If the world's most secure networks are scrambling to inventory quantum vulnerabilities, what does this signal for healthcare organizations protecting 50+ years of PHI?",
+    tags: ["quantum security", "DoD", "SandboxAQ", "healthcare", "post-quantum cryptography"],
+    slug: "sandboxaq-dod-quantum-security",
+    readTime: "8 min read",
+    image: "https://images.unsplash.com/photo-1550751827-4bd374c3f58b?w=800&q=80"
+},
+    {
         title: "The Quantum Reality Check: What a Former Cambridge Researcher Reveals",
         date: "2025-06-27",
         author: "Michael Bennett",
