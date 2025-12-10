@@ -228,48 +228,34 @@
         </div>
     </nav>
 
-    <!-- Hero Section -->
-    <section class="hero flex items-center justify-center">
-        <div class="container mx-auto px-4 text-center">
-            <div class="animate-fade-in">
-                <i class="fas fa-shield-alt text-blue-500 text-6xl mb-8"></i>
-                <h1 class="text-5xl md:text-7xl font-bold mb-6 bg-clip-text text-transparent bg-gradient-to-r from-blue-500 to-purple-500">
-                    Quantum Shield Labs
-                </h1>
-                <h2 class="text-2xl md:text-3xl font-semibold mb-6 text-blue-200">
-                    Advanced Security Solutions for the Quantum Age
-                </h2>
-                <p class="text-xl md:text-2xl text-gray-300 mb-12 max-w-3xl mx-auto">
-                    Cybersecurity, blockchain, and AI expertise to protect your digital assets in an evolving technological landscape.
-                </p>
-                
-                <!-- UPDATED: Hero CTA Buttons with Calculator -->
-                <div class="flex flex-col md:flex-row items-center justify-center space-y-4 md:space-y-0 md:space-x-4">
-                    <!-- NEW: Featured Calculator Button -->
-                    <a href="https://quantumshieldlabs.dev/quantum-risk-calculator/" class="inline-block bg-gradient-to-r from-green-500 to-emerald-600 hover:from-green-600 hover:to-emerald-700 text-white px-8 py-4 rounded-full text-lg font-semibold transition transform hover:scale-105 shadow-lg hover:shadow-green-500/30 animate-pulse-glow">
-                        <span class="flex items-center justify-center">
-                            <i class="fas fa-calculator mr-2"></i>
-                            <span>Try Free Risk Calculator</span>
-                            <i class="fas fa-external-link-alt ml-2 text-sm"></i>
-                        </span>
-                    </a>
-                    
-                    <a href="#services" class="inline-block bg-blue-600 hover:bg-blue-700 text-white px-8 py-4 rounded-full text-lg font-semibold transition transform hover:scale-105 shadow-lg hover:shadow-blue-500/30">
-                        <span class="flex items-center justify-center">
-                            <span>Explore Services</span>
-                            <i class="fas fa-arrow-right ml-2"></i>
-                        </span>
-                    </a>
-                    
-                    <a href="#roadmap" class="inline-block bg-transparent border-2 border-blue-400 hover:border-blue-300 text-white px-8 py-4 rounded-full text-lg font-semibold transition transform hover:scale-105">
-                        <span class="flex items-center justify-center">
-                            <span>Launch Timeline</span>
-                            <i class="fas fa-calendar-alt ml-2"></i>
-                        </span>
-                    </a>
-                </div>
-            </div>
-        </div>
+    <!-- REPLACE YOUR CURRENT HERO CTA BUTTONS WITH THIS -->
+<!-- Find the section that starts with "UPDATED: Hero CTA Buttons with Calculator" -->
+<!-- Replace from <div class="flex flex-col md:flex-row..."> to the closing </div> -->
+
+<!-- FIXED: Hero CTA Buttons with Calculator -->
+<div class="flex flex-col md:flex-row items-center justify-center gap-4">
+    <!-- Calculator Button -->
+    <a href="https://quantumshieldlabs.dev/quantum-risk-calculator/" 
+       class="flex items-center justify-center gap-2 bg-gradient-to-r from-green-500 to-emerald-600 hover:from-green-600 hover:to-emerald-700 text-white px-8 py-4 rounded-full text-lg font-semibold transition transform hover:scale-105 shadow-lg hover:shadow-green-500/30 animate-pulse-glow">
+        <i class="fas fa-calculator"></i>
+        Try Free Risk Calculator
+        <i class="fas fa-external-link-alt text-sm"></i>
+    </a>
+    
+    <!-- Explore Services Button -->
+    <a href="#services" 
+       class="flex items-center justify-center gap-2 bg-blue-600 hover:bg-blue-700 text-white px-8 py-4 rounded-full text-lg font-semibold transition transform hover:scale-105 shadow-lg hover:shadow-blue-500/30">
+        Explore Services
+        <i class="fas fa-arrow-right"></i>
+    </a>
+    
+    <!-- Launch Timeline Button -->
+    <a href="#roadmap" 
+       class="flex items-center justify-center gap-2 bg-transparent border-2 border-blue-400 hover:border-blue-300 hover:bg-blue-500/10 text-white px-8 py-4 rounded-full text-lg font-semibold transition transform hover:scale-105">
+        Launch Timeline
+        <i class="fas fa-calendar-alt"></i>
+    </a>
+</div>
         
         <!-- Scroll indicator -->
         <div class="absolute bottom-8 left-0 right-0 flex justify-center animate-bounce">
@@ -1300,4 +1286,5 @@
     </script>
 </body>
 </html>
+
 
