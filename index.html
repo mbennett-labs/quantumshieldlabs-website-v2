@@ -171,6 +171,28 @@
         .animate-pulse-glow {
           animation: pulse-glow 2s ease-in-out infinite;
         }
+
+        /* FIX: Ensure hero buttons are clickable */
+.hero .container {
+    position: relative;
+    z-index: 10;
+}
+
+.hero a {
+    position: relative;
+    z-index: 20;
+    cursor: pointer;
+}
+
+/* Make sure bg-pattern doesn't block clicks */
+.bg-pattern {
+    pointer-events: none;
+}
+
+/* Ensure the scroll indicator doesn't block hero content */
+.hero > .absolute {
+    pointer-events: none;
+}
     </style>
 </head>
 <body>
@@ -1191,6 +1213,7 @@
     </script>
 </body>
 </html>
+
 
 
 
