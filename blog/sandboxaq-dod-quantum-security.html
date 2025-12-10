@@ -1,0 +1,419 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pentagon's Quantum Scramble: What SandboxAQ's DoD Contract Means for Healthcare | Quantum Shield Labs</title>
+    <meta name="description" content="The Pentagon just contracted SandboxAQ for cryptographic discovery across military systems. If the world's most secure networks are scrambling to inventory quantum vulnerabilities, what does this mean for healthcare organizations protecting 50+ years of PHI?">
+    <meta name="keywords" content="SandboxAQ, DoD, quantum security, post-quantum cryptography, healthcare cybersecurity, HIPAA, cryptographic discovery, AQtive Guard">
+    <meta name="author" content="Michael Bennett, Quantum Shield Labs">
+    
+    <!-- Open Graph Meta Tags -->
+    <meta property="og:title" content="Pentagon's Quantum Scramble: What SandboxAQ's DoD Contract Means for Healthcare">
+    <meta property="og:description" content="The Pentagon just contracted SandboxAQ for cryptographic discovery across military systems. Here's what healthcare CISOs need to know.">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://quantumshieldlabs.dev/blog/sandboxaq-dod-quantum-security.html">
+    <meta property="og:site_name" content="Quantum Shield Labs">
+    
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Pentagon's Quantum Scramble: What SandboxAQ's DoD Contract Means for Healthcare">
+    <meta name="twitter:description" content="If the Pentagon is scrambling to inventory cryptographic assets, healthcare orgs protecting 50+ year PHI should be concerned.">
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css">
+    <link rel="stylesheet" href="../css/styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        body {
+            background: linear-gradient(to bottom, #0f172a, #000);
+            color: white;
+            font-family: 'Inter', sans-serif;
+        }
+        .blog-content {
+            max-width: 800px;
+            margin: 0 auto;
+            line-height: 1.8;
+        }
+        .blog-content h2 {
+            color: #3b82f6;
+            margin-top: 2.5rem;
+            margin-bottom: 1rem;
+            font-size: 1.75rem;
+            font-weight: 700;
+        }
+        .blog-content h3 {
+            color: #60a5fa;
+            margin-top: 2rem;
+            margin-bottom: 0.75rem;
+            font-size: 1.25rem;
+            font-weight: 600;
+        }
+        .blog-content p {
+            margin-bottom: 1.5rem;
+            color: #cbd5e1;
+        }
+        .blog-content blockquote {
+            border-left: 4px solid #3b82f6;
+            padding: 1rem 1rem 1rem 2rem;
+            margin: 1.5rem 0;
+            background: rgba(59, 130, 246, 0.1);
+            border-radius: 0 0.5rem 0.5rem 0;
+            font-style: italic;
+            color: #94a3b8;
+        }
+        .blog-content ul {
+            margin-bottom: 1.5rem;
+            padding-left: 1.5rem;
+        }
+        .blog-content li {
+            margin-bottom: 0.75rem;
+            color: #cbd5e1;
+            position: relative;
+            padding-left: 1.5rem;
+        }
+        .blog-content li::before {
+            content: "→";
+            position: absolute;
+            left: 0;
+            color: #3b82f6;
+        }
+        .blog-content strong {
+            color: #f1f5f9;
+        }
+        .highlight-box {
+            background: linear-gradient(135deg, rgba(59, 130, 246, 0.15), rgba(139, 92, 246, 0.15));
+            border: 1px solid rgba(59, 130, 246, 0.3);
+            border-radius: 0.75rem;
+            padding: 1.5rem;
+            margin: 2rem 0;
+        }
+        .stat-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin: 2rem 0;
+        }
+        .stat-card {
+            background: rgba(30, 41, 59, 0.5);
+            border: 1px solid rgba(59, 130, 246, 0.2);
+            border-radius: 0.5rem;
+            padding: 1.25rem;
+            text-align: center;
+        }
+        .stat-number {
+            font-size: 2rem;
+            font-weight: 700;
+            color: #3b82f6;
+        }
+        .stat-label {
+            font-size: 0.875rem;
+            color: #94a3b8;
+            margin-top: 0.25rem;
+        }
+        .timeline {
+            border-left: 2px solid #3b82f6;
+            padding-left: 1.5rem;
+            margin: 2rem 0;
+        }
+        .timeline-item {
+            position: relative;
+            margin-bottom: 1.5rem;
+        }
+        .timeline-item::before {
+            content: "";
+            position: absolute;
+            left: -1.75rem;
+            top: 0.5rem;
+            width: 0.75rem;
+            height: 0.75rem;
+            background: #3b82f6;
+            border-radius: 50%;
+        }
+        .timeline-date {
+            font-weight: 600;
+            color: #60a5fa;
+            font-size: 0.875rem;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="fixed w-full z-50 py-4 px-6 bg-black/80 backdrop-blur-lg">
+        <div class="container mx-auto flex justify-between items-center">
+            <a href="../index.html" class="flex items-center space-x-2">
+                <i class="fas fa-shield-alt text-blue-500 text-2xl"></i>
+                <span class="text-xl font-bold">Quantum Shield Labs</span>
+            </a>
+            <div class="hidden md:flex space-x-8">
+                <a href="index.html" class="hover:text-blue-500 transition">← Back to Blog</a>
+                <a href="../index.html" class="hover:text-blue-500 transition">Home</a>
+                <a href="../index.html#services" class="hover:text-blue-500 transition">Services</a>
+                <a href="../index.html#contact" class="hover:text-blue-500 transition">Contact</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Article -->
+    <article class="pt-24 pb-16">
+        <div class="container mx-auto px-4">
+            <!-- Header -->
+            <header class="text-center mb-12">
+                <span class="bg-blue-500/20 text-blue-300 px-3 py-1 rounded-full text-sm">Quantum Security News</span>
+                <h1 class="text-4xl md:text-5xl font-bold mb-6 bg-gradient-to-r from-blue-500 to-purple-500 bg-clip-text text-transparent mt-6">
+                    Pentagon's Quantum Scramble: What SandboxAQ's DoD Contract Means for Healthcare
+                </h1>
+                <div class="text-gray-400">
+                    <span>By Michael Bennett</span> • <span>December 10, 2025</span> • <span>8 min read</span>
+                </div>
+            </header>
+
+            <!-- Content -->
+            <div class="blog-content">
+                <p class="text-xl text-gray-300 mb-8 text-center italic">
+                    The Pentagon just signed a five-year contract with SandboxAQ for automated cryptographic discovery across military systems. If the world's most security-conscious networks are scrambling to inventory their quantum vulnerabilities, what does this signal for healthcare organizations protecting patient data for 50+ years?
+                </p>
+
+                <h2>The Contract That Should Wake Up Every Healthcare CISO</h2>
+                
+                <p>
+                    On December 10, 2025, SandboxAQ announced a landmark five-year agreement with the Department of War's Chief Information Officer. The contract deploys their <strong>AQtive Guard platform</strong> for Automated Cryptographic Discovery and Inventory (ACDI) across Department of War systems.
+                </p>
+
+                <p>
+                    This isn't a pilot program. This isn't a study. This is the Pentagon operationalizing quantum security preparedness at scale.
+                </p>
+
+                <div class="highlight-box">
+                    <h3 class="text-lg font-semibold text-blue-300 mb-2">🎯 Key Takeaway</h3>
+                    <p class="mb-0">
+                        If military networks—with dedicated security teams, classified budgets, and national security mandates—need automated tools to discover their own cryptographic assets, healthcare organizations are almost certainly flying blind.
+                    </p>
+                </div>
+
+                <h2>What SandboxAQ's AQtive Guard Actually Does</h2>
+                
+                <p>
+                    The platform provides automated discovery of cryptographic implementations across complex enterprise environments. This includes:
+                </p>
+
+                <ul>
+                    <li><strong>Certificate discovery</strong> — Finding every SSL/TLS certificate across the network</li>
+                    <li><strong>Protocol identification</strong> — Mapping which encryption protocols are actually in use</li>
+                    <li><strong>Key management audit</strong> — Identifying where cryptographic keys are stored and how they're managed</li>
+                    <li><strong>Vulnerability mapping</strong> — Flagging quantum-vulnerable implementations (RSA, ECC, etc.)</li>
+                    <li><strong>Migration prioritization</strong> — Helping organizations plan the transition to post-quantum algorithms</li>
+                </ul>
+
+                <p>
+                    This builds on SandboxAQ's earlier work with DISA's Emerging Technology Quantum Resistant Cryptography (QRC) PKI prototype, proving the concept before scaling to enterprise deployment.
+                </p>
+
+                <h2>The "Harvest Now, Decrypt Later" Clock is Ticking</h2>
+                
+                <p>
+                    Why is the Pentagon moving so urgently? Because sophisticated adversaries—particularly nation-state actors—are already collecting encrypted data with the intention of decrypting it once quantum computers become capable.
+                </p>
+
+                <blockquote>
+                    "Harvest now, decrypt later" isn't a theoretical future threat. It's happening today. Every piece of encrypted data transmitted now could be readable within 5-10 years.
+                </blockquote>
+
+                <p>
+                    For military secrets, this is obviously critical. But consider healthcare:
+                </p>
+
+                <div class="stat-grid">
+                    <div class="stat-card">
+                        <div class="stat-number">50+</div>
+                        <div class="stat-label">Years PHI must remain protected</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-number">2035</div>
+                        <div class="stat-label">NIST migration deadline</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-number">~5-10</div>
+                        <div class="stat-label">Years until cryptographically relevant quantum</div>
+                    </div>
+                </div>
+
+                <p>
+                    Patient health information created today will still require protection in 2075 and beyond. If that data is being harvested now, encrypted with RSA or ECC, it may be completely exposed before the patient's lifetime protection requirement expires.
+                </p>
+
+                <h2>What This Means for Healthcare Organizations</h2>
+
+                <h3>1. You Probably Don't Know What Encryption You're Using</h3>
+                
+                <p>
+                    Most healthcare organizations can't answer basic questions about their cryptographic posture:
+                </p>
+
+                <ul>
+                    <li>What encryption algorithms protect your EHR data at rest?</li>
+                    <li>What protocols secure your HIE connections?</li>
+                    <li>Where are your cryptographic keys stored?</li>
+                    <li>Which third-party integrations use quantum-vulnerable encryption?</li>
+                </ul>
+
+                <p>
+                    If the Department of War needs automated tools to answer these questions, your organization almost certainly does too.
+                </p>
+
+                <h3>2. HIPAA Compliance Will Evolve</h3>
+                
+                <p>
+                    The HIPAA Security Rule requires "appropriate" encryption. Today, RSA-2048 is appropriate. By 2030? It may be considered negligent. Healthcare organizations that wait for regulatory mandates will be scrambling—and their data will already be compromised.
+                </p>
+
+                <h3>3. The Window for Proactive Action is Closing</h3>
+                
+                <p>
+                    Post-quantum cryptography migration isn't a flip-the-switch operation. It requires:
+                </p>
+
+                <div class="timeline">
+                    <div class="timeline-item">
+                        <div class="timeline-date">Phase 1: Discovery (3-6 months)</div>
+                        <p class="text-sm text-gray-400 mt-1">Complete cryptographic inventory across all systems</p>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-date">Phase 2: Assessment (2-3 months)</div>
+                        <p class="text-sm text-gray-400 mt-1">Risk scoring and migration prioritization</p>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-date">Phase 3: Planning (3-6 months)</div>
+                        <p class="text-sm text-gray-400 mt-1">Vendor coordination, budget allocation, timeline development</p>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-date">Phase 4: Migration (12-36 months)</div>
+                        <p class="text-sm text-gray-400 mt-1">Phased implementation of NIST-approved PQC algorithms</p>
+                    </div>
+                </div>
+
+                <p>
+                    Organizations starting today have time to migrate methodically. Those waiting until 2030 will be rushing—and rushing creates vulnerabilities.
+                </p>
+
+                <h2>The SandboxAQ Signal</h2>
+                
+                <p>
+                    This DoD contract isn't just news—it's a signal. When the Pentagon operationalizes quantum security preparedness, it validates what security researchers have been warning about for years:
+                </p>
+
+                <ul>
+                    <li><strong>The threat is real enough</strong> to justify major defense investment</li>
+                    <li><strong>Manual discovery doesn't scale</strong> — automation is essential</li>
+                    <li><strong>The time to act is now</strong> — not when quantum computers arrive</li>
+                </ul>
+
+                <p>
+                    Healthcare organizations face the same cryptographic challenges as military networks, with longer data protection requirements and often fewer resources. The Pentagon just showed its hand. What's your organization's quantum security posture?
+                </p>
+
+                <h2>Start With What You Can Control</h2>
+                
+                <p>
+                    You don't need a Pentagon budget to begin quantum security preparedness. Start with these steps:
+                </p>
+
+                <ul>
+                    <li><strong>Assessment first</strong> — You can't protect what you can't see. Begin with a cryptographic discovery process.</li>
+                    <li><strong>Prioritize by risk</strong> — Not all data faces equal quantum risk. Focus on long-retention, high-sensitivity information first.</li>
+                    <li><strong>Build awareness</strong> — Ensure leadership understands the "harvest now, decrypt later" threat model.</li>
+                    <li><strong>Plan for 2035</strong> — Align your migration timeline with NIST's post-quantum cryptography standards.</li>
+                </ul>
+
+                <!-- CTA Box -->
+                <div class="mt-12 p-8 bg-gradient-to-r from-blue-900/30 to-purple-900/30 rounded-xl text-center">
+                    <h3 class="text-2xl font-bold mb-4">Assess Your Quantum Risk in 5 Minutes</h3>
+                    <p class="text-gray-300 mb-6">
+                        Take our free Quantum Risk Calculator to understand your organization's exposure to quantum computing threats.
+                    </p>
+                    <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                        <a href="../quantum-risk-calculator/" class="inline-block bg-blue-600 hover:bg-blue-700 text-white px-8 py-4 rounded-lg font-semibold transition">
+                            <i class="fas fa-calculator mr-2"></i>Take Free Assessment
+                        </a>
+                        <a href="https://quantumshieldlabs.gumroad.com/l/pqc-healthcare-playbook" target="_blank" class="inline-block bg-purple-600 hover:bg-purple-700 text-white px-8 py-4 rounded-lg font-semibold transition">
+                            <i class="fas fa-book mr-2"></i>Get the Full Playbook
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Author Box -->
+                <div class="mt-12 p-6 bg-gray-800/50 rounded-xl flex flex-col md:flex-row gap-6 items-center">
+                    <div class="w-24 h-24 bg-gradient-to-br from-blue-500 to-purple-600 rounded-full flex items-center justify-center flex-shrink-0">
+                        <i class="fas fa-user text-3xl text-white"></i>
+                    </div>
+                    <div>
+                        <h4 class="text-xl font-bold mb-2">Michael Bennett</h4>
+                        <p class="text-gray-400 text-sm mb-3">
+                            Founder & CEO, Quantum Shield Labs. Specializing in post-quantum cryptography for healthcare organizations. Author of the Post-Quantum Security Playbook for Healthcare.
+                        </p>
+                        <div class="flex gap-4">
+                            <a href="https://www.linkedin.com/in/michael-bennett-a29a93103/" target="_blank" class="text-blue-400 hover:text-blue-300 transition">
+                                <i class="fab fa-linkedin text-xl"></i>
+                            </a>
+                            <a href="https://github.com/mbennett-labs" target="_blank" class="text-gray-400 hover:text-white transition">
+                                <i class="fab fa-github text-xl"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </article>
+
+    <!-- Related Posts -->
+    <section class="py-12 bg-gray-900/50">
+        <div class="container mx-auto px-4">
+            <h3 class="text-2xl font-bold mb-8 text-center">Continue Reading</h3>
+            <div class="grid md:grid-cols-2 gap-6 max-w-4xl mx-auto">
+                <a href="quantum-reality-check.html" class="block p-6 bg-gray-800/50 rounded-xl hover:bg-gray-800 transition">
+                    <span class="text-blue-400 text-sm">Previous Post</span>
+                    <h4 class="text-lg font-semibold mt-2">The Quantum Reality Check Healthcare Can't Ignore</h4>
+                </a>
+                <a href="index.html" class="block p-6 bg-gray-800/50 rounded-xl hover:bg-gray-800 transition">
+                    <span class="text-blue-400 text-sm">All Posts</span>
+                    <h4 class="text-lg font-semibold mt-2">View All Educational Content →</h4>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-black/50 backdrop-blur-lg py-8">
+        <div class="container mx-auto px-4">
+            <div class="flex flex-col md:flex-row justify-between items-center">
+                <div class="flex items-center space-x-2 mb-4 md:mb-0">
+                    <i class="fas fa-shield-alt text-blue-500 text-xl"></i>
+                    <span class="text-lg font-semibold">Quantum Shield Labs</span>
+                </div>
+                <div class="flex space-x-6">
+                    <a href="https://github.com/mbennett-labs" class="hover:text-blue-500 transition">
+                        <i class="fab fa-github text-xl"></i>
+                    </a>
+                    <a href="https://www.linkedin.com/in/michael-bennett-a29a93103/" class="hover:text-blue-500 transition">
+                        <i class="fab fa-linkedin text-xl"></i>
+                    </a>
+                </div>
+            </div>
+            <div class="mt-8 text-center text-gray-400">
+                <p>&copy; 2025 Quantum Shield Labs. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Mobile Menu Script -->
+    <script>
+        const mobileMenuButton = document.getElementById('mobile-menu-button');
+        const mobileMenu = document.getElementById('mobile-menu');
+        
+        if (mobileMenuButton && mobileMenu) {
+            mobileMenuButton.addEventListener('click', () => {
+                mobileMenu.classList.toggle('hidden');
+            });
+        }
+    </script>
+</body>
+</html>
