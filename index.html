@@ -228,153 +228,58 @@
         </div>
     </nav>
 
-    <!-- REPLACE YOUR CURRENT HERO CTA BUTTONS WITH THIS -->
-<!-- Find the section that starts with "UPDATED: Hero CTA Buttons with Calculator" -->
-<!-- Replace from <div class="flex flex-col md:flex-row..."> to the closing </div> -->
+   <!-- COMPLETE HERO SECTION REPLACEMENT -->
+<!-- Find <section class="hero flex items-center justify-center"> and replace the ENTIRE section down to its closing </section> tag -->
 
-<!-- FIXED: Hero CTA Buttons with Calculator -->
-<div class="flex flex-col md:flex-row items-center justify-center gap-4">
-    <!-- Calculator Button -->
-    <a href="https://quantumshieldlabs.dev/quantum-risk-calculator/" 
-       class="flex items-center justify-center gap-2 bg-gradient-to-r from-green-500 to-emerald-600 hover:from-green-600 hover:to-emerald-700 text-white px-8 py-4 rounded-full text-lg font-semibold transition transform hover:scale-105 shadow-lg hover:shadow-green-500/30 animate-pulse-glow">
-        <i class="fas fa-calculator"></i>
-        Try Free Risk Calculator
-        <i class="fas fa-external-link-alt text-sm"></i>
-    </a>
-    
-    <!-- Explore Services Button -->
-    <a href="#services" 
-       class="flex items-center justify-center gap-2 bg-blue-600 hover:bg-blue-700 text-white px-8 py-4 rounded-full text-lg font-semibold transition transform hover:scale-105 shadow-lg hover:shadow-blue-500/30">
-        Explore Services
-        <i class="fas fa-arrow-right"></i>
-    </a>
-    
-    <!-- Launch Timeline Button -->
-    <a href="#roadmap" 
-       class="flex items-center justify-center gap-2 bg-transparent border-2 border-blue-400 hover:border-blue-300 hover:bg-blue-500/10 text-white px-8 py-4 rounded-full text-lg font-semibold transition transform hover:scale-105">
-        Launch Timeline
-        <i class="fas fa-calendar-alt"></i>
-    </a>
-</div>
-        
-        <!-- Scroll indicator -->
-        <div class="absolute bottom-8 left-0 right-0 flex justify-center animate-bounce">
-            <div class="w-8 h-12 rounded-full border-2 border-white/30 flex justify-center">
-                <div class="w-1 h-3 bg-white/60 rounded-full mt-2 animate-pulse"></div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Services Section -->
-    <section id="services" class="py-20 bg-black bg-opacity-30">
-        <div class="container mx-auto px-4">
-            <div class="max-w-4xl mx-auto text-center mb-16">
-                <h2 class="text-3xl md:text-4xl font-bold mb-6">Our Services</h2>
-                <p class="text-gray-300 text-lg">
-                    Cutting-edge solutions designed to protect your digital assets and infrastructure 
-                    from emerging cybersecurity threats in the quantum era.
-                </p>
-            </div>
+<!-- Hero Section -->
+<section class="hero flex items-center justify-center">
+    <div class="container mx-auto px-4 text-center">
+        <div class="animate-fade-in">
+            <i class="fas fa-shield-alt text-blue-500 text-6xl mb-8"></i>
+            <h1 class="text-5xl md:text-7xl font-bold mb-6 bg-clip-text text-transparent bg-gradient-to-r from-blue-500 to-purple-500">
+                Quantum Shield Labs
+            </h1>
+            <h2 class="text-2xl md:text-3xl font-semibold mb-6 text-blue-200">
+                Advanced Security Solutions for the Quantum Age
+            </h2>
+            <p class="text-xl md:text-2xl text-gray-300 mb-12 max-w-3xl mx-auto">
+                Cybersecurity, blockchain, and AI expertise to protect your digital assets in an evolving technological landscape.
+            </p>
             
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-5xl mx-auto">
-                <div class="service-card bg-gradient-to-br from-gray-900 to-gray-800 bg-opacity-70 backdrop-blur-lg rounded-xl overflow-hidden shadow-lg transition-all duration-300">
-                    <div class="p-6">
-                        <div class="flex items-start">
-                            <div class="p-3 bg-blue-500 bg-opacity-10 rounded-lg">
-                                <i class="fas fa-shield-alt text-blue-500 text-xl"></i>
-                            </div>
-                            <div class="ml-4">
-                                <h3 class="text-xl font-semibold mb-2">Security Consulting</h3>
-                                <p class="text-gray-400">Comprehensive risk assessments and penetration testing to identify and address vulnerabilities.</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+            <!-- FIXED: Hero CTA Buttons -->
+            <div class="flex flex-col sm:flex-row items-center justify-center gap-4 flex-wrap">
+                <!-- Calculator Button -->
+                <a href="https://quantumshieldlabs.dev/quantum-risk-calculator/" 
+                   class="inline-flex items-center gap-2 bg-gradient-to-r from-green-500 to-emerald-600 hover:from-green-600 hover:to-emerald-700 text-white px-6 py-3 md:px-8 md:py-4 rounded-full text-base md:text-lg font-semibold transition transform hover:scale-105 shadow-lg hover:shadow-green-500/30 animate-pulse-glow whitespace-nowrap">
+                    <i class="fas fa-calculator"></i>
+                    <span>Try Free Risk Calculator</span>
+                    <i class="fas fa-external-link-alt text-xs"></i>
+                </a>
                 
-                <div class="service-card bg-gradient-to-br from-gray-900 to-gray-800 bg-opacity-70 backdrop-blur-lg rounded-xl overflow-hidden shadow-lg transition-all duration-300">
-                    <div class="p-6">
-                        <div class="flex items-start">
-                            <div class="p-3 bg-blue-500 bg-opacity-10 rounded-lg">
-                                <i class="fas fa-database text-blue-500 text-xl"></i>
-                            </div>
-                            <div class="ml-4">
-                                <h3 class="text-xl font-semibold mb-2">Blockchain Integration</h3>
-                                <p class="text-gray-400">Expert implementation of secure blockchain solutions to enhance transactional integrity.</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                <!-- Explore Services Button -->
+                <a href="#services" 
+                   class="inline-flex items-center gap-2 bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 md:px-8 md:py-4 rounded-full text-base md:text-lg font-semibold transition transform hover:scale-105 shadow-lg hover:shadow-blue-500/30 whitespace-nowrap">
+                    <span>Explore Services</span>
+                    <i class="fas fa-arrow-right"></i>
+                </a>
                 
-                <div class="service-card bg-gradient-to-br from-gray-900 to-gray-800 bg-opacity-70 backdrop-blur-lg rounded-xl overflow-hidden shadow-lg transition-all duration-300">
-                    <div class="p-6">
-                        <div class="flex items-start">
-                            <div class="p-3 bg-blue-500 bg-opacity-10 rounded-lg">
-                                <i class="fas fa-brain text-blue-500 text-xl"></i>
-                            </div>
-                            <div class="ml-4">
-                                <h3 class="text-xl font-semibold mb-2">AI-Driven Security</h3>
-                                <p class="text-gray-400">Intelligent threat detection and response systems powered by machine learning algorithms.</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="service-card bg-gradient-to-br from-gray-900 to-gray-800 bg-opacity-70 backdrop-blur-lg rounded-xl overflow-hidden shadow-lg transition-all duration-300">
-                    <div class="p-6">
-                        <div class="flex items-start">
-                            <div class="p-3 bg-blue-500 bg-opacity-10 rounded-lg">
-                                <i class="fas fa-lock text-blue-500 text-xl"></i>
-                            </div>
-                            <div class="ml-4">
-                                <h3 class="text-xl font-semibold mb-2">Quantum Resistance</h3>
-                                <p class="text-gray-400">Future-proof security measures designed to withstand quantum computing threats.</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            
-            <!-- NEW: Featured Calculator Tool Section -->
-            <div class="mt-16 bg-gradient-to-r from-green-900/30 to-emerald-900/30 rounded-xl p-8 border border-green-500/30">
-                <div class="flex flex-col md:flex-row items-center justify-between">
-                    <div class="md:w-2/3 mb-6 md:mb-0">
-                        <div class="flex items-center mb-4">
-                            <div class="p-3 bg-green-500 bg-opacity-10 rounded-lg mr-4">
-                                <i class="fas fa-calculator text-green-500 text-2xl"></i>
-                            </div>
-                            <div>
-                                <span class="inline-block bg-green-500/20 text-green-300 px-3 py-1 rounded-full text-xs font-semibold mb-2">FREE TOOL</span>
-                                <h3 class="text-2xl font-bold">Quantum Security Risk Calculator</h3>
-                            </div>
-                        </div>
-                        <p class="text-gray-300 mb-4">
-                            Assess your organization's quantum security readiness in just 2 minutes. Get an instant risk score and personalized PDF report with actionable recommendations.
-                        </p>
-                        <ul class="text-sm text-gray-400 space-y-2">
-                            <li><i class="fas fa-check text-green-500 mr-2"></i> 8 critical security questions</li>
-                            <li><i class="fas fa-check text-green-500 mr-2"></i> Instant risk assessment</li>
-                            <li><i class="fas fa-check text-green-500 mr-2"></i> Professional PDF report</li>
-                            <li><i class="fas fa-check text-green-500 mr-2"></i> No credit card required</li>
-                        </ul>
-                    </div>
-                    <div class="md:w-1/3 text-center md:text-right">
-                        <a href="https://quantumshieldlabs.dev/quantum-risk-calculator/" class="inline-block bg-gradient-to-r from-green-500 to-emerald-600 hover:from-green-600 hover:to-emerald-700 text-white px-8 py-4 rounded-lg font-semibold transition transform hover:scale-105 shadow-lg hover:shadow-green-500/30">
-                            <i class="fas fa-calculator mr-2"></i>
-                            Try Calculator Now
-                            <i class="fas fa-arrow-right ml-2"></i>
-                        </a>
-                        <p class="text-xs text-gray-500 mt-3">Takes ~2 minutes</p>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="mt-16 text-center">
-                <a href="#contact" class="inline-block px-8 py-4 bg-blue-600 hover:bg-blue-700 text-white rounded-lg transition shadow-lg hover:shadow-blue-500/30">
-                    Request a Consultation
+                <!-- Launch Timeline Button -->
+                <a href="#roadmap" 
+                   class="inline-flex items-center gap-2 bg-transparent border-2 border-blue-400 hover:border-blue-300 hover:bg-blue-500/10 text-white px-6 py-3 md:px-8 md:py-4 rounded-full text-base md:text-lg font-semibold transition transform hover:scale-105 whitespace-nowrap">
+                    <span>Launch Timeline</span>
+                    <i class="fas fa-calendar-alt"></i>
                 </a>
             </div>
         </div>
-    </section>
+    </div>
+    
+    <!-- Scroll indicator -->
+    <div class="absolute bottom-8 left-0 right-0 flex justify-center animate-bounce">
+        <div class="w-8 h-12 rounded-full border-2 border-white/30 flex justify-center">
+            <div class="w-1 h-3 bg-white/60 rounded-full mt-2 animate-pulse"></div>
+        </div>
+    </div>
+</section>
 
     <!-- Projects Section -->
     <section id="projects" class="py-20">
@@ -1286,5 +1191,6 @@
     </script>
 </body>
 </html>
+
 
 
