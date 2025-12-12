@@ -435,93 +435,116 @@
     </div>
 </section>
 
-    <!-- Projects Section -->
-    <section id="projects" class="py-20">
-        <div class="container mx-auto px-4">
-            <h2 class="text-3xl md:text-4xl font-bold text-center mb-6">Featured Projects</h2>
-            <p class="text-center text-gray-300 mb-16 max-w-3xl mx-auto">
-                Explore our successful implementations that have transformed security postures and operational efficiencies.
-            </p>
+   <!-- Projects Section - UPDATED WITH BTC BATTLE -->
+<!-- Replace the entire <section id="projects"> ... </section> in your index.html -->
+
+<section id="projects" class="py-20">
+    <div class="container mx-auto px-4">
+        <h2 class="text-3xl md:text-4xl font-bold text-center mb-6">Featured Projects</h2>
+        <p class="text-center text-gray-300 mb-16 max-w-3xl mx-auto">
+            Live applications and tools demonstrating our blockchain, security, and Web3 development capabilities.
+        </p>
+        
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8 project-grid">
             
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 project-grid">
-                <div class="project-card bg-gray-900/30 rounded-xl overflow-hidden shadow-lg hover:shadow-blue-500/10 transition-all duration-300 transform hover:-translate-y-2">
-                    <div class="project-img-container">
-                        <img src="https://images.unsplash.com/photo-1558494949-ef010cbdcc31?q=80&w=2940&auto=format&fit=crop" alt="AI Calendar Assistant" class="project-img">
-                        <div class="absolute inset-0 bg-gradient-to-t from-gray-900 via-gray-900/60 to-transparent"></div>
+            <!-- PROJECT 1: BTC Battle (FEATURED) -->
+            <div class="project-card bg-gray-900/30 rounded-xl overflow-hidden shadow-lg hover:shadow-blue-500/10 transition-all duration-300 transform hover:-translate-y-2 border border-blue-500/30">
+                <div class="project-img-container relative">
+                    <img src="https://base-signal.vercel.app/screenshot-1.png" alt="BTC Battle - Whale War Visualization" class="project-img" onerror="this.src='https://images.unsplash.com/photo-1639762681485-074b7f938ba0?q=80&w=2832&auto=format&fit=crop'">
+                    <div class="absolute inset-0 bg-gradient-to-t from-gray-900 via-gray-900/60 to-transparent"></div>
+                    <div class="absolute top-3 left-3 bg-green-500 text-white text-xs px-3 py-1 rounded-full font-semibold">
+                        <i class="fas fa-circle text-xs mr-1 animate-pulse"></i> LIVE
                     </div>
-                    <div class="p-6 project-content">
-                        <h3 class="text-xl font-semibold mb-2">AI Calendar Assistant</h3>
-                        <p class="text-gray-300 text-sm mb-4 project-description">Production AI assistant using HuggingFace transformers for intelligent appointment parsing with 70% confidence.</p>
-                        
-                        <div>
-                            <div class="flex flex-wrap gap-2 mb-4">
-                                <span class="text-xs bg-blue-500/20 text-blue-300 px-2 py-1 rounded-full">Python</span>
-                                <span class="text-xs bg-blue-500/20 text-blue-300 px-2 py-1 rounded-full">HuggingFace</span>
-                                <span class="text-xs bg-blue-500/20 text-blue-300 px-2 py-1 rounded-full">AI/ML</span>
-                            </div>
-                            
-                            <a href="https://github.com/mbennett-labs/ai-assistant-michael" class="flex items-center text-blue-500 hover:text-blue-400 transition-all duration-300">
-                                <span>View Project</span> <i class="fas fa-arrow-right ml-2"></i>
-                            </a>
-                        </div>
+                    <div class="absolute top-3 right-3 bg-blue-600 text-white text-xs px-3 py-1 rounded-full font-semibold">
+                        Featured
                     </div>
                 </div>
-                
-                <div class="project-card bg-gray-900/30 rounded-xl overflow-hidden shadow-lg hover:shadow-blue-500/10 transition-all duration-300 transform hover:-translate-y-2">
-                    <div class="project-img-container">
-                        <img src="https://images.unsplash.com/photo-1639762681057-408e52192e55?q=80&w=2832&auto=format&fit=crop" alt="Ethereum Smart Contracts" class="project-img">
-                        <div class="absolute inset-0 bg-gradient-to-t from-gray-900 via-gray-900/60 to-transparent"></div>
-                    </div>
-                    <div class="p-6 project-content">
-                        <h3 class="text-xl font-semibold mb-2">Ethereum Smart Contracts</h3>
-                        <p class="text-gray-300 text-sm mb-4 project-description">Collection of Ethereum smart contracts with security best practices and gas optimization.</p>
-                        
-                        <div>
-                            <div class="flex flex-wrap gap-2 mb-4">
-                                <span class="text-xs bg-blue-500/20 text-blue-300 px-2 py-1 rounded-full">Blockchain</span>
-                                <span class="text-xs bg-blue-500/20 text-blue-300 px-2 py-1 rounded-full">Solidity</span>
-                                <span class="text-xs bg-blue-500/20 text-blue-300 px-2 py-1 rounded-full">Web3</span>
-                            </div>
-                            
-                            <a href="https://github.com/mbennett-labs/ethereum-smart-contracts" class="flex items-center text-blue-500 hover:text-blue-400 transition-all duration-300">
-                                <span>View Project</span> <i class="fas fa-arrow-right ml-2"></i>
-                            </a>
+                <div class="p-6 project-content">
+                    <h3 class="text-xl font-semibold mb-2">BTC Battle</h3>
+                    <p class="text-gray-300 text-sm mb-4 project-description">Real-time whale war visualization on Base L2. Watch bulls vs bears battle for market dominance with live Farcaster social feed integration.</p>
+                    
+                    <div>
+                        <div class="flex flex-wrap gap-2 mb-4">
+                            <span class="text-xs bg-blue-500/20 text-blue-300 px-2 py-1 rounded-full">Base L2</span>
+                            <span class="text-xs bg-purple-500/20 text-purple-300 px-2 py-1 rounded-full">Farcaster</span>
+                            <span class="text-xs bg-green-500/20 text-green-300 px-2 py-1 rounded-full">Next.js</span>
+                            <span class="text-xs bg-yellow-500/20 text-yellow-300 px-2 py-1 rounded-full">Mini App</span>
                         </div>
-                    </div>
-                </div>
-                
-                <div class="project-card bg-gray-900/30 rounded-xl overflow-hidden shadow-lg hover:shadow-blue-500/10 transition-all duration-300 transform hover:-translate-y-2">
-                    <div class="project-img-container">
-                        <img src="https://images.unsplash.com/photo-1614064641938-3bbee52942c7?q=80&w=2940&auto=format&fit=crop" alt="Celestia Light Node" class="project-img">
-                        <div class="absolute inset-0 bg-gradient-to-t from-gray-900 via-gray-900/60 to-transparent"></div>
-                    </div>
-                    <div class="p-6 project-content">
-                        <h3 class="text-xl font-semibold mb-2">Celestia Light Node</h3>
-                        <p class="text-gray-300 text-sm mb-4 project-description">Resource-optimized Celestia Light Node implementation with custom monitoring dashboard.</p>
                         
-                        <div>
-                            <div class="flex flex-wrap gap-2 mb-4">
-                                <span class="text-xs bg-blue-500/20 text-blue-300 px-2 py-1 rounded-full">Go</span>
-                                <span class="text-xs bg-blue-500/20 text-blue-300 px-2 py-1 rounded-full">Node.js</span>
-                                <span class="text-xs bg-blue-500/20 text-blue-300 px-2 py-1 rounded-full">Blockchain</span>
-                            </div>
-                            
-                            <a href="https://github.com/mbennett-labs/celestia-node-project" class="flex items-center text-blue-500 hover:text-blue-400 transition-all duration-300">
-                                <span>View Project</span> <i class="fas fa-arrow-right ml-2"></i>
+                        <div class="flex items-center justify-between">
+                            <a href="https://base-signal.vercel.app" target="_blank" class="flex items-center text-green-400 hover:text-green-300 transition-all duration-300">
+                                <i class="fas fa-external-link-alt mr-2"></i>
+                                <span>Live Demo</span>
+                            </a>
+                            <a href="https://github.com/mbennett-labs/base-signal" target="_blank" class="flex items-center text-blue-500 hover:text-blue-400 transition-all duration-300">
+                                <i class="fab fa-github mr-2"></i>
+                                <span>Code</span>
                             </a>
                         </div>
                     </div>
                 </div>
             </div>
             
-            <div class="text-center mt-12">
-                <a href="https://github.com/mbennett-labs" class="px-6 py-3 bg-gradient-to-r from-blue-600 to-blue-500 hover:from-blue-700 hover:to-blue-600 text-white rounded-lg shadow-lg hover:shadow-blue-500/30 transition">
-                    View All Projects
-                </a>
+            <!-- PROJECT 2: Quantum Risk Calculator -->
+            <div class="project-card bg-gray-900/30 rounded-xl overflow-hidden shadow-lg hover:shadow-blue-500/10 transition-all duration-300 transform hover:-translate-y-2">
+                <div class="project-img-container relative">
+                    <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=2940&auto=format&fit=crop" alt="Quantum Risk Calculator" class="project-img">
+                    <div class="absolute inset-0 bg-gradient-to-t from-gray-900 via-gray-900/60 to-transparent"></div>
+                    <div class="absolute top-3 left-3 bg-green-500 text-white text-xs px-3 py-1 rounded-full font-semibold">
+                        <i class="fas fa-circle text-xs mr-1 animate-pulse"></i> LIVE
+                    </div>
+                </div>
+                <div class="p-6 project-content">
+                    <h3 class="text-xl font-semibold mb-2">Quantum Risk Calculator</h3>
+                    <p class="text-gray-300 text-sm mb-4 project-description">Free security assessment tool for healthcare organizations. Instant quantum threat analysis with professional PDF reports.</p>
+                    
+                    <div>
+                        <div class="flex flex-wrap gap-2 mb-4">
+                            <span class="text-xs bg-blue-500/20 text-blue-300 px-2 py-1 rounded-full">Security</span>
+                            <span class="text-xs bg-blue-500/20 text-blue-300 px-2 py-1 rounded-full">Healthcare</span>
+                            <span class="text-xs bg-blue-500/20 text-blue-300 px-2 py-1 rounded-full">Assessment</span>
+                        </div>
+                        
+                        <a href="https://quantumshieldlabs.dev/quantum-risk-calculator/" target="_blank" class="flex items-center text-green-400 hover:text-green-300 transition-all duration-300">
+                            <i class="fas fa-calculator mr-2"></i>
+                            <span>Try Calculator</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- PROJECT 3: Ethereum Smart Contracts -->
+            <div class="project-card bg-gray-900/30 rounded-xl overflow-hidden shadow-lg hover:shadow-blue-500/10 transition-all duration-300 transform hover:-translate-y-2">
+                <div class="project-img-container">
+                    <img src="https://images.unsplash.com/photo-1639762681057-408e52192e55?q=80&w=2832&auto=format&fit=crop" alt="Ethereum Smart Contracts" class="project-img">
+                    <div class="absolute inset-0 bg-gradient-to-t from-gray-900 via-gray-900/60 to-transparent"></div>
+                </div>
+                <div class="p-6 project-content">
+                    <h3 class="text-xl font-semibold mb-2">Smart Contract Security</h3>
+                    <p class="text-gray-300 text-sm mb-4 project-description">Collection of audited Ethereum smart contracts demonstrating security best practices, gas optimization, and DeFi patterns.</p>
+                    
+                    <div>
+                        <div class="flex flex-wrap gap-2 mb-4">
+                            <span class="text-xs bg-blue-500/20 text-blue-300 px-2 py-1 rounded-full">Solidity</span>
+                            <span class="text-xs bg-blue-500/20 text-blue-300 px-2 py-1 rounded-full">Security</span>
+                            <span class="text-xs bg-blue-500/20 text-blue-300 px-2 py-1 rounded-full">DeFi</span>
+                        </div>
+                        
+                        <a href="https://github.com/mbennett-labs/ethereum-smart-contracts" target="_blank" class="flex items-center text-blue-500 hover:text-blue-400 transition-all duration-300">
+                            <span>View Project</span> <i class="fas fa-arrow-right ml-2"></i>
+                        </a>
+                    </div>
+                </div>
             </div>
         </div>
-    </section>
-
+        
+        <div class="text-center mt-12">
+            <a href="https://github.com/mbennett-labs" target="_blank" class="px-6 py-3 bg-gradient-to-r from-blue-600 to-blue-500 hover:from-blue-700 hover:to-blue-600 text-white rounded-lg shadow-lg hover:shadow-blue-500/30 transition">
+                <i class="fab fa-github mr-2"></i>View All Projects
+            </a>
+        </div>
+    </div>
+</section>
     <!-- About Section -->
     <section id="about" class="py-20 bg-black bg-opacity-30">
         <div class="container mx-auto px-4">
