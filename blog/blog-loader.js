@@ -4,15 +4,38 @@
 
 const blogPosts = [
     {
-    title: "Pentagon's Quantum Scramble: What SandboxAQ's DoD Contract Means for Healthcare",
-    date: "2025-12-10",
-    category: "Quantum Security News",
-    excerpt: "The Pentagon just contracted SandboxAQ for cryptographic discovery across military systems. If the world's most secure networks are scrambling to inventory quantum vulnerabilities, what does this signal for healthcare organizations protecting 50+ years of PHI?",
-    tags: ["quantum security", "DoD", "SandboxAQ", "healthcare", "post-quantum cryptography"],
-    slug: "sandboxaq-dod-quantum-security",
-    readTime: "8 min read",
-    image: "https://images.unsplash.com/photo-1550751827-4bd374c3f58b?w=800&q=80"
-},
+        title: "Why A16Z's Quantum Security Report Should Alarm Healthcare More Than Crypto",
+        date: "2025-12-23",
+        author: "Michael Bennett",
+        category: "Quantum Threat Analysis",
+        excerpt: "Andreessen Horowitz just released a quantum threat assessment that's reshaping how crypto thinks about Q-Day. But here's what nobody's discussing: these findings apply MORE urgently to healthcare than to blockchain. The 'harvest now, decrypt later' attack is already happening—and medical records made the list.",
+        tags: ["quantum security", "A16Z", "healthcare", "HNDL", "post-quantum cryptography", "HIPAA"],
+        slug: "a16z-quantum-healthcare-report",
+        readTime: "12 min read",
+        image: "https://images.unsplash.com/photo-1639322537228-f710d846310a?w=800&q=80"
+    },
+    {
+        title: "Pentagon's Quantum Scramble: What SandboxAQ's DoD Contract Means for Healthcare",
+        date: "2025-12-10",
+        author: "Michael Bennett",
+        category: "Quantum Security News",
+        excerpt: "The Pentagon just contracted SandboxAQ for cryptographic discovery across military systems. If the world's most secure networks are scrambling to inventory quantum vulnerabilities, what does this signal for healthcare organizations protecting 50+ years of PHI?",
+        tags: ["quantum security", "DoD", "SandboxAQ", "healthcare", "post-quantum cryptography"],
+        slug: "sandboxaq-dod-quantum-security",
+        readTime: "8 min read",
+        image: "https://images.unsplash.com/photo-1550751827-4bd374c3f58b?w=800&q=80"
+    },
+    {
+        title: "Quantum Computing: The Revolution That Will Eclipse AI",
+        date: "2025-12-08",
+        author: "Michael Bennett",
+        category: "Quantum Computing",
+        excerpt: "While the world obsesses over AI, a far more fundamental shift is quietly gaining momentum. Google's Willow chip just solved a problem in 5 minutes that would take classical computers 10 septillion years.",
+        tags: ["quantum computing", "AI", "Google Willow", "technology"],
+        slug: "quantum-revolution-eclipse-ai",
+        readTime: "10 min read",
+        image: "https://images.unsplash.com/photo-1635070041078-e363dbe005cb?w=800&q=80"
+    },
     {
         title: "The Quantum Reality Check: What a Former Cambridge Researcher Reveals",
         date: "2025-06-27",
