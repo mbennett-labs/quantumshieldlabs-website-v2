@@ -1,0 +1,1133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quantum Security Risk Calculator | Quantum Shield Labs</title>
+    <meta name="description" content="Assess your healthcare organization's quantum security risk in 2 minutes. Get an instant risk score and professional PDF report with actionable recommendations.">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <style>
+        :root {
+            --primary-blue: #3b82f6;
+            --primary-purple: #8b5cf6;
+            --dark-bg: #0f172a;
+            --darker-bg: #020617;
+            --card-bg: rgba(15, 23, 42, 0.8);
+            --border-color: rgba(59, 130, 246, 0.3);
+            --text-primary: #ffffff;
+            --text-secondary: #94a3b8;
+            --green: #10b981;
+            --yellow: #f59e0b;
+            --orange: #f97316;
+            --red: #ef4444;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: linear-gradient(135deg, var(--darker-bg) 0%, var(--dark-bg) 50%, rgba(59, 130, 246, 0.1) 100%);
+            color: var(--text-primary);
+            min-height: 100vh;
+        }
+
+        .bg-pattern {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                radial-gradient(circle at 20% 80%, rgba(59, 130, 246, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 80% 20%, rgba(139, 92, 246, 0.1) 0%, transparent 50%);
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 2rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        .header {
+            text-align: center;
+            padding: 2rem 0;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.75rem;
+            margin-bottom: 1rem;
+            text-decoration: none;
+        }
+
+        .logo i {
+            font-size: 2.5rem;
+            color: var(--primary-blue);
+        }
+
+        .logo-text {
+            font-size: 1.5rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, var(--primary-blue), var(--primary-purple));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .header h1 {
+            font-size: 2.5rem;
+            font-weight: 800;
+            margin-bottom: 0.5rem;
+            background: linear-gradient(135deg, #fff, #94a3b8);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .header p {
+            color: var(--text-secondary);
+            font-size: 1.1rem;
+        }
+
+        .card {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 1rem;
+            padding: 2rem;
+            margin-bottom: 1.5rem;
+            backdrop-filter: blur(10px);
+        }
+
+        .progress-bar {
+            width: 100%;
+            height: 8px;
+            background: rgba(59, 130, 246, 0.2);
+            border-radius: 4px;
+            margin-bottom: 2rem;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, var(--primary-blue), var(--primary-purple));
+            border-radius: 4px;
+            transition: width 0.3s ease;
+        }
+
+        .question-number {
+            color: var(--primary-blue);
+            font-size: 0.875rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+
+        .question-text {
+            font-size: 1.25rem;
+            font-weight: 600;
+            margin-bottom: 1.5rem;
+            line-height: 1.4;
+        }
+
+        .options {
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+        }
+
+        .option {
+            display: flex;
+            align-items: center;
+            padding: 1rem 1.25rem;
+            background: rgba(59, 130, 246, 0.05);
+            border: 2px solid rgba(59, 130, 246, 0.2);
+            border-radius: 0.75rem;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .option:hover {
+            background: rgba(59, 130, 246, 0.1);
+            border-color: rgba(59, 130, 246, 0.4);
+        }
+
+        .option.selected {
+            background: rgba(59, 130, 246, 0.15);
+            border-color: var(--primary-blue);
+        }
+
+        .option input {
+            display: none;
+        }
+
+        .option-radio {
+            width: 20px;
+            height: 20px;
+            border: 2px solid rgba(59, 130, 246, 0.5);
+            border-radius: 50%;
+            margin-right: 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+
+        .option.selected .option-radio {
+            border-color: var(--primary-blue);
+            background: var(--primary-blue);
+        }
+
+        .option.selected .option-radio::after {
+            content: '';
+            width: 8px;
+            height: 8px;
+            background: white;
+            border-radius: 50%;
+        }
+
+        .option-text {
+            font-size: 1rem;
+            color: var(--text-primary);
+        }
+
+        .nav-buttons {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 2rem;
+        }
+
+        .btn {
+            padding: 0.875rem 2rem;
+            border-radius: 0.5rem;
+            font-weight: 600;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            border: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .btn-secondary {
+            background: rgba(59, 130, 246, 0.1);
+            color: var(--primary-blue);
+            border: 1px solid rgba(59, 130, 246, 0.3);
+        }
+
+        .btn-secondary:hover {
+            background: rgba(59, 130, 246, 0.2);
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--primary-blue), var(--primary-purple));
+            color: white;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(59, 130, 246, 0.3);
+        }
+
+        .btn-primary:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+            transform: none;
+            box-shadow: none;
+        }
+
+        .btn-success {
+            background: linear-gradient(135deg, var(--green), #059669);
+            color: white;
+        }
+
+        .btn-success:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(16, 185, 129, 0.3);
+        }
+
+        /* Results Styles */
+        .results-container {
+            display: none;
+        }
+
+        .score-gauge {
+            width: 200px;
+            height: 200px;
+            margin: 0 auto 2rem;
+            position: relative;
+        }
+
+        .gauge-bg {
+            fill: none;
+            stroke: rgba(59, 130, 246, 0.2);
+            stroke-width: 12;
+        }
+
+        .gauge-fill {
+            fill: none;
+            stroke-width: 12;
+            stroke-linecap: round;
+            transform: rotate(-90deg);
+            transform-origin: center;
+            transition: stroke-dasharray 1s ease;
+        }
+
+        .gauge-text {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            text-align: center;
+        }
+
+        .gauge-score {
+            font-size: 3rem;
+            font-weight: 800;
+        }
+
+        .gauge-label {
+            font-size: 0.875rem;
+            color: var(--text-secondary);
+        }
+
+        .risk-level {
+            text-align: center;
+            padding: 1rem 2rem;
+            border-radius: 0.75rem;
+            margin-bottom: 2rem;
+            font-weight: 600;
+            font-size: 1.25rem;
+        }
+
+        .risk-low {
+            background: rgba(16, 185, 129, 0.15);
+            color: var(--green);
+            border: 1px solid rgba(16, 185, 129, 0.3);
+        }
+
+        .risk-medium {
+            background: rgba(245, 158, 11, 0.15);
+            color: var(--yellow);
+            border: 1px solid rgba(245, 158, 11, 0.3);
+        }
+
+        .risk-high {
+            background: rgba(249, 115, 22, 0.15);
+            color: var(--orange);
+            border: 1px solid rgba(249, 115, 22, 0.3);
+        }
+
+        .risk-critical {
+            background: rgba(239, 68, 68, 0.15);
+            color: var(--red);
+            border: 1px solid rgba(239, 68, 68, 0.3);
+        }
+
+        .recommendations {
+            margin-top: 2rem;
+        }
+
+        .recommendations h3 {
+            font-size: 1.25rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .rec-list {
+            list-style: none;
+        }
+
+        .rec-list li {
+            padding: 1rem;
+            background: rgba(59, 130, 246, 0.05);
+            border-left: 3px solid var(--primary-blue);
+            margin-bottom: 0.75rem;
+            border-radius: 0 0.5rem 0.5rem 0;
+        }
+
+        .rec-list li strong {
+            display: block;
+            margin-bottom: 0.25rem;
+            color: var(--primary-blue);
+        }
+
+        /* Lead Capture Form */
+        .lead-form {
+            margin-top: 2rem;
+            padding-top: 2rem;
+            border-top: 1px solid var(--border-color);
+        }
+
+        .lead-form h3 {
+            font-size: 1.25rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+
+        .lead-form p {
+            color: var(--text-secondary);
+            margin-bottom: 1.5rem;
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        @media (max-width: 640px) {
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .form-group {
+            margin-bottom: 1rem;
+        }
+
+        .form-group label {
+            display: block;
+            font-size: 0.875rem;
+            font-weight: 500;
+            margin-bottom: 0.5rem;
+            color: var(--text-secondary);
+        }
+
+        .form-group input,
+        .form-group select {
+            width: 100%;
+            padding: 0.75rem 1rem;
+            background: rgba(15, 23, 42, 0.8);
+            border: 2px solid var(--border-color);
+            border-radius: 0.5rem;
+            color: var(--text-primary);
+            font-size: 1rem;
+            transition: border-color 0.2s ease;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus {
+            outline: none;
+            border-color: var(--primary-blue);
+        }
+
+        .form-group input::placeholder {
+            color: rgba(148, 163, 184, 0.5);
+        }
+
+        .form-group select option {
+            background: var(--dark-bg);
+        }
+
+        .cta-box {
+            background: linear-gradient(135deg, rgba(59, 130, 246, 0.1), rgba(139, 92, 246, 0.1));
+            border: 1px solid rgba(59, 130, 246, 0.3);
+            border-radius: 1rem;
+            padding: 2rem;
+            text-align: center;
+            margin-top: 2rem;
+        }
+
+        .cta-box h3 {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 0.75rem;
+        }
+
+        .cta-box p {
+            color: var(--text-secondary);
+            margin-bottom: 1.5rem;
+        }
+
+        .hidden {
+            display: none !important;
+        }
+
+        .intro-features {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1rem;
+            margin: 2rem 0;
+        }
+
+        @media (max-width: 640px) {
+            .intro-features {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .intro-feature {
+            text-align: center;
+            padding: 1.5rem;
+            background: rgba(59, 130, 246, 0.05);
+            border-radius: 0.75rem;
+        }
+
+        .intro-feature i {
+            font-size: 2rem;
+            color: var(--primary-blue);
+            margin-bottom: 0.75rem;
+        }
+
+        .intro-feature h3 {
+            font-size: 1rem;
+            font-weight: 600;
+            margin-bottom: 0.25rem;
+        }
+
+        .intro-feature p {
+            font-size: 0.875rem;
+            color: var(--text-secondary);
+        }
+
+        .footer {
+            text-align: center;
+            padding: 2rem;
+            color: var(--text-secondary);
+            font-size: 0.875rem;
+        }
+
+        .footer a {
+            color: var(--primary-blue);
+            text-decoration: none;
+        }
+
+        .footer a:hover {
+            text-decoration: underline;
+        }
+
+        .back-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: var(--text-secondary);
+            text-decoration: none;
+            margin-bottom: 1rem;
+            font-size: 0.875rem;
+            transition: color 0.2s ease;
+        }
+
+        .back-link:hover {
+            color: var(--primary-blue);
+        }
+    </style>
+</head>
+<body>
+    <div class="bg-pattern"></div>
+
+    <div class="container">
+        <a href="https://quantumshieldlabs.dev" class="back-link">
+            <i class="fas fa-arrow-left"></i> Back to Quantum Shield Labs
+        </a>
+
+        <div class="header">
+            <a href="https://quantumshieldlabs.dev" class="logo">
+                <i class="fas fa-shield-alt"></i>
+                <span class="logo-text">Quantum Shield Labs</span>
+            </a>
+            <h1>Quantum Risk Calculator</h1>
+            <p>Assess your organization's quantum security exposure in 2 minutes</p>
+        </div>
+
+        <!-- Intro Screen -->
+        <div id="intro-screen" class="card">
+            <h2 style="font-size: 1.5rem; font-weight: 700; margin-bottom: 1rem; text-align: center;">
+                Is Your Healthcare Data Ready for the Quantum Era?
+            </h2>
+            <p style="color: var(--text-secondary); text-align: center; margin-bottom: 1.5rem;">
+                Quantum computers will break today's encryption. Patient records need protection for 50+ years.
+                Find out where you stand in just 8 questions.
+            </p>
+
+            <div class="intro-features">
+                <div class="intro-feature">
+                    <i class="fas fa-clock"></i>
+                    <h3>2 Minutes</h3>
+                    <p>Quick assessment</p>
+                </div>
+                <div class="intro-feature">
+                    <i class="fas fa-chart-pie"></i>
+                    <h3>Instant Score</h3>
+                    <p>Risk quantified</p>
+                </div>
+                <div class="intro-feature">
+                    <i class="fas fa-file-pdf"></i>
+                    <h3>PDF Report</h3>
+                    <p>Actionable insights</p>
+                </div>
+            </div>
+
+            <div style="text-align: center;">
+                <button class="btn btn-primary" onclick="startAssessment()">
+                    Start Free Assessment <i class="fas fa-arrow-right"></i>
+                </button>
+            </div>
+        </div>
+
+        <!-- Question Screen -->
+        <div id="question-screen" class="card hidden">
+            <div class="progress-bar">
+                <div class="progress-fill" id="progress-fill" style="width: 12.5%"></div>
+            </div>
+
+            <div class="question-number" id="question-number">Question 1 of 8</div>
+            <div class="question-text" id="question-text"></div>
+
+            <div class="options" id="options-container"></div>
+
+            <div class="nav-buttons">
+                <button class="btn btn-secondary" id="prev-btn" onclick="prevQuestion()" style="visibility: hidden;">
+                    <i class="fas fa-arrow-left"></i> Previous
+                </button>
+                <button class="btn btn-primary" id="next-btn" onclick="nextQuestion()" disabled>
+                    Next <i class="fas fa-arrow-right"></i>
+                </button>
+            </div>
+        </div>
+
+        <!-- Results Screen -->
+        <div id="results-screen" class="card hidden">
+            <h2 style="font-size: 1.5rem; font-weight: 700; margin-bottom: 1.5rem; text-align: center;">
+                Your Quantum Risk Assessment Results
+            </h2>
+
+            <div class="score-gauge">
+                <svg viewBox="0 0 100 100" width="200" height="200">
+                    <circle class="gauge-bg" cx="50" cy="50" r="40"></circle>
+                    <circle class="gauge-fill" id="gauge-fill" cx="50" cy="50" r="40" 
+                            stroke-dasharray="0 251.2"></circle>
+                </svg>
+                <div class="gauge-text">
+                    <div class="gauge-score" id="score-display">0</div>
+                    <div class="gauge-label">Risk Score</div>
+                </div>
+            </div>
+
+            <div class="risk-level" id="risk-level">Calculating...</div>
+
+            <div class="recommendations">
+                <h3><i class="fas fa-lightbulb"></i> Priority Recommendations</h3>
+                <ul class="rec-list" id="rec-list"></ul>
+            </div>
+
+            <!-- Lead Capture Form -->
+            <div class="lead-form">
+                <h3><i class="fas fa-file-pdf" style="color: var(--primary-blue); margin-right: 0.5rem;"></i> Get Your Full PDF Report</h3>
+                <p>Enter your details to download a professional report with detailed findings and next steps.</p>
+
+                <form id="lead-capture-form" action="https://formspree.io/f/mjkrqvqj" method="POST">
+                    <input type="hidden" name="_subject" value="QSL Risk Calculator - New Lead">
+                    <input type="hidden" name="risk_score" id="form-risk-score">
+                    <input type="hidden" name="risk_level" id="form-risk-level">
+                    <input type="hidden" name="assessment_answers" id="form-answers">
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="lead-name">Name *</label>
+                            <input type="text" id="lead-name" name="name" required placeholder="Your name">
+                        </div>
+                        <div class="form-group">
+                            <label for="lead-email">Email *</label>
+                            <input type="email" id="lead-email" name="email" required placeholder="you@company.com">
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="lead-company">Organization *</label>
+                            <input type="text" id="lead-company" name="company" required placeholder="Your organization">
+                        </div>
+                        <div class="form-group">
+                            <label for="lead-title">Job Title</label>
+                            <input type="text" id="lead-title" name="title" placeholder="CISO, CTO, etc.">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="lead-org-type">Organization Type</label>
+                        <select id="lead-org-type" name="org_type">
+                            <option value="">Select type...</option>
+                            <option value="hospital">Hospital / Health System</option>
+                            <option value="clinic">Clinic / Medical Practice</option>
+                            <option value="payer">Health Insurance / Payer</option>
+                            <option value="pharma">Pharmaceutical / Life Sciences</option>
+                            <option value="health-tech">Health Tech / Digital Health</option>
+                            <option value="other">Other Healthcare</option>
+                        </select>
+                    </div>
+
+                    <button type="submit" class="btn btn-success" style="width: 100%; justify-content: center;">
+                        <i class="fas fa-download"></i> Download PDF Report & Submit
+                    </button>
+                </form>
+            </div>
+
+            <div class="cta-box">
+                <h3>Ready to Take Action?</h3>
+                <p>Get a comprehensive quantum readiness assessment with our expert team.</p>
+                <a href="https://quantumshieldlabs.dev/#contact" class="btn btn-primary">
+                    <i class="fas fa-calendar"></i> Schedule Consultation
+                </a>
+            </div>
+        </div>
+
+        <div class="footer">
+            <p>&copy; 2025 Quantum Shield Labs. All rights reserved.</p>
+            <p style="margin-top: 0.5rem;">
+                <a href="https://quantumshieldlabs.dev">Home</a> · 
+                <a href="https://quantumshieldlabs.dev/blog/">Blog</a> · 
+                <a href="https://quantumshieldlabs.dev/#contact">Contact</a>
+            </p>
+        </div>
+    </div>
+
+    <script>
+        // Assessment Questions
+        const questions = [
+            {
+                id: 'data_sensitivity',
+                text: 'What types of sensitive data does your organization handle?',
+                options: [
+                    { text: 'Basic administrative records only', value: 1 },
+                    { text: 'Standard patient/customer information', value: 2 },
+                    { text: 'Protected Health Information (PHI)', value: 3 },
+                    { text: 'PHI + genetic/genomic data', value: 4 },
+                    { text: 'PHI + genetic + research/clinical trial data', value: 5 }
+                ]
+            },
+            {
+                id: 'retention_period',
+                text: 'How long must your most sensitive data remain confidential?',
+                options: [
+                    { text: 'Less than 5 years', value: 1 },
+                    { text: '5-10 years', value: 2 },
+                    { text: '10-25 years', value: 3 },
+                    { text: '25-50 years', value: 4 },
+                    { text: '50+ years (lifetime medical records)', value: 5 }
+                ]
+            },
+            {
+                id: 'crypto_inventory',
+                text: 'Do you have a complete inventory of all cryptographic assets in your environment?',
+                options: [
+                    { text: 'Yes, fully documented and maintained', value: 1 },
+                    { text: 'Partial inventory exists', value: 2 },
+                    { text: 'We know the major systems but not details', value: 3 },
+                    { text: 'Limited visibility', value: 4 },
+                    { text: 'No inventory exists', value: 5 }
+                ]
+            },
+            {
+                id: 'encryption_types',
+                text: 'What encryption algorithms are primarily used for your sensitive data?',
+                options: [
+                    { text: 'Already using post-quantum algorithms', value: 1 },
+                    { text: 'AES-256 with quantum-safe key exchange', value: 2 },
+                    { text: 'AES-256 with RSA/ECC key exchange', value: 3 },
+                    { text: 'Mix of AES, RSA, and legacy algorithms', value: 4 },
+                    { text: 'Unknown or legacy encryption', value: 5 }
+                ]
+            },
+            {
+                id: 'vendor_readiness',
+                text: 'Have your critical vendors (EHR, cloud, etc.) communicated their quantum migration plans?',
+                options: [
+                    { text: 'Yes, with concrete timelines', value: 1 },
+                    { text: 'Some vendors have shared plans', value: 2 },
+                    { text: 'We have asked but received vague responses', value: 3 },
+                    { text: 'We have not asked vendors about this', value: 4 },
+                    { text: 'We don\'t know who to ask', value: 5 }
+                ]
+            },
+            {
+                id: 'crypto_agility',
+                text: 'How easily could your organization switch to new encryption algorithms?',
+                options: [
+                    { text: 'Systems are designed for crypto agility', value: 1 },
+                    { text: 'Most systems could be updated with moderate effort', value: 2 },
+                    { text: 'Major systems would require significant work', value: 3 },
+                    { text: 'Would require substantial infrastructure changes', value: 4 },
+                    { text: 'Complete system replacement likely needed', value: 5 }
+                ]
+            },
+            {
+                id: 'awareness',
+                text: 'What is your organization\'s awareness level of quantum computing threats?',
+                options: [
+                    { text: 'Board-level awareness with active planning', value: 1 },
+                    { text: 'Security team is tracking and has briefed leadership', value: 2 },
+                    { text: 'IT/Security aware but no formal planning', value: 3 },
+                    { text: 'Limited awareness, seen as future issue', value: 4 },
+                    { text: 'Not on our radar', value: 5 }
+                ]
+            },
+            {
+                id: 'regulatory',
+                text: 'How does your organization typically respond to new security compliance requirements?',
+                options: [
+                    { text: 'Proactively ahead of requirements', value: 1 },
+                    { text: 'Early adopter, prepare before deadlines', value: 2 },
+                    { text: 'Meet requirements as they become mandatory', value: 3 },
+                    { text: 'Often scrambling to meet deadlines', value: 4 },
+                    { text: 'Reactive, address issues as they arise', value: 5 }
+                ]
+            }
+        ];
+
+        let currentQuestion = 0;
+        let answers = {};
+
+        function startAssessment() {
+            document.getElementById('intro-screen').classList.add('hidden');
+            document.getElementById('question-screen').classList.remove('hidden');
+            showQuestion(0);
+        }
+
+        function showQuestion(index) {
+            const question = questions[index];
+            document.getElementById('question-number').textContent = `Question ${index + 1} of ${questions.length}`;
+            document.getElementById('question-text').textContent = question.text;
+            document.getElementById('progress-fill').style.width = `${((index + 1) / questions.length) * 100}%`;
+
+            const optionsContainer = document.getElementById('options-container');
+            optionsContainer.innerHTML = '';
+
+            question.options.forEach((option, i) => {
+                const optionDiv = document.createElement('div');
+                optionDiv.className = 'option' + (answers[question.id] === option.value ? ' selected' : '');
+                optionDiv.innerHTML = `
+                    <input type="radio" name="q${index}" id="q${index}_${i}" value="${option.value}">
+                    <div class="option-radio"></div>
+                    <span class="option-text">${option.text}</span>
+                `;
+                optionDiv.onclick = () => selectOption(question.id, option.value, optionDiv);
+                optionsContainer.appendChild(optionDiv);
+            });
+
+            // Update nav buttons
+            document.getElementById('prev-btn').style.visibility = index === 0 ? 'hidden' : 'visible';
+            
+            const nextBtn = document.getElementById('next-btn');
+            if (index === questions.length - 1) {
+                nextBtn.innerHTML = 'See Results <i class="fas fa-chart-pie"></i>';
+            } else {
+                nextBtn.innerHTML = 'Next <i class="fas fa-arrow-right"></i>';
+            }
+            nextBtn.disabled = !answers[question.id];
+        }
+
+        function selectOption(questionId, value, element) {
+            answers[questionId] = value;
+            
+            document.querySelectorAll('.option').forEach(opt => opt.classList.remove('selected'));
+            element.classList.add('selected');
+            
+            document.getElementById('next-btn').disabled = false;
+        }
+
+        function nextQuestion() {
+            if (currentQuestion < questions.length - 1) {
+                currentQuestion++;
+                showQuestion(currentQuestion);
+            } else {
+                showResults();
+            }
+        }
+
+        function prevQuestion() {
+            if (currentQuestion > 0) {
+                currentQuestion--;
+                showQuestion(currentQuestion);
+            }
+        }
+
+        function calculateScore() {
+            let totalScore = 0;
+            let maxScore = questions.length * 5;
+            
+            Object.values(answers).forEach(value => {
+                totalScore += value;
+            });
+
+            // Convert to 0-100 scale (higher = more risk)
+            return Math.round((totalScore / maxScore) * 100);
+        }
+
+        function getRiskLevel(score) {
+            if (score <= 25) return { level: 'Low Risk', class: 'risk-low', color: '#10b981' };
+            if (score <= 50) return { level: 'Moderate Risk', class: 'risk-medium', color: '#f59e0b' };
+            if (score <= 75) return { level: 'High Risk', class: 'risk-high', color: '#f97316' };
+            return { level: 'Critical Risk', class: 'risk-critical', color: '#ef4444' };
+        }
+
+        function getRecommendations(score) {
+            const recs = [];
+
+            if (answers.crypto_inventory >= 3) {
+                recs.push({
+                    title: 'Conduct Cryptographic Discovery',
+                    text: 'You need visibility into all encryption in your environment before you can plan a migration. This is foundational.'
+                });
+            }
+
+            if (answers.data_sensitivity >= 3 && answers.retention_period >= 4) {
+                recs.push({
+                    title: 'Prioritize Long-Retention Data',
+                    text: 'With sensitive data requiring 25+ years of protection, you face "harvest now, decrypt later" risks today. Prioritize these systems.'
+                });
+            }
+
+            if (answers.vendor_readiness >= 3) {
+                recs.push({
+                    title: 'Engage Critical Vendors',
+                    text: 'Request post-quantum migration roadmaps from your EHR, cloud, and security vendors. Include PQC requirements in new contracts.'
+                });
+            }
+
+            if (answers.crypto_agility >= 4) {
+                recs.push({
+                    title: 'Assess Crypto Agility',
+                    text: 'Systems that are difficult to update will take longest to migrate. Identify these early and begin planning.'
+                });
+            }
+
+            if (answers.awareness >= 3) {
+                recs.push({
+                    title: 'Brief Leadership',
+                    text: 'Quantum risk needs board-level awareness. Prepare an executive briefing on the threat timeline and required investments.'
+                });
+            }
+
+            if (answers.encryption_types >= 4) {
+                recs.push({
+                    title: 'Modernize Encryption',
+                    text: 'Legacy or unknown encryption algorithms are highest priority for replacement. Inventory and upgrade these systems first.'
+                });
+            }
+
+            // Always include at least 3 recommendations
+            if (recs.length < 3) {
+                recs.push({
+                    title: 'Develop PQC Roadmap',
+                    text: 'Create a phased migration plan aligned with NIST post-quantum standards (FIPS 203, 204, 205) and your vendor timelines.'
+                });
+            }
+
+            return recs.slice(0, 4);
+        }
+
+        function showResults() {
+            document.getElementById('question-screen').classList.add('hidden');
+            document.getElementById('results-screen').classList.remove('hidden');
+
+            const score = calculateScore();
+            const risk = getRiskLevel(score);
+
+            // Animate score
+            let displayScore = 0;
+            const scoreDisplay = document.getElementById('score-display');
+            const interval = setInterval(() => {
+                displayScore += 2;
+                if (displayScore >= score) {
+                    displayScore = score;
+                    clearInterval(interval);
+                }
+                scoreDisplay.textContent = displayScore;
+            }, 20);
+
+            // Animate gauge
+            const circumference = 2 * Math.PI * 40;
+            const gaugeFill = document.getElementById('gauge-fill');
+            gaugeFill.style.stroke = risk.color;
+            setTimeout(() => {
+                gaugeFill.style.strokeDasharray = `${(score / 100) * circumference} ${circumference}`;
+            }, 100);
+
+            // Set risk level
+            const riskLevel = document.getElementById('risk-level');
+            riskLevel.textContent = risk.level;
+            riskLevel.className = 'risk-level ' + risk.class;
+
+            // Show recommendations
+            const recList = document.getElementById('rec-list');
+            recList.innerHTML = '';
+            getRecommendations(score).forEach(rec => {
+                const li = document.createElement('li');
+                li.innerHTML = `<strong>${rec.title}</strong>${rec.text}`;
+                recList.appendChild(li);
+            });
+
+            // Set hidden form fields
+            document.getElementById('form-risk-score').value = score;
+            document.getElementById('form-risk-level').value = risk.level;
+            document.getElementById('form-answers').value = JSON.stringify(answers);
+        }
+
+        // Handle form submission
+        document.getElementById('lead-capture-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // Generate PDF first
+            generatePDF();
+            
+            // Then submit form data to Formspree
+            const formData = new FormData(this);
+            
+            fetch(this.action, {
+                method: 'POST',
+                body: formData,
+                headers: {
+                    'Accept': 'application/json'
+                }
+            }).then(response => {
+                if (response.ok) {
+                    alert('Thank you! Your report has been downloaded and our team will be in touch shortly.');
+                }
+            }).catch(error => {
+                console.log('Form submission error:', error);
+            });
+        });
+
+        function generatePDF() {
+            const { jsPDF } = window.jspdf;
+            const doc = new jsPDF();
+            
+            const score = calculateScore();
+            const risk = getRiskLevel(score);
+            const userName = document.getElementById('lead-name').value || 'Assessment';
+            const userCompany = document.getElementById('lead-company').value || 'Organization';
+            const userEmail = document.getElementById('lead-email').value || '';
+            const date = new Date().toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
+
+            // Header
+            doc.setFillColor(15, 23, 42);
+            doc.rect(0, 0, 210, 45, 'F');
+            
+            doc.setTextColor(59, 130, 246);
+            doc.setFontSize(24);
+            doc.setFont('helvetica', 'bold');
+            doc.text('QUANTUM SHIELD LABS', 105, 20, { align: 'center' });
+            
+            doc.setTextColor(255, 255, 255);
+            doc.setFontSize(14);
+            doc.setFont('helvetica', 'normal');
+            doc.text('Quantum Security Risk Assessment Report', 105, 32, { align: 'center' });
+
+            // Report Info
+            doc.setTextColor(100, 100, 100);
+            doc.setFontSize(10);
+            doc.text(`Prepared for: ${userCompany}`, 20, 55);
+            doc.text(`Date: ${date}`, 20, 62);
+
+            // Score Section
+            doc.setFillColor(240, 245, 255);
+            doc.roundedRect(20, 75, 170, 50, 3, 3, 'F');
+            
+            doc.setTextColor(30, 30, 30);
+            doc.setFontSize(16);
+            doc.setFont('helvetica', 'bold');
+            doc.text('RISK ASSESSMENT SCORE', 105, 90, { align: 'center' });
+            
+            // Color code based on risk
+            if (score <= 25) doc.setTextColor(16, 185, 129);
+            else if (score <= 50) doc.setTextColor(245, 158, 11);
+            else if (score <= 75) doc.setTextColor(249, 115, 22);
+            else doc.setTextColor(239, 68, 68);
+            
+            doc.setFontSize(36);
+            doc.text(`${score}/100`, 105, 112, { align: 'center' });
+            
+            doc.setFontSize(14);
+            doc.text(risk.level.toUpperCase(), 105, 122, { align: 'center' });
+
+            // Assessment Summary
+            doc.setTextColor(30, 30, 30);
+            doc.setFontSize(14);
+            doc.setFont('helvetica', 'bold');
+            doc.text('Assessment Summary', 20, 145);
+            
+            doc.setFont('helvetica', 'normal');
+            doc.setFontSize(10);
+            doc.setTextColor(60, 60, 60);
+            
+            let yPos = 155;
+            const summaryItems = [
+                `Data Sensitivity: ${['Minimal', 'Low', 'Moderate', 'High', 'Critical'][answers.data_sensitivity - 1]}`,
+                `Retention Requirements: ${['<5 years', '5-10 years', '10-25 years', '25-50 years', '50+ years'][answers.retention_period - 1]}`,
+                `Cryptographic Visibility: ${['Complete', 'Good', 'Partial', 'Limited', 'None'][answers.crypto_inventory - 1]}`,
+                `Quantum Awareness: ${['Board-level', 'Leadership aware', 'IT aware', 'Limited', 'None'][answers.awareness - 1]}`
+            ];
+            
+            summaryItems.forEach(item => {
+                doc.text(`• ${item}`, 25, yPos);
+                yPos += 7;
+            });
+
+            // Recommendations
+            doc.setTextColor(30, 30, 30);
+            doc.setFontSize(14);
+            doc.setFont('helvetica', 'bold');
+            doc.text('Priority Recommendations', 20, yPos + 10);
+            
+            yPos += 20;
+            doc.setFont('helvetica', 'normal');
+            doc.setFontSize(10);
+            
+            const recs = getRecommendations(score);
+            recs.forEach((rec, i) => {
+                doc.setFont('helvetica', 'bold');
+                doc.setTextColor(59, 130, 246);
+                doc.text(`${i + 1}. ${rec.title}`, 25, yPos);
+                yPos += 6;
+                
+                doc.setFont('helvetica', 'normal');
+                doc.setTextColor(60, 60, 60);
+                const lines = doc.splitTextToSize(rec.text, 160);
+                lines.forEach(line => {
+                    doc.text(line, 30, yPos);
+                    yPos += 5;
+                });
+                yPos += 5;
+            });
+
+            // Next Steps CTA
+            doc.setFillColor(59, 130, 246);
+            doc.roundedRect(20, 230, 170, 35, 3, 3, 'F');
+            
+            doc.setTextColor(255, 255, 255);
+            doc.setFontSize(12);
+            doc.setFont('helvetica', 'bold');
+            doc.text('Ready for a Comprehensive Assessment?', 105, 245, { align: 'center' });
+            
+            doc.setFontSize(10);
+            doc.setFont('helvetica', 'normal');
+            doc.text('Contact Quantum Shield Labs for expert guidance', 105, 255, { align: 'center' });
+
+            // Footer
+            doc.setTextColor(100, 100, 100);
+            doc.setFontSize(9);
+            doc.text('michael@quantumshieldlabs.dev | (240) 659-8286', 105, 275, { align: 'center' });
+            doc.text('quantumshieldlabs.dev', 105, 282, { align: 'center' });
+
+            // Save
+            doc.save(`Quantum_Risk_Assessment_${userCompany.replace(/[^a-zA-Z0-9]/g, '_')}.pdf`);
+        }
+    </script>
+</body>
+</html>
