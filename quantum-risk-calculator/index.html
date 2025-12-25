@@ -459,6 +459,14 @@
             display: none !important;
         }
 
+        #results-screen {
+            display: block;
+        }
+
+        #results-screen.hidden {
+            display: none !important;
+        }
+
         .intro-features {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
@@ -933,50 +941,60 @@
         }
 
         function showResults() {
-            document.getElementById('question-screen').classList.add('hidden');
-            document.getElementById('results-screen').classList.remove('hidden');
+            try {
+                // Hide question screen, show results
+                document.getElementById('question-screen').classList.add('hidden');
+                document.getElementById('results-screen').classList.remove('hidden');
+                
+                // Scroll to top
+                window.scrollTo(0, 0);
 
-            const score = calculateScore();
-            const risk = getRiskLevel(score);
+                const score = calculateScore();
+                const risk = getRiskLevel(score);
 
-            // Animate score
-            let displayScore = 0;
-            const scoreDisplay = document.getElementById('score-display');
-            const interval = setInterval(() => {
-                displayScore += 2;
-                if (displayScore >= score) {
-                    displayScore = score;
-                    clearInterval(interval);
+                // Display score (simple, no animation to avoid issues)
+                const scoreDisplay = document.getElementById('score-display');
+                scoreDisplay.textContent = score;
+
+                // Update gauge
+                const circumference = 2 * Math.PI * 40;
+                const gaugeFill = document.getElementById('gauge-fill');
+                if (gaugeFill) {
+                    gaugeFill.style.stroke = risk.color;
+                    gaugeFill.setAttribute('stroke-dasharray', `${(score / 100) * circumference} ${circumference}`);
                 }
-                scoreDisplay.textContent = displayScore;
-            }, 20);
 
-            // Animate gauge
-            const circumference = 2 * Math.PI * 40;
-            const gaugeFill = document.getElementById('gauge-fill');
-            gaugeFill.style.stroke = risk.color;
-            setTimeout(() => {
-                gaugeFill.style.strokeDasharray = `${(score / 100) * circumference} ${circumference}`;
-            }, 100);
+                // Set risk level
+                const riskLevel = document.getElementById('risk-level');
+                if (riskLevel) {
+                    riskLevel.textContent = risk.level;
+                    riskLevel.className = 'risk-level ' + risk.class;
+                }
 
-            // Set risk level
-            const riskLevel = document.getElementById('risk-level');
-            riskLevel.textContent = risk.level;
-            riskLevel.className = 'risk-level ' + risk.class;
+                // Show recommendations
+                const recList = document.getElementById('rec-list');
+                if (recList) {
+                    recList.innerHTML = '';
+                    getRecommendations(score).forEach(rec => {
+                        const li = document.createElement('li');
+                        li.innerHTML = `<strong>${rec.title}</strong>${rec.text}`;
+                        recList.appendChild(li);
+                    });
+                }
 
-            // Show recommendations
-            const recList = document.getElementById('rec-list');
-            recList.innerHTML = '';
-            getRecommendations(score).forEach(rec => {
-                const li = document.createElement('li');
-                li.innerHTML = `<strong>${rec.title}</strong>${rec.text}`;
-                recList.appendChild(li);
-            });
-
-            // Set hidden form fields
-            document.getElementById('form-risk-score').value = score;
-            document.getElementById('form-risk-level').value = risk.level;
-            document.getElementById('form-answers').value = JSON.stringify(answers);
+                // Set hidden form fields
+                const formScore = document.getElementById('form-risk-score');
+                const formLevel = document.getElementById('form-risk-level');
+                const formAnswers = document.getElementById('form-answers');
+                
+                if (formScore) formScore.value = score;
+                if (formLevel) formLevel.value = risk.level;
+                if (formAnswers) formAnswers.value = JSON.stringify(answers);
+                
+            } catch (error) {
+                console.error('Error showing results:', error);
+                alert('There was an error calculating your results. Please refresh and try again.');
+            }
         }
 
         // Handle form submission
