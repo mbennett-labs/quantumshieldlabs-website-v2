@@ -1109,6 +1109,12 @@
             
             const recs = getRecommendations(score);
             recs.forEach((rec, i) => {
+                // Check if we need a new page
+                if (yPos > 250) {
+                    doc.addPage();
+                    yPos = 20;
+                }
+                
                 doc.setFont('helvetica', 'bold');
                 doc.setTextColor(59, 130, 246);
                 doc.text(`${i + 1}. ${rec.title}`, 25, yPos);
@@ -1121,23 +1127,32 @@
                     doc.text(line, 30, yPos);
                     yPos += 5;
                 });
-                yPos += 5;
+                yPos += 8;
             });
+
+            // Add spacing before CTA
+            yPos += 10;
+            
+            // Check if CTA box fits on current page, if not add new page
+            if (yPos > 230) {
+                doc.addPage();
+                yPos = 30;
+            }
 
             // Next Steps CTA
             doc.setFillColor(59, 130, 246);
-            doc.roundedRect(20, 230, 170, 35, 3, 3, 'F');
+            doc.roundedRect(20, yPos, 170, 35, 3, 3, 'F');
             
             doc.setTextColor(255, 255, 255);
             doc.setFontSize(12);
             doc.setFont('helvetica', 'bold');
-            doc.text('Ready for a Comprehensive Assessment?', 105, 245, { align: 'center' });
+            doc.text('Ready for a Comprehensive Assessment?', 105, yPos + 15, { align: 'center' });
             
             doc.setFontSize(10);
             doc.setFont('helvetica', 'normal');
-            doc.text('Contact Quantum Shield Labs for expert guidance', 105, 255, { align: 'center' });
+            doc.text('Contact Quantum Shield Labs for expert guidance', 105, yPos + 25, { align: 'center' });
 
-            // Footer
+            // Footer - always at bottom of last page
             doc.setTextColor(100, 100, 100);
             doc.setFontSize(9);
             doc.text('michael@quantumshieldlabs.dev | (240) 659-8286', 105, 275, { align: 'center' });
