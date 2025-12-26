@@ -3,6 +3,19 @@
 
 
 const blogPosts = [
+
+    {
+        title: "OpenAI's Transparency Crisis Reveals a Pattern Every CISO Should Recognize",
+        date: "2024-12-26",
+        author: "Michael Bennett",
+        category: "Quantum Threat Analysis",
+        excerpt: "When trained economists quit OpenAI over allegedly buried research, security leaders should pay attention. The same organizational pattern that buries AI economic impact data mirrors the pattern threatening organizations unprepared for quantum threats.",
+        tags: ["quantum security", "OpenAI", "transparency", "CISO", "healthcare IT", "risk management"],
+        slug: "openai-transparency-crisis-quantum-security-pattern",
+        readTime: "8 min read",
+        image: "https://images.unsplash.com/photo-1677442136019-21780ecad995?w=800&q=80"
+    },
+    // ... rest of your existing posts
     {
         title: "Why A16Z's Quantum Security Report Should Alarm Healthcare More Than Crypto",
         date: "2025-12-23",
