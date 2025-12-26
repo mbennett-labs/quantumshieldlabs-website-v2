@@ -197,6 +197,12 @@
             border-bottom-color: #3b82f6;
         }
         
+        .blog-content .cta-section a,
+        .blog-content a.cta-btn {
+            color: #ffffff !important;
+            border-bottom: none !important;
+        }
+        
         /* Blockquotes */
         .blog-content blockquote {
             border-left: 4px solid #3b82f6;
@@ -397,22 +403,33 @@
         
         .cta-btn-primary {
             background: linear-gradient(135deg, #3b82f6, #8b5cf6);
-            color: white;
+            color: #ffffff !important;
+            text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
         }
         
         .cta-btn-primary:hover {
             transform: translateY(-2px);
             box-shadow: 0 10px 20px rgba(59, 130, 246, 0.3);
+            color: #ffffff !important;
+        }
+        
+        .cta-btn-primary i {
+            color: #ffffff !important;
         }
         
         .cta-btn-secondary {
             background: transparent;
-            border: 2px solid #3b82f6;
-            color: #3b82f6;
+            border: 2px solid #60a5fa;
+            color: #60a5fa !important;
         }
         
         .cta-btn-secondary:hover {
-            background: rgba(59, 130, 246, 0.1);
+            background: rgba(59, 130, 246, 0.2);
+            color: #93c5fd !important;
+        }
+        
+        .cta-btn-secondary i {
+            color: #60a5fa !important;
         }
         
         /* Author Box */
