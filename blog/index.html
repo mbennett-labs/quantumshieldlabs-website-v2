@@ -257,7 +257,7 @@
         /* Blog Grid */
         .blog-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
             gap: 2rem;
         }
         
@@ -268,6 +268,8 @@
             border-radius: 1rem;
             overflow: hidden;
             transition: all 0.3s ease;
+            display: flex;
+            flex-direction: column;
         }
         
         .blog-post-card:hover {
@@ -276,61 +278,81 @@
             box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
         }
         
-        .blog-post-card .aspect-video {
-            height: 200px;
+        .blog-post-card-image {
+            height: 180px;
             overflow: hidden;
+            background: linear-gradient(135deg, rgba(59, 130, 246, 0.2), rgba(139, 92, 246, 0.2));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3rem;
         }
         
-        .blog-post-card img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            transition: transform 0.3s ease;
-        }
-        
-        .blog-post-card:hover img {
-            transform: scale(1.05);
-        }
-        
-        .blog-post-card .p-6 {
+        .blog-post-card-content {
             padding: 1.5rem;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
         }
         
-        .blog-post-card .tag {
+        .blog-post-card-tag {
+            display: inline-block;
             background: rgba(59, 130, 246, 0.2);
             color: #60a5fa;
+            font-size: 0.75rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            padding: 0.25rem 0.75rem;
+            border-radius: 0.25rem;
+            margin-bottom: 0.75rem;
+            width: fit-content;
         }
         
-        .blog-post-card h2 {
+        .blog-post-card h3 {
             font-size: 1.25rem;
             font-weight: 600;
             color: white;
             margin-bottom: 0.75rem;
             line-height: 1.4;
+            min-height: 2.8rem;
         }
         
-        .blog-post-card h2 a {
+        .blog-post-card h3 a {
             color: white;
             text-decoration: none;
             transition: color 0.3s ease;
         }
         
-        .blog-post-card h2 a:hover {
+        .blog-post-card h3 a:hover {
             color: #60a5fa;
         }
         
-        .blog-post-card p {
+        .blog-post-card-excerpt {
             color: #94a3b8;
             font-size: 0.95rem;
             line-height: 1.6;
             margin-bottom: 1rem;
+            flex-grow: 1;
         }
         
-        .blog-post-card .text-blue-500 {
+        .blog-post-card-meta {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 0.85rem;
+            color: #64748b;
+            padding-top: 1rem;
+            border-top: 1px solid rgba(59, 130, 246, 0.1);
+        }
+        
+        .blog-post-card-link {
             color: #3b82f6;
+            text-decoration: none;
+            font-weight: 600;
+            transition: color 0.3s ease;
         }
         
-        .blog-post-card .text-blue-500:hover {
+        .blog-post-card-link:hover {
             color: #60a5fa;
         }
         
@@ -541,7 +563,121 @@
         <!-- All Posts Section -->
         <section>
             <h2 class="section-title"><i class="fas fa-newspaper"></i> All Articles</h2>
-            <div class="blog-grid" id="blog-posts"></div>
+            <div class="blog-grid">
+                
+                <!-- Post 1 -->
+                <article class="blog-post-card">
+                    <div class="blog-post-card-image">🔐</div>
+                    <div class="blog-post-card-content">
+                        <span class="blog-post-card-tag">Cryptography</span>
+                        <h3>
+                            <a href="quantum-encryption-guide.html">Quantum Encryption: A Complete Guide for Healthcare</a>
+                        </h3>
+                        <p class="blog-post-card-excerpt">Master the fundamentals of quantum-resistant encryption and how post-quantum cryptography protects healthcare data in the quantum computing era.</p>
+                        <div class="blog-post-card-meta">
+                            <span><i class="far fa-calendar"></i> Dec 2024</span>
+                            <span><i class="far fa-clock"></i> 12 min</span>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- Post 2 -->
+                <article class="blog-post-card">
+                    <div class="blog-post-card-image">🏥</div>
+                    <div class="blog-post-card-content">
+                        <span class="blog-post-card-tag">Healthcare</span>
+                        <h3>
+                            <a href="quantum-reality-check.html">The Quantum Reality Check Healthcare Can't Ignore</a>
+                        </h3>
+                        <p class="blog-post-card-excerpt">Healthcare organizations face a unique quantum threat. Here's why your 50+ year PHI sensitivity requirement makes quantum preparation urgent—not optional.</p>
+                        <div class="blog-post-card-meta">
+                            <span><i class="far fa-calendar"></i> Nov 2024</span>
+                            <span><i class="far fa-clock"></i> 10 min</span>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- Post 3 -->
+                <article class="blog-post-card">
+                    <div class="blog-post-card-image">🛡️</div>
+                    <div class="blog-post-card-content">
+                        <span class="blog-post-card-tag">Security</span>
+                        <h3>
+                            <a href="sandboxaq-dod-quantum-security.html">Pentagon's Quantum Scramble: What SandboxAQ's DoD Contract Means for Healthcare</a>
+                        </h3>
+                        <p class="blog-post-card-excerpt">The Pentagon just contracted SandboxAQ for cryptographic discovery. If military networks are scrambling to inventory vulnerabilities, healthcare organizations should be too.</p>
+                        <div class="blog-post-card-meta">
+                            <span><i class="far fa-calendar"></i> Dec 2025</span>
+                            <span><i class="far fa-clock"></i> 8 min</span>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- Post 4 -->
+                <article class="blog-post-card">
+                    <div class="blog-post-card-image">💡</div>
+                    <div class="blog-post-card-content">
+                        <span class="blog-post-card-tag">Risk Analysis</span>
+                        <h3>
+                            <a href="a16z-quantum-healthcare-report.html">A16Z Quantum Computing Report: Healthcare Implications</a>
+                        </h3>
+                        <p class="blog-post-card-excerpt">Andreessen Horowitz's latest quantum analysis reveals critical insights for healthcare organizations evaluating quantum risk and migration timelines.</p>
+                        <div class="blog-post-card-meta">
+                            <span><i class="far fa-calendar"></i> Oct 2024</span>
+                            <span><i class="far fa-clock"></i> 11 min</span>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- Post 5 -->
+                <article class="blog-post-card">
+                    <div class="blog-post-card-image">🏗️</div>
+                    <div class="blog-post-card-content">
+                        <span class="blog-post-card-tag">Infrastructure</span>
+                        <h3>
+                            <a href="healthcare-ai-security-blog.html">Healthcare AI Security: Building Quantum-Safe Infrastructure</a>
+                        </h3>
+                        <p class="blog-post-card-excerpt">Integrating AI and healthcare systems requires quantum-aware security architecture. Learn how to build infrastructure that's AI-native AND quantum-safe.</p>
+                        <div class="blog-post-card-meta">
+                            <span><i class="far fa-calendar"></i> Sep 2024</span>
+                            <span><i class="far fa-clock"></i> 9 min</span>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- Post 6 -->
+                <article class="blog-post-card">
+                    <div class="blog-post-card-image">⚡</div>
+                    <div class="blog-post-card-content">
+                        <span class="blog-post-card-tag">Technology</span>
+                        <h3>
+                            <a href="quantum-revolution-eclipse-ai.html">The Quantum Revolution: How AI & Quantum Computing Converge</a>
+                        </h3>
+                        <p class="blog-post-card-excerpt">Quantum computing and AI aren't separate trends—they're converging. Understand how this convergence reshapes security strategy for healthcare organizations.</p>
+                        <div class="blog-post-card-meta">
+                            <span><i class="far fa-calendar"></i> Aug 2024</span>
+                            <span><i class="far fa-clock"></i> 10 min</span>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- Post 7 -->
+                <article class="blog-post-card">
+                    <div class="blog-post-card-image">📋</div>
+                    <div class="blog-post-card-content">
+                        <span class="blog-post-card-tag">Policy</span>
+                        <h3>
+                            <a href="trump_policy_complete_post.html">Federal Policy & Post-Quantum Cryptography: What Healthcare Needs to Know</a>
+                        </h3>
+                        <p class="blog-post-card-excerpt">Recent executive orders and federal guidance are reshaping quantum security requirements. Here's what healthcare CIOs need to understand about policy implications.</p>
+                        <div class="blog-post-card-meta">
+                            <span><i class="far fa-calendar"></i> Jan 2025</span>
+                            <span><i class="far fa-clock"></i> 7 min</span>
+                        </div>
+                    </div>
+                </article>
+
+            </div>
         </section>
 
         <!-- CTA Section -->
@@ -577,7 +713,5 @@
         </div>
     </footer>
 
-    <!-- Blog Loader Script -->
-    <script src="blog-loader.js"></script>
 </body>
 </html>
