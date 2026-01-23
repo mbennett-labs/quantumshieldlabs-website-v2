@@ -146,8 +146,8 @@
         }
         
         .featured-post {
-            background: linear-gradient(135deg, rgba(59, 130, 246, 0.15), rgba(139, 92, 246, 0.15));
-            border: 1px solid rgba(59, 130, 246, 0.3);
+            background: linear-gradient(135deg, rgba(239, 68, 68, 0.15), rgba(245, 158, 11, 0.15));
+            border: 1px solid rgba(239, 68, 68, 0.3);
             border-radius: 1rem;
             overflow: hidden;
             transition: transform 0.3s ease, box-shadow 0.3s ease;
@@ -155,13 +155,13 @@
         
         .featured-post:hover {
             transform: translateY(-5px);
-            box-shadow: 0 20px 40px rgba(59, 130, 246, 0.2);
+            box-shadow: 0 20px 40px rgba(239, 68, 68, 0.2);
         }
         
         .featured-badge {
             display: inline-block;
-            background: linear-gradient(135deg, #f59e0b, #fbbf24);
-            color: #1e1b4b;
+            background: linear-gradient(135deg, #ef4444, #f59e0b);
+            color: white;
             padding: 0.5rem 1.25rem;
             font-weight: 700;
             font-size: 0.8rem;
@@ -192,7 +192,7 @@
         }
         
         .featured-content h2 a:hover {
-            color: #60a5fa;
+            color: #fbbf24;
         }
         
         .featured-meta {
@@ -211,7 +211,7 @@
         }
         
         .featured-meta i {
-            color: #60a5fa;
+            color: #f59e0b;
         }
         
         .featured-excerpt {
@@ -221,11 +221,28 @@
             margin-bottom: 1.5rem;
         }
         
+        .featured-tags {
+            display: flex;
+            gap: 0.5rem;
+            margin-bottom: 1.5rem;
+            flex-wrap: wrap;
+        }
+        
+        .featured-tag {
+            background: rgba(239, 68, 68, 0.2);
+            color: #fca5a5;
+            padding: 0.25rem 0.75rem;
+            border-radius: 0.25rem;
+            font-size: 0.75rem;
+            font-weight: 600;
+            text-transform: uppercase;
+        }
+        
         .featured-cta {
             display: inline-flex;
             align-items: center;
             gap: 0.5rem;
-            background: linear-gradient(135deg, #3b82f6, #8b5cf6);
+            background: linear-gradient(135deg, #ef4444, #f59e0b);
             color: white;
             padding: 0.75rem 1.5rem;
             border-radius: 0.5rem;
@@ -236,7 +253,7 @@
         
         .featured-cta:hover {
             transform: translateY(-2px);
-            box-shadow: 0 10px 20px rgba(59, 130, 246, 0.3);
+            box-shadow: 0 10px 20px rgba(239, 68, 68, 0.3);
         }
         
         /* Section Title */
@@ -533,28 +550,34 @@
     <!-- Main Content -->
     <main class="blog-main">
         
-        <!-- Featured Post Section -->
+        <!-- Featured Post Section - NEW QUANTUM FEAR POST -->
         <section class="featured-section">
             <article class="featured-post">
                 <div class="featured-badge">
-                    <i class="fas fa-star"></i> Featured Post
+                    <i class="fas fa-fire"></i> Breaking Analysis
                 </div>
                 <div class="featured-content">
                     <h2>
-                        <a href="openai-transparency-crisis-quantum-security-pattern.html">
-                            OpenAI's Transparency Crisis Reveals a Pattern Every CISO Should Recognize
+                        <a href="quantum-fear-blog.html">
+                            Wall Street Is Selling Bitcoin Over Quantum Fears — But Should You?
                         </a>
                     </h2>
                     <div class="featured-meta">
-                        <span><i class="far fa-calendar"></i> December 26, 2024</span>
+                        <span><i class="far fa-calendar"></i> January 23, 2026</span>
                         <span><i class="far fa-user"></i> Michael Bennett</span>
-                        <span><i class="far fa-clock"></i> 8 min read</span>
+                        <span><i class="far fa-clock"></i> 15 min read</span>
+                    </div>
+                    <div class="featured-tags">
+                        <span class="featured-tag">Fact-Checked</span>
+                        <span class="featured-tag">Bitcoin</span>
+                        <span class="featured-tag">HNDL Attacks</span>
+                        <span class="featured-tag">Healthcare</span>
                     </div>
                     <p class="featured-excerpt">
-                        When trained economists walk away from OpenAI over allegedly buried research, security leaders should pay attention. The same organizational pattern that buries AI economic impact data mirrors the pattern threatening organizations unprepared for quantum threats.
+                        Jefferies strategist Christopher Wood just sold 100% of his Bitcoin citing quantum threats. The same week, a16z called those fears "overblown." We fact-check every major claim and reveal what crypto's quantum crisis means for healthcare organizations protecting data with 50+ year sensitivity requirements.
                     </p>
-                    <a href="openai-transparency-crisis-quantum-security-pattern.html" class="featured-cta">
-                        Read Full Analysis <i class="fas fa-arrow-right"></i>
+                    <a href="quantum-fear-blog.html" class="featured-cta">
+                        Read the Full Analysis <i class="fas fa-arrow-right"></i>
                     </a>
                 </div>
             </article>
@@ -565,7 +588,23 @@
             <h2 class="section-title"><i class="fas fa-newspaper"></i> All Articles</h2>
             <div class="blog-grid">
                 
-                <!-- Post 1 -->
+                <!-- Post 1 - Former Featured (OpenAI) -->
+                <article class="blog-post-card">
+                    <div class="blog-post-card-image">🔍</div>
+                    <div class="blog-post-card-content">
+                        <span class="blog-post-card-tag">Analysis</span>
+                        <h3>
+                            <a href="openai-transparency-crisis-quantum-security-pattern.html">OpenAI's Transparency Crisis Reveals a Pattern Every CISO Should Recognize</a>
+                        </h3>
+                        <p class="blog-post-card-excerpt">When trained economists walk away from OpenAI over allegedly buried research, security leaders should pay attention. The same organizational pattern threatens quantum preparedness.</p>
+                        <div class="blog-post-card-meta">
+                            <span><i class="far fa-calendar"></i> Dec 2024</span>
+                            <span><i class="far fa-clock"></i> 8 min</span>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- Post 2 -->
                 <article class="blog-post-card">
                     <div class="blog-post-card-image">🔐</div>
                     <div class="blog-post-card-content">
@@ -581,7 +620,7 @@
                     </div>
                 </article>
 
-                <!-- Post 2 -->
+                <!-- Post 3 -->
                 <article class="blog-post-card">
                     <div class="blog-post-card-image">🏥</div>
                     <div class="blog-post-card-content">
@@ -597,7 +636,7 @@
                     </div>
                 </article>
 
-                <!-- Post 3 -->
+                <!-- Post 4 -->
                 <article class="blog-post-card">
                     <div class="blog-post-card-image">🛡️</div>
                     <div class="blog-post-card-content">
@@ -613,7 +652,7 @@
                     </div>
                 </article>
 
-                <!-- Post 4 -->
+                <!-- Post 5 -->
                 <article class="blog-post-card">
                     <div class="blog-post-card-image">💡</div>
                     <div class="blog-post-card-content">
@@ -629,7 +668,7 @@
                     </div>
                 </article>
 
-                <!-- Post 5 -->
+                <!-- Post 6 -->
                 <article class="blog-post-card">
                     <div class="blog-post-card-image">🏗️</div>
                     <div class="blog-post-card-content">
@@ -645,7 +684,7 @@
                     </div>
                 </article>
 
-                <!-- Post 6 -->
+                <!-- Post 7 -->
                 <article class="blog-post-card">
                     <div class="blog-post-card-image">⚡</div>
                     <div class="blog-post-card-content">
@@ -661,7 +700,7 @@
                     </div>
                 </article>
 
-                <!-- Post 7 -->
+                <!-- Post 8 -->
                 <article class="blog-post-card">
                     <div class="blog-post-card-image">📋</div>
                     <div class="blog-post-card-content">
@@ -709,7 +748,7 @@
                 <a href="https://3864413400060.gumroad.com/l/quantum-security-playbook">Playbook</a>
                 <a href="https://www.linkedin.com/in/michael-bennett-a29a93103/">LinkedIn</a>
             </div>
-            <p class="footer-copyright">© 2024 Quantum Shield Labs LLC. All rights reserved.</p>
+            <p class="footer-copyright">© 2026 Quantum Shield Labs LLC. All rights reserved.</p>
         </div>
     </footer>
 
