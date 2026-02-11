@@ -1,0 +1,1022 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>QuantumShield Quick Scan - Customer Workflow</title>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-dark: #0a0a0f;
+            --bg-card: #12121a;
+            --bg-elevated: #1a1a25;
+            --accent-cyan: #00d4ff;
+            --accent-purple: #8b5cf6;
+            --accent-green: #10b981;
+            --accent-orange: #f59e0b;
+            --accent-red: #ef4444;
+            --text-primary: #f0f0f5;
+            --text-secondary: #888899;
+            --border: #2a2a3a;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Space Grotesk', sans-serif;
+            background: var(--bg-dark);
+            color: var(--text-primary);
+            line-height: 1.7;
+            padding: 2rem;
+        }
+        
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+        
+        header {
+            text-align: center;
+            margin-bottom: 4rem;
+            padding: 3rem;
+            background: linear-gradient(135deg, rgba(0,212,255,0.1), rgba(139,92,246,0.1));
+            border-radius: 20px;
+            border: 1px solid var(--border);
+        }
+        
+        h1 {
+            font-size: 2.5rem;
+            background: linear-gradient(135deg, var(--accent-cyan), var(--accent-purple));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 0.5rem;
+        }
+        
+        .subtitle {
+            color: var(--text-secondary);
+            font-size: 1.1rem;
+        }
+        
+        h2 {
+            font-size: 1.8rem;
+            margin: 3rem 0 1.5rem;
+            color: var(--accent-cyan);
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+        
+        h2::before {
+            content: '';
+            width: 4px;
+            height: 1.5rem;
+            background: var(--accent-cyan);
+            border-radius: 2px;
+        }
+        
+        h3 {
+            font-size: 1.3rem;
+            margin: 2rem 0 1rem;
+            color: var(--text-primary);
+        }
+        
+        p {
+            color: var(--text-secondary);
+            margin-bottom: 1rem;
+        }
+        
+        /* Flowchart Styles */
+        .flowchart {
+            display: flex;
+            flex-direction: column;
+            gap: 0;
+            padding: 2rem;
+            background: var(--bg-card);
+            border-radius: 16px;
+            border: 1px solid var(--border);
+            margin: 2rem 0;
+        }
+        
+        .flow-row {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 1rem;
+        }
+        
+        .flow-step {
+            background: var(--bg-elevated);
+            border: 2px solid var(--border);
+            border-radius: 12px;
+            padding: 1.25rem 1.5rem;
+            min-width: 200px;
+            text-align: center;
+            position: relative;
+        }
+        
+        .flow-step.customer {
+            border-color: var(--accent-cyan);
+            background: rgba(0,212,255,0.1);
+        }
+        
+        .flow-step.system {
+            border-color: var(--accent-purple);
+            background: rgba(139,92,246,0.1);
+        }
+        
+        .flow-step.output {
+            border-color: var(--accent-green);
+            background: rgba(16,185,129,0.1);
+        }
+        
+        .flow-step.security {
+            border-color: var(--accent-orange);
+            background: rgba(245,158,11,0.1);
+        }
+        
+        .flow-label {
+            font-size: 0.7rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 0.5rem;
+            opacity: 0.7;
+        }
+        
+        .flow-title {
+            font-weight: 600;
+            font-size: 1rem;
+        }
+        
+        .flow-arrow {
+            font-size: 1.5rem;
+            color: var(--text-secondary);
+        }
+        
+        .flow-arrow.down {
+            transform: rotate(90deg);
+            margin: 0.5rem 0;
+        }
+        
+        /* Mockup Styles */
+        .mockup-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: 2rem;
+            margin: 2rem 0;
+        }
+        
+        .mockup {
+            background: var(--bg-card);
+            border-radius: 16px;
+            border: 1px solid var(--border);
+            overflow: hidden;
+        }
+        
+        .mockup-header {
+            background: var(--bg-elevated);
+            padding: 0.75rem 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            border-bottom: 1px solid var(--border);
+        }
+        
+        .mockup-dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+        }
+        
+        .mockup-dot.red { background: #ff5f57; }
+        .mockup-dot.yellow { background: #febc2e; }
+        .mockup-dot.green { background: #28c840; }
+        
+        .mockup-title {
+            margin-left: 0.5rem;
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+        }
+        
+        .mockup-content {
+            padding: 1.5rem;
+        }
+        
+        .telegram-chat {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+        
+        .chat-message {
+            max-width: 85%;
+            padding: 0.75rem 1rem;
+            border-radius: 12px;
+            font-size: 0.9rem;
+        }
+        
+        .chat-message.user {
+            background: var(--accent-cyan);
+            color: var(--bg-dark);
+            align-self: flex-end;
+            border-bottom-right-radius: 4px;
+        }
+        
+        .chat-message.bot {
+            background: var(--bg-elevated);
+            border: 1px solid var(--border);
+            align-self: flex-start;
+            border-bottom-left-radius: 4px;
+        }
+        
+        .chat-message .bot-name {
+            color: var(--accent-purple);
+            font-weight: 600;
+            font-size: 0.8rem;
+            margin-bottom: 0.25rem;
+        }
+        
+        /* Form Mockup */
+        .form-field {
+            margin-bottom: 1rem;
+        }
+        
+        .form-label {
+            display: block;
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+            margin-bottom: 0.5rem;
+        }
+        
+        .form-input {
+            width: 100%;
+            background: var(--bg-dark);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 0.75rem 1rem;
+            color: var(--text-primary);
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.9rem;
+        }
+        
+        .form-input:focus {
+            outline: none;
+            border-color: var(--accent-cyan);
+        }
+        
+        .form-button {
+            background: linear-gradient(135deg, var(--accent-cyan), var(--accent-purple));
+            border: none;
+            border-radius: 8px;
+            padding: 0.75rem 1.5rem;
+            color: white;
+            font-weight: 600;
+            cursor: pointer;
+            width: 100%;
+            margin-top: 1rem;
+        }
+        
+        /* Security Badge */
+        .security-badges {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            margin: 1.5rem 0;
+        }
+        
+        .badge {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: var(--bg-elevated);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 0.75rem 1rem;
+            font-size: 0.85rem;
+        }
+        
+        .badge-icon {
+            font-size: 1.2rem;
+        }
+        
+        /* Code Block */
+        .code-block {
+            background: var(--bg-dark);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 1rem;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.85rem;
+            overflow-x: auto;
+            margin: 1rem 0;
+        }
+        
+        .code-comment {
+            color: #6b7280;
+        }
+        
+        .code-command {
+            color: var(--accent-cyan);
+        }
+        
+        .code-string {
+            color: var(--accent-green);
+        }
+        
+        /* Report Preview */
+        .report-preview {
+            background: var(--bg-dark);
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin: 1rem 0;
+        }
+        
+        .report-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid var(--border);
+        }
+        
+        .report-logo {
+            font-weight: 700;
+            font-size: 1.2rem;
+            background: linear-gradient(135deg, var(--accent-cyan), var(--accent-purple));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        
+        .report-date {
+            font-size: 0.8rem;
+            color: var(--text-secondary);
+        }
+        
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+        
+        .stat-card {
+            background: var(--bg-elevated);
+            border-radius: 8px;
+            padding: 1rem;
+            text-align: center;
+        }
+        
+        .stat-value {
+            font-size: 1.8rem;
+            font-weight: 700;
+        }
+        
+        .stat-value.critical { color: var(--accent-red); }
+        .stat-value.high { color: var(--accent-orange); }
+        .stat-value.medium { color: #f59e0b; }
+        .stat-value.low { color: var(--accent-green); }
+        
+        .stat-label {
+            font-size: 0.7rem;
+            text-transform: uppercase;
+            color: var(--text-secondary);
+            margin-top: 0.25rem;
+        }
+        
+        /* Timeline */
+        .timeline {
+            position: relative;
+            padding-left: 2rem;
+            margin: 2rem 0;
+        }
+        
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: var(--border);
+        }
+        
+        .timeline-item {
+            position: relative;
+            padding-bottom: 2rem;
+        }
+        
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -2rem;
+            top: 0.25rem;
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: var(--accent-cyan);
+            border: 2px solid var(--bg-dark);
+        }
+        
+        .timeline-time {
+            font-size: 0.8rem;
+            color: var(--accent-cyan);
+            margin-bottom: 0.25rem;
+        }
+        
+        .timeline-title {
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+        
+        .timeline-desc {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+        }
+        
+        /* Section Cards */
+        .section-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 2rem;
+            margin: 2rem 0;
+        }
+        
+        .section-card h3 {
+            margin-top: 0;
+        }
+        
+        /* List Styles */
+        ul {
+            list-style: none;
+            padding: 0;
+        }
+        
+        ul li {
+            padding: 0.5rem 0;
+            padding-left: 1.5rem;
+            position: relative;
+            color: var(--text-secondary);
+        }
+        
+        ul li::before {
+            content: '→';
+            position: absolute;
+            left: 0;
+            color: var(--accent-cyan);
+        }
+        
+        /* Options Grid */
+        .options-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+            margin: 1.5rem 0;
+        }
+        
+        .option-card {
+            background: var(--bg-elevated);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 1.5rem;
+            transition: all 0.3s ease;
+        }
+        
+        .option-card:hover {
+            border-color: var(--accent-cyan);
+            transform: translateY(-2px);
+        }
+        
+        .option-title {
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .option-desc {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+        }
+        
+        /* Footer */
+        footer {
+            margin-top: 4rem;
+            padding-top: 2rem;
+            border-top: 1px solid var(--border);
+            text-align: center;
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+        
+        .highlight {
+            color: var(--accent-cyan);
+            font-weight: 600;
+        }
+        
+        .warning-box {
+            background: rgba(245,158,11,0.1);
+            border: 1px solid var(--accent-orange);
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+        }
+        
+        .warning-box h4 {
+            color: var(--accent-orange);
+            margin-bottom: 0.5rem;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🛡️ QuantumShield Quick Scan</h1>
+            <p class="subtitle">Complete Customer Workflow & Experience Guide</p>
+        </header>
+
+        <!-- SECTION 1: Overview -->
+        <h2>Overview: What Is Quick Security Scan?</h2>
+        <p>A <span class="highlight">0.001 ETH (~$3)</span> automated service that scans any public GitHub repository for cryptographic vulnerabilities, with special focus on quantum-vulnerable algorithms. Delivered within <span class="highlight">1 hour</span> as a professional HTML report.</p>
+
+        <div class="section-card">
+            <h3>What Customers Get:</h3>
+            <ul>
+                <li>Full codebase scan for cryptographic patterns</li>
+                <li>Risk classification: CRITICAL → HIGH → MEDIUM → LOW</li>
+                <li>Specific file locations and line numbers</li>
+                <li>Actionable recommendations for each finding</li>
+                <li>Professional HTML report with QSL branding</li>
+                <li>Certificate analysis (if .pem/.crt files present)</li>
+            </ul>
+        </div>
+
+        <!-- SECTION 2: Customer Journey Flowchart -->
+        <h2>Customer Journey Flowchart</h2>
+        
+        <div class="flowchart">
+            <!-- Row 1: Entry Points -->
+            <div class="flow-row">
+                <div class="flow-step customer">
+                    <div class="flow-label">Entry Point A</div>
+                    <div class="flow-title">🌐 Moltlaunch<br>Marketplace</div>
+                </div>
+                <span class="flow-arrow">or</span>
+                <div class="flow-step customer">
+                    <div class="flow-label">Entry Point B</div>
+                    <div class="flow-title">🤖 Telegram Bot<br>@blocdev_bot</div>
+                </div>
+                <span class="flow-arrow">or</span>
+                <div class="flow-step customer">
+                    <div class="flow-label">Entry Point C</div>
+                    <div class="flow-title">💻 CLI Direct<br>mltl hire</div>
+                </div>
+            </div>
+            
+            <div class="flow-row"><span class="flow-arrow down">→</span></div>
+            
+            <!-- Row 2: Input -->
+            <div class="flow-row">
+                <div class="flow-step customer">
+                    <div class="flow-label">Customer Action</div>
+                    <div class="flow-title">📝 Submit GitHub URL<br>+ Pay 0.001 ETH</div>
+                </div>
+            </div>
+            
+            <div class="flow-row"><span class="flow-arrow down">→</span></div>
+            
+            <!-- Row 3: Processing -->
+            <div class="flow-row">
+                <div class="flow-step system">
+                    <div class="flow-label">Automated</div>
+                    <div class="flow-title">🔐 ETH Locked<br>in Escrow</div>
+                </div>
+                <span class="flow-arrow">→</span>
+                <div class="flow-step system">
+                    <div class="flow-label">CrawDaddy Bot</div>
+                    <div class="flow-title">📥 Clone Repo<br>to /tmp/</div>
+                </div>
+                <span class="flow-arrow">→</span>
+                <div class="flow-step security">
+                    <div class="flow-label">Security</div>
+                    <div class="flow-title">🛡️ Sandboxed<br>Scan Only</div>
+                </div>
+            </div>
+            
+            <div class="flow-row"><span class="flow-arrow down">→</span></div>
+            
+            <!-- Row 4: Scan -->
+            <div class="flow-row">
+                <div class="flow-step system">
+                    <div class="flow-label">crypto-scanner</div>
+                    <div class="flow-title">🔍 Pattern Match<br>All Source Files</div>
+                </div>
+                <span class="flow-arrow">→</span>
+                <div class="flow-step system">
+                    <div class="flow-label">Analysis</div>
+                    <div class="flow-title">📊 Certificate<br>Parsing</div>
+                </div>
+                <span class="flow-arrow">→</span>
+                <div class="flow-step system">
+                    <div class="flow-label">Report Gen</div>
+                    <div class="flow-title">📄 HTML Report<br>Generated</div>
+                </div>
+            </div>
+            
+            <div class="flow-row"><span class="flow-arrow down">→</span></div>
+            
+            <!-- Row 5: Cleanup -->
+            <div class="flow-row">
+                <div class="flow-step security">
+                    <div class="flow-label">Security</div>
+                    <div class="flow-title">🗑️ Delete Repo<br>rm -rf /tmp/scan</div>
+                </div>
+                <span class="flow-arrow">→</span>
+                <div class="flow-step output">
+                    <div class="flow-label">Delivery</div>
+                    <div class="flow-title">📤 Report Sent<br>via Telegram/Email</div>
+                </div>
+                <span class="flow-arrow">→</span>
+                <div class="flow-step output">
+                    <div class="flow-label">Payment</div>
+                    <div class="flow-title">💰 ETH Released<br>+ Token Burn</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- SECTION 3: Input Options -->
+        <h2>How Customers Submit Their Data</h2>
+        
+        <div class="options-grid">
+            <div class="option-card">
+                <div class="option-title">🔗 Option 1: GitHub URL</div>
+                <div class="option-desc">
+                    Customer provides a public GitHub repository URL. This is the <strong>recommended</strong> and most common method.
+                    <br><br>
+                    <code style="background: var(--bg-dark); padding: 0.25rem 0.5rem; border-radius: 4px; font-size: 0.8rem;">
+                        https://github.com/username/repo
+                    </code>
+                </div>
+            </div>
+            
+            <div class="option-card">
+                <div class="option-title">📦 Option 2: ZIP Upload (Future)</div>
+                <div class="option-desc">
+                    For private repos, customers could upload a ZIP file. Requires additional security measures.
+                    <br><br>
+                    <em style="color: var(--accent-orange);">Phase 2 feature - not in initial launch</em>
+                </div>
+            </div>
+            
+            <div class="option-card">
+                <div class="option-title">🔑 Option 3: Private Repo Token (Future)</div>
+                <div class="option-desc">
+                    Customer provides a read-only GitHub PAT for private repo access.
+                    <br><br>
+                    <em style="color: var(--accent-orange);">Phase 2 feature - requires trust framework</em>
+                </div>
+            </div>
+        </div>
+
+        <!-- SECTION 4: Telegram Interaction Mockup -->
+        <h2>Customer Interaction: Telegram Flow</h2>
+        
+        <div class="mockup-grid">
+            <div class="mockup">
+                <div class="mockup-header">
+                    <div class="mockup-dot red"></div>
+                    <div class="mockup-dot yellow"></div>
+                    <div class="mockup-dot green"></div>
+                    <span class="mockup-title">Telegram - @blocdev_bot</span>
+                </div>
+                <div class="mockup-content">
+                    <div class="telegram-chat">
+                        <div class="chat-message user">
+                            /scan https://github.com/acme-corp/payment-service
+                        </div>
+                        <div class="chat-message bot">
+                            <div class="bot-name">🦞 CrawDaddy</div>
+                            <strong>Quick Security Scan Request</strong><br><br>
+                            📦 <strong>Repo:</strong> acme-corp/payment-service<br>
+                            💰 <strong>Cost:</strong> 0.001 ETH (~$3)<br>
+                            ⏱️ <strong>ETA:</strong> &lt;1 hour<br><br>
+                            <em>Reply "CONFIRM" to proceed, or "CANCEL" to abort.</em>
+                        </div>
+                        <div class="chat-message user">
+                            CONFIRM
+                        </div>
+                        <div class="chat-message bot">
+                            <div class="bot-name">🦞 CrawDaddy</div>
+                            ✅ <strong>Scan initiated!</strong><br><br>
+                            🔐 0.001 ETH locked in escrow<br>
+                            📥 Cloning repository...<br>
+                            🔍 Running crypto-scanner...<br><br>
+                            <em>I'll send your report shortly.</em>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="mockup">
+                <div class="mockup-header">
+                    <div class="mockup-dot red"></div>
+                    <div class="mockup-dot yellow"></div>
+                    <div class="mockup-dot green"></div>
+                    <span class="mockup-title">Telegram - Report Delivery</span>
+                </div>
+                <div class="mockup-content">
+                    <div class="telegram-chat">
+                        <div class="chat-message bot">
+                            <div class="bot-name">🦞 CrawDaddy</div>
+                            🛡️ <strong>Scan Complete!</strong><br><br>
+                            <strong>acme-corp/payment-service</strong><br><br>
+                            📊 <strong>Summary:</strong><br>
+                            🔴 CRITICAL: 12<br>
+                            🟠 HIGH: 8<br>
+                            🟡 MEDIUM: 24<br>
+                            🟢 LOW: 15<br><br>
+                            ⚠️ Found RSA-2048 keys and MD5 hashes that need attention.<br><br>
+                            📄 Full report attached below.
+                        </div>
+                        <div class="chat-message bot" style="background: var(--accent-purple); color: white;">
+                            📎 <strong>payment-service-scan.html</strong><br>
+                            <span style="font-size: 0.8rem;">247 KB • HTML Report</span>
+                        </div>
+                        <div class="chat-message user">
+                            Thanks! This is super helpful 🙏
+                        </div>
+                        <div class="chat-message bot">
+                            <div class="bot-name">🦞 CrawDaddy</div>
+                            Happy to help! 🦞<br><br>
+                            Need a deeper assessment? Check out our <strong>Quantum Readiness Assessment</strong> (0.05 ETH) for a comprehensive migration roadmap.<br><br>
+                            <em>Your code has been securely deleted from our systems.</em>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- SECTION 5: CLI Flow -->
+        <h2>Alternative: CLI Direct Hire</h2>
+        
+        <div class="code-block">
+<span class="code-comment"># Install moltlaunch CLI</span>
+npm install -g moltlaunch
+
+<span class="code-comment"># Hire QuantumShield for a quick scan</span>
+<span class="code-command">mltl hire</span> --agent 16839 --task <span class="code-string">"Quick scan: https://github.com/acme-corp/payment-service"</span>
+
+<span class="code-comment"># Check your inbox for the result</span>
+<span class="code-command">mltl inbox</span> --agent 16839
+
+<span class="code-comment"># Download the report</span>
+<span class="code-command">mltl download</span> --task &lt;task-id&gt; --output ./report.html
+        </div>
+
+        <!-- SECTION 6: Report Preview -->
+        <h2>What The Report Looks Like</h2>
+        
+        <div class="mockup">
+            <div class="mockup-header">
+                <div class="mockup-dot red"></div>
+                <div class="mockup-dot yellow"></div>
+                <div class="mockup-dot green"></div>
+                <span class="mockup-title">payment-service-scan.html</span>
+            </div>
+            <div class="mockup-content">
+                <div class="report-preview">
+                    <div class="report-header">
+                        <div class="report-logo">⚛️ Quantum Shield Labs</div>
+                        <div class="report-date">Generated: Feb 11, 2026 • 2:45 PM EST</div>
+                    </div>
+                    
+                    <h4 style="margin-bottom: 1rem; color: var(--text-primary);">Risk Summary</h4>
+                    <div class="stats-grid">
+                        <div class="stat-card">
+                            <div class="stat-value critical">12</div>
+                            <div class="stat-label">Critical</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-value high">8</div>
+                            <div class="stat-label">High</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-value medium">24</div>
+                            <div class="stat-label">Medium</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-value low">15</div>
+                            <div class="stat-label">Low</div>
+                        </div>
+                    </div>
+                    
+                    <h4 style="margin: 1.5rem 0 1rem; color: var(--text-primary);">Sample Findings</h4>
+                    <table style="width: 100%; border-collapse: collapse; font-size: 0.85rem;">
+                        <tr style="border-bottom: 1px solid var(--border);">
+                            <td style="padding: 0.75rem;"><span style="background: var(--accent-red); color: white; padding: 0.2rem 0.5rem; border-radius: 4px; font-size: 0.7rem;">CRITICAL</span></td>
+                            <td style="padding: 0.75rem;"><strong>RSA-2048</strong></td>
+                            <td style="padding: 0.75rem; color: var(--text-secondary);">src/auth/jwt.py:45</td>
+                        </tr>
+                        <tr style="border-bottom: 1px solid var(--border);">
+                            <td style="padding: 0.75rem;"><span style="background: var(--accent-orange); color: white; padding: 0.2rem 0.5rem; border-radius: 4px; font-size: 0.7rem;">HIGH</span></td>
+                            <td style="padding: 0.75rem;"><strong>MD5</strong></td>
+                            <td style="padding: 0.75rem; color: var(--text-secondary);">src/utils/hash.py:12</td>
+                        </tr>
+                        <tr style="border-bottom: 1px solid var(--border);">
+                            <td style="padding: 0.75rem;"><span style="background: #f59e0b; color: white; padding: 0.2rem 0.5rem; border-radius: 4px; font-size: 0.7rem;">MEDIUM</span></td>
+                            <td style="padding: 0.75rem;"><strong>SHA-256</strong></td>
+                            <td style="padding: 0.75rem; color: var(--text-secondary);">src/crypto/sign.py:78</td>
+                        </tr>
+                        <tr>
+                            <td style="padding: 0.75rem;"><span style="background: var(--accent-green); color: white; padding: 0.2rem 0.5rem; border-radius: 4px; font-size: 0.7rem;">LOW</span></td>
+                            <td style="padding: 0.75rem;"><strong>AES-256</strong></td>
+                            <td style="padding: 0.75rem; color: var(--text-secondary);">src/encrypt/aes.py:23</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <!-- SECTION 7: Security Measures -->
+        <h2>Security Measures</h2>
+        <p>We take customer code security seriously. Here's how we protect your data:</p>
+        
+        <div class="security-badges">
+            <div class="badge">
+                <span class="badge-icon">🏖️</span>
+                <div>
+                    <strong>Sandboxed Execution</strong><br>
+                    <span style="font-size: 0.8rem; color: var(--text-secondary);">Scans run in isolated /tmp directory</span>
+                </div>
+            </div>
+            <div class="badge">
+                <span class="badge-icon">🗑️</span>
+                <div>
+                    <strong>Immediate Deletion</strong><br>
+                    <span style="font-size: 0.8rem; color: var(--text-secondary);">Code deleted immediately after scan</span>
+                </div>
+            </div>
+            <div class="badge">
+                <span class="badge-icon">📖</span>
+                <div>
+                    <strong>Read-Only Analysis</strong><br>
+                    <span style="font-size: 0.8rem; color: var(--text-secondary);">No code execution, only pattern matching</span>
+                </div>
+            </div>
+            <div class="badge">
+                <span class="badge-icon">🔒</span>
+                <div>
+                    <strong>No Data Retention</strong><br>
+                    <span style="font-size: 0.8rem; color: var(--text-secondary);">We don't store your code or findings</span>
+                </div>
+            </div>
+            <div class="badge">
+                <span class="badge-icon">🌐</span>
+                <div>
+                    <strong>Public Repos Only</strong><br>
+                    <span style="font-size: 0.8rem; color: var(--text-secondary);">Phase 1 only scans public repositories</span>
+                </div>
+            </div>
+            <div class="badge">
+                <span class="badge-icon">⛓️</span>
+                <div>
+                    <strong>On-Chain Escrow</strong><br>
+                    <span style="font-size: 0.8rem; color: var(--text-secondary);">Payment protected until delivery</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="warning-box">
+            <h4>⚠️ Important Security Notes</h4>
+            <ul>
+                <li>We never execute your code - only static pattern analysis</li>
+                <li>Repository is cloned to ephemeral storage and deleted within minutes</li>
+                <li>Reports are sent directly to you, not stored on our servers</li>
+                <li>For private repos (Phase 2), we'll use read-only GitHub App permissions</li>
+            </ul>
+        </div>
+
+        <!-- SECTION 8: Timeline -->
+        <h2>Typical Scan Timeline</h2>
+        
+        <div class="timeline">
+            <div class="timeline-item">
+                <div class="timeline-time">0:00</div>
+                <div class="timeline-title">Request Received</div>
+                <div class="timeline-desc">Customer submits GitHub URL via Telegram or CLI</div>
+            </div>
+            <div class="timeline-item">
+                <div class="timeline-time">0:01</div>
+                <div class="timeline-title">Payment Confirmed</div>
+                <div class="timeline-desc">0.001 ETH locked in Moltlaunch escrow</div>
+            </div>
+            <div class="timeline-item">
+                <div class="timeline-time">0:02</div>
+                <div class="timeline-title">Repository Cloned</div>
+                <div class="timeline-desc">Code downloaded to isolated /tmp directory</div>
+            </div>
+            <div class="timeline-item">
+                <div class="timeline-time">0:03 - 0:15</div>
+                <div class="timeline-title">Scan In Progress</div>
+                <div class="timeline-desc">crypto-scanner analyzes all supported file types</div>
+            </div>
+            <div class="timeline-item">
+                <div class="timeline-time">0:15 - 0:20</div>
+                <div class="timeline-title">Report Generated</div>
+                <div class="timeline-desc">HTML report created with findings and recommendations</div>
+            </div>
+            <div class="timeline-item">
+                <div class="timeline-time">0:20</div>
+                <div class="timeline-title">Code Deleted</div>
+                <div class="timeline-desc">rm -rf removes all traces of customer code</div>
+            </div>
+            <div class="timeline-item">
+                <div class="timeline-time">0:21</div>
+                <div class="timeline-title">Report Delivered</div>
+                <div class="timeline-desc">HTML file sent via Telegram or email</div>
+            </div>
+            <div class="timeline-item">
+                <div class="timeline-time">24:00</div>
+                <div class="timeline-title">Payment Released</div>
+                <div class="timeline-desc">After 24hr review window, ETH released + $QSHIELD burned</div>
+            </div>
+        </div>
+
+        <!-- SECTION 9: Pricing Tiers -->
+        <h2>Service Tiers</h2>
+        
+        <div class="options-grid">
+            <div class="option-card" style="border-color: var(--accent-cyan);">
+                <div class="option-title">⚡ Quick Security Scan</div>
+                <div style="font-size: 1.5rem; font-weight: 700; color: var(--accent-cyan); margin: 0.5rem 0;">0.001 ETH</div>
+                <div class="option-desc">
+                    Automated scan for cryptographic vulnerabilities. Best for quick health checks on any public repo.
+                    <br><br>
+                    <strong>Delivery:</strong> &lt;1 hour<br>
+                    <strong>Output:</strong> HTML Report
+                </div>
+            </div>
+            
+            <div class="option-card">
+                <div class="option-title">🔬 Quantum Readiness Assessment</div>
+                <div style="font-size: 1.5rem; font-weight: 700; color: var(--accent-purple); margin: 0.5rem 0;">0.05 ETH</div>
+                <div class="option-desc">
+                    Comprehensive evaluation with migration roadmap and priority rankings.
+                    <br><br>
+                    <strong>Delivery:</strong> 48 hours<br>
+                    <strong>Output:</strong> Detailed Report + Recommendations
+                </div>
+            </div>
+            
+            <div class="option-card">
+                <div class="option-title">📋 Full PQC Migration Plan</div>
+                <div style="font-size: 1.5rem; font-weight: 700; color: var(--accent-green); margin: 0.5rem 0;">0.5 ETH</div>
+                <div class="option-desc">
+                    Complete post-quantum cryptography roadmap with implementation guide.
+                    <br><br>
+                    <strong>Delivery:</strong> 7 days<br>
+                    <strong>Output:</strong> Full Plan + 1hr Consultation
+                </div>
+            </div>
+        </div>
+
+        <!-- SECTION 10: FAQ -->
+        <h2>Frequently Asked Questions</h2>
+        
+        <div class="section-card">
+            <h3>Q: What if my scan finds nothing?</h3>
+            <p>Great news! You'll still receive a report confirming no quantum-vulnerable algorithms were detected. This is valuable documentation for compliance purposes.</p>
+            
+            <h3>Q: Can you scan private repositories?</h3>
+            <p>Not yet. Phase 1 only supports public GitHub repos. Private repo support (via read-only GitHub App) is planned for Phase 2.</p>
+            
+            <h3>Q: Do you store my code?</h3>
+            <p>No. Code is cloned to ephemeral storage, scanned, and immediately deleted. We don't retain copies.</p>
+            
+            <h3>Q: What languages are supported?</h3>
+            <p>Python, JavaScript, TypeScript, Java, Go, Rust, C, C++, C#, Ruby, PHP, Swift, Kotlin, plus config files (YAML, JSON, ENV, INI, TOML) and certificates (PEM, CRT, DER).</p>
+            
+            <h3>Q: What if I disagree with a finding?</h3>
+            <p>Reports identify patterns that may indicate vulnerabilities. Some findings (like SHA-256 in HMAC contexts) may be acceptable. Use the report as a starting point for deeper analysis.</p>
+            
+            <h3>Q: How is payment handled?</h3>
+            <p>ETH is locked in Moltlaunch escrow when you submit a request. After delivery, you have 24 hours to review. Payment auto-releases after the review period (and burns $QSHIELD supply).</p>
+        </div>
+
+        <footer>
+            <p>🛡️ <strong>Quantum Shield Labs</strong> | Post-quantum security for the agent economy</p>
+            <p style="margin-top: 0.5rem;">
+                <a href="https://quantumshieldlabs.dev" style="color: var(--accent-cyan);">Website</a> •
+                <a href="https://t.me/blocdev_bot" style="color: var(--accent-cyan);">Telegram</a> •
+                <a href="https://flaunch.gg/base/coin/0x07cfed1dc3227359f89545ca48b11e3eeb69436d" style="color: var(--accent-cyan);">$QSHIELD</a>
+            </p>
+        </footer>
+    </div>
+</body>
+</html>
