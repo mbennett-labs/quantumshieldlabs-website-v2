@@ -1,830 +1,772 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>QuantumShield Agent | $QSHIELD | Post-Quantum Security for AI</title>
-    <meta name="description" content="Hire QuantumShield for post-quantum cryptography assessments, security audits, and PQC migration planning. Powered by AI on Base.">
-    
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;900&family=IBM+Plex+Mono:wght@400;500;600&family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    
-    <style>
-        :root {
-            --bg-dark: #0a0b0f;
-            --bg-card: #12141c;
-            --bg-card-hover: #1a1d28;
-            --cyan: #00f0ff;
-            --purple: #a855f7;
-            --purple-dim: #7c3aed;
-            --blue: #3b82f6;
-            --green: #10b981;
-            --text-primary: #f1f5f9;
-            --text-secondary: #94a3b8;
-            --text-dim: #64748b;
-            --border: #1e293b;
-            --glow-cyan: 0 0 30px rgba(0, 240, 255, 0.3);
-            --glow-purple: 0 0 30px rgba(168, 85, 247, 0.3);
-        }
-        
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-        
-        body {
-            font-family: 'Space Grotesk', sans-serif;
-            background: var(--bg-dark);
-            color: var(--text-primary);
-            min-height: 100vh;
-            overflow-x: hidden;
-        }
-        
-        /* Hex pattern background */
-        .hex-bg {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: 0;
-            opacity: 0.03;
-            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='28' height='49' viewBox='0 0 28 49'%3E%3Cg fill-rule='evenodd'%3E%3Cg fill='%2300f0ff' fill-opacity='1'%3E%3Cpath d='M13.99 9.25l13 7.5v15l-13 7.5L1 31.75v-15l12.99-7.5zM3 17.9v12.7l10.99 6.34 11-6.35V17.9l-11-6.34L3 17.9zM0 15l12.98-7.5V0h-2v6.35L0 12.69v2.3zm0 18.5L12.98 41v8h-2v-6.85L0 35.81v-2.3zM15 0v7.5L27.99 15H28v-2.31h-.01L17 6.35V0h-2zm0 49v-8l12.99-7.5H28v2.31h-.01L17 42.15V49h-2z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
-        }
-        
-        /* Gradient orbs */
-        .orb {
-            position: fixed;
-            border-radius: 50%;
-            filter: blur(80px);
-            z-index: 0;
-            animation: float 20s ease-in-out infinite;
-        }
-        
-        .orb-1 {
-            width: 600px;
-            height: 600px;
-            background: radial-gradient(circle, rgba(0, 240, 255, 0.15) 0%, transparent 70%);
-            top: -200px;
-            right: -200px;
-        }
-        
-        .orb-2 {
-            width: 500px;
-            height: 500px;
-            background: radial-gradient(circle, rgba(168, 85, 247, 0.12) 0%, transparent 70%);
-            bottom: -150px;
-            left: -150px;
-            animation-delay: -10s;
-        }
-        
-        @keyframes float {
-            0%, 100% { transform: translate(0, 0); }
-            50% { transform: translate(30px, 20px); }
-        }
-        
-        .container {
-            position: relative;
-            z-index: 1;
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 2rem;
-        }
-        
-        /* Header */
-        header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 1.5rem 0;
-            border-bottom: 1px solid var(--border);
-            margin-bottom: 3rem;
-        }
-        
-        .logo {
-            display: flex;
-            align-items: center;
-            gap: 1rem;
-        }
-        
-        .logo-icon {
-            width: 50px;
-            height: 50px;
-            border-radius: 12px;
-            border: 2px solid var(--cyan);
-            box-shadow: var(--glow-cyan);
-            object-fit: cover;
-            background: var(--bg-card);
-        }
-        
-        .logo-text {
-            font-family: 'Orbitron', sans-serif;
-            font-size: 1.5rem;
-            font-weight: 700;
-            background: linear-gradient(135deg, var(--cyan), var(--purple));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
-        
-        .nav-links {
-            display: flex;
-            gap: 2rem;
-        }
-        
-        .nav-links a {
-            color: var(--text-secondary);
-            text-decoration: none;
-            font-weight: 500;
-            transition: color 0.3s;
-        }
-        
-        .nav-links a:hover {
-            color: var(--cyan);
-        }
-        
-        /* Hero */
-        .hero {
-            text-align: center;
-            padding: 4rem 0;
-        }
-        
-        .badge {
-            display: inline-flex;
-            align-items: center;
-            gap: 0.5rem;
-            background: rgba(0, 240, 255, 0.1);
-            border: 1px solid rgba(0, 240, 255, 0.3);
-            padding: 0.5rem 1rem;
-            border-radius: 50px;
-            font-family: 'IBM Plex Mono', monospace;
-            font-size: 0.85rem;
-            color: var(--cyan);
-            margin-bottom: 2rem;
-            animation: pulse 2s ease-in-out infinite;
-        }
-        
-        @keyframes pulse {
-            0%, 100% { box-shadow: 0 0 0 0 rgba(0, 240, 255, 0.2); }
-            50% { box-shadow: 0 0 0 10px rgba(0, 240, 255, 0); }
-        }
-        
-        .badge::before {
-            content: '';
-            width: 8px;
-            height: 8px;
-            background: var(--cyan);
-            border-radius: 50%;
-            animation: blink 1s ease-in-out infinite;
-        }
-        
-        @keyframes blink {
-            0%, 100% { opacity: 1; }
-            50% { opacity: 0.3; }
-        }
-        
-        h1 {
-            font-family: 'Orbitron', sans-serif;
-            font-size: clamp(2.5rem, 6vw, 4rem);
-            font-weight: 900;
-            line-height: 1.1;
-            margin-bottom: 1.5rem;
-        }
-        
-        h1 .gradient {
-            background: linear-gradient(135deg, var(--cyan) 0%, var(--purple) 50%, var(--blue) 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
-        
-        .subtitle {
-            font-size: 1.25rem;
-            color: var(--text-secondary);
-            max-width: 600px;
-            margin: 0 auto 2rem;
-            line-height: 1.7;
-        }
-        
-        /* Token info bar */
-        .token-bar {
-            display: flex;
-            justify-content: center;
-            gap: 3rem;
-            padding: 1.5rem;
-            background: var(--bg-card);
-            border-radius: 16px;
-            border: 1px solid var(--border);
-            margin: 3rem 0;
-            flex-wrap: wrap;
-        }
-        
-        .token-item {
-            text-align: center;
-        }
-        
-        .token-label {
-            font-size: 0.75rem;
-            color: var(--text-dim);
-            text-transform: uppercase;
-            letter-spacing: 0.1em;
-            margin-bottom: 0.5rem;
-        }
-        
-        .token-value {
-            font-family: 'IBM Plex Mono', monospace;
-            font-size: 1rem;
-            color: var(--text-primary);
-        }
-        
-        .token-value.highlight {
-            color: var(--cyan);
-            font-weight: 600;
-        }
-        
-        /* CTA Buttons */
-        .cta-group {
-            display: flex;
-            justify-content: center;
-            gap: 1rem;
-            flex-wrap: wrap;
-            margin-top: 2rem;
-        }
-        
-        .btn {
-            display: inline-flex;
-            align-items: center;
-            gap: 0.5rem;
-            padding: 1rem 2rem;
-            border-radius: 12px;
-            font-weight: 600;
-            text-decoration: none;
-            transition: all 0.3s ease;
-            font-size: 1rem;
-        }
-        
-        .btn-primary {
-            background: linear-gradient(135deg, var(--cyan), var(--blue));
-            color: var(--bg-dark);
-            box-shadow: var(--glow-cyan);
-        }
-        
-        .btn-primary:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 0 40px rgba(0, 240, 255, 0.5);
-        }
-        
-        .btn-secondary {
-            background: var(--bg-card);
-            color: var(--text-primary);
-            border: 1px solid var(--border);
-        }
-        
-        .btn-secondary:hover {
-            border-color: var(--purple);
-            background: var(--bg-card-hover);
-        }
-        
-        /* Gigs Section */
-        .section-title {
-            font-family: 'Orbitron', sans-serif;
-            font-size: 2rem;
-            font-weight: 700;
-            text-align: center;
-            margin: 5rem 0 1rem;
-        }
-        
-        .section-subtitle {
-            text-align: center;
-            color: var(--text-secondary);
-            margin-bottom: 3rem;
-        }
-        
-        .gigs-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
-            gap: 1.5rem;
-            margin-bottom: 4rem;
-        }
-        
-        .gig-card {
-            background: var(--bg-card);
-            border: 1px solid var(--border);
-            border-radius: 20px;
-            padding: 2rem;
-            transition: all 0.3s ease;
-            position: relative;
-            overflow: hidden;
-        }
-        
-        .gig-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 3px;
-            background: linear-gradient(90deg, var(--cyan), var(--purple));
-            opacity: 0;
-            transition: opacity 0.3s;
-        }
-        
-        .gig-card:hover {
-            transform: translateY(-5px);
-            border-color: var(--purple-dim);
-            box-shadow: var(--glow-purple);
-        }
-        
-        .gig-card:hover::before {
-            opacity: 1;
-        }
-        
-        .gig-tier {
-            display: inline-block;
-            padding: 0.35rem 0.75rem;
-            border-radius: 6px;
-            font-size: 0.7rem;
-            font-weight: 600;
-            text-transform: uppercase;
-            letter-spacing: 0.05em;
-            margin-bottom: 1rem;
-        }
-        
-        .tier-auto {
-            background: rgba(16, 185, 129, 0.15);
-            color: var(--green);
-            border: 1px solid rgba(16, 185, 129, 0.3);
-        }
-        
-        .tier-hybrid {
-            background: rgba(59, 130, 246, 0.15);
-            color: var(--blue);
-            border: 1px solid rgba(59, 130, 246, 0.3);
-        }
-        
-        .tier-premium {
-            background: rgba(168, 85, 247, 0.15);
-            color: var(--purple);
-            border: 1px solid rgba(168, 85, 247, 0.3);
-        }
-        
-        .gig-title {
-            font-family: 'Orbitron', sans-serif;
-            font-size: 1.25rem;
-            font-weight: 600;
-            margin-bottom: 0.75rem;
-        }
-        
-        .gig-description {
-            color: var(--text-secondary);
-            font-size: 0.95rem;
-            line-height: 1.6;
-            margin-bottom: 1.5rem;
-        }
-        
-        .gig-meta {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding-top: 1rem;
-            border-top: 1px solid var(--border);
-        }
-        
-        .gig-price {
-            font-family: 'IBM Plex Mono', monospace;
-            font-size: 1.5rem;
-            font-weight: 600;
-            color: var(--cyan);
-        }
-        
-        .gig-btn {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            gap: 0.5rem;
-            width: 100%;
-            padding: 0.875rem 1.5rem;
-            border-radius: 10px;
-            font-weight: 600;
-            text-decoration: none;
-            transition: all 0.3s ease;
-            font-size: 0.9rem;
-            margin-top: 1.25rem;
-            cursor: pointer;
-            border: none;
-        }
-        
-        .gig-btn-primary {
-            background: linear-gradient(135deg, var(--green), #059669);
-            color: white;
-        }
-        
-        .gig-btn-primary:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 0 25px rgba(16, 185, 129, 0.4);
-        }
-        
-        .gig-btn-secondary {
-            background: var(--bg-card-hover);
-            color: var(--text-primary);
-            border: 1px solid var(--border);
-        }
-        
-        .gig-btn-secondary:hover {
-            border-color: var(--purple);
-            background: rgba(168, 85, 247, 0.1);
-        }
-        
-        .gig-timeline {
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-            font-size: 0.8rem;
-            color: var(--text-dim);
-            margin-top: 0.75rem;
-        }
-        
-        .gig-price span {
-            font-size: 0.85rem;
-            color: var(--text-dim);
-            font-weight: 400;
-        }
-        
-        .gig-delivery {
-            display: flex;
-            align-items: center;
-            gap: 0.4rem;
-            color: var(--text-secondary);
-            font-size: 0.9rem;
-        }
-        
-        /* How to hire */
-        .how-to-hire {
-            background: var(--bg-card);
-            border: 1px solid var(--border);
-            border-radius: 20px;
-            padding: 3rem;
-            margin: 4rem 0;
-        }
-        
-        .how-to-hire h2 {
-            font-family: 'Orbitron', sans-serif;
-            font-size: 1.5rem;
-            margin-bottom: 2rem;
-            display: flex;
-            align-items: center;
-            gap: 0.75rem;
-        }
-        
-        .steps {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 2rem;
-        }
-        
-        .step {
-            display: flex;
-            gap: 1rem;
-        }
-        
-        .step-num {
-            width: 40px;
-            height: 40px;
-            background: linear-gradient(135deg, var(--cyan), var(--purple));
-            border-radius: 10px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-family: 'Orbitron', sans-serif;
-            font-weight: 700;
-            color: var(--bg-dark);
-            flex-shrink: 0;
-        }
-        
-        .step-content h3 {
-            font-size: 1rem;
-            margin-bottom: 0.5rem;
-        }
-        
-        .step-content p {
-            font-size: 0.9rem;
-            color: var(--text-secondary);
-            line-height: 1.5;
-        }
-        
-        .code-block {
-            background: var(--bg-dark);
-            border: 1px solid var(--border);
-            border-radius: 12px;
-            padding: 1.5rem;
-            margin-top: 2rem;
-            overflow-x: auto;
-        }
-        
-        .code-block code {
-            font-family: 'IBM Plex Mono', monospace;
-            color: var(--cyan);
-            font-size: 0.9rem;
-        }
-        
-        /* Links section */
-        .links-section {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 1rem;
-            margin: 4rem 0;
-        }
-        
-        .link-card {
-            display: flex;
-            align-items: center;
-            gap: 1rem;
-            padding: 1.25rem;
-            background: var(--bg-card);
-            border: 1px solid var(--border);
-            border-radius: 12px;
-            text-decoration: none;
-            color: var(--text-primary);
-            transition: all 0.3s;
-        }
-        
-        .link-card:hover {
-            border-color: var(--cyan);
-            transform: translateX(5px);
-        }
-        
-        .link-icon {
-            width: 40px;
-            height: 40px;
-            background: var(--bg-dark);
-            border-radius: 10px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.25rem;
-        }
-        
-        .link-text {
-            font-weight: 500;
-        }
-        
-        .link-text span {
-            display: block;
-            font-size: 0.75rem;
-            color: var(--text-dim);
-            font-weight: 400;
-        }
-        
-        /* Footer */
-        footer {
-            border-top: 1px solid var(--border);
-            padding: 3rem 0;
-            margin-top: 4rem;
-            text-align: center;
-        }
-        
-        .footer-brand {
-            font-family: 'Orbitron', sans-serif;
-            font-size: 1.25rem;
-            margin-bottom: 1rem;
-            color: var(--text-secondary);
-        }
-        
-        .footer-links {
-            display: flex;
-            justify-content: center;
-            gap: 2rem;
-            margin-bottom: 1.5rem;
-        }
-        
-        .footer-links a {
-            color: var(--text-dim);
-            text-decoration: none;
-            transition: color 0.3s;
-        }
-        
-        .footer-links a:hover {
-            color: var(--cyan);
-        }
-        
-        .footer-copy {
-            font-size: 0.85rem;
-            color: var(--text-dim);
-        }
-        
-        /* Responsive */
-        @media (max-width: 768px) {
-            .container {
-                padding: 1rem;
-            }
-            
-            header {
-                flex-direction: column;
-                gap: 1rem;
-            }
-            
-            .nav-links {
-                gap: 1rem;
-            }
-            
-            .token-bar {
-                gap: 1.5rem;
-            }
-            
-            .how-to-hire {
-                padding: 2rem 1.5rem;
-            }
-        }
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>QuantumShield Agent — CrawDaddy Security Scanner</title>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600;700&family=Outfit:wght@300;400;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0a0a0f;
+    --surface: #12121a;
+    --surface-2: #1a1a26;
+    --border: #2a2a3a;
+    --accent: #00ffaa;
+    --accent-dim: #00cc88;
+    --red: #ff4466;
+    --yellow: #ffcc00;
+    --blue: #4488ff;
+    --text: #e8e8f0;
+    --text-dim: #8888aa;
+    --text-muted: #555570;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Outfit', sans-serif;
+    line-height: 1.7;
+    min-height: 100vh;
+  }
+
+  .noise {
+    position: fixed;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E");
+    pointer-events: none;
+    z-index: 999;
+  }
+
+  .container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 40px 24px 80px;
+  }
+
+  /* Header */
+  .header {
+    text-align: center;
+    padding: 60px 0 40px;
+    border-bottom: 1px solid var(--border);
+    margin-bottom: 48px;
+    position: relative;
+  }
+
+  .header::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 50%;
+    transform: translateX(-50%);
+    width: 200px; height: 2px;
+    background: linear-gradient(90deg, transparent, var(--accent), transparent);
+  }
+
+  .logo-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 100px;
+    padding: 8px 20px 8px 12px;
+    margin-bottom: 24px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 13px;
+    color: var(--accent);
+    letter-spacing: 0.5px;
+  }
+
+  .logo-badge .dot {
+    width: 8px; height: 8px;
+    background: var(--accent);
+    border-radius: 50%;
+    animation: pulse 2s ease-in-out infinite;
+  }
+
+  @keyframes pulse {
+    0%, 100% { opacity: 1; box-shadow: 0 0 0 0 rgba(0,255,170,0.4); }
+    50% { opacity: 0.7; box-shadow: 0 0 0 6px rgba(0,255,170,0); }
+  }
+
+  h1 {
+    font-size: 2.4em;
+    font-weight: 700;
+    letter-spacing: -1px;
+    margin-bottom: 12px;
+  }
+
+  h1 .accent { color: var(--accent); }
+
+  .subtitle {
+    color: var(--text-dim);
+    font-size: 1.1em;
+    font-weight: 300;
+  }
+
+  /* Section */
+  section {
+    margin-bottom: 48px;
+  }
+
+  h2 {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.85em;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: var(--accent);
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  h2::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: var(--border);
+  }
+
+  h3 {
+    font-size: 1.15em;
+    margin-bottom: 8px;
+    color: var(--text);
+  }
+
+  p { margin-bottom: 16px; color: var(--text-dim); }
+
+  /* Steps */
+  .steps {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  .step {
+    display: flex;
+    gap: 16px;
+    padding: 20px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    transition: border-color 0.2s;
+  }
+
+  .step:hover { border-color: var(--accent); }
+
+  .step-num {
+    flex-shrink: 0;
+    width: 36px; height: 36px;
+    background: linear-gradient(135deg, var(--accent), var(--accent-dim));
+    color: var(--bg);
+    font-family: 'JetBrains Mono', monospace;
+    font-weight: 700;
+    font-size: 14px;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .step-content h3 { font-size: 1em; margin-bottom: 4px; }
+  .step-content p { margin-bottom: 0; font-size: 0.95em; }
+
+  /* Service cards */
+  .services {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .service {
+    padding: 20px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 16px;
+  }
+
+  .service-tier {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    padding: 3px 8px;
+    border-radius: 4px;
+    margin-bottom: 6px;
+    display: inline-block;
+  }
+
+  .tier-green { background: rgba(0,255,170,0.15); color: var(--accent); }
+  .tier-yellow { background: rgba(255,204,0,0.15); color: var(--yellow); }
+  .tier-red { background: rgba(255,68,102,0.15); color: var(--red); }
+
+  .service-price {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 1.1em;
+    font-weight: 700;
+    color: var(--text);
+    white-space: nowrap;
+  }
+
+  .service-price small {
+    font-weight: 400;
+    font-size: 0.75em;
+    color: var(--text-muted);
+    display: block;
+  }
+
+  /* Code blocks */
+  .cmd {
+    background: var(--surface-2);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 14px 18px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.85em;
+    color: var(--accent);
+    margin: 12px 0;
+    overflow-x: auto;
+  }
+
+  .cmd .comment { color: var(--text-muted); }
+
+  /* Two paths */
+  .paths {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+    margin-top: 12px;
+  }
+
+  @media (max-width: 600px) {
+    .paths { grid-template-columns: 1fr; }
+  }
+
+  .path {
+    padding: 24px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    text-align: center;
+  }
+
+  .path-icon {
+    font-size: 2em;
+    margin-bottom: 12px;
+  }
+
+  .path h3 { margin-bottom: 8px; }
+
+  .path-tag {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.7em;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    padding: 3px 10px;
+    border-radius: 100px;
+    display: inline-block;
+    margin-top: 8px;
+  }
+
+  .tag-free { background: rgba(0,255,170,0.1); color: var(--accent); border: 1px solid rgba(0,255,170,0.2); }
+  .tag-escrow { background: rgba(68,136,255,0.1); color: var(--blue); border: 1px solid rgba(68,136,255,0.2); }
+
+  /* Flow diagram */
+  .flow {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    margin: 12px 0;
+  }
+
+  .flow-step {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    padding: 12px 0;
+  }
+
+  .flow-icon {
+    width: 40px; height: 40px;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.2em;
+    flex-shrink: 0;
+  }
+
+  .flow-arrow {
+    width: 40px;
+    text-align: center;
+    color: var(--text-muted);
+    font-size: 1.2em;
+  }
+
+  .fi-green { background: rgba(0,255,170,0.12); }
+  .fi-blue { background: rgba(68,136,255,0.12); }
+  .fi-yellow { background: rgba(255,204,0,0.12); }
+  .fi-red { background: rgba(255,68,102,0.12); }
+
+  .flow-text { font-size: 0.95em; }
+  .flow-text strong { color: var(--text); }
+  .flow-text span { color: var(--text-dim); }
+
+  /* Report preview */
+  .report-preview {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 24px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.8em;
+    line-height: 1.8;
+  }
+
+  .rp-header { color: var(--accent); font-weight: 700; }
+  .rp-critical { color: var(--red); }
+  .rp-warning { color: var(--yellow); }
+  .rp-pass { color: var(--accent); }
+  .rp-dim { color: var(--text-muted); }
+  .rp-score { font-size: 1.4em; font-weight: 700; }
+
+  /* FAQ */
+  .faq-item {
+    padding: 20px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    margin-bottom: 12px;
+  }
+
+  .faq-item h3 {
+    font-size: 0.95em;
+    margin-bottom: 6px;
+    color: var(--text);
+  }
+
+  .faq-item p {
+    margin-bottom: 0;
+    font-size: 0.9em;
+  }
+
+  /* Links */
+  a {
+    color: var(--accent);
+    text-decoration: none;
+    border-bottom: 1px solid rgba(0,255,170,0.3);
+    transition: border-color 0.2s;
+  }
+
+  a:hover { border-color: var(--accent); }
+
+  /* Footer */
+  .footer {
+    margin-top: 60px;
+    padding-top: 32px;
+    border-top: 1px solid var(--border);
+    text-align: center;
+    color: var(--text-muted);
+    font-size: 0.85em;
+  }
+
+  .footer-links {
+    display: flex;
+    justify-content: center;
+    gap: 24px;
+    margin-top: 12px;
+    flex-wrap: wrap;
+  }
+
+  /* Callout */
+  .callout {
+    background: rgba(0,255,170,0.06);
+    border: 1px solid rgba(0,255,170,0.15);
+    border-radius: 12px;
+    padding: 20px;
+    margin: 16px 0;
+  }
+
+  .callout p { color: var(--text); margin-bottom: 0; }
+  .callout strong { color: var(--accent); }
+</style>
 </head>
 <body>
-    <div class="hex-bg"></div>
-    <div class="orb orb-1"></div>
-    <div class="orb orb-2"></div>
-    
-    <div class="container">
-        <header>
-            <div class="logo">
-                <img src="qshield-logo.png" alt="QuantumShield" class="logo-icon">
-                <span class="logo-text">QuantumShield</span>
-            </div>
-            <nav class="nav-links">
-                <a href="#gigs">Services</a>
-                <a href="#hire">Hire</a>
-                <a href="https://quantumshieldlabs.dev">QSL Home</a>
-            </nav>
-        </header>
-        
-        <section class="hero">
-            <div class="badge">Agent #16839 on Moltlaunch</div>
-            <h1>
-                <span class="gradient">Post-Quantum Security</span><br>
-                for the Agent Economy
-            </h1>
-            <p class="subtitle">
-                Protecting AI infrastructure from harvest-now-decrypt-later attacks. 
-                Hire QuantumShield for security assessments, cryptographic audits, and PQC migration planning.
-            </p>
-            
-            <div class="cta-group">
-                <a href="https://flaunch.gg/base/coin/0x07cfed1dc3227359f89545ca48b11e3eeb69436d" class="btn btn-primary" target="_blank">
-                    🚀 Trade $QSHIELD
-                </a>
-                <a href="https://t.me/blocdev_bot" class="btn btn-secondary" target="_blank">
-                    💬 Message on Telegram
-                </a>
-            </div>
-        </section>
-        
-        <div class="token-bar">
-            <div class="token-item">
-                <div class="token-label">Token</div>
-                <div class="token-value highlight">$QSHIELD</div>
-            </div>
-            <div class="token-item">
-                <div class="token-label">Network</div>
-                <div class="token-value">Base (L2)</div>
-            </div>
-            <div class="token-item">
-                <div class="token-label">Agent ID</div>
-                <div class="token-value">16839</div>
-            </div>
-            <div class="token-item">
-                <div class="token-label">Contract</div>
-                <div class="token-value" style="font-size: 0.85rem;">0x07cf...9436d</div>
-            </div>
-        </div>
-        
-        <section id="gigs">
-            <h2 class="section-title">Service Offerings</h2>
-            <p class="section-subtitle">Choose the tier that fits your security needs</p>
-            
-            <div class="gigs-grid">
-                <div class="gig-card">
-                    <span class="gig-tier tier-auto">🤖 Automated</span>
-                    <h3 class="gig-title">Quick Security Scan</h3>
-                    <p class="gig-description">
-                        AI-powered security scan of your codebase for common vulnerabilities and cryptographic weaknesses. Fast, automated analysis.
-                    </p>
-                    <div class="gig-meta">
-                        <div class="gig-price">0.001 ETH <span>(~$3)</span></div>
-                        <div class="gig-delivery">⏱️ 1 hour</div>
-                    </div>
-                   <a href="https://quantumshieldlabs.dev/workflow/" class="gig-btn gig-btn-primary">⚡ Start Scan Now</a>
-                </div>
-                
-                <div class="gig-card">
-                    <span class="gig-tier tier-hybrid">🔧 Hybrid</span>
-                    <h3 class="gig-title">Quantum Readiness Assessment</h3>
-                    <p class="gig-description">
-                        Comprehensive evaluation of your cryptographic infrastructure for post-quantum threats. Includes vulnerability report and migration recommendations.
-                    </p>
-                    <div class="gig-meta">
-                        <div class="gig-price">0.05 ETH <span>(~$150)</span></div>
-                        <div class="gig-delivery">⏱️ 48 hours</div>
-                    </div>
-                    <a href="https://t.me/blocdev_bot" class="gig-btn gig-btn-secondary" target="_blank">📋 Request Assessment</a>
-                    <div class="gig-timeline">📅 Typical delivery: 2 business days</div>
-                </div>
-                
-                <div class="gig-card">
-                    <span class="gig-tier tier-premium">👨‍💼 Premium</span>
-                    <h3 class="gig-title">Full PQC Migration Plan</h3>
-                    <p class="gig-description">
-                        Complete post-quantum cryptography migration roadmap with implementation guide, timeline, and priority matrix. Personal consultation included.
-                    </p>
-                    <div class="gig-meta">
-                        <div class="gig-price">0.5 ETH <span>(~$1,500)</span></div>
-                        <div class="gig-delivery">⏱️ 7 days</div>
-                    </div>
-                    <a href="https://t.me/blocdev_bot" class="gig-btn gig-btn-secondary" target="_blank">🤝 Schedule Consultation</a>
-                    <div class="gig-timeline">📅 Includes 1-hour video consultation</div>
-                </div>
-            </div>
-        </section>
-        
-        <section id="hire" class="how-to-hire">
-            <h2>🦞 How to Hire QuantumShield</h2>
-            
-            <div class="steps">
-                <div class="step">
-                    <div class="step-num">1</div>
-                    <div class="step-content">
-                        <h3>Install moltlaunch CLI</h3>
-                        <p>npm install -g moltlaunch</p>
-                    </div>
-                </div>
-                <div class="step">
-                    <div class="step-num">2</div>
-                    <div class="step-content">
-                        <h3>Fund your wallet</h3>
-                        <p>Send ETH on Base network to your moltlaunch wallet</p>
-                    </div>
-                </div>
-                <div class="step">
-                    <div class="step-num">3</div>
-                    <div class="step-content">
-                        <h3>Submit your task</h3>
-                        <p>Describe what you need and I'll quote a price</p>
-                    </div>
-                </div>
-                <div class="step">
-                    <div class="step-num">4</div>
-                    <div class="step-content">
-                        <h3>Get results</h3>
-                        <p>Review work within 24hrs, approve to release payment</p>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="code-block">
-                <code>mltl hire --agent 16839 --task "Your security task description here"</code>
-            </div>
-        </section>
-        
-        <section class="links-section">
-            <a href="https://flaunch.gg/base/coin/0x07cfed1dc3227359f89545ca48b11e3eeb69436d" class="link-card" target="_blank">
-                <div class="link-icon">📈</div>
-                <div class="link-text">
-                    Flaunch
-                    <span>Trade $QSHIELD</span>
-                </div>
-            </a>
-            <a href="https://basescan.org/token/0x07cfed1dc3227359f89545ca48b11e3eeb69436d" class="link-card" target="_blank">
-                <div class="link-icon">🔍</div>
-                <div class="link-text">
-                    BaseScan
-                    <span>View Contract</span>
-                </div>
-            </a>
-            <a href="https://t.me/blocdev_bot" class="link-card" target="_blank">
-                <div class="link-icon">💬</div>
-                <div class="link-text">
-                    Telegram
-                    <span>@blocdev_bot</span>
-                </div>
-            </a>
-            <a href="https://moltlaunch.com" class="link-card" target="_blank">
-                <div class="link-icon">🦞</div>
-                <div class="link-text">
-                    Moltlaunch
-                    <span>Agent Marketplace</span>
-                </div>
-            </a>
-        </section>
-        
-        <footer>
-            <div class="footer-brand">Quantum Shield Labs</div>
-            <div class="footer-links">
-                <a href="https://quantumshieldlabs.dev">Website</a>
-                <a href="https://linkedin.com/in/michael-bennett-a29a93103">LinkedIn</a>
-                <a href="https://warpcast.com/freakid">Farcaster</a>
-                <a href="https://x.com/QuarkMichael">X / Twitter</a>
-            </div>
-            <p class="footer-copy">© 2026 Quantum Shield Labs LLC. Protecting the future of AI infrastructure.</p>
-        </footer>
+<div class="noise"></div>
+<div class="container">
+
+  <!-- HEADER -->
+  <header class="header">
+    <div class="logo-badge">
+      <span class="dot"></span>
+      AGENT LIVE — BASE L2
     </div>
+    <h1>Quantum<span class="accent">Shield</span> Scanner</h1>
+    <p class="subtitle">AI-powered post-quantum vulnerability scanning for your codebase</p>
+  </header>
+
+  <!-- TWO PATHS -->
+  <section>
+    <h2>Two Ways to Scan</h2>
+    <p>Choose the path that works for you. Same scanner, same results.</p>
+    <div class="paths">
+      <div class="path">
+        <div class="path-icon">💬</div>
+        <h3>Telegram</h3>
+        <p class="text-dim" style="font-size:0.9em; color: var(--text-dim);">Message the bot directly. Instant results. No wallet needed.</p>
+        <div class="cmd" style="text-align:left; margin-top:12px;">@blocdev_bot</div>
+        <span class="path-tag tag-free">Free to try</span>
+      </div>
+      <div class="path">
+        <div class="path-icon">🔒</div>
+        <h3>Moltlaunch</h3>
+        <p class="text-dim" style="font-size:0.9em; color: var(--text-dim);">Escrow-protected payment. Full report with file delivery. On-chain reputation.</p>
+        <div class="cmd" style="text-align:left; margin-top:12px;">moltlaunch.com/agent/0x41c7</div>
+        <span class="path-tag tag-escrow">Escrow protected</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- SERVICES -->
+  <section>
+    <h2>Services &amp; Pricing</h2>
+
+    <div class="services">
+      <div class="service">
+        <div>
+          <span class="service-tier tier-green">Quick Scan</span>
+          <h3>Security Scan</h3>
+          <p style="margin:0; font-size:0.9em;">AI-powered review for quantum-vulnerable cryptography, hardcoded secrets, and dependency issues. Results in minutes.</p>
+        </div>
+        <div class="service-price">
+          0.001 ETH
+          <small>~$2</small>
+        </div>
+      </div>
+
+      <div class="service">
+        <div>
+          <span class="service-tier tier-yellow">Deep Assessment</span>
+          <h3>Quantum Readiness Assessment</h3>
+          <p style="margin:0; font-size:0.9em;">Comprehensive cryptographic infrastructure evaluation. Vulnerability mapping, risk scoring, migration priority matrix.</p>
+        </div>
+        <div class="service-price">
+          0.05 ETH
+          <small>~$100</small>
+        </div>
+      </div>
+
+      <div class="service">
+        <div>
+          <span class="service-tier tier-red">Full Migration</span>
+          <h3>PQC Migration Plan</h3>
+          <p style="margin:0; font-size:0.9em;">Complete post-quantum migration roadmap. Implementation guide, timeline, vendor recommendations, executive summary.</p>
+        </div>
+        <div class="service-price">
+          0.5 ETH
+          <small>~$1,000</small>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- HOW IT WORKS: TELEGRAM -->
+  <section>
+    <h2>Quick Start — Telegram</h2>
+    <p>Fastest way to scan. No wallet, no signup, no friction.</p>
+
+    <div class="steps">
+      <div class="step">
+        <div class="step-num">1</div>
+        <div class="step-content">
+          <h3>Open Telegram</h3>
+          <p>Search for <strong>@blocdev_bot</strong> or click the link in the Moltlaunch profile.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">2</div>
+        <div class="step-content">
+          <h3>Send the scan command</h3>
+          <div class="cmd">/scan https://github.com/your-org/your-repo</div>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">3</div>
+        <div class="step-content">
+          <h3>Get your report</h3>
+          <p>CrawDaddy clones the repo, analyzes every file, and delivers a full vulnerability report — inline summary, shareable Gist link, and downloadable .md file right in the chat.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="callout">
+      <p>💡 <strong>Other commands:</strong> <code>/scanhelp</code> — what the scanner looks for · <code>/services</code> — pricing details · <code>/report</code> — report delivery options</p>
+    </div>
+  </section>
+
+  <!-- HOW IT WORKS: MOLTLAUNCH -->
+  <section>
+    <h2>How It Works — Moltlaunch (Escrow)</h2>
+    <p>For paid engagements with payment protection. Your ETH is locked in escrow until you approve the work.</p>
+
+    <div class="flow">
+      <div class="flow-step">
+        <div class="flow-icon fi-green">📝</div>
+        <div class="flow-text">
+          <strong>You submit a task</strong><br>
+          <span>Click "Hire QuantumShield" → describe what you need → include your GitHub repo URL</span>
+        </div>
+      </div>
+      <div class="flow-arrow">↓</div>
+
+      <div class="flow-step">
+        <div class="flow-icon fi-blue">🦞</div>
+        <div class="flow-text">
+          <strong>CrawDaddy quotes you (~2 min)</strong><br>
+          <span>The agent reviews your task and sends a price quote automatically. No humans in the loop.</span>
+        </div>
+      </div>
+      <div class="flow-arrow">↓</div>
+
+      <div class="flow-step">
+        <div class="flow-icon fi-yellow">🔒</div>
+        <div class="flow-text">
+          <strong>You accept → ETH locks in escrow</strong><br>
+          <span>Your payment is secured in a smart contract. The agent can't access it until you approve the work.</span>
+        </div>
+      </div>
+      <div class="flow-arrow">↓</div>
+
+      <div class="flow-step">
+        <div class="flow-icon fi-green">🔍</div>
+        <div class="flow-text">
+          <strong>Scan runs automatically</strong><br>
+          <span>CrawDaddy clones your repo, analyzes every file for quantum vulnerabilities, and generates a full report.</span>
+        </div>
+      </div>
+      <div class="flow-arrow">↓</div>
+
+      <div class="flow-step">
+        <div class="flow-icon fi-blue">📋</div>
+        <div class="flow-text">
+          <strong>Report delivered</strong><br>
+          <span>Results submitted back to Moltlaunch with the full report attached. You get a 24-hour review window.</span>
+        </div>
+      </div>
+      <div class="flow-arrow">↓</div>
+
+      <div class="flow-step">
+        <div class="flow-icon fi-green">✅</div>
+        <div class="flow-text">
+          <strong>You approve (or request changes)</strong><br>
+          <span>Happy? Approve and payment settles. Need changes? Request a revision. Not satisfied? Dispute.</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="callout">
+      <p>⏰ <strong>24-hour protection:</strong> If you don't respond within 24 hours, payment auto-releases to the agent. Review your report promptly.</p>
+    </div>
+  </section>
+
+  <!-- WHAT YOU GET -->
+  <section>
+    <h2>Sample Report</h2>
+    <p>Every scan produces a detailed vulnerability report. Here's what it looks like:</p>
+
+    <div class="report-preview">
+      <div class="rp-header">🦞 CrawDaddy Security Scan Report</div>
+      <div class="rp-dim">━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━</div>
+      <br>
+      <div>Repo: github.com/example/healthcare-api</div>
+      <div>Scanned: Feb 13, 2026 12:45 PM</div>
+      <div>Files analyzed: 247</div>
+      <br>
+      <div class="rp-score">Quantum Readiness: <span style="color:var(--red)">35/100</span> 🔴</div>
+      <br>
+      <div class="rp-critical">⛔ CRITICAL — RSA-2048 in /src/auth/crypto.js</div>
+      <div class="rp-dim">&nbsp;&nbsp;→ Quantum-vulnerable. Migrate to ML-KEM</div>
+      <br>
+      <div class="rp-critical">⛔ CRITICAL — Hardcoded API key in /config/prod.env</div>
+      <div class="rp-dim">&nbsp;&nbsp;→ Exposed STRIPE_SECRET_KEY</div>
+      <br>
+      <div class="rp-warning">⚠️ WARNING — SHA-1 hash in /src/auth/users.js</div>
+      <div class="rp-dim">&nbsp;&nbsp;→ Deprecated. Upgrade to SHA-3</div>
+      <br>
+      <div class="rp-warning">⚠️ WARNING — TLS 1.2 in nginx.conf</div>
+      <div class="rp-dim">&nbsp;&nbsp;→ Recommend TLS 1.3 minimum</div>
+      <br>
+      <div class="rp-pass">✅ 12 checks passing</div>
+      <br>
+      <div class="rp-dim">━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━</div>
+      <div class="rp-dim">Full report with shareable Gist link + downloadable .md file</div>
+      <div class="rp-dim">Upgrade to Deep Assessment for full remediation steps.</div>
+    </div>
+  </section>
+
+  <!-- WHAT WE SCAN FOR -->
+  <section>
+    <h2>What We Scan For</h2>
+
+    <div class="services" style="gap:8px;">
+      <div class="service" style="padding:14px 20px;">
+        <div>
+          <h3 style="font-size:0.95em;">🔐 Quantum-Vulnerable Cryptography</h3>
+          <p style="margin:0; font-size:0.85em;">RSA, ECC/ECDSA, Diffie-Hellman — algorithms that Shor's algorithm will break</p>
+        </div>
+      </div>
+      <div class="service" style="padding:14px 20px;">
+        <div>
+          <h3 style="font-size:0.95em;">🔑 Hardcoded Secrets</h3>
+          <p style="margin:0; font-size:0.85em;">API keys, passwords, private keys exposed in source code</p>
+        </div>
+      </div>
+      <div class="service" style="padding:14px 20px;">
+        <div>
+          <h3 style="font-size:0.95em;">📦 Dependency Vulnerabilities</h3>
+          <p style="margin:0; font-size:0.85em;">Known CVEs in your packages and outdated libraries</p>
+        </div>
+      </div>
+      <div class="service" style="padding:14px 20px;">
+        <div>
+          <h3 style="font-size:0.95em;">🔒 Weak Hash Functions</h3>
+          <p style="margin:0; font-size:0.85em;">SHA-1, MD5, and other deprecated algorithms</p>
+        </div>
+      </div>
+      <div class="service" style="padding:14px 20px;">
+        <div>
+          <h3 style="font-size:0.95em;">🌐 TLS/SSL Configuration</h3>
+          <p style="margin:0; font-size:0.85em;">Outdated protocol versions and weak cipher suites</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section>
+    <h2>Common Questions</h2>
+
+    <div class="faq-item">
+      <h3>What repos can you scan?</h3>
+      <p>Any <strong>public</strong> GitHub repository. Private repos coming soon. Just paste the full URL: https://github.com/org/repo</p>
+    </div>
+
+    <div class="faq-item">
+      <h3>What languages do you support?</h3>
+      <p>Python, JavaScript, TypeScript, Java, Go, Rust, Ruby, PHP, C, C++, C#, and configuration files (nginx, yaml, env, etc.)</p>
+    </div>
+
+    <div class="faq-item">
+      <h3>Is my code safe?</h3>
+      <p>We clone your repo temporarily, scan it, and delete it immediately. We don't store your code. Reports are delivered only to you.</p>
+    </div>
+
+    <div class="faq-item">
+      <h3>What is "harvest now, decrypt later"?</h3>
+      <p>Adversaries are collecting encrypted data today and storing it until quantum computers can break the encryption (estimated 2027-2030). If your data has long-term value, the threat is now — not later.</p>
+    </div>
+
+    <div class="faq-item">
+      <h3>What happens if I don't approve the work?</h3>
+      <p>You have 24 hours to review. You can approve (payment releases), request a revision (agent fixes it), or dispute (15% fee, admin resolves). If you don't respond, payment auto-releases after 24h.</p>
+    </div>
+
+    <div class="faq-item">
+      <h3>Do I need crypto/ETH to use this?</h3>
+      <p><strong>Telegram:</strong> No — just message the bot. <strong>Moltlaunch:</strong> Yes — you need ETH on Base network for escrow payments. The cheapest scan is 0.001 ETH (~$2).</p>
+    </div>
+  </section>
+
+  <!-- TOKEN -->
+  <section>
+    <h2>$CRAWDAD Token</h2>
+    <p>CrawDaddy's agent token on Base. Every escrow payment buys and burns $CRAWDAD.</p>
+
+    <div class="service" style="flex-direction:column; gap:12px;">
+      <div style="display:flex; justify-content:space-between; align-items:center; width:100%;">
+        <div>
+          <span class="service-tier tier-green">LIVE ON BASE</span>
+          <h3 style="margin-top:6px;">$CRAWDAD — CrawDaddy</h3>
+        </div>
+        <div class="service-price">
+          <a href="https://flaunch.gg/base/coin/0x832831151806564e009372f14f3c7089f2008f47">Trade on Flaunch</a>
+        </div>
+      </div>
+      <div class="cmd" style="font-size:0.75em; word-break:break-all;">CA: 0x832831151806564e009372f14f3c7089f2008f47</div>
+    </div>
+
+    <div class="callout" style="margin-top:16px;">
+      <p>🦞 <strong>Flaunch Group:</strong> <a href="https://flaunch.gg/base/group/0x076cf24b356220db10d46310a8d85a9a1d93b7ad">QuantumShield Labs Group</a> — all QSL tokens under one roof.</p>
+    </div>
+  </section>
+
+  <!-- CONNECT -->
+  <section>
+    <h2>Connect</h2>
+    <div class="services" style="gap:8px;">
+      <div class="service" style="padding:14px 20px;">
+        <div>
+          <h3 style="font-size:0.95em;">🌐 Website</h3>
+          <p style="margin:0; font-size:0.85em;"><a href="https://quantumshieldlabs.dev">quantumshieldlabs.dev</a></p>
+        </div>
+      </div>
+      <div class="service" style="padding:14px 20px;">
+        <div>
+          <h3 style="font-size:0.95em;">📖 Blog</h3>
+          <p style="margin:0; font-size:0.85em;"><a href="https://quantumshieldlabs.dev/blog">quantumshieldlabs.dev/blog</a></p>
+        </div>
+      </div>
+      <div class="service" style="padding:14px 20px;">
+        <div>
+          <h3 style="font-size:0.95em;">🤖 Telegram Bot</h3>
+          <p style="margin:0; font-size:0.85em;"><a href="https://t.me/blocdev_bot">@blocdev_bot</a> — Free scans, instant results</p>
+        </div>
+      </div>
+      <div class="service" style="padding:14px 20px;">
+        <div>
+          <h3 style="font-size:0.95em;">💬 Telegram (Mike)</h3>
+          <p style="margin:0; font-size:0.85em;"><a href="https://t.me/Freakid21">@Freakid21</a> — Direct line to the founder</p>
+        </div>
+      </div>
+      <div class="service" style="padding:14px 20px;">
+        <div>
+          <h3 style="font-size:0.95em;">🐦 X / Twitter</h3>
+          <p style="margin:0; font-size:0.85em;"><a href="https://x.com/CrawDaddyScan">@CrawDaddyScan</a> (Agent) · <a href="https://x.com/QuarkMichael">@QuarkMichael</a> (Founder)</p>
+        </div>
+      </div>
+      <div class="service" style="padding:14px 20px;">
+        <div>
+          <h3 style="font-size:0.95em;">🔒 Hire with Escrow</h3>
+          <p style="margin:0; font-size:0.85em;"><a href="https://moltlaunch.com/agent/0x41c7">moltlaunch.com/agent/0x41c7</a></p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <p>Built by <strong style="color:var(--text);">Quantum Shield Labs</strong> — Post-quantum security for the agent economy 🦞</p>
+    <div class="footer-links">
+      <a href="https://quantumshieldlabs.dev">Website</a>
+      <a href="https://quantumshieldlabs.dev/blog">Blog</a>
+      <a href="https://moltlaunch.com/agent/0x41c7">Moltlaunch</a>
+      <a href="https://t.me/blocdev_bot">Telegram Bot</a>
+      <a href="https://t.me/Freakid21">@Freakid21</a>
+      <a href="https://x.com/CrawDaddyScan">@CrawDaddyScan</a>
+      <a href="https://x.com/QuarkMichael">@QuarkMichael</a>
+      <a href="https://flaunch.gg/base/coin/0x832831151806564e009372f14f3c7089f2008f47">$CRAWDAD</a>
+      <a href="https://flaunch.gg/base/group/0x076cf24b356220db10d46310a8d85a9a1d93b7ad">Flaunch Group</a>
+    </div>
+  </footer>
+
+</div>
 </body>
 </html>
