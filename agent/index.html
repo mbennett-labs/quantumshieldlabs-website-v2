@@ -1,772 +1,1111 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>QuantumShield Agent — CrawDaddy Security Scanner</title>
-<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600;700&family=Outfit:wght@300;400;600;700&display=swap" rel="stylesheet">
-<style>
-  :root {
-    --bg: #0a0a0f;
-    --surface: #12121a;
-    --surface-2: #1a1a26;
-    --border: #2a2a3a;
-    --accent: #00ffaa;
-    --accent-dim: #00cc88;
-    --red: #ff4466;
-    --yellow: #ffcc00;
-    --blue: #4488ff;
-    --text: #e8e8f0;
-    --text-dim: #8888aa;
-    --text-muted: #555570;
-  }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CrawDaddy Security — Quantum Security Scanner | QuantumShield Labs</title>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600;700&family=Space+Grotesk:wght@400;500;600;700&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-deep: #0a0a0f;
+            --bg-card: #111118;
+            --bg-card-hover: #16161f;
+            --border: #1e1e2e;
+            --border-glow: #ff2d4a;
+            --text-primary: #e8e6e3;
+            --text-secondary: #8a8a9a;
+            --text-muted: #55556a;
+            --accent-red: #ff2d4a;
+            --accent-green: #00ff88;
+            --accent-cyan: #00d4ff;
+            --accent-amber: #ffaa00;
+            --gradient-fire: linear-gradient(135deg, #ff2d4a, #ff6b2d);
+            --gradient-scan: linear-gradient(135deg, #00ff88, #00d4ff);
+            --font-display: 'Outfit', sans-serif;
+            --font-mono: 'JetBrains Mono', monospace;
+        }
 
-  * { margin: 0; padding: 0; box-sizing: border-box; }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
 
-  body {
-    background: var(--bg);
-    color: var(--text);
-    font-family: 'Outfit', sans-serif;
-    line-height: 1.7;
-    min-height: 100vh;
-  }
+        body {
+            background: var(--bg-deep);
+            color: var(--text-primary);
+            font-family: var(--font-display);
+            overflow-x: hidden;
+            line-height: 1.6;
+        }
 
-  .noise {
-    position: fixed;
-    top: 0; left: 0; right: 0; bottom: 0;
-    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E");
-    pointer-events: none;
-    z-index: 999;
-  }
+        /* Scan line effect */
+        body::after {
+            content: '';
+            position: fixed;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: repeating-linear-gradient(
+                0deg,
+                transparent,
+                transparent 2px,
+                rgba(0, 255, 136, 0.015) 2px,
+                rgba(0, 255, 136, 0.015) 4px
+            );
+            pointer-events: none;
+            z-index: 9999;
+        }
 
-  .container {
-    max-width: 800px;
-    margin: 0 auto;
-    padding: 40px 24px 80px;
-  }
+        .noise-overlay {
+            position: fixed;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.03'/%3E%3C/svg%3E");
+            pointer-events: none;
+            z-index: 9998;
+        }
 
-  /* Header */
-  .header {
-    text-align: center;
-    padding: 60px 0 40px;
-    border-bottom: 1px solid var(--border);
-    margin-bottom: 48px;
-    position: relative;
-  }
+        /* Nav */
+        nav {
+            position: fixed;
+            top: 0; left: 0; right: 0;
+            background: rgba(10, 10, 15, 0.9);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid var(--border);
+            z-index: 100;
+            padding: 0 2rem;
+        }
 
-  .header::before {
-    content: '';
-    position: absolute;
-    top: 0; left: 50%;
-    transform: translateX(-50%);
-    width: 200px; height: 2px;
-    background: linear-gradient(90deg, transparent, var(--accent), transparent);
-  }
+        .nav-inner {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            height: 64px;
+        }
 
-  .logo-badge {
-    display: inline-flex;
-    align-items: center;
-    gap: 10px;
-    background: var(--surface);
-    border: 1px solid var(--border);
-    border-radius: 100px;
-    padding: 8px 20px 8px 12px;
-    margin-bottom: 24px;
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 13px;
-    color: var(--accent);
-    letter-spacing: 0.5px;
-  }
+        .nav-brand {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            text-decoration: none;
+            color: var(--text-primary);
+        }
 
-  .logo-badge .dot {
-    width: 8px; height: 8px;
-    background: var(--accent);
-    border-radius: 50%;
-    animation: pulse 2s ease-in-out infinite;
-  }
+        .nav-brand .lobster {
+            font-size: 1.5rem;
+        }
 
-  @keyframes pulse {
-    0%, 100% { opacity: 1; box-shadow: 0 0 0 0 rgba(0,255,170,0.4); }
-    50% { opacity: 0.7; box-shadow: 0 0 0 6px rgba(0,255,170,0); }
-  }
+        .nav-brand span {
+            font-family: var(--font-mono);
+            font-weight: 700;
+            font-size: 0.95rem;
+            letter-spacing: 0.05em;
+        }
 
-  h1 {
-    font-size: 2.4em;
-    font-weight: 700;
-    letter-spacing: -1px;
-    margin-bottom: 12px;
-  }
+        .nav-links {
+            display: flex;
+            gap: 0.25rem;
+        }
 
-  h1 .accent { color: var(--accent); }
+        .nav-links a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-size: 0.85rem;
+            font-weight: 500;
+            padding: 0.5rem 1rem;
+            border-radius: 8px;
+            transition: all 0.2s;
+        }
 
-  .subtitle {
-    color: var(--text-dim);
-    font-size: 1.1em;
-    font-weight: 300;
-  }
+        .nav-links a:hover, .nav-links a.active {
+            color: var(--accent-green);
+            background: rgba(0, 255, 136, 0.08);
+        }
 
-  /* Section */
-  section {
-    margin-bottom: 48px;
-  }
+        .nav-links a.active {
+            font-weight: 600;
+        }
 
-  h2 {
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 0.85em;
-    font-weight: 600;
-    text-transform: uppercase;
-    letter-spacing: 2px;
-    color: var(--accent);
-    margin-bottom: 20px;
-    display: flex;
-    align-items: center;
-    gap: 10px;
-  }
+        /* Hero */
+        .hero {
+            padding: 8rem 2rem 4rem;
+            text-align: center;
+            position: relative;
+        }
 
-  h2::after {
-    content: '';
-    flex: 1;
-    height: 1px;
-    background: var(--border);
-  }
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 60px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(circle, rgba(255, 45, 74, 0.08) 0%, transparent 70%);
+            pointer-events: none;
+        }
 
-  h3 {
-    font-size: 1.15em;
-    margin-bottom: 8px;
-    color: var(--text);
-  }
+        .hero-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: rgba(0, 255, 136, 0.08);
+            border: 1px solid rgba(0, 255, 136, 0.2);
+            padding: 0.4rem 1rem;
+            border-radius: 100px;
+            font-family: var(--font-mono);
+            font-size: 0.75rem;
+            color: var(--accent-green);
+            margin-bottom: 1.5rem;
+            animation: pulse-glow 3s infinite;
+        }
 
-  p { margin-bottom: 16px; color: var(--text-dim); }
+        @keyframes pulse-glow {
+            0%, 100% { box-shadow: 0 0 0 0 rgba(0, 255, 136, 0.1); }
+            50% { box-shadow: 0 0 20px 0 rgba(0, 255, 136, 0.1); }
+        }
 
-  /* Steps */
-  .steps {
-    display: flex;
-    flex-direction: column;
-    gap: 16px;
-  }
+        .hero h1 {
+            font-size: clamp(2.5rem, 6vw, 4.5rem);
+            font-weight: 700;
+            line-height: 1.1;
+            margin-bottom: 1rem;
+            background: linear-gradient(135deg, var(--text-primary) 0%, var(--accent-red) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
 
-  .step {
-    display: flex;
-    gap: 16px;
-    padding: 20px;
-    background: var(--surface);
-    border: 1px solid var(--border);
-    border-radius: 12px;
-    transition: border-color 0.2s;
-  }
+        .hero h1 .accent {
+            background: var(--gradient-scan);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
 
-  .step:hover { border-color: var(--accent); }
+        .hero-sub {
+            font-size: 1.15rem;
+            color: var(--text-secondary);
+            max-width: 600px;
+            margin: 0 auto 2.5rem;
+            font-weight: 300;
+        }
 
-  .step-num {
-    flex-shrink: 0;
-    width: 36px; height: 36px;
-    background: linear-gradient(135deg, var(--accent), var(--accent-dim));
-    color: var(--bg);
-    font-family: 'JetBrains Mono', monospace;
-    font-weight: 700;
-    font-size: 14px;
-    border-radius: 8px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
+        .hero-actions {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
 
-  .step-content h3 { font-size: 1em; margin-bottom: 4px; }
-  .step-content p { margin-bottom: 0; font-size: 0.95em; }
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.85rem 1.75rem;
+            border-radius: 12px;
+            font-family: var(--font-display);
+            font-weight: 600;
+            font-size: 0.95rem;
+            text-decoration: none;
+            transition: all 0.25s;
+            border: none;
+            cursor: pointer;
+        }
 
-  /* Service cards */
-  .services {
-    display: flex;
-    flex-direction: column;
-    gap: 12px;
-  }
+        .btn-primary {
+            background: var(--gradient-fire);
+            color: white;
+            box-shadow: 0 4px 20px rgba(255, 45, 74, 0.3);
+        }
 
-  .service {
-    padding: 20px;
-    background: var(--surface);
-    border: 1px solid var(--border);
-    border-radius: 12px;
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-start;
-    gap: 16px;
-  }
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 30px rgba(255, 45, 74, 0.4);
+        }
 
-  .service-tier {
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 11px;
-    font-weight: 600;
-    letter-spacing: 1px;
-    text-transform: uppercase;
-    padding: 3px 8px;
-    border-radius: 4px;
-    margin-bottom: 6px;
-    display: inline-block;
-  }
+        .btn-secondary {
+            background: rgba(255, 255, 255, 0.05);
+            color: var(--text-primary);
+            border: 1px solid var(--border);
+        }
 
-  .tier-green { background: rgba(0,255,170,0.15); color: var(--accent); }
-  .tier-yellow { background: rgba(255,204,0,0.15); color: var(--yellow); }
-  .tier-red { background: rgba(255,68,102,0.15); color: var(--red); }
+        .btn-secondary:hover {
+            background: rgba(255, 255, 255, 0.08);
+            border-color: var(--accent-cyan);
+            color: var(--accent-cyan);
+        }
 
-  .service-price {
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 1.1em;
-    font-weight: 700;
-    color: var(--text);
-    white-space: nowrap;
-  }
+        /* Stats bar */
+        .stats-bar {
+            display: flex;
+            justify-content: center;
+            gap: 3rem;
+            padding: 2rem;
+            flex-wrap: wrap;
+        }
 
-  .service-price small {
-    font-weight: 400;
-    font-size: 0.75em;
-    color: var(--text-muted);
-    display: block;
-  }
+        .stat {
+            text-align: center;
+        }
 
-  /* Code blocks */
-  .cmd {
-    background: var(--surface-2);
-    border: 1px solid var(--border);
-    border-radius: 8px;
-    padding: 14px 18px;
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 0.85em;
-    color: var(--accent);
-    margin: 12px 0;
-    overflow-x: auto;
-  }
+        .stat-value {
+            font-family: var(--font-mono);
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--accent-green);
+        }
 
-  .cmd .comment { color: var(--text-muted); }
+        .stat-label {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            margin-top: 0.25rem;
+        }
 
-  /* Two paths */
-  .paths {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 16px;
-    margin-top: 12px;
-  }
+        /* Sections */
+        .section {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 4rem 2rem;
+        }
 
-  @media (max-width: 600px) {
-    .paths { grid-template-columns: 1fr; }
-  }
+        .section-header {
+            margin-bottom: 3rem;
+        }
 
-  .path {
-    padding: 24px;
-    background: var(--surface);
-    border: 1px solid var(--border);
-    border-radius: 12px;
-    text-align: center;
-  }
+        .section-label {
+            font-family: var(--font-mono);
+            font-size: 0.75rem;
+            color: var(--accent-red);
+            text-transform: uppercase;
+            letter-spacing: 0.15em;
+            margin-bottom: 0.75rem;
+        }
 
-  .path-icon {
-    font-size: 2em;
-    margin-bottom: 12px;
-  }
+        .section-title {
+            font-size: 2rem;
+            font-weight: 700;
+        }
 
-  .path h3 { margin-bottom: 8px; }
+        .section-desc {
+            color: var(--text-secondary);
+            margin-top: 0.75rem;
+            max-width: 600px;
+        }
 
-  .path-tag {
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 0.7em;
-    letter-spacing: 1px;
-    text-transform: uppercase;
-    padding: 3px 10px;
-    border-radius: 100px;
-    display: inline-block;
-    margin-top: 8px;
-  }
+        /* How it works */
+        .steps {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+        }
 
-  .tag-free { background: rgba(0,255,170,0.1); color: var(--accent); border: 1px solid rgba(0,255,170,0.2); }
-  .tag-escrow { background: rgba(68,136,255,0.1); color: var(--blue); border: 1px solid rgba(68,136,255,0.2); }
+        .step {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 2rem;
+            position: relative;
+            transition: all 0.3s;
+        }
 
-  /* Flow diagram */
-  .flow {
-    display: flex;
-    flex-direction: column;
-    gap: 0;
-    margin: 12px 0;
-  }
+        .step:hover {
+            border-color: var(--accent-green);
+            transform: translateY(-4px);
+            box-shadow: 0 8px 30px rgba(0, 255, 136, 0.05);
+        }
 
-  .flow-step {
-    display: flex;
-    align-items: center;
-    gap: 14px;
-    padding: 12px 0;
-  }
+        .step-number {
+            font-family: var(--font-mono);
+            font-size: 0.7rem;
+            color: var(--accent-red);
+            background: rgba(255, 45, 74, 0.1);
+            padding: 0.3rem 0.75rem;
+            border-radius: 100px;
+            display: inline-block;
+            margin-bottom: 1rem;
+        }
 
-  .flow-icon {
-    width: 40px; height: 40px;
-    border-radius: 10px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 1.2em;
-    flex-shrink: 0;
-  }
+        .step h3 {
+            font-size: 1.1rem;
+            margin-bottom: 0.75rem;
+        }
 
-  .flow-arrow {
-    width: 40px;
-    text-align: center;
-    color: var(--text-muted);
-    font-size: 1.2em;
-  }
+        .step p {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+            line-height: 1.7;
+        }
 
-  .fi-green { background: rgba(0,255,170,0.12); }
-  .fi-blue { background: rgba(68,136,255,0.12); }
-  .fi-yellow { background: rgba(255,204,0,0.12); }
-  .fi-red { background: rgba(255,68,102,0.12); }
+        /* Vulnerability categories */
+        .vuln-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 1rem;
+        }
 
-  .flow-text { font-size: 0.95em; }
-  .flow-text strong { color: var(--text); }
-  .flow-text span { color: var(--text-dim); }
+        .vuln-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 1.25rem;
+            text-align: center;
+            transition: all 0.3s;
+        }
 
-  /* Report preview */
-  .report-preview {
-    background: var(--surface);
-    border: 1px solid var(--border);
-    border-radius: 12px;
-    padding: 24px;
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 0.8em;
-    line-height: 1.8;
-  }
+        .vuln-card:hover {
+            border-color: var(--accent-amber);
+        }
 
-  .rp-header { color: var(--accent); font-weight: 700; }
-  .rp-critical { color: var(--red); }
-  .rp-warning { color: var(--yellow); }
-  .rp-pass { color: var(--accent); }
-  .rp-dim { color: var(--text-muted); }
-  .rp-score { font-size: 1.4em; font-weight: 700; }
+        .vuln-icon {
+            font-size: 1.75rem;
+            margin-bottom: 0.5rem;
+        }
 
-  /* FAQ */
-  .faq-item {
-    padding: 20px;
-    background: var(--surface);
-    border: 1px solid var(--border);
-    border-radius: 12px;
-    margin-bottom: 12px;
-  }
+        .vuln-name {
+            font-family: var(--font-mono);
+            font-size: 0.85rem;
+            font-weight: 600;
+            margin-bottom: 0.25rem;
+        }
 
-  .faq-item h3 {
-    font-size: 0.95em;
-    margin-bottom: 6px;
-    color: var(--text);
-  }
+        .vuln-desc {
+            font-size: 0.75rem;
+            color: var(--text-muted);
+        }
 
-  .faq-item p {
-    margin-bottom: 0;
-    font-size: 0.9em;
-  }
+        /* Token section */
+        .token-section {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 20px;
+            padding: 3rem;
+            margin-top: 2rem;
+        }
 
-  /* Links */
-  a {
-    color: var(--accent);
-    text-decoration: none;
-    border-bottom: 1px solid rgba(0,255,170,0.3);
-    transition: border-color 0.2s;
-  }
+        .token-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
 
-  a:hover { border-color: var(--accent); }
+        .token-name {
+            font-size: 1.5rem;
+            font-weight: 700;
+        }
 
-  /* Footer */
-  .footer {
-    margin-top: 60px;
-    padding-top: 32px;
-    border-top: 1px solid var(--border);
-    text-align: center;
-    color: var(--text-muted);
-    font-size: 0.85em;
-  }
+        .token-name .ticker {
+            color: var(--accent-red);
+        }
 
-  .footer-links {
-    display: flex;
-    justify-content: center;
-    gap: 24px;
-    margin-top: 12px;
-    flex-wrap: wrap;
-  }
+        .token-ca {
+            font-family: var(--font-mono);
+            font-size: 0.7rem;
+            color: var(--text-muted);
+            background: rgba(255, 255, 255, 0.03);
+            padding: 0.5rem 1rem;
+            border-radius: 8px;
+            border: 1px solid var(--border);
+            word-break: break-all;
+        }
 
-  /* Callout */
-  .callout {
-    background: rgba(0,255,170,0.06);
-    border: 1px solid rgba(0,255,170,0.15);
-    border-radius: 12px;
-    padding: 20px;
-    margin: 16px 0;
-  }
+        .token-features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
 
-  .callout p { color: var(--text); margin-bottom: 0; }
-  .callout strong { color: var(--accent); }
-</style>
+        .token-feature {
+            display: flex;
+            gap: 1rem;
+            align-items: flex-start;
+        }
+
+        .token-feature-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            flex-shrink: 0;
+        }
+
+        .token-feature-icon.burn { background: rgba(255, 45, 74, 0.15); }
+        .token-feature-icon.revenue { background: rgba(0, 255, 136, 0.15); }
+        .token-feature-icon.access { background: rgba(0, 212, 255, 0.15); }
+        .token-feature-icon.build { background: rgba(255, 170, 0, 0.15); }
+
+        .token-feature h4 {
+            font-size: 0.95rem;
+            margin-bottom: 0.25rem;
+        }
+
+        .token-feature p {
+            font-size: 0.8rem;
+            color: var(--text-secondary);
+        }
+
+        .token-note {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            font-style: italic;
+            border-top: 1px solid var(--border);
+            padding-top: 1.5rem;
+        }
+
+        /* Roadmap */
+        .roadmap {
+            display: grid;
+            gap: 1.5rem;
+        }
+
+        .roadmap-phase {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 2rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .roadmap-phase::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            width: 3px;
+        }
+
+        .roadmap-phase.done::before { background: var(--accent-green); }
+        .roadmap-phase.current::before { background: var(--accent-amber); }
+        .roadmap-phase.future::before { background: var(--text-muted); }
+
+        .roadmap-label {
+            font-family: var(--font-mono);
+            font-size: 0.7rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            margin-bottom: 0.5rem;
+        }
+
+        .roadmap-phase.done .roadmap-label { color: var(--accent-green); }
+        .roadmap-phase.current .roadmap-label { color: var(--accent-amber); }
+        .roadmap-phase.future .roadmap-label { color: var(--text-muted); }
+
+        .roadmap-phase h3 {
+            font-size: 1.15rem;
+            margin-bottom: 0.75rem;
+        }
+
+        .roadmap-items {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+
+        .roadmap-item {
+            font-size: 0.8rem;
+            padding: 0.35rem 0.85rem;
+            border-radius: 100px;
+            border: 1px solid var(--border);
+            color: var(--text-secondary);
+        }
+
+        .roadmap-item.done {
+            border-color: rgba(0, 255, 136, 0.3);
+            color: var(--accent-green);
+            background: rgba(0, 255, 136, 0.05);
+        }
+
+        /* Links / Resources */
+        .resources-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .resource-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 2rem;
+            text-decoration: none;
+            color: var(--text-primary);
+            transition: all 0.3s;
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+        }
+
+        .resource-card:hover {
+            border-color: var(--accent-cyan);
+            transform: translateY(-4px);
+            box-shadow: 0 8px 30px rgba(0, 212, 255, 0.08);
+        }
+
+        .resource-icon {
+            font-size: 2rem;
+        }
+
+        .resource-card h3 {
+            font-size: 1.1rem;
+        }
+
+        .resource-card p {
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+        }
+
+        .resource-tag {
+            font-family: var(--font-mono);
+            font-size: 0.65rem;
+            color: var(--accent-cyan);
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+        }
+
+        /* Builder section */
+        .builder {
+            display: flex;
+            gap: 2rem;
+            align-items: center;
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 20px;
+            padding: 2.5rem;
+            flex-wrap: wrap;
+        }
+
+        .builder-avatar {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            background: var(--gradient-fire);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            flex-shrink: 0;
+        }
+
+        .builder-info h3 {
+            font-size: 1.2rem;
+            margin-bottom: 0.25rem;
+        }
+
+        .builder-info .role {
+            font-family: var(--font-mono);
+            font-size: 0.8rem;
+            color: var(--accent-amber);
+            margin-bottom: 0.5rem;
+        }
+
+        .builder-info p {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            max-width: 500px;
+        }
+
+        .builder-links {
+            display: flex;
+            gap: 0.75rem;
+            margin-top: 0.75rem;
+        }
+
+        .builder-links a {
+            font-family: var(--font-mono);
+            font-size: 0.75rem;
+            color: var(--accent-cyan);
+            text-decoration: none;
+            padding: 0.3rem 0.75rem;
+            border: 1px solid rgba(0, 212, 255, 0.3);
+            border-radius: 6px;
+            transition: all 0.2s;
+        }
+
+        .builder-links a:hover {
+            background: rgba(0, 212, 255, 0.1);
+        }
+
+        /* Footer */
+        footer {
+            border-top: 1px solid var(--border);
+            padding: 3rem 2rem;
+            text-align: center;
+            margin-top: 4rem;
+        }
+
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-bottom: 1.5rem;
+            flex-wrap: wrap;
+        }
+
+        .footer-links a {
+            color: var(--text-muted);
+            text-decoration: none;
+            font-size: 0.85rem;
+            transition: color 0.2s;
+        }
+
+        .footer-links a:hover { color: var(--accent-green); }
+
+        .footer-copy {
+            font-size: 0.75rem;
+            color: var(--text-muted);
+        }
+
+        /* Terminal effect for scan demo */
+        .terminal {
+            background: #0d0d14;
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 1.5rem;
+            font-family: var(--font-mono);
+            font-size: 0.8rem;
+            line-height: 1.8;
+            overflow-x: auto;
+            margin-top: 2rem;
+        }
+
+        .terminal .prompt { color: var(--accent-green); }
+        .terminal .output { color: var(--text-secondary); }
+        .terminal .highlight { color: var(--accent-red); }
+        .terminal .info { color: var(--accent-cyan); }
+        .terminal .warn { color: var(--accent-amber); }
+
+        /* Divider */
+        .divider {
+            height: 1px;
+            background: linear-gradient(90deg, transparent, var(--border), transparent);
+            margin: 2rem 0;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .nav-links { display: none; }
+            .stats-bar { gap: 1.5rem; }
+            .builder { flex-direction: column; text-align: center; }
+            .builder-links { justify-content: center; }
+            .token-header { flex-direction: column; }
+        }
+
+        /* Animations */
+        @keyframes fade-up {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .animate {
+            animation: fade-up 0.6s ease-out forwards;
+            opacity: 0;
+        }
+
+        .animate:nth-child(2) { animation-delay: 0.1s; }
+        .animate:nth-child(3) { animation-delay: 0.2s; }
+        .animate:nth-child(4) { animation-delay: 0.3s; }
+    </style>
 </head>
 <body>
-<div class="noise"></div>
-<div class="container">
+    <div class="noise-overlay"></div>
 
-  <!-- HEADER -->
-  <header class="header">
-    <div class="logo-badge">
-      <span class="dot"></span>
-      AGENT LIVE — BASE L2
-    </div>
-    <h1>Quantum<span class="accent">Shield</span> Scanner</h1>
-    <p class="subtitle">AI-powered post-quantum vulnerability scanning for your codebase</p>
-  </header>
+    <!-- Nav -->
+    <nav>
+        <div class="nav-inner">
+            <a href="#" class="nav-brand">
+                <span class="lobster">🦞</span>
+                <span>CRAWDADDY</span>
+            </a>
+            <div class="nav-links">
+                <a href="#how" class="active">Scanner</a>
+                <a href="#token">$CRAWDAD</a>
+                <a href="#roadmap">Roadmap</a>
+                <a href="#resources">Resources</a>
+                <a href="https://quantumshieldlabs.dev" target="_blank">QSL Home</a>
+            </div>
+        </div>
+    </nav>
 
-  <!-- TWO PATHS -->
-  <section>
-    <h2>Two Ways to Scan</h2>
-    <p>Choose the path that works for you. Same scanner, same results.</p>
-    <div class="paths">
-      <div class="path">
-        <div class="path-icon">💬</div>
-        <h3>Telegram</h3>
-        <p class="text-dim" style="font-size:0.9em; color: var(--text-dim);">Message the bot directly. Instant results. No wallet needed.</p>
-        <div class="cmd" style="text-align:left; margin-top:12px;">@blocdev_bot</div>
-        <span class="path-tag tag-free">Free to try</span>
-      </div>
-      <div class="path">
-        <div class="path-icon">🔒</div>
-        <h3>Moltlaunch</h3>
-        <p class="text-dim" style="font-size:0.9em; color: var(--text-dim);">Escrow-protected payment. Full report with file delivery. On-chain reputation.</p>
-        <div class="cmd" style="text-align:left; margin-top:12px;">moltlaunch.com/agent/0x41c7</div>
-        <span class="path-tag tag-escrow">Escrow protected</span>
-      </div>
-    </div>
-  </section>
+    <!-- Hero -->
+    <section class="hero">
+        <div class="hero-badge animate">● LIVE ON VIRTUALS PROTOCOL</div>
+        <h1 class="animate">Quantum Security<br><span class="accent">Scanner</span></h1>
+        <p class="hero-sub animate">The first autonomous quantum vulnerability scanner for the AI agent economy. Finds the encryption that quantum computers will break — before they do.</p>
+        <div class="hero-actions animate">
+            <a href="https://t.me/blocdev_bot" target="_blank" class="btn btn-primary">🤖 Free Scan on Telegram</a>
+            <a href="https://app.virtuals.io/prototypes/0x30370E314dc93c5f926677Eb84bdc59372E0E1E3" target="_blank" class="btn btn-secondary">View on Virtuals</a>
+        </div>
+    </section>
 
-  <!-- SERVICES -->
-  <section>
-    <h2>Services &amp; Pricing</h2>
-
-    <div class="services">
-      <div class="service">
-        <div>
-          <span class="service-tier tier-green">Quick Scan</span>
-          <h3>Security Scan</h3>
-          <p style="margin:0; font-size:0.9em;">AI-powered review for quantum-vulnerable cryptography, hardcoded secrets, and dependency issues. Results in minutes.</p>
+    <!-- Stats -->
+    <div class="stats-bar">
+        <div class="stat animate">
+            <div class="stat-value">100+</div>
+            <div class="stat-label">Repos Scanned</div>
         </div>
-        <div class="service-price">
-          0.001 ETH
-          <small>~$2</small>
+        <div class="stat animate">
+            <div class="stat-value">6</div>
+            <div class="stat-label">Vuln Categories</div>
         </div>
-      </div>
-
-      <div class="service">
-        <div>
-          <span class="service-tier tier-yellow">Deep Assessment</span>
-          <h3>Quantum Readiness Assessment</h3>
-          <p style="margin:0; font-size:0.9em;">Comprehensive cryptographic infrastructure evaluation. Vulnerability mapping, risk scoring, migration priority matrix.</p>
+        <div class="stat animate">
+            <div class="stat-value">0-100</div>
+            <div class="stat-label">Readiness Score</div>
         </div>
-        <div class="service-price">
-          0.05 ETH
-          <small>~$100</small>
+        <div class="stat animate">
+            <div class="stat-value">24/7</div>
+            <div class="stat-label">EC2 Uptime</div>
         </div>
-      </div>
-
-      <div class="service">
-        <div>
-          <span class="service-tier tier-red">Full Migration</span>
-          <h3>PQC Migration Plan</h3>
-          <p style="margin:0; font-size:0.9em;">Complete post-quantum migration roadmap. Implementation guide, timeline, vendor recommendations, executive summary.</p>
+        <div class="stat animate">
+            <div class="stat-value">NIST</div>
+            <div class="stat-label">FIPS 203/204/205</div>
         </div>
-        <div class="service-price">
-          0.5 ETH
-          <small>~$1,000</small>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- HOW IT WORKS: TELEGRAM -->
-  <section>
-    <h2>Quick Start — Telegram</h2>
-    <p>Fastest way to scan. No wallet, no signup, no friction.</p>
-
-    <div class="steps">
-      <div class="step">
-        <div class="step-num">1</div>
-        <div class="step-content">
-          <h3>Open Telegram</h3>
-          <p>Search for <strong>@blocdev_bot</strong> or click the link in the Moltlaunch profile.</p>
-        </div>
-      </div>
-      <div class="step">
-        <div class="step-num">2</div>
-        <div class="step-content">
-          <h3>Send the scan command</h3>
-          <div class="cmd">/scan https://github.com/your-org/your-repo</div>
-        </div>
-      </div>
-      <div class="step">
-        <div class="step-num">3</div>
-        <div class="step-content">
-          <h3>Get your report</h3>
-          <p>CrawDaddy clones the repo, analyzes every file, and delivers a full vulnerability report — inline summary, shareable Gist link, and downloadable .md file right in the chat.</p>
-        </div>
-      </div>
     </div>
 
-    <div class="callout">
-      <p>💡 <strong>Other commands:</strong> <code>/scanhelp</code> — what the scanner looks for · <code>/services</code> — pricing details · <code>/report</code> — report delivery options</p>
-    </div>
-  </section>
+    <div class="divider"></div>
 
-  <!-- HOW IT WORKS: MOLTLAUNCH -->
-  <section>
-    <h2>How It Works — Moltlaunch (Escrow)</h2>
-    <p>For paid engagements with payment protection. Your ETH is locked in escrow until you approve the work.</p>
-
-    <div class="flow">
-      <div class="flow-step">
-        <div class="flow-icon fi-green">📝</div>
-        <div class="flow-text">
-          <strong>You submit a task</strong><br>
-          <span>Click "Hire QuantumShield" → describe what you need → include your GitHub repo URL</span>
+    <!-- How It Works -->
+    <section class="section" id="how">
+        <div class="section-header">
+            <div class="section-label">// How It Works</div>
+            <h2 class="section-title">Scan → Score → Fix</h2>
+            <p class="section-desc">Send a GitHub repo URL. Get a quantum readiness report in seconds.</p>
         </div>
-      </div>
-      <div class="flow-arrow">↓</div>
 
-      <div class="flow-step">
-        <div class="flow-icon fi-blue">🦞</div>
-        <div class="flow-text">
-          <strong>CrawDaddy quotes you (~2 min)</strong><br>
-          <span>The agent reviews your task and sends a price quote automatically. No humans in the loop.</span>
+        <div class="steps">
+            <div class="step animate">
+                <div class="step-number">01 — SUBMIT</div>
+                <h3>Send a Repo URL</h3>
+                <p>Message @blocdev_bot on Telegram with any public GitHub repository URL. Or submit through Moltlaunch escrow for paid deep assessments.</p>
+            </div>
+            <div class="step animate">
+                <div class="step-number">02 — SCAN</div>
+                <h3>CrawDaddy Clones & Scans</h3>
+                <p>Every file is analyzed for quantum-vulnerable cryptography patterns — RSA, ECC, DH, DES, SHA-1, hardcoded secrets, and weak TLS configurations.</p>
+            </div>
+            <div class="step animate">
+                <div class="step-number">03 — SCORE</div>
+                <h3>Quantum Readiness Score</h3>
+                <p>Receive a 0-100 score with critical findings, file paths, line numbers, and specific remediation steps referencing NIST FIPS 203, 204, 205.</p>
+            </div>
+            <div class="step animate">
+                <div class="step-number">04 — REPORT</div>
+                <h3>Full Branded Report</h3>
+                <p>Download a .md report and secret GitHub Gist with complete findings. Reports self-destruct after 1 hour for security — no scan data lingers on our servers. Download immediately.</p>
+            </div>
         </div>
-      </div>
-      <div class="flow-arrow">↓</div>
 
-      <div class="flow-step">
-        <div class="flow-icon fi-yellow">🔒</div>
-        <div class="flow-text">
-          <strong>You accept → ETH locks in escrow</strong><br>
-          <span>Your payment is secured in a smart contract. The agent can't access it until you approve the work.</span>
+        <!-- Terminal demo -->
+        <div class="terminal">
+            <span class="prompt">$</span> <span class="output">scan https://github.com/example/defi-protocol</span><br><br>
+            <span class="info">🦞 CrawDaddy Security Scanner v2.1</span><br>
+            <span class="output">Cloning repository...</span><br>
+            <span class="output">Scanning 247 files across 18 directories...</span><br><br>
+            <span class="highlight">⚠ CRITICAL:</span> <span class="output">RSA-2048 key generation found</span><br>
+            <span class="output">  → src/crypto/keypair.js:42</span><br>
+            <span class="output">  → Fix: Migrate to ML-KEM (FIPS 203)</span><br><br>
+            <span class="highlight">⚠ HIGH:</span> <span class="output">ECDSA P-256 signing detected</span><br>
+            <span class="output">  → lib/auth/signer.py:118</span><br>
+            <span class="output">  → Fix: Migrate to ML-DSA (FIPS 204)</span><br><br>
+            <span class="warn">⚠ MEDIUM:</span> <span class="output">SHA-1 hash in dependency verification</span><br>
+            <span class="output">  → scripts/verify.sh:7</span><br>
+            <span class="output">  → Fix: Upgrade to SHA-3 or SHA-256</span><br><br>
+            <span class="info">Quantum Readiness Score: 34/100</span><br>
+            <span class="info">Report: https://gist.github.com/crawdaddy/...</span><br>
+            <span class="warn">⏱ This report will self-destruct in 1 hour.</span>
         </div>
-      </div>
-      <div class="flow-arrow">↓</div>
 
-      <div class="flow-step">
-        <div class="flow-icon fi-green">🔍</div>
-        <div class="flow-text">
-          <strong>Scan runs automatically</strong><br>
-          <span>CrawDaddy clones your repo, analyzes every file for quantum vulnerabilities, and generates a full report.</span>
+        <div style="display: flex; gap: 1.5rem; margin-top: 1.5rem; flex-wrap: wrap;">
+            <div style="flex: 1; min-width: 280px; background: rgba(255, 45, 74, 0.05); border: 1px solid rgba(255, 45, 74, 0.2); border-radius: 12px; padding: 1.25rem; display: flex; gap: 1rem; align-items: flex-start;">
+                <span style="font-size: 1.5rem;">💣</span>
+                <div>
+                    <h4 style="font-size: 0.95rem; margin-bottom: 0.25rem;">Self-Destructing Reports</h4>
+                    <p style="font-size: 0.8rem; color: var(--text-secondary);">All scan reports auto-delete from Telegram after 1 hour. Gists are created as secret (unlisted). Server-side report files are purged every 24 hours. Your security data doesn't linger.</p>
+                </div>
+            </div>
+            <div style="flex: 1; min-width: 280px; background: rgba(0, 212, 255, 0.05); border: 1px solid rgba(0, 212, 255, 0.2); border-radius: 12px; padding: 1.25rem; display: flex; gap: 1rem; align-items: flex-start;">
+                <span style="font-size: 1.5rem;">📝</span>
+                <div>
+                    <h4 style="font-size: 0.95rem; margin-bottom: 0.25rem;">Learn Why This Matters</h4>
+                    <p style="font-size: 0.8rem; color: var(--text-secondary);">Deep dives on post-quantum cryptography, NIST standards, and "harvest now, decrypt later" attacks.</p>
+                    <a href="https://quantumshieldlabs.dev/blog" target="_blank" style="font-family: var(--font-mono); font-size: 0.75rem; color: var(--accent-cyan); text-decoration: none; display: inline-block; margin-top: 0.5rem;">Read the Quantum Blog →</a>
+                </div>
+            </div>
         </div>
-      </div>
-      <div class="flow-arrow">↓</div>
+    </section>
 
-      <div class="flow-step">
-        <div class="flow-icon fi-blue">📋</div>
-        <div class="flow-text">
-          <strong>Report delivered</strong><br>
-          <span>Results submitted back to Moltlaunch with the full report attached. You get a 24-hour review window.</span>
+    <!-- What We Scan -->
+    <section class="section">
+        <div class="section-header">
+            <div class="section-label">// Vulnerability Categories</div>
+            <h2 class="section-title">What CrawDaddy Finds</h2>
+            <p class="section-desc">Six categories of cryptography that quantum computers will break.</p>
         </div>
-      </div>
-      <div class="flow-arrow">↓</div>
 
-      <div class="flow-step">
-        <div class="flow-icon fi-green">✅</div>
-        <div class="flow-text">
-          <strong>You approve (or request changes)</strong><br>
-          <span>Happy? Approve and payment settles. Need changes? Request a revision. Not satisfied? Dispute.</span>
+        <div class="vuln-grid">
+            <div class="vuln-card">
+                <div class="vuln-icon">🔓</div>
+                <div class="vuln-name">RSA</div>
+                <div class="vuln-desc">Key exchange & signing — broken by Shor's algorithm</div>
+            </div>
+            <div class="vuln-card">
+                <div class="vuln-icon">📐</div>
+                <div class="vuln-name">ECC / ECDSA</div>
+                <div class="vuln-desc">Elliptic curve — broken by quantum in polynomial time</div>
+            </div>
+            <div class="vuln-card">
+                <div class="vuln-icon">🤝</div>
+                <div class="vuln-name">Diffie-Hellman</div>
+                <div class="vuln-desc">Key exchange — vulnerable to discrete log attacks</div>
+            </div>
+            <div class="vuln-card">
+                <div class="vuln-icon">🪦</div>
+                <div class="vuln-name">DES / 3DES</div>
+                <div class="vuln-desc">Legacy encryption — already weak, quantum makes it trivial</div>
+            </div>
+            <div class="vuln-card">
+                <div class="vuln-icon">🔗</div>
+                <div class="vuln-name">SHA-1</div>
+                <div class="vuln-desc">Deprecated hash — collision attacks already practical</div>
+            </div>
+            <div class="vuln-card">
+                <div class="vuln-icon">🔑</div>
+                <div class="vuln-name">Hardcoded Secrets</div>
+                <div class="vuln-desc">API keys, private keys, credentials in source code</div>
+            </div>
         </div>
-      </div>
-    </div>
+    </section>
 
-    <div class="callout">
-      <p>⏰ <strong>24-hour protection:</strong> If you don't respond within 24 hours, payment auto-releases to the agent. Review your report promptly.</p>
-    </div>
-  </section>
-
-  <!-- WHAT YOU GET -->
-  <section>
-    <h2>Sample Report</h2>
-    <p>Every scan produces a detailed vulnerability report. Here's what it looks like:</p>
-
-    <div class="report-preview">
-      <div class="rp-header">🦞 CrawDaddy Security Scan Report</div>
-      <div class="rp-dim">━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━</div>
-      <br>
-      <div>Repo: github.com/example/healthcare-api</div>
-      <div>Scanned: Feb 13, 2026 12:45 PM</div>
-      <div>Files analyzed: 247</div>
-      <br>
-      <div class="rp-score">Quantum Readiness: <span style="color:var(--red)">35/100</span> 🔴</div>
-      <br>
-      <div class="rp-critical">⛔ CRITICAL — RSA-2048 in /src/auth/crypto.js</div>
-      <div class="rp-dim">&nbsp;&nbsp;→ Quantum-vulnerable. Migrate to ML-KEM</div>
-      <br>
-      <div class="rp-critical">⛔ CRITICAL — Hardcoded API key in /config/prod.env</div>
-      <div class="rp-dim">&nbsp;&nbsp;→ Exposed STRIPE_SECRET_KEY</div>
-      <br>
-      <div class="rp-warning">⚠️ WARNING — SHA-1 hash in /src/auth/users.js</div>
-      <div class="rp-dim">&nbsp;&nbsp;→ Deprecated. Upgrade to SHA-3</div>
-      <br>
-      <div class="rp-warning">⚠️ WARNING — TLS 1.2 in nginx.conf</div>
-      <div class="rp-dim">&nbsp;&nbsp;→ Recommend TLS 1.3 minimum</div>
-      <br>
-      <div class="rp-pass">✅ 12 checks passing</div>
-      <br>
-      <div class="rp-dim">━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━</div>
-      <div class="rp-dim">Full report with shareable Gist link + downloadable .md file</div>
-      <div class="rp-dim">Upgrade to Deep Assessment for full remediation steps.</div>
-    </div>
-  </section>
-
-  <!-- WHAT WE SCAN FOR -->
-  <section>
-    <h2>What We Scan For</h2>
-
-    <div class="services" style="gap:8px;">
-      <div class="service" style="padding:14px 20px;">
-        <div>
-          <h3 style="font-size:0.95em;">🔐 Quantum-Vulnerable Cryptography</h3>
-          <p style="margin:0; font-size:0.85em;">RSA, ECC/ECDSA, Diffie-Hellman — algorithms that Shor's algorithm will break</p>
+    <!-- Token -->
+    <section class="section" id="token">
+        <div class="section-header">
+            <div class="section-label">// Token</div>
+            <h2 class="section-title">$CRAWDAD</h2>
         </div>
-      </div>
-      <div class="service" style="padding:14px 20px;">
-        <div>
-          <h3 style="font-size:0.95em;">🔑 Hardcoded Secrets</h3>
-          <p style="margin:0; font-size:0.85em;">API keys, passwords, private keys exposed in source code</p>
+
+        <div class="token-section">
+            <div class="token-header">
+                <div class="token-name">CrawDaddy Security <span class="ticker">$CRAWDAD</span></div>
+                <div class="token-ca">CA: 0x832831151806564e009372f14f3c7089f2008f47</div>
+            </div>
+
+            <div class="token-features">
+                <div class="token-feature">
+                    <div class="token-feature-icon burn">🔥</div>
+                    <div>
+                        <h4>Buyback & Burn</h4>
+                        <p>Revenue from scan jobs is used to buy $CRAWDAD on the open market and send to the dead address. More scans = less supply.</p>
+                    </div>
+                </div>
+                <div class="token-feature">
+                    <div class="token-feature-icon revenue">💰</div>
+                    <div>
+                        <h4>1% Trading Tax</h4>
+                        <p>Built into Virtuals Protocol. Every buy and sell contributes to ecosystem sustainability.</p>
+                    </div>
+                </div>
+                <div class="token-feature">
+                    <div class="token-feature-icon access">🎟️</div>
+                    <div>
+                        <h4>Tiered Access (In Development)</h4>
+                        <p>Priority scan queue, deep assessments, API access, and white-label reports for holders. Coming soon.</p>
+                    </div>
+                </div>
+                <div class="token-feature">
+                    <div class="token-feature-icon build">🏗️</div>
+                    <div>
+                        <h4>Real Infrastructure</h4>
+                        <p>Backed by a live scanner running 24/7 on AWS EC2. Not a wrapper, not a concept — working software.</p>
+                    </div>
+                </div>
+            </div>
+
+            <p class="token-note">Additional holder utility — including scan credits, governance, and premium report tiers — is actively in development. We ship features when they're real, not before.</p>
         </div>
-      </div>
-      <div class="service" style="padding:14px 20px;">
-        <div>
-          <h3 style="font-size:0.95em;">📦 Dependency Vulnerabilities</h3>
-          <p style="margin:0; font-size:0.85em;">Known CVEs in your packages and outdated libraries</p>
+    </section>
+
+    <!-- Roadmap -->
+    <section class="section" id="roadmap">
+        <div class="section-header">
+            <div class="section-label">// Roadmap</div>
+            <h2 class="section-title">What's Built. What's Next.</h2>
         </div>
-      </div>
-      <div class="service" style="padding:14px 20px;">
-        <div>
-          <h3 style="font-size:0.95em;">🔒 Weak Hash Functions</h3>
-          <p style="margin:0; font-size:0.85em;">SHA-1, MD5, and other deprecated algorithms</p>
+
+        <div class="roadmap">
+            <div class="roadmap-phase done">
+                <div class="roadmap-label">✅ Completed</div>
+                <h3>Foundation</h3>
+                <div class="roadmap-items">
+                    <span class="roadmap-item done">Telegram bot live</span>
+                    <span class="roadmap-item done">EC2 scan engine 24/7</span>
+                    <span class="roadmap-item done">$CRAWDAD on Virtuals</span>
+                    <span class="roadmap-item done">Moltlaunch Agent #17484</span>
+                    <span class="roadmap-item done">Virtuals ACP registered</span>
+                    <span class="roadmap-item done">Branded reports</span>
+                    <span class="roadmap-item done">Self-destructing reports</span>
+                    <span class="roadmap-item done">Full GitHub security audit (90 repos)</span>
+                </div>
+            </div>
+
+            <div class="roadmap-phase current">
+                <div class="roadmap-label">🔨 Q1 2026 — Expand</div>
+                <h3>Reach & Integration</h3>
+                <div class="roadmap-items">
+                    <span class="roadmap-item">GAME framework for autonomous X posting</span>
+                    <span class="roadmap-item">ACP integration — agent-to-agent scanning</span>
+                    <span class="roadmap-item">AGDP registration</span>
+                    <span class="roadmap-item">Buyback-and-burn automation</span>
+                    <span class="roadmap-item">500 scans milestone</span>
+                </div>
+            </div>
+
+            <div class="roadmap-phase future">
+                <div class="roadmap-label">Q2 2026 — Deepen</div>
+                <h3>New Capabilities</h3>
+                <div class="roadmap-items">
+                    <span class="roadmap-item">Smart contract security scanning</span>
+                    <span class="roadmap-item">Multi-repo org scans</span>
+                    <span class="roadmap-item">Holder priority queue</span>
+                    <span class="roadmap-item">API endpoint</span>
+                    <span class="roadmap-item">Launchpad partnerships</span>
+                </div>
+            </div>
+
+            <div class="roadmap-phase future">
+                <div class="roadmap-label">Q3 2026 — Scale</div>
+                <h3>Automation & Growth</h3>
+                <div class="roadmap-items">
+                    <span class="roadmap-item">Auto scan-and-post trending repos</span>
+                    <span class="roadmap-item">Agent-to-agent hiring</span>
+                    <span class="roadmap-item">Premium tier</span>
+                    <span class="roadmap-item">10,000 scans milestone</span>
+                    <span class="roadmap-item">Cross-chain expansion</span>
+                </div>
+            </div>
         </div>
-      </div>
-      <div class="service" style="padding:14px 20px;">
-        <div>
-          <h3 style="font-size:0.95em;">🌐 TLS/SSL Configuration</h3>
-          <p style="margin:0; font-size:0.85em;">Outdated protocol versions and weak cipher suites</p>
+    </section>
+
+    <!-- Resources -->
+    <section class="section" id="resources">
+        <div class="section-header">
+            <div class="section-label">// Resources</div>
+            <h2 class="section-title">Learn More</h2>
         </div>
-      </div>
-    </div>
-  </section>
 
-  <!-- FAQ -->
-  <section>
-    <h2>Common Questions</h2>
+        <div class="resources-grid">
+            <a href="https://t.me/blocdev_bot" target="_blank" class="resource-card">
+                <div class="resource-icon">🤖</div>
+                <div class="resource-tag">Free Tool</div>
+                <h3>Telegram Scanner</h3>
+                <p>Send any public GitHub repo URL and get a quantum readiness score in seconds. Free, no signup required.</p>
+            </a>
 
-    <div class="faq-item">
-      <h3>What repos can you scan?</h3>
-      <p>Any <strong>public</strong> GitHub repository. Private repos coming soon. Just paste the full URL: https://github.com/org/repo</p>
-    </div>
+            <a href="https://quantumshieldlabs.dev/blog" target="_blank" class="resource-card">
+                <div class="resource-icon">📝</div>
+                <div class="resource-tag">Education</div>
+                <h3>Quantum Security Blog</h3>
+                <p>Deep dives on post-quantum cryptography, NIST standards, migration strategies, and why this matters now.</p>
+            </a>
 
-    <div class="faq-item">
-      <h3>What languages do you support?</h3>
-      <p>Python, JavaScript, TypeScript, Java, Go, Rust, Ruby, PHP, C, C++, C#, and configuration files (nginx, yaml, env, etc.)</p>
-    </div>
+            <a href="https://quantumshieldlabs.dev/calculator" target="_blank" class="resource-card">
+                <div class="resource-icon">🧮</div>
+                <div class="resource-tag">Tool</div>
+                <h3>Quantum Risk Calculator</h3>
+                <p>Estimate your organization's quantum risk exposure based on the cryptography in your stack.</p>
+            </a>
 
-    <div class="faq-item">
-      <h3>Is my code safe?</h3>
-      <p>We clone your repo temporarily, scan it, and delete it immediately. We don't store your code. Reports are delivered only to you.</p>
-    </div>
+            <a href="https://app.virtuals.io/prototypes/0x30370E314dc93c5f926677Eb84bdc59372E0E1E3" target="_blank" class="resource-card">
+                <div class="resource-icon">🪙</div>
+                <div class="resource-tag">Token</div>
+                <h3>$CRAWDAD on Virtuals</h3>
+                <p>View tokenomics, trading activity, team vesting schedule, and project updates on Virtuals Protocol.</p>
+            </a>
 
-    <div class="faq-item">
-      <h3>What is "harvest now, decrypt later"?</h3>
-      <p>Adversaries are collecting encrypted data today and storing it until quantum computers can break the encryption (estimated 2027-2030). If your data has long-term value, the threat is now — not later.</p>
-    </div>
+            <a href="https://moltlaunch.com/agents/17484" target="_blank" class="resource-card">
+                <div class="resource-icon">⚡</div>
+                <div class="resource-tag">Hire CrawDaddy</div>
+                <h3>Moltlaunch Escrow</h3>
+                <p>Book a paid deep assessment through on-chain escrow. 3 gig packages from quick scan to full audit.</p>
+            </a>
 
-    <div class="faq-item">
-      <h3>What happens if I don't approve the work?</h3>
-      <p>You have 24 hours to review. You can approve (payment releases), request a revision (agent fixes it), or dispute (15% fee, admin resolves). If you don't respond, payment auto-releases after 24h.</p>
-    </div>
-
-    <div class="faq-item">
-      <h3>Do I need crypto/ETH to use this?</h3>
-      <p><strong>Telegram:</strong> No — just message the bot. <strong>Moltlaunch:</strong> Yes — you need ETH on Base network for escrow payments. The cheapest scan is 0.001 ETH (~$2).</p>
-    </div>
-  </section>
-
-  <!-- TOKEN -->
-  <section>
-    <h2>$CRAWDAD Token</h2>
-    <p>CrawDaddy's agent token on Base. Every escrow payment buys and burns $CRAWDAD.</p>
-
-    <div class="service" style="flex-direction:column; gap:12px;">
-      <div style="display:flex; justify-content:space-between; align-items:center; width:100%;">
-        <div>
-          <span class="service-tier tier-green">LIVE ON BASE</span>
-          <h3 style="margin-top:6px;">$CRAWDAD — CrawDaddy</h3>
+            <a href="https://quantumshieldlabs.dev" target="_blank" class="resource-card">
+                <div class="resource-icon">🛡️</div>
+                <div class="resource-tag">Consultancy</div>
+                <h3>QuantumShield Labs</h3>
+                <p>Post-quantum cybersecurity consulting for healthcare organizations in the DMV area. Full-service engagements.</p>
+            </a>
         </div>
-        <div class="service-price">
-          <a href="https://flaunch.gg/base/coin/0x832831151806564e009372f14f3c7089f2008f47">Trade on Flaunch</a>
-        </div>
-      </div>
-      <div class="cmd" style="font-size:0.75em; word-break:break-all;">CA: 0x832831151806564e009372f14f3c7089f2008f47</div>
-    </div>
+    </section>
 
-    <div class="callout" style="margin-top:16px;">
-      <p>🦞 <strong>Flaunch Group:</strong> <a href="https://flaunch.gg/base/group/0x076cf24b356220db10d46310a8d85a9a1d93b7ad">QuantumShield Labs Group</a> — all QSL tokens under one roof.</p>
-    </div>
-  </section>
+    <!-- Builder -->
+    <section class="section">
+        <div class="section-header">
+            <div class="section-label">// The Builder</div>
+            <h2 class="section-title">Who's Behind This</h2>
+        </div>
 
-  <!-- CONNECT -->
-  <section>
-    <h2>Connect</h2>
-    <div class="services" style="gap:8px;">
-      <div class="service" style="padding:14px 20px;">
-        <div>
-          <h3 style="font-size:0.95em;">🌐 Website</h3>
-          <p style="margin:0; font-size:0.85em;"><a href="https://quantumshieldlabs.dev">quantumshieldlabs.dev</a></p>
+        <div class="builder">
+            <div class="builder-avatar">🦞</div>
+            <div class="builder-info">
+                <h3>Mike Bennett</h3>
+                <div class="role">Founder & CEO — QuantumShield Labs</div>
+                <p>Former Executive Chef who traded kitchens for codebases. BS in Software Development & Security. Building the security layer for the AI agent economy. The only agent builder on Virtuals who can audit your code AND cook you dinner.</p>
+                <div class="builder-links">
+                    <a href="https://x.com/QuarkMichael" target="_blank">@QuarkMichael</a>
+                    <a href="https://x.com/CrawDaddyScan" target="_blank">@CrawDaddyScan</a>
+                    <a href="https://linkedin.com/in/michael-bennett-a29a93103" target="_blank">LinkedIn</a>
+                    <a href="https://github.com/mbennett-labs" target="_blank">GitHub</a>
+                </div>
+            </div>
         </div>
-      </div>
-      <div class="service" style="padding:14px 20px;">
-        <div>
-          <h3 style="font-size:0.95em;">📖 Blog</h3>
-          <p style="margin:0; font-size:0.85em;"><a href="https://quantumshieldlabs.dev/blog">quantumshieldlabs.dev/blog</a></p>
-        </div>
-      </div>
-      <div class="service" style="padding:14px 20px;">
-        <div>
-          <h3 style="font-size:0.95em;">🤖 Telegram Bot</h3>
-          <p style="margin:0; font-size:0.85em;"><a href="https://t.me/blocdev_bot">@blocdev_bot</a> — Free scans, instant results</p>
-        </div>
-      </div>
-      <div class="service" style="padding:14px 20px;">
-        <div>
-          <h3 style="font-size:0.95em;">💬 Telegram (Mike)</h3>
-          <p style="margin:0; font-size:0.85em;"><a href="https://t.me/Freakid21">@Freakid21</a> — Direct line to the founder</p>
-        </div>
-      </div>
-      <div class="service" style="padding:14px 20px;">
-        <div>
-          <h3 style="font-size:0.95em;">🐦 X / Twitter</h3>
-          <p style="margin:0; font-size:0.85em;"><a href="https://x.com/CrawDaddyScan">@CrawDaddyScan</a> (Agent) · <a href="https://x.com/QuarkMichael">@QuarkMichael</a> (Founder)</p>
-        </div>
-      </div>
-      <div class="service" style="padding:14px 20px;">
-        <div>
-          <h3 style="font-size:0.95em;">🔒 Hire with Escrow</h3>
-          <p style="margin:0; font-size:0.85em;"><a href="https://moltlaunch.com/agent/0x41c7">moltlaunch.com/agent/0x41c7</a></p>
-        </div>
-      </div>
-    </div>
-  </section>
+    </section>
 
-  <!-- FOOTER -->
-  <footer class="footer">
-    <p>Built by <strong style="color:var(--text);">Quantum Shield Labs</strong> — Post-quantum security for the agent economy 🦞</p>
-    <div class="footer-links">
-      <a href="https://quantumshieldlabs.dev">Website</a>
-      <a href="https://quantumshieldlabs.dev/blog">Blog</a>
-      <a href="https://moltlaunch.com/agent/0x41c7">Moltlaunch</a>
-      <a href="https://t.me/blocdev_bot">Telegram Bot</a>
-      <a href="https://t.me/Freakid21">@Freakid21</a>
-      <a href="https://x.com/CrawDaddyScan">@CrawDaddyScan</a>
-      <a href="https://x.com/QuarkMichael">@QuarkMichael</a>
-      <a href="https://flaunch.gg/base/coin/0x832831151806564e009372f14f3c7089f2008f47">$CRAWDAD</a>
-      <a href="https://flaunch.gg/base/group/0x076cf24b356220db10d46310a8d85a9a1d93b7ad">Flaunch Group</a>
-    </div>
-  </footer>
+    <!-- Enterprise CTA -->
+    <section class="section">
+        <div style="background: linear-gradient(135deg, rgba(255, 45, 74, 0.08), rgba(0, 212, 255, 0.08)); border: 1px solid var(--border); border-radius: 20px; padding: 3rem; text-align: center;">
+            <div style="font-size: 2.5rem; margin-bottom: 1rem;">🛡️</div>
+            <h3 style="font-size: 1.5rem; margin-bottom: 0.75rem;">Need a Full Quantum Security Assessment?</h3>
+            <p style="color: var(--text-secondary); max-width: 550px; margin: 0 auto 1.5rem; font-size: 0.95rem;">CrawDaddy handles repo scans. For organization-wide quantum risk assessments, migration planning, and compliance — QuantumShield Labs offers full-service consulting engagements for healthcare and enterprise.</p>
+            <a href="https://quantumshieldlabs.dev" target="_blank" class="btn btn-primary" style="font-size: 1rem;">Get a Custom Assessment →</a>
+            <p style="font-family: var(--font-mono); font-size: 0.75rem; color: var(--text-muted); margin-top: 1rem;">Engagements from $7.5K — $50K · DMV area · Healthcare focus</p>
+        </div>
+    </section>
 
-</div>
+    <!-- Footer -->
+    <footer>
+        <div class="footer-links">
+            <a href="https://t.me/blocdev_bot">Telegram Bot</a>
+            <a href="https://x.com/CrawDaddyScan">X / Twitter</a>
+            <a href="https://quantumshieldlabs.dev">QuantumShield Labs</a>
+            <a href="https://quantumshieldlabs.dev/blog">Blog</a>
+            <a href="https://app.virtuals.io/prototypes/0x30370E314dc93c5f926677Eb84bdc59372E0E1E3">Virtuals</a>
+        </div>
+        <div class="footer-copy">
+            © 2026 QuantumShield Labs LLC — CrawDaddy Security<br>
+            <span style="font-family: var(--font-mono); font-size: 0.65rem; color: var(--text-muted);">CA: 0x832831151806564e009372f14f3c7089f2008f47</span>
+        </div>
+    </footer>
+
+    <script>
+        // Simple scroll reveal
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.animationPlayState = 'running';
+                }
+            });
+        }, { threshold: 0.1 });
+
+        document.querySelectorAll('.animate').forEach(el => {
+            el.style.animationPlayState = 'paused';
+            observer.observe(el);
+        });
+    </script>
 </body>
 </html>
