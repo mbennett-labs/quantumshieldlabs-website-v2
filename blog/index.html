@@ -18,9 +18,8 @@
     <!-- Fonts & Icons -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css">
     
     <style>
         * {
@@ -41,7 +40,7 @@
             line-height: 1.7;
         }
         
-        /* Navigation */
+        /* ===== NAVIGATION ===== */
         .nav-fixed {
             position: fixed;
             top: 0;
@@ -98,7 +97,7 @@
             color: #3b82f6;
         }
         
-        /* Hero Section */
+        /* ===== HERO ===== */
         .blog-hero {
             padding: 8rem 1.5rem 4rem;
             text-align: center;
@@ -133,130 +132,177 @@
             margin: 0 auto;
         }
         
-        /* Main Container */
+        /* ===== MAIN ===== */
         .blog-main {
             max-width: 1200px;
             margin: 0 auto;
             padding: 3rem 1.5rem;
         }
         
-        /* Featured Post */
-        .featured-section {
+        /* ===== NEW: DUAL FEATURED POSTS ===== */
+        .featured-duo-section {
             margin-bottom: 4rem;
         }
-        
-        .featured-post {
-            background: linear-gradient(135deg, rgba(239, 68, 68, 0.15), rgba(245, 158, 11, 0.15));
-            border: 1px solid rgba(239, 68, 68, 0.3);
-            border-radius: 1rem;
-            overflow: hidden;
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-        }
-        
-        .featured-post:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 20px 40px rgba(239, 68, 68, 0.2);
-        }
-        
-        .featured-badge {
-            display: inline-block;
-            background: linear-gradient(135deg, #ef4444, #f59e0b);
-            color: white;
-            padding: 0.5rem 1.25rem;
-            font-weight: 700;
-            font-size: 0.8rem;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-        }
-        
-        .featured-badge i {
-            margin-right: 0.5rem;
-        }
-        
-        .featured-content {
-            padding: 2rem 2.5rem 2.5rem;
-        }
-        
-        .featured-content h2 {
-            font-size: 1.75rem;
-            font-weight: 700;
-            color: white;
-            margin-bottom: 1rem;
-            line-height: 1.3;
-        }
-        
-        .featured-content h2 a {
-            color: white;
-            text-decoration: none;
-            transition: color 0.3s ease;
-        }
-        
-        .featured-content h2 a:hover {
-            color: #fbbf24;
-        }
-        
-        .featured-meta {
-            display: flex;
-            gap: 1.5rem;
-            margin-bottom: 1.25rem;
-            color: #94a3b8;
-            font-size: 0.9rem;
-            flex-wrap: wrap;
-        }
-        
-        .featured-meta span {
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-        }
-        
-        .featured-meta i {
-            color: #f59e0b;
-        }
-        
-        .featured-excerpt {
-            color: #cbd5e1;
-            font-size: 1.05rem;
-            line-height: 1.7;
-            margin-bottom: 1.5rem;
-        }
-        
-        .featured-tags {
-            display: flex;
-            gap: 0.5rem;
-            margin-bottom: 1.5rem;
-            flex-wrap: wrap;
-        }
-        
-        .featured-tag {
-            background: rgba(239, 68, 68, 0.2);
-            color: #fca5a5;
-            padding: 0.25rem 0.75rem;
-            border-radius: 0.25rem;
-            font-size: 0.75rem;
-            font-weight: 600;
-            text-transform: uppercase;
-        }
-        
-        .featured-cta {
+
+        .featured-duo-label {
             display: inline-flex;
             align-items: center;
             gap: 0.5rem;
             background: linear-gradient(135deg, #ef4444, #f59e0b);
             color: white;
-            padding: 0.75rem 1.5rem;
+            padding: 0.4rem 1.25rem;
+            border-radius: 2rem;
+            font-weight: 700;
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 1.5rem;
+        }
+
+        .featured-duo-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.5rem;
+        }
+
+        .featured-duo-card {
+            background: linear-gradient(135deg, rgba(239, 68, 68, 0.12), rgba(245, 158, 11, 0.12));
+            border: 1px solid rgba(239, 68, 68, 0.25);
+            border-radius: 1rem;
+            overflow: hidden;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .featured-duo-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px rgba(239, 68, 68, 0.15);
+        }
+
+        .featured-duo-card-image {
+            height: 200px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 4rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .featured-duo-card:first-child .featured-duo-card-image {
+            background: linear-gradient(135deg, rgba(59, 130, 246, 0.2), rgba(245, 158, 11, 0.2));
+        }
+
+        .featured-duo-card:last-child .featured-duo-card-image {
+            background: linear-gradient(135deg, rgba(139, 92, 246, 0.2), rgba(59, 130, 246, 0.2));
+        }
+
+        .featured-duo-card-image .new-badge {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            background: linear-gradient(135deg, #ef4444, #f59e0b);
+            color: white;
+            padding: 0.25rem 0.75rem;
+            border-radius: 0.25rem;
+            font-size: 0.7rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .featured-duo-card-body {
+            padding: 1.75rem;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .featured-duo-tags {
+            display: flex;
+            gap: 0.4rem;
+            margin-bottom: 0.75rem;
+            flex-wrap: wrap;
+        }
+
+        .featured-duo-tag {
+            background: rgba(239, 68, 68, 0.2);
+            color: #fca5a5;
+            padding: 0.2rem 0.6rem;
+            border-radius: 0.25rem;
+            font-size: 0.7rem;
+            font-weight: 600;
+            text-transform: uppercase;
+        }
+
+        .featured-duo-card-body h3 {
+            font-size: 1.35rem;
+            font-weight: 700;
+            color: white;
+            line-height: 1.3;
+            margin-bottom: 0.75rem;
+        }
+
+        .featured-duo-card-body h3 a {
+            color: white;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .featured-duo-card-body h3 a:hover {
+            color: #fbbf24;
+        }
+
+        .featured-duo-meta {
+            display: flex;
+            gap: 1.25rem;
+            margin-bottom: 1rem;
+            color: #94a3b8;
+            font-size: 0.8rem;
+            flex-wrap: wrap;
+        }
+
+        .featured-duo-meta span {
+            display: flex;
+            align-items: center;
+            gap: 0.4rem;
+        }
+
+        .featured-duo-meta i {
+            color: #f59e0b;
+            font-size: 0.75rem;
+        }
+
+        .featured-duo-excerpt {
+            color: #cbd5e1;
+            font-size: 0.95rem;
+            line-height: 1.6;
+            margin-bottom: 1.5rem;
+            flex-grow: 1;
+        }
+
+        .featured-duo-cta {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: linear-gradient(135deg, #ef4444, #f59e0b);
+            color: white;
+            padding: 0.65rem 1.25rem;
             border-radius: 0.5rem;
             font-weight: 600;
+            font-size: 0.9rem;
             text-decoration: none;
             transition: all 0.3s ease;
+            width: fit-content;
         }
-        
-        .featured-cta:hover {
+
+        .featured-duo-cta:hover {
             transform: translateY(-2px);
-            box-shadow: 0 10px 20px rgba(239, 68, 68, 0.3);
+            box-shadow: 0 8px 20px rgba(239, 68, 68, 0.3);
         }
         
-        /* Section Title */
+        /* ===== SECTION TITLE ===== */
         .section-title {
             font-size: 1.5rem;
             font-weight: 700;
@@ -271,14 +317,14 @@
             color: #3b82f6;
         }
         
-        /* Blog Grid */
+        /* ===== BLOG GRID ===== */
         .blog-grid {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
             gap: 2rem;
         }
         
-        /* Blog Card */
+        /* ===== BLOG CARD ===== */
         .blog-post-card {
             background: rgba(15, 23, 42, 0.6);
             border: 1px solid rgba(59, 130, 246, 0.2);
@@ -362,18 +408,7 @@
             border-top: 1px solid rgba(59, 130, 246, 0.1);
         }
         
-        .blog-post-card-link {
-            color: #3b82f6;
-            text-decoration: none;
-            font-weight: 600;
-            transition: color 0.3s ease;
-        }
-        
-        .blog-post-card-link:hover {
-            color: #60a5fa;
-        }
-        
-        /* CTA Section */
+        /* ===== CTA ===== */
         .cta-section {
             background: linear-gradient(135deg, rgba(59, 130, 246, 0.15), rgba(139, 92, 246, 0.15));
             border: 1px solid rgba(59, 130, 246, 0.3);
@@ -435,7 +470,7 @@
             background: rgba(59, 130, 246, 0.1);
         }
         
-        /* Footer */
+        /* ===== FOOTER ===== */
         .blog-footer {
             background: rgba(0, 0, 0, 0.5);
             padding: 2rem 1.5rem;
@@ -490,7 +525,7 @@
             font-size: 0.875rem;
         }
         
-        /* Responsive */
+        /* ===== RESPONSIVE ===== */
         @media (max-width: 768px) {
             .nav-links {
                 display: none;
@@ -503,13 +538,13 @@
             .blog-hero h1 {
                 font-size: 1.75rem;
             }
-            
-            .featured-content {
-                padding: 1.5rem;
+
+            .featured-duo-grid {
+                grid-template-columns: 1fr;
             }
-            
-            .featured-content h2 {
-                font-size: 1.35rem;
+
+            .featured-duo-card-body h3 {
+                font-size: 1.15rem;
             }
             
             .blog-grid {
@@ -550,45 +585,101 @@
     <!-- Main Content -->
     <main class="blog-main">
         
-        <!-- Featured Post Section - NEW QUANTUM FEAR POST -->
-        <section class="featured-section">
-            <article class="featured-post">
-                <div class="featured-badge">
-                    <i class="fas fa-fire"></i> Breaking Analysis
-                </div>
-                <div class="featured-content">
-                    <h2>
-                        <a href="quantum-fear-blog.html">
-                            Wall Street Is Selling Bitcoin Over Quantum Fears — But Should You?
+        <!-- ===== NEW: DUAL FEATURED POSTS ===== -->
+        <section class="featured-duo-section">
+            <div class="featured-duo-label">
+                <i class="fas fa-fire"></i> New This Week
+            </div>
+            <div class="featured-duo-grid">
+
+                <!-- Featured 1: Frozen Light -->
+                <article class="featured-duo-card">
+                    <div class="featured-duo-card-image">
+                        🔐
+                        <span class="new-badge"><i class="fas fa-bolt"></i> New</span>
+                    </div>
+                    <div class="featured-duo-card-body">
+                        <div class="featured-duo-tags">
+                            <span class="featured-duo-tag">Cryptography</span>
+                            <span class="featured-duo-tag">Physics</span>
+                            <span class="featured-duo-tag">HNDL</span>
+                        </div>
+                        <h3>
+                            <a href="encryption-frozen-light-quantum-threat.html">
+                                Your Encryption Is Frozen Light. Quantum Computing Is the Heat.
+                            </a>
+                        </h3>
+                        <div class="featured-duo-meta">
+                            <span><i class="far fa-calendar"></i> Feb 15, 2026</span>
+                            <span><i class="far fa-user"></i> Michael Bennett</span>
+                            <span><i class="far fa-clock"></i> 12 min</span>
+                        </div>
+                        <p class="featured-duo-excerpt">
+                            David Bohm said "matter is frozen light." Your encrypted data is frozen trust. When quantum computing raises the temperature, the mathematical confinement dissolves — and 50 years of patient records melt into plaintext. The physics of why your encryption has an expiration date.
+                        </p>
+                        <a href="encryption-frozen-light-quantum-threat.html" class="featured-duo-cta">
+                            Read Full Article <i class="fas fa-arrow-right"></i>
                         </a>
-                    </h2>
-                    <div class="featured-meta">
-                        <span><i class="far fa-calendar"></i> January 23, 2026</span>
-                        <span><i class="far fa-user"></i> Michael Bennett</span>
-                        <span><i class="far fa-clock"></i> 15 min read</span>
                     </div>
-                    <div class="featured-tags">
-                        <span class="featured-tag">Fact-Checked</span>
-                        <span class="featured-tag">Bitcoin</span>
-                        <span class="featured-tag">HNDL Attacks</span>
-                        <span class="featured-tag">Healthcare</span>
+                </article>
+
+                <!-- Featured 2: AI Energy Wall -->
+                <article class="featured-duo-card">
+                    <div class="featured-duo-card-image">
+                        ⚡
+                        <span class="new-badge"><i class="fas fa-bolt"></i> New</span>
                     </div>
-                    <p class="featured-excerpt">
-                        Jefferies strategist Christopher Wood just sold 100% of his Bitcoin citing quantum threats. The same week, a16z called those fears "overblown." We fact-check every major claim and reveal what crypto's quantum crisis means for healthcare organizations protecting data with 50+ year sensitivity requirements.
-                    </p>
-                    <a href="quantum-fear-blog.html" class="featured-cta">
-                        Read the Full Analysis <i class="fas fa-arrow-right"></i>
-                    </a>
-                </div>
-            </article>
+                    <div class="featured-duo-card-body">
+                        <div class="featured-duo-tags">
+                            <span class="featured-duo-tag">Energy</span>
+                            <span class="featured-duo-tag">Quantum</span>
+                            <span class="featured-duo-tag">Photonic</span>
+                            <span class="featured-duo-tag">Policy</span>
+                        </div>
+                        <h3>
+                            <a href="ai-energy-wall-quantum-photonic-security.html">
+                                The AI Energy Wall Is Real — And the Security Threat Nobody's Connecting
+                            </a>
+                        </h3>
+                        <div class="featured-duo-meta">
+                            <span><i class="far fa-calendar"></i> Feb 15, 2026</span>
+                            <span><i class="far fa-user"></i> Michael Bennett</span>
+                            <span><i class="far fa-clock"></i> 14 min</span>
+                        </div>
+                        <p class="featured-duo-excerpt">
+                            Google's quantum milestone, photonic computing breakthroughs, and the EPA endangerment rollback are one story. The same technologies racing to solve AI's energy crisis are racing to break every encryption standard protecting your data.
+                        </p>
+                        <a href="ai-energy-wall-quantum-photonic-security.html" class="featured-duo-cta">
+                            Read Full Article <i class="fas fa-arrow-right"></i>
+                        </a>
+                    </div>
+                </article>
+
+            </div>
         </section>
 
-        <!-- All Posts Section -->
+        <!-- ===== ALL ARTICLES ===== -->
         <section>
             <h2 class="section-title"><i class="fas fa-newspaper"></i> All Articles</h2>
             <div class="blog-grid">
-                
-                <!-- Post 1 - Former Featured (OpenAI) -->
+
+                <!-- Post: Wall Street Bitcoin Quantum Fears (prev featured) -->
+                <article class="blog-post-card">
+                    <div class="blog-post-card-image">🚨</div>
+                    <div class="blog-post-card-content">
+                        <span class="blog-post-card-tag">Breaking Analysis</span>
+                        <h3>
+                            <a href="quantum-fear-blog.html">Wall Street Is Selling Bitcoin Over Quantum Fears — But Should You?</a>
+                        </h3>
+                        <p class="blog-post-card-excerpt">Jefferies strategist Christopher Wood sold 100% of his Bitcoin citing quantum threats. A16z called those fears "overblown." We fact-check every major claim and reveal what it means for healthcare.</p>
+                        <div class="blog-post-card-meta">
+                            <span><i class="far fa-calendar"></i> Jan 2026</span>
+                            <span><i class="far fa-clock"></i> 15 min</span>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- Post: OpenAI Transparency -->
                 <article class="blog-post-card">
                     <div class="blog-post-card-image">🔍</div>
                     <div class="blog-post-card-content">
@@ -604,39 +695,7 @@
                     </div>
                 </article>
 
-                <!-- Post 2 -->
-                <article class="blog-post-card">
-                    <div class="blog-post-card-image">🔐</div>
-                    <div class="blog-post-card-content">
-                        <span class="blog-post-card-tag">Cryptography</span>
-                        <h3>
-                            <a href="quantum-encryption-guide.html">Quantum Encryption: A Complete Guide for Healthcare</a>
-                        </h3>
-                        <p class="blog-post-card-excerpt">Master the fundamentals of quantum-resistant encryption and how post-quantum cryptography protects healthcare data in the quantum computing era.</p>
-                        <div class="blog-post-card-meta">
-                            <span><i class="far fa-calendar"></i> Dec 2024</span>
-                            <span><i class="far fa-clock"></i> 12 min</span>
-                        </div>
-                    </div>
-                </article>
-
-                <!-- Post 3 -->
-                <article class="blog-post-card">
-                    <div class="blog-post-card-image">🏥</div>
-                    <div class="blog-post-card-content">
-                        <span class="blog-post-card-tag">Healthcare</span>
-                        <h3>
-                            <a href="quantum-reality-check.html">The Quantum Reality Check Healthcare Can't Ignore</a>
-                        </h3>
-                        <p class="blog-post-card-excerpt">Healthcare organizations face a unique quantum threat. Here's why your 50+ year PHI sensitivity requirement makes quantum preparation urgent—not optional.</p>
-                        <div class="blog-post-card-meta">
-                            <span><i class="far fa-calendar"></i> Nov 2024</span>
-                            <span><i class="far fa-clock"></i> 10 min</span>
-                        </div>
-                    </div>
-                </article>
-
-                <!-- Post 4 -->
+                <!-- Post: SandboxAQ DoD -->
                 <article class="blog-post-card">
                     <div class="blog-post-card-image">🛡️</div>
                     <div class="blog-post-card-content">
@@ -652,7 +711,55 @@
                     </div>
                 </article>
 
-                <!-- Post 5 -->
+                <!-- Post: Federal Policy -->
+                <article class="blog-post-card">
+                    <div class="blog-post-card-image">📋</div>
+                    <div class="blog-post-card-content">
+                        <span class="blog-post-card-tag">Policy</span>
+                        <h3>
+                            <a href="trump_policy_complete_post.html">Federal Policy & Post-Quantum Cryptography: What Healthcare Needs to Know</a>
+                        </h3>
+                        <p class="blog-post-card-excerpt">Recent executive orders and federal guidance are reshaping quantum security requirements. Here's what healthcare CIOs need to understand about policy implications.</p>
+                        <div class="blog-post-card-meta">
+                            <span><i class="far fa-calendar"></i> Jan 2025</span>
+                            <span><i class="far fa-clock"></i> 7 min</span>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- Post: Quantum Encryption Guide -->
+                <article class="blog-post-card">
+                    <div class="blog-post-card-image">🔐</div>
+                    <div class="blog-post-card-content">
+                        <span class="blog-post-card-tag">Cryptography</span>
+                        <h3>
+                            <a href="quantum-encryption-guide.html">Quantum Encryption: A Complete Guide for Healthcare</a>
+                        </h3>
+                        <p class="blog-post-card-excerpt">Master the fundamentals of quantum-resistant encryption and how post-quantum cryptography protects healthcare data in the quantum computing era.</p>
+                        <div class="blog-post-card-meta">
+                            <span><i class="far fa-calendar"></i> Dec 2024</span>
+                            <span><i class="far fa-clock"></i> 12 min</span>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- Post: Quantum Reality Check -->
+                <article class="blog-post-card">
+                    <div class="blog-post-card-image">🏥</div>
+                    <div class="blog-post-card-content">
+                        <span class="blog-post-card-tag">Healthcare</span>
+                        <h3>
+                            <a href="quantum-reality-check.html">The Quantum Reality Check Healthcare Can't Ignore</a>
+                        </h3>
+                        <p class="blog-post-card-excerpt">Healthcare organizations face a unique quantum threat. Here's why your 50+ year PHI sensitivity requirement makes quantum preparation urgent—not optional.</p>
+                        <div class="blog-post-card-meta">
+                            <span><i class="far fa-calendar"></i> Nov 2024</span>
+                            <span><i class="far fa-clock"></i> 10 min</span>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- Post: A16Z Report -->
                 <article class="blog-post-card">
                     <div class="blog-post-card-image">💡</div>
                     <div class="blog-post-card-content">
@@ -668,7 +775,7 @@
                     </div>
                 </article>
 
-                <!-- Post 6 -->
+                <!-- Post: Healthcare AI Security -->
                 <article class="blog-post-card">
                     <div class="blog-post-card-image">🏗️</div>
                     <div class="blog-post-card-content">
@@ -684,7 +791,7 @@
                     </div>
                 </article>
 
-                <!-- Post 7 -->
+                <!-- Post: Quantum Revolution -->
                 <article class="blog-post-card">
                     <div class="blog-post-card-image">⚡</div>
                     <div class="blog-post-card-content">
@@ -696,22 +803,6 @@
                         <div class="blog-post-card-meta">
                             <span><i class="far fa-calendar"></i> Aug 2024</span>
                             <span><i class="far fa-clock"></i> 10 min</span>
-                        </div>
-                    </div>
-                </article>
-
-                <!-- Post 8 -->
-                <article class="blog-post-card">
-                    <div class="blog-post-card-image">📋</div>
-                    <div class="blog-post-card-content">
-                        <span class="blog-post-card-tag">Policy</span>
-                        <h3>
-                            <a href="trump_policy_complete_post.html">Federal Policy & Post-Quantum Cryptography: What Healthcare Needs to Know</a>
-                        </h3>
-                        <p class="blog-post-card-excerpt">Recent executive orders and federal guidance are reshaping quantum security requirements. Here's what healthcare CIOs need to understand about policy implications.</p>
-                        <div class="blog-post-card-meta">
-                            <span><i class="far fa-calendar"></i> Jan 2025</span>
-                            <span><i class="far fa-clock"></i> 7 min</span>
                         </div>
                     </div>
                 </article>
