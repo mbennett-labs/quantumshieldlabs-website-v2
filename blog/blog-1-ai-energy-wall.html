@@ -1,0 +1,672 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The AI Energy Wall Is Real — And the Security Threat Nobody's Connecting | Quantum Shield Labs</title>
+    <meta name="description" content="Google's quantum milestone, photonic computing breakthroughs, and the EPA endangerment rollback are one story. The same tech solving the energy crisis will break your encryption.">
+    <meta property="og:title" content="The AI Energy Wall Is Real — And the Security Threat Nobody's Connecting">
+    <meta property="og:description" content="Quantum computing and photonic chips are racing to solve AI's energy crisis. They're also racing toward breaking every encryption standard protecting your data.">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://quantumshieldlabs.dev/blog/ai-energy-wall-quantum-photonic-security.html">
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        body {
+            background: linear-gradient(to bottom, #0f172a, #000);
+            color: #e2e8f0;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            line-height: 1.7;
+            min-height: 100vh;
+        }
+
+        /* ===== NAVIGATION ===== */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 1000;
+            background: rgba(15, 23, 42, 0.95);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(59, 130, 246, 0.15);
+            padding: 1rem 0;
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .nav-logo {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            text-decoration: none;
+            color: white;
+            font-weight: 700;
+            font-size: 1.1rem;
+        }
+
+        .nav-logo i { color: #3b82f6; font-size: 1.3rem; }
+
+        .nav-links { display: flex; gap: 2rem; align-items: center; }
+
+        .nav-links a {
+            color: #94a3b8;
+            text-decoration: none;
+            font-size: 0.9rem;
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+
+        .nav-links a:hover { color: #3b82f6; }
+
+        .nav-links .active { color: #3b82f6; }
+
+        /* ===== BLOG HERO ===== */
+        .blog-hero {
+            padding: 8rem 2rem 3rem;
+            text-align: center;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .blog-category {
+            display: inline-block;
+            background: rgba(59, 130, 246, 0.15);
+            color: #60a5fa;
+            padding: 0.3rem 1.25rem;
+            border-radius: 2rem;
+            font-size: 0.85rem;
+            font-weight: 600;
+            letter-spacing: 0.05em;
+            margin-bottom: 1.5rem;
+            border: 1px solid rgba(59, 130, 246, 0.25);
+        }
+
+        .blog-hero h1 {
+            font-size: 2.75rem;
+            font-weight: 800;
+            color: white;
+            line-height: 1.15;
+            margin-bottom: 1.5rem;
+            letter-spacing: -0.02em;
+        }
+
+        .blog-hero h1 span {
+            background: linear-gradient(135deg, #3b82f6, #8b5cf6);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        .blog-meta {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 2rem;
+            color: #64748b;
+            font-size: 0.9rem;
+            flex-wrap: wrap;
+        }
+
+        .blog-meta span {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .blog-meta i { color: #3b82f6; font-size: 0.85rem; }
+
+        .tag-row {
+            display: flex;
+            justify-content: center;
+            gap: 0.5rem;
+            margin-top: 1.5rem;
+            flex-wrap: wrap;
+        }
+
+        .tag {
+            background: rgba(30, 41, 59, 0.6);
+            color: #94a3b8;
+            padding: 0.25rem 0.75rem;
+            border-radius: 1rem;
+            font-size: 0.75rem;
+            font-weight: 500;
+            border: 1px solid rgba(59, 130, 246, 0.1);
+        }
+
+        /* ===== BLOG CONTENT ===== */
+        .blog-container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 0 1.5rem 4rem;
+        }
+
+        .blog-content {
+            background: rgba(15, 23, 42, 0.6);
+            border: 1px solid rgba(59, 130, 246, 0.15);
+            border-radius: 1rem;
+            padding: 3rem;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+        }
+
+        .blog-content h2 {
+            color: #3b82f6;
+            font-size: 1.7rem;
+            font-weight: 700;
+            margin: 2.5rem 0 1.25rem 0;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid rgba(59, 130, 246, 0.25);
+            letter-spacing: -0.01em;
+        }
+
+        .blog-content h3 {
+            color: #60a5fa;
+            font-size: 1.3rem;
+            font-weight: 600;
+            margin: 2rem 0 1rem 0;
+        }
+
+        .blog-content p {
+            margin-bottom: 1.5rem;
+            color: #cbd5e1;
+            font-size: 1.05rem;
+            line-height: 1.85;
+        }
+
+        .blog-content strong {
+            color: #fbbf24;
+            font-weight: 600;
+        }
+
+        .blog-content a {
+            color: #3b82f6;
+            text-decoration: none;
+            border-bottom: 1px solid transparent;
+            transition: border-color 0.3s ease;
+        }
+
+        .blog-content a:hover { border-bottom-color: #3b82f6; }
+
+        /* Blockquotes */
+        .blog-content blockquote {
+            border-left: 4px solid #3b82f6;
+            background: rgba(59, 130, 246, 0.08);
+            padding: 1.25rem 1.5rem;
+            margin: 2rem 0;
+            border-radius: 0 0.5rem 0.5rem 0;
+            font-style: italic;
+            color: #94a3b8;
+        }
+
+        .blog-content blockquote p { margin-bottom: 0; color: #94a3b8; }
+
+        /* Arrow Bullets */
+        .arrow-list {
+            list-style: none;
+            padding: 0;
+            margin: 1.25rem 0 1.75rem;
+        }
+
+        .arrow-list li {
+            padding: 0.5rem 0 0.5rem 1.75rem;
+            position: relative;
+            color: #cbd5e1;
+            font-size: 1.05rem;
+            line-height: 1.7;
+        }
+
+        .arrow-list li::before {
+            content: '→';
+            position: absolute;
+            left: 0;
+            color: #3b82f6;
+            font-weight: 700;
+        }
+
+        /* Check / X Lists */
+        .check-list, .x-list {
+            list-style: none;
+            padding: 0;
+            margin: 1.25rem 0 1.75rem;
+        }
+
+        .check-list li, .x-list li {
+            padding: 0.5rem 0 0.5rem 2rem;
+            position: relative;
+            color: #cbd5e1;
+            font-size: 1.05rem;
+            line-height: 1.7;
+        }
+
+        .check-list li::before {
+            content: '✅';
+            position: absolute;
+            left: 0;
+        }
+
+        .x-list li::before {
+            content: '❌';
+            position: absolute;
+            left: 0;
+        }
+
+        /* Highlight Boxes */
+        .highlight-box {
+            background: rgba(59, 130, 246, 0.08);
+            border: 1px solid rgba(59, 130, 246, 0.2);
+            border-left: 4px solid #3b82f6;
+            border-radius: 0.5rem;
+            padding: 1.5rem;
+            margin: 2rem 0;
+        }
+
+        .highlight-box p { margin-bottom: 0.5rem; }
+        .highlight-box p:last-child { margin-bottom: 0; }
+
+        .warning-box {
+            background: rgba(251, 191, 36, 0.08);
+            border: 1px solid rgba(251, 191, 36, 0.2);
+            border-left: 4px solid #fbbf24;
+            border-radius: 0.5rem;
+            padding: 1.5rem;
+            margin: 2rem 0;
+        }
+
+        .warning-box p { margin-bottom: 0.5rem; color: #fbbf24; }
+        .warning-box p:last-child { margin-bottom: 0; }
+
+        /* Section Divider */
+        .section-divider {
+            border: none;
+            height: 1px;
+            background: linear-gradient(to right, transparent, rgba(59, 130, 246, 0.3), transparent);
+            margin: 3rem 0;
+        }
+
+        /* ===== CTA SECTION ===== */
+        .cta-section {
+            background: linear-gradient(135deg, rgba(59, 130, 246, 0.1), rgba(139, 92, 246, 0.1));
+            border: 1px solid rgba(59, 130, 246, 0.2);
+            border-radius: 1rem;
+            padding: 2.5rem;
+            text-align: center;
+            margin: 3rem 0 0;
+        }
+
+        .cta-section h3 {
+            color: white !important;
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .cta-section p { color: #94a3b8; margin-bottom: 1.5rem; }
+
+        .cta-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .btn-primary {
+            display: inline-block;
+            background: linear-gradient(135deg, #3b82f6, #2563eb);
+            color: white;
+            padding: 0.85rem 2rem;
+            border-radius: 0.5rem;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.95rem;
+            transition: all 0.3s ease;
+            border: none;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(59, 130, 246, 0.35);
+        }
+
+        .btn-secondary {
+            display: inline-block;
+            background: transparent;
+            color: #60a5fa;
+            padding: 0.85rem 2rem;
+            border-radius: 0.5rem;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.95rem;
+            border: 1px solid rgba(59, 130, 246, 0.4);
+            transition: all 0.3s ease;
+        }
+
+        .btn-secondary:hover {
+            background: rgba(59, 130, 246, 0.1);
+            border-color: #3b82f6;
+        }
+
+        /* ===== AUTHOR BOX ===== */
+        .author-box {
+            display: flex;
+            align-items: flex-start;
+            gap: 1.5rem;
+            background: rgba(30, 41, 59, 0.4);
+            border: 1px solid rgba(59, 130, 246, 0.1);
+            border-radius: 1rem;
+            padding: 2rem;
+            margin-top: 3rem;
+        }
+
+        .author-avatar {
+            width: 70px;
+            height: 70px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #3b82f6, #8b5cf6);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            font-size: 1.75rem;
+            color: white;
+            font-weight: 700;
+        }
+
+        .author-info h4 { color: white; font-size: 1.1rem; margin-bottom: 0.25rem; }
+        .author-info .author-title { color: #3b82f6; font-size: 0.85rem; font-weight: 500; margin-bottom: 0.5rem; }
+        .author-info p { color: #94a3b8; font-size: 0.9rem; line-height: 1.6; margin-bottom: 0; }
+
+        /* ===== FOOTER ===== */
+        footer {
+            background: rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(10px);
+            border-top: 1px solid rgba(59, 130, 246, 0.1);
+            padding: 2rem 0;
+            margin-top: 0;
+        }
+
+        .footer-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .footer-logo {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: white;
+            font-weight: 600;
+        }
+
+        .footer-logo i { color: #3b82f6; }
+
+        .footer-links { display: flex; gap: 1.5rem; }
+
+        .footer-links a {
+            color: #64748b;
+            text-decoration: none;
+            font-size: 0.85rem;
+            transition: color 0.3s;
+        }
+
+        .footer-links a:hover { color: #3b82f6; }
+
+        .footer-copy { color: #475569; font-size: 0.8rem; width: 100%; text-align: center; margin-top: 1rem; }
+
+        /* ===== RESPONSIVE ===== */
+        @media (max-width: 768px) {
+            .blog-hero { padding: 7rem 1.5rem 2rem; }
+            .blog-hero h1 { font-size: 1.85rem; }
+            .blog-content { padding: 1.75rem; }
+            .blog-content h2 { font-size: 1.4rem; }
+            .nav-links { display: none; }
+            .author-box { flex-direction: column; align-items: center; text-align: center; }
+            .cta-buttons { flex-direction: column; align-items: center; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Navigation -->
+    <nav>
+        <div class="nav-container">
+            <a href="https://quantumshieldlabs.dev/" class="nav-logo">
+                <i class="fas fa-shield-alt"></i>
+                Quantum Shield Labs
+            </a>
+            <div class="nav-links">
+                <a href="https://quantumshieldlabs.dev/#services">Services</a>
+                <a href="https://quantumshieldlabs.dev/#about">About</a>
+                <a href="https://quantumshieldlabs.dev/blog/" class="active">Blog</a>
+                <a href="https://quantumshieldlabs.dev/#contact">Contact</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Blog Hero -->
+    <header class="blog-hero">
+        <span class="blog-category">⚡ Energy &bull; Security &bull; Quantum</span>
+        <h1>The AI Energy Wall Is Real. <span>The Security Threat? Nobody's Connecting It.</span></h1>
+        <div class="blog-meta">
+            <span><i class="fas fa-user"></i> Michael Bennett</span>
+            <span><i class="fas fa-calendar"></i> February 15, 2026</span>
+            <span><i class="fas fa-clock"></i> 14 min read</span>
+        </div>
+        <div class="tag-row">
+            <span class="tag">Quantum Computing</span>
+            <span class="tag">Photonic Computing</span>
+            <span class="tag">AI Energy</span>
+            <span class="tag">EPA Policy</span>
+            <span class="tag">HNDL</span>
+            <span class="tag">Healthcare</span>
+        </div>
+    </header>
+
+    <!-- Blog Content -->
+    <div class="blog-container">
+        <article class="blog-content">
+
+            <p>Three things happened this week that most people are treating as separate stories. They're not.</p>
+
+            <p>Google Quantum AI demonstrated its first logical qubit prototype and confirmed its roadmap to 1 million qubits. The EPA formally revoked the 2009 endangerment finding — the scientific and legal foundation for federal greenhouse gas regulation. And a German startup shipped the first operational photonic processor into a live supercomputing environment, consuming <strong>90x less power</strong> than conventional chips.</p>
+
+            <p>These three stories are one story. And if you work in healthcare, cybersecurity, or any industry that stores sensitive data, it's your story too.</p>
+
+            <h2>AI Is Eating the Power Grid</h2>
+
+            <p>This isn't speculation. The numbers are public.</p>
+
+            <p>AI data centers are on track to <strong>double their electricity consumption by 2030</strong>. A single AI training chip uses as much power as an entire household. Every time you ask ChatGPT a question, a server somewhere turns electricity into heat. Multiply that by hundreds of millions of users, and you have an energy crisis that has nothing to do with politics.</p>
+
+            <p>Classical computers hit a wall. Not a theoretical wall — a <strong>thermodynamic</strong> one.</p>
+
+            <div class="highlight-box">
+                <p>There's a principle in physics called <strong>Landauer's Principle</strong>. Every time a traditional computer erases a bit of information, it loses energy as heat. That's not a design flaw. It's physics. And as problems get more complex, that energy loss grows exponentially.</p>
+            </div>
+
+            <p>The AI models we're building today are pushing right up against that limit. More parameters, more data, more compute, more heat, more electricity, more cooling, more cost. The curve doesn't flatten. It steepens.</p>
+
+            <h2>Enter Quantum Computing</h2>
+
+            <p>Quantum computers handle information differently. Their operations are <strong>reversible</strong> — they can "uncompute" instead of erase. For the same complex problems, quantum computers aren't just faster. They're exponentially more energy efficient.</p>
+
+            <p>But here's the part that matters for the energy conversation: <strong>not all quantum computers are created equal.</strong></p>
+
+            <ul class="arrow-list">
+                <li><strong>Google's superconducting approach</strong> needs temperatures near absolute zero. Massive refrigerators. ~25 kilowatts of power — and most of that goes to keeping things frozen, not actual computing.</li>
+                <li><strong>Neutral atom quantum computers</strong> work at room temperature. Same processor capability. ~10 kilowatts. Already a 3x improvement.</li>
+                <li><strong>Microsoft's Majorana 1 chip</strong> (announced February 2025) claims to fit over 1 million qubits on a palm-sized chip using topological superconductor materials. If it works — big if — the energy profile changes entirely.</li>
+            </ul>
+
+            <div class="warning-box">
+                <p>The difference between architectures could be <strong>100x</strong> in power consumption. The technology that wins the architecture race doesn't just determine who builds the fastest computer. It determines whether quantum computing helps solve the energy crisis or creates a new one.</p>
+            </div>
+
+            <h2>Photonic Computing: Light Instead of Electricity</h2>
+
+            <p>This is the one most people haven't heard of yet.</p>
+
+            <p>Photonic computing uses <strong>light instead of electricity</strong> to move and process data. Photons instead of electrons. Lasers and waveguides instead of wires. And the advantages are real:</p>
+
+            <ul class="arrow-list">
+                <li>Light travels at... the speed of light. No resistance. No heat.</li>
+                <li>Multiple wavelengths can carry data simultaneously (wavelength multiplexing)</li>
+                <li>Power consumption drops dramatically — we're talking <strong>90x less power per workload</strong> in early deployments</li>
+            </ul>
+
+            <p>In July 2025, Q.ANT and the Leibniz Supercomputing Centre in Germany switched on the world's <strong>first operational photonic processor</strong> in a live high-performance computing environment. Not a lab demo. A working system processing real workloads.</p>
+
+            <p>NVIDIA is building silicon photonics into their next-generation AI infrastructure. Broadcom's co-packaged optics achieve a <strong>70% reduction in power consumption</strong> compared to traditional solutions. MIT demonstrated a fully integrated photonic neural network that completed machine learning classifications in under half a nanosecond with 92%+ accuracy.</p>
+
+            <p>The trajectory: photonic networking in data centers now (2025-2026), specialized photonic compute accelerators in the mid-term (2027-2029), and deeper integration from there.</p>
+
+            <p>This isn't replacing silicon overnight. It's supplementing it where it matters most — <strong>moving data faster with less heat</strong>.</p>
+
+            <h2>The Policy Reality</h2>
+
+            <p>On February 12, 2026, the EPA formally revoked the 2009 endangerment finding — the scientific determination that greenhouse gases threaten public health and welfare. That finding was the legal foundation for Clean Air Act regulations on vehicle emissions, power plants, and industrial pollution sources.</p>
+
+            <p>I'm not going to tell you how to feel about that. I don't do politics in this space.</p>
+
+            <p>But I will tell you the facts that matter for energy and computing:</p>
+
+            <ul class="arrow-list">
+                <li>The endangerment finding repeal eliminates all federal greenhouse gas emissions standards for cars and trucks.</li>
+                <li>It could unravel climate regulations on power plants and oil and gas facilities.</li>
+                <li>This happened during the three hottest years ever recorded.</li>
+                <li>Over 1,000 scientists signed a letter opposing the repeal.</li>
+                <li>Legal challenges are certain. This will be in courts for years.</li>
+            </ul>
+
+            <div class="highlight-box">
+                <p>What I care about as a security professional: <strong>the energy problem doesn't go away because the regulations did.</strong> Physics doesn't care about policy. Landauer's Principle doesn't read executive orders.</p>
+                <p>AI's energy appetite is growing regardless of who's in office. And the technologies racing to solve that problem — quantum computing and photonic computing — are <strong>the same technologies that will break current encryption.</strong></p>
+            </div>
+
+            <p>That's the connection nobody's making.</p>
+
+            <h2>The Security Threat Inside the Energy Solution</h2>
+
+            <p>Here's where I need you to pay attention.</p>
+
+            <p>Every advancement that makes quantum computing more practical — more energy efficient, more scalable, more commercially viable — simultaneously makes it more capable of breaking the encryption protecting your data today.</p>
+
+            <ul class="arrow-list">
+                <li>Google's logical qubit milestone means error-corrected quantum computing is real, not theoretical</li>
+                <li>Microsoft's palm-sized million-qubit chip means quantum hardware could become accessible, not just data-center-scale</li>
+                <li>Energy-efficient quantum architectures mean quantum computers run longer, cheaper, and solve bigger problems</li>
+            </ul>
+
+            <p>Those are the same capabilities needed to run Shor's algorithm against RSA-2048. The same capabilities needed to crack the elliptic curve cryptography protecting your TLS connections. The same capabilities that make the "harvest now, decrypt later" strategy profitable.</p>
+
+            <div class="warning-box">
+                <p><strong>The more efficient quantum computing gets, the faster your encryption breaks.</strong></p>
+            </div>
+
+            <p>Nation-state actors aren't waiting for 2030. They're collecting encrypted data today — healthcare records, financial data, government communications — and storing it for future decryption. Every breakthrough that brings quantum computing closer to commercial viability is another step toward that decryption day.</p>
+
+            <p>And photonic computing? It's accelerating AI, which is accelerating quantum research, which is accelerating the timeline to cryptographically relevant quantum computers. The technologies are feeding each other.</p>
+
+            <h2>What This Means for Healthcare</h2>
+
+            <p>Patient data has a shelf life measured in decades. Your medical records from today will still be sensitive in 2075. A credit card number expires in 3 years. A Social Security number lasts a lifetime.</p>
+
+            <p>Healthcare organizations running RSA-2048 or standard ECC today are sitting on data that will outlive the encryption protecting it. That's not a prediction. That's math.</p>
+
+            <p>NIST published post-quantum cryptography standards (FIPS 203, 204, 205) for a reason. The migration window is now, not when the first quantum computer cracks RSA live on stage at a conference.</p>
+
+            <p>Every month of delay is another month of data collected under vulnerable encryption.</p>
+
+            <h2>What You Should Do</h2>
+
+            <h3>If you're in healthcare IT:</h3>
+            <ul class="arrow-list">
+                <li>Run a cryptographic inventory. You can't protect what you can't see.</li>
+                <li>Identify every instance of RSA, ECC, SHA-1, DES, and hardcoded keys in your environment.</li>
+                <li>Start mapping your migration path to NIST-approved post-quantum algorithms.</li>
+                <li>Don't wait for a vendor to sell you a solution. Understand the problem first.</li>
+            </ul>
+
+            <h3>If you're in energy or infrastructure:</h3>
+            <ul class="arrow-list">
+                <li>The same quantum computers that will optimize your grid will threaten your control systems.</li>
+                <li>SCADA and ICS environments running legacy encryption are the most vulnerable.</li>
+                <li>Photonic networking will improve your efficiency AND increase your attack surface if not secured properly.</li>
+            </ul>
+
+            <h3>If you're a builder or investor in quantum/AI:</h3>
+            <ul class="arrow-list">
+                <li>The energy story and the security story are the same story.</li>
+                <li>Every efficiency milestone is also a threat milestone.</li>
+                <li>Post-quantum security isn't a niche — it's the foundation everything else depends on.</li>
+            </ul>
+
+            <hr class="section-divider">
+
+            <h2>The Bottom Line</h2>
+
+            <p>The AI energy crisis is real. Quantum computing and photonic computing are real solutions. The policy environment just got more complicated. And the security implications of all three are converging faster than most organizations realize.</p>
+
+            <p>The physics doesn't care about your politics, your budget cycle, or your migration timeline.</p>
+
+            <p>Your encrypted data has an expiration date. The only question is whether you'll be ready when it arrives.</p>
+
+            <!-- CTA Section -->
+            <div class="cta-section">
+                <h3>📖 Get the Complete Quantum Security Playbook</h3>
+                <p>125,000+ words of actionable implementation guidance for healthcare organizations preparing for the quantum threat. Migration roadmaps, cryptographic inventories, HIPAA compliance mapping, and executive briefing templates.</p>
+                <div class="cta-buttons">
+                    <a href="https://3864413400060.gumroad.com/l/quantum-security-playbook" class="btn-primary">Get the Playbook — $197</a>
+                    <a href="https://quantumshieldlabs.dev/#contact" class="btn-secondary">Schedule Assessment</a>
+                </div>
+            </div>
+
+            <!-- Author Box -->
+            <div class="author-box">
+                <div class="author-avatar">MB</div>
+                <div class="author-info">
+                    <h4>Mike Bennett</h4>
+                    <div class="author-title">Founder &amp; CEO, Quantum Shield Labs</div>
+                    <p>Former executive chef turned cybersecurity entrepreneur. Builds autonomous security tools like CrawDaddy Security and writes about quantum threats that most people aren't thinking about yet. BS in Software Development &amp; Security, UMGC.</p>
+                </div>
+            </div>
+
+        </article>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-container">
+            <div class="footer-logo">
+                <i class="fas fa-shield-alt"></i>
+                Quantum Shield Labs
+            </div>
+            <div class="footer-links">
+                <a href="https://quantumshieldlabs.dev/">Home</a>
+                <a href="https://quantumshieldlabs.dev/blog/">Blog</a>
+                <a href="https://3864413400060.gumroad.com/l/quantum-security-playbook">Playbook</a>
+                <a href="https://www.linkedin.com/in/michael-bennett-a29a93103/">LinkedIn</a>
+                <a href="https://github.com/mbennett-labs">GitHub</a>
+            </div>
+            <p class="footer-copy">&copy; 2026 Quantum Shield Labs LLC. All rights reserved.</p>
+        </div>
+    </footer>
+
+</body>
+</html>
