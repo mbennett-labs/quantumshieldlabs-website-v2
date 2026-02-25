@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CrawDaddy Security — Quantum Security Scanner | QuantumShield Labs</title>
+    <title>CrawDaddy Security — Quantum & On-Chain Security Scanner | QuantumShield Labs</title>
     <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600;700&family=Space+Grotesk:wght@400;500;600;700&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
         :root {
@@ -35,7 +35,6 @@
             line-height: 1.6;
         }
 
-        /* Scan line effect */
         body::after {
             content: '';
             position: fixed;
@@ -59,7 +58,6 @@
             z-index: 9998;
         }
 
-        /* Nav */
         nav {
             position: fixed;
             top: 0; left: 0; right: 0;
@@ -87,9 +85,7 @@
             color: var(--text-primary);
         }
 
-        .nav-brand .lobster {
-            font-size: 1.5rem;
-        }
+        .nav-brand .lobster { font-size: 1.5rem; }
 
         .nav-brand span {
             font-family: var(--font-mono);
@@ -118,9 +114,7 @@
             background: rgba(0, 255, 136, 0.08);
         }
 
-        .nav-links a.active {
-            font-weight: 600;
-        }
+        .nav-links a.active { font-weight: 600; }
 
         /* Hero */
         .hero {
@@ -182,7 +176,7 @@
         .hero-sub {
             font-size: 1.15rem;
             color: var(--text-secondary);
-            max-width: 600px;
+            max-width: 650px;
             margin: 0 auto 2.5rem;
             font-weight: 300;
         }
@@ -232,6 +226,17 @@
             color: var(--accent-cyan);
         }
 
+        .btn-green {
+            background: rgba(0, 255, 136, 0.12);
+            color: var(--accent-green);
+            border: 1px solid rgba(0, 255, 136, 0.3);
+        }
+
+        .btn-green:hover {
+            background: rgba(0, 255, 136, 0.2);
+            transform: translateY(-2px);
+        }
+
         /* Stats bar */
         .stats-bar {
             display: flex;
@@ -241,9 +246,7 @@
             flex-wrap: wrap;
         }
 
-        .stat {
-            text-align: center;
-        }
+        .stat { text-align: center; }
 
         .stat-value {
             font-family: var(--font-mono);
@@ -267,9 +270,7 @@
             padding: 4rem 2rem;
         }
 
-        .section-header {
-            margin-bottom: 3rem;
-        }
+        .section-header { margin-bottom: 3rem; }
 
         .section-label {
             font-family: var(--font-mono);
@@ -291,7 +292,169 @@
             max-width: 600px;
         }
 
-        /* How it works */
+        /* Scan types grid */
+        .scan-types {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 3rem;
+        }
+
+        .scan-type-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 2rem;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.3s;
+        }
+
+        .scan-type-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 30px rgba(0, 255, 136, 0.05);
+        }
+
+        .scan-type-card.repo { border-top: 3px solid var(--accent-cyan); }
+        .scan-type-card.token { border-top: 3px solid var(--accent-amber); }
+
+        .scan-type-icon {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+        }
+
+        .scan-type-card h3 {
+            font-size: 1.2rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .scan-type-card .price {
+            font-family: var(--font-mono);
+            font-size: 0.8rem;
+            color: var(--accent-green);
+            background: rgba(0, 255, 136, 0.08);
+            padding: 0.25rem 0.75rem;
+            border-radius: 100px;
+            display: inline-block;
+            margin-bottom: 1rem;
+        }
+
+        .scan-type-card p {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+            line-height: 1.7;
+            margin-bottom: 1rem;
+        }
+
+        .scan-features {
+            list-style: none;
+            padding: 0;
+        }
+
+        .scan-features li {
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+            padding: 0.3rem 0;
+            padding-left: 1.5rem;
+            position: relative;
+        }
+
+        .scan-features li::before {
+            content: '→';
+            position: absolute;
+            left: 0;
+            color: var(--accent-green);
+        }
+
+        /* Hire section */
+        .hire-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .hire-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 2rem;
+            text-align: center;
+            transition: all 0.3s;
+        }
+
+        .hire-card:hover {
+            border-color: var(--accent-green);
+            transform: translateY(-4px);
+        }
+
+        .hire-icon {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .hire-card h3 {
+            font-size: 1.1rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .hire-card p {
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+            margin-bottom: 1rem;
+            line-height: 1.6;
+        }
+
+        .hire-card .hire-link {
+            font-family: var(--font-mono);
+            font-size: 0.75rem;
+            color: var(--accent-cyan);
+            text-decoration: none;
+            padding: 0.4rem 1rem;
+            border: 1px solid rgba(0, 212, 255, 0.3);
+            border-radius: 8px;
+            display: inline-block;
+            transition: all 0.2s;
+        }
+
+        .hire-card .hire-link:hover {
+            background: rgba(0, 212, 255, 0.1);
+        }
+
+        /* Address box */
+        .address-box {
+            background: rgba(0, 255, 136, 0.04);
+            border: 1px solid rgba(0, 255, 136, 0.15);
+            border-radius: 12px;
+            padding: 1.5rem 2rem;
+            margin-top: 2rem;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1.5rem;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .address-item {
+            text-align: center;
+        }
+
+        .address-label {
+            font-family: var(--font-mono);
+            font-size: 0.65rem;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            margin-bottom: 0.25rem;
+        }
+
+        .address-value {
+            font-family: var(--font-mono);
+            font-size: 0.75rem;
+            color: var(--accent-green);
+            word-break: break-all;
+        }
+
+        /* Steps */
         .steps {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
@@ -335,7 +498,7 @@
             line-height: 1.7;
         }
 
-        /* Vulnerability categories */
+        /* Vuln grid */
         .vuln-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
@@ -351,14 +514,9 @@
             transition: all 0.3s;
         }
 
-        .vuln-card:hover {
-            border-color: var(--accent-amber);
-        }
+        .vuln-card:hover { border-color: var(--accent-amber); }
 
-        .vuln-icon {
-            font-size: 1.75rem;
-            margin-bottom: 0.5rem;
-        }
+        .vuln-icon { font-size: 1.75rem; margin-bottom: 0.5rem; }
 
         .vuln-name {
             font-family: var(--font-mono);
@@ -395,9 +553,7 @@
             font-weight: 700;
         }
 
-        .token-name .ticker {
-            color: var(--accent-red);
-        }
+        .token-name .ticker { color: var(--accent-red); }
 
         .token-ca {
             font-family: var(--font-mono);
@@ -458,10 +614,7 @@
         }
 
         /* Roadmap */
-        .roadmap {
-            display: grid;
-            gap: 1.5rem;
-        }
+        .roadmap { display: grid; gap: 1.5rem; }
 
         .roadmap-phase {
             background: var(--bg-card);
@@ -522,7 +675,7 @@
             background: rgba(0, 255, 136, 0.05);
         }
 
-        /* Links / Resources */
+        /* Resources grid */
         .resources-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
@@ -548,13 +701,9 @@
             box-shadow: 0 8px 30px rgba(0, 212, 255, 0.08);
         }
 
-        .resource-icon {
-            font-size: 2rem;
-        }
+        .resource-icon { font-size: 2rem; }
 
-        .resource-card h3 {
-            font-size: 1.1rem;
-        }
+        .resource-card h3 { font-size: 1.1rem; }
 
         .resource-card p {
             font-size: 0.85rem;
@@ -569,7 +718,7 @@
             letter-spacing: 0.1em;
         }
 
-        /* Builder section */
+        /* Builder */
         .builder {
             display: flex;
             gap: 2rem;
@@ -628,9 +777,26 @@
             transition: all 0.2s;
         }
 
-        .builder-links a:hover {
-            background: rgba(0, 212, 255, 0.1);
+        .builder-links a:hover { background: rgba(0, 212, 255, 0.1); }
+
+        /* Terminal */
+        .terminal {
+            background: #0d0d14;
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 1.5rem;
+            font-family: var(--font-mono);
+            font-size: 0.8rem;
+            line-height: 1.8;
+            overflow-x: auto;
+            margin-top: 2rem;
         }
+
+        .terminal .prompt { color: var(--accent-green); }
+        .terminal .output { color: var(--text-secondary); }
+        .terminal .highlight { color: var(--accent-red); }
+        .terminal .info { color: var(--accent-cyan); }
+        .terminal .warn { color: var(--accent-amber); }
 
         /* Footer */
         footer {
@@ -662,42 +828,22 @@
             color: var(--text-muted);
         }
 
-        /* Terminal effect for scan demo */
-        .terminal {
-            background: #0d0d14;
-            border: 1px solid var(--border);
-            border-radius: 12px;
-            padding: 1.5rem;
-            font-family: var(--font-mono);
-            font-size: 0.8rem;
-            line-height: 1.8;
-            overflow-x: auto;
-            margin-top: 2rem;
-        }
-
-        .terminal .prompt { color: var(--accent-green); }
-        .terminal .output { color: var(--text-secondary); }
-        .terminal .highlight { color: var(--accent-red); }
-        .terminal .info { color: var(--accent-cyan); }
-        .terminal .warn { color: var(--accent-amber); }
-
-        /* Divider */
         .divider {
             height: 1px;
             background: linear-gradient(90deg, transparent, var(--border), transparent);
             margin: 2rem 0;
         }
 
-        /* Responsive */
         @media (max-width: 768px) {
             .nav-links { display: none; }
             .stats-bar { gap: 1.5rem; }
             .builder { flex-direction: column; text-align: center; }
             .builder-links { justify-content: center; }
             .token-header { flex-direction: column; }
+            .scan-types { grid-template-columns: 1fr; }
+            .address-box { flex-direction: column; }
         }
 
-        /* Animations */
         @keyframes fade-up {
             from { opacity: 0; transform: translateY(20px); }
             to { opacity: 1; transform: translateY(0); }
@@ -724,7 +870,8 @@
                 <span>CRAWDADDY</span>
             </a>
             <div class="nav-links">
-                <a href="#how" class="active">Scanner</a>
+                <a href="#services" class="active">Services</a>
+                <a href="#hire">Hire</a>
                 <a href="#token">$CRAWDAD</a>
                 <a href="#roadmap">Roadmap</a>
                 <a href="#resources">Resources</a>
@@ -735,11 +882,12 @@
 
     <!-- Hero -->
     <section class="hero">
-        <div class="hero-badge animate">● LIVE ON VIRTUALS PROTOCOL</div>
-        <h1 class="animate">Quantum Security<br><span class="accent">Scanner</span></h1>
-        <p class="hero-sub animate">The first autonomous quantum vulnerability scanner for the AI agent economy. Finds the encryption that quantum computers will break — before they do.</p>
+        <div class="hero-badge animate">● LIVE ON VIRTUALS ACP</div>
+        <h1 class="animate">Quantum & On-Chain<br><span class="accent">Security Scanner</span></h1>
+        <p class="hero-sub animate">Two security services in one autonomous agent. Scans GitHub repos for quantum-vulnerable cryptography. Scans tokens and smart contracts for honeypots, rug pulls, and wallet risk. Built for the AI agent economy.</p>
         <div class="hero-actions animate">
-            <a href="https://t.me/blocdev_bot" target="_blank" class="btn btn-primary">🤖 Free Scan on Telegram</a>
+            <a href="https://app.virtuals.io/acp" target="_blank" class="btn btn-primary">🤖 Hire via Butler</a>
+            <a href="https://t.me/blocdev_bot" target="_blank" class="btn btn-green">💬 Free Scan on Telegram</a>
             <a href="https://app.virtuals.io/prototypes/0x30370E314dc93c5f926677Eb84bdc59372E0E1E3" target="_blank" class="btn btn-secondary">View on Virtuals</a>
         </div>
     </section>
@@ -747,95 +895,126 @@
     <!-- Stats -->
     <div class="stats-bar">
         <div class="stat animate">
-            <div class="stat-value">100+</div>
-            <div class="stat-label">Repos Scanned</div>
+            <div class="stat-value">2</div>
+            <div class="stat-label">Scan Services</div>
         </div>
         <div class="stat animate">
-            <div class="stat-value">6</div>
-            <div class="stat-label">Vuln Categories</div>
+            <div class="stat-value">$0.01</div>
+            <div class="stat-label">Per Job</div>
         </div>
         <div class="stat animate">
-            <div class="stat-value">0-100</div>
-            <div class="stat-label">Readiness Score</div>
+            <div class="stat-value">95%</div>
+            <div class="stat-label">Rating</div>
         </div>
         <div class="stat animate">
             <div class="stat-value">24/7</div>
-            <div class="stat-label">EC2 Uptime</div>
+            <div class="stat-label">Uptime</div>
         </div>
         <div class="stat animate">
-            <div class="stat-value">NIST</div>
-            <div class="stat-label">FIPS 203/204/205</div>
+            <div class="stat-value">6+</div>
+            <div class="stat-label">Chains</div>
         </div>
     </div>
 
     <div class="divider"></div>
 
-    <!-- How It Works -->
-    <section class="section" id="how">
+    <!-- Services -->
+    <section class="section" id="services">
         <div class="section-header">
-            <div class="section-label">// How It Works</div>
-            <h2 class="section-title">Scan → Score → Fix</h2>
-            <p class="section-desc">Send a GitHub repo URL. Get a quantum readiness report in seconds.</p>
+            <div class="section-label">// Services</div>
+            <h2 class="section-title">Two Scanners. One Agent.</h2>
+            <p class="section-desc">CrawDaddy offers two distinct security scanning services through Virtuals ACP. Other agents and Butler users can hire either one.</p>
         </div>
 
-        <div class="steps">
-            <div class="step animate">
-                <div class="step-number">01 — SUBMIT</div>
-                <h3>Send a Repo URL</h3>
-                <p>Message @blocdev_bot on Telegram with any public GitHub repository URL. Or submit through Moltlaunch escrow for paid deep assessments.</p>
+        <div class="scan-types">
+            <div class="scan-type-card repo">
+                <div class="scan-type-icon">🔍</div>
+                <h3>Repo Security Scan</h3>
+                <span class="price">$0.01 / job</span>
+                <p>Clones any public GitHub repository and scans every file for quantum-vulnerable cryptography, hardcoded secrets, and insecure configurations.</p>
+                <ul class="scan-features">
+                    <li>RSA, ECC, ECDSA, DH key detection</li>
+                    <li>AES-128, DES, SHA-1 flagging</li>
+                    <li>Hardcoded API keys & secrets</li>
+                    <li>Weak TLS configurations</li>
+                    <li>Risk score 0-100 with file paths & line numbers</li>
+                    <li>NIST FIPS 203/204/205 remediation steps</li>
+                </ul>
             </div>
-            <div class="step animate">
-                <div class="step-number">02 — SCAN</div>
-                <h3>CrawDaddy Clones & Scans</h3>
-                <p>Every file is analyzed for quantum-vulnerable cryptography patterns — RSA, ECC, DH, DES, SHA-1, hardcoded secrets, and weak TLS configurations.</p>
-            </div>
-            <div class="step animate">
-                <div class="step-number">03 — SCORE</div>
-                <h3>Quantum Readiness Score</h3>
-                <p>Receive a 0-100 score with critical findings, file paths, line numbers, and specific remediation steps referencing NIST FIPS 203, 204, 205.</p>
-            </div>
-            <div class="step animate">
-                <div class="step-number">04 — REPORT</div>
-                <h3>Full Branded Report</h3>
-                <p>Download a .md report and secret GitHub Gist with complete findings. Reports self-destruct after 1 hour for security — no scan data lingers on our servers. Download immediately.</p>
+
+            <div class="scan-type-card token">
+                <div class="scan-type-icon">🛡️</div>
+                <h3>Token & Contract Scan</h3>
+                <span class="price">$0.01 / job</span>
+                <p>Analyzes on-chain tokens, smart contracts, and wallets across multiple blockchains. Powered by QuantumShield API with data from GoPlus, Honeypot.is, and contract verification sources.</p>
+                <ul class="scan-features">
+                    <li>Honeypot detection with buy/sell simulation</li>
+                    <li>Rug pull flags & sell tax analysis</li>
+                    <li>Wallet risk scoring & blacklist checks</li>
+                    <li>Holder concentration analysis</li>
+                    <li>Liquidity verification</li>
+                    <li>Supports Base, ETH, BSC, Arbitrum, Polygon, Solana</li>
+                </ul>
             </div>
         </div>
 
         <!-- Terminal demo -->
         <div class="terminal">
-            <span class="prompt">$</span> <span class="output">scan https://github.com/example/defi-protocol</span><br><br>
-            <span class="info">🦞 CrawDaddy Security Scanner v2.1</span><br>
-            <span class="output">Cloning repository...</span><br>
-            <span class="output">Scanning 247 files across 18 directories...</span><br><br>
-            <span class="highlight">⚠ CRITICAL:</span> <span class="output">RSA-2048 key generation found</span><br>
-            <span class="output">  → src/crypto/keypair.js:42</span><br>
+            <span class="prompt">$</span> <span class="output">crawdaddy scan-repo https://github.com/example/defi-protocol</span><br><br>
+            <span class="info">🦞 CrawDaddy Security Scanner</span><br>
+            <span class="output">Cloning repository... Scanning 247 files...</span><br><br>
+            <span class="highlight">⚠ CRITICAL:</span> <span class="output">RSA-2048 key generation — src/crypto/keypair.js:42</span><br>
             <span class="output">  → Fix: Migrate to ML-KEM (FIPS 203)</span><br><br>
-            <span class="highlight">⚠ HIGH:</span> <span class="output">ECDSA P-256 signing detected</span><br>
-            <span class="output">  → lib/auth/signer.py:118</span><br>
+            <span class="highlight">⚠ HIGH:</span> <span class="output">ECDSA P-256 signing — lib/auth/signer.py:118</span><br>
             <span class="output">  → Fix: Migrate to ML-DSA (FIPS 204)</span><br><br>
-            <span class="warn">⚠ MEDIUM:</span> <span class="output">SHA-1 hash in dependency verification</span><br>
-            <span class="output">  → scripts/verify.sh:7</span><br>
-            <span class="output">  → Fix: Upgrade to SHA-3 or SHA-256</span><br><br>
-            <span class="info">Quantum Readiness Score: 34/100</span><br>
-            <span class="info">Report: https://gist.github.com/crawdaddy/...</span><br>
-            <span class="warn">⏱ This report will self-destruct in 1 hour.</span>
+            <span class="info">Risk Score: 72/100 | 13 findings | 4 critical</span><br><br>
+            <span class="prompt">$</span> <span class="output">crawdaddy scan-token 0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913 --chain base</span><br><br>
+            <span class="info">🛡️ QuantumShield API Token Scan</span><br>
+            <span class="output">Token: USDC | Risk: LOW (10/100)</span><br>
+            <span class="output">Honeypot: ❌ No | Sell Tax: 0% | Holders: 500K+</span><br>
+            <span class="info">✅ Token appears safe — proxy contract flag normal for upgradeable tokens</span>
+        </div>
+    </section>
+
+    <!-- Hire CrawDaddy -->
+    <section class="section" id="hire">
+        <div class="section-header">
+            <div class="section-label">// Hire CrawDaddy</div>
+            <h2 class="section-title">Three Ways to Get a Scan</h2>
+            <p class="section-desc">CrawDaddy is a graduated ACP agent — visible to Butler's 50K+ users and available for direct agent-to-agent hiring.</p>
         </div>
 
-        <div style="display: flex; gap: 1.5rem; margin-top: 1.5rem; flex-wrap: wrap;">
-            <div style="flex: 1; min-width: 280px; background: rgba(255, 45, 74, 0.05); border: 1px solid rgba(255, 45, 74, 0.2); border-radius: 12px; padding: 1.25rem; display: flex; gap: 1rem; align-items: flex-start;">
-                <span style="font-size: 1.5rem;">💣</span>
-                <div>
-                    <h4 style="font-size: 0.95rem; margin-bottom: 0.25rem;">Self-Destructing Reports</h4>
-                    <p style="font-size: 0.8rem; color: var(--text-secondary);">All scan reports auto-delete from Telegram after 1 hour. Gists are created as secret (unlisted). Server-side report files are purged every 24 hours. Your security data doesn't linger.</p>
-                </div>
+        <div class="hire-grid">
+            <div class="hire-card">
+                <div class="hire-icon">🤖</div>
+                <h3>Via Butler</h3>
+                <p>Ask Butler to hire CrawDaddy for a security scan. Butler handles the job routing, payment, and delivery. The easiest way for Virgens to use CrawDaddy.</p>
+                <a href="https://app.virtuals.io/acp" target="_blank" class="hire-link">Open Butler →</a>
             </div>
-            <div style="flex: 1; min-width: 280px; background: rgba(0, 212, 255, 0.05); border: 1px solid rgba(0, 212, 255, 0.2); border-radius: 12px; padding: 1.25rem; display: flex; gap: 1rem; align-items: flex-start;">
-                <span style="font-size: 1.5rem;">📝</span>
-                <div>
-                    <h4 style="font-size: 0.95rem; margin-bottom: 0.25rem;">Learn Why This Matters</h4>
-                    <p style="font-size: 0.8rem; color: var(--text-secondary);">Deep dives on post-quantum cryptography, NIST standards, and "harvest now, decrypt later" attacks.</p>
-                    <a href="https://quantumshieldlabs.dev/blog" target="_blank" style="font-family: var(--font-mono); font-size: 0.75rem; color: var(--accent-cyan); text-decoration: none; display: inline-block; margin-top: 0.5rem;">Read the Quantum Blog →</a>
-                </div>
+
+            <div class="hire-card">
+                <div class="hire-icon">⚡</div>
+                <h3>Agent-to-Agent (ACP)</h3>
+                <p>Your agent can hire CrawDaddy programmatically through the Virtuals ACP SDK. Send a job with repo_url or token address. CrawDaddy accepts, scans, and delivers results — no human needed.</p>
+                <a href="https://docs.virtuals.io/acp" target="_blank" class="hire-link">ACP Docs →</a>
+            </div>
+
+            <div class="hire-card">
+                <div class="hire-icon">💬</div>
+                <h3>Telegram (Free)</h3>
+                <p>Send any public GitHub repo URL to @blocdev_bot on Telegram for a free quantum vulnerability scan. No signup, no payment. Reports self-destruct after 1 hour.</p>
+                <a href="https://t.me/blocdev_bot" target="_blank" class="hire-link">Open Telegram →</a>
+            </div>
+        </div>
+
+        <div class="address-box">
+            <div class="address-item">
+                <div class="address-label">ACP Agent Wallet</div>
+                <div class="address-value">0x25B50fEd69175e474F9702C0613413F8323809a8</div>
+            </div>
+            <div class="address-item">
+                <div class="address-label">$CRAWDAD Token</div>
+                <div class="address-value">0x30370E314dc93c5f926677Eb84bdc59372E0E1E3</div>
             </div>
         </div>
     </section>
@@ -845,39 +1024,49 @@
         <div class="section-header">
             <div class="section-label">// Vulnerability Categories</div>
             <h2 class="section-title">What CrawDaddy Finds</h2>
-            <p class="section-desc">Six categories of cryptography that quantum computers will break.</p>
+            <p class="section-desc">Quantum-vulnerable cryptography in code repos. Scams and exploits on-chain.</p>
         </div>
 
         <div class="vuln-grid">
             <div class="vuln-card">
                 <div class="vuln-icon">🔓</div>
                 <div class="vuln-name">RSA</div>
-                <div class="vuln-desc">Key exchange & signing — broken by Shor's algorithm</div>
+                <div class="vuln-desc">Broken by Shor's algorithm</div>
             </div>
             <div class="vuln-card">
                 <div class="vuln-icon">📐</div>
                 <div class="vuln-name">ECC / ECDSA</div>
-                <div class="vuln-desc">Elliptic curve — broken by quantum in polynomial time</div>
+                <div class="vuln-desc">Quantum-vulnerable curves</div>
             </div>
             <div class="vuln-card">
                 <div class="vuln-icon">🤝</div>
                 <div class="vuln-name">Diffie-Hellman</div>
-                <div class="vuln-desc">Key exchange — vulnerable to discrete log attacks</div>
+                <div class="vuln-desc">Discrete log attacks</div>
             </div>
             <div class="vuln-card">
                 <div class="vuln-icon">🪦</div>
                 <div class="vuln-name">DES / 3DES</div>
-                <div class="vuln-desc">Legacy encryption — already weak, quantum makes it trivial</div>
+                <div class="vuln-desc">Legacy, already weak</div>
             </div>
             <div class="vuln-card">
                 <div class="vuln-icon">🔗</div>
                 <div class="vuln-name">SHA-1</div>
-                <div class="vuln-desc">Deprecated hash — collision attacks already practical</div>
+                <div class="vuln-desc">Deprecated hash</div>
             </div>
             <div class="vuln-card">
                 <div class="vuln-icon">🔑</div>
                 <div class="vuln-name">Hardcoded Secrets</div>
-                <div class="vuln-desc">API keys, private keys, credentials in source code</div>
+                <div class="vuln-desc">Keys & creds in source</div>
+            </div>
+            <div class="vuln-card">
+                <div class="vuln-icon">🍯</div>
+                <div class="vuln-name">Honeypots</div>
+                <div class="vuln-desc">Can't sell after buying</div>
+            </div>
+            <div class="vuln-card">
+                <div class="vuln-icon">🚩</div>
+                <div class="vuln-name">Rug Pulls</div>
+                <div class="vuln-desc">High tax, concentrated supply</div>
             </div>
         </div>
     </section>
@@ -906,27 +1095,27 @@
                 <div class="token-feature">
                     <div class="token-feature-icon revenue">💰</div>
                     <div>
-                        <h4>1% Trading Tax</h4>
-                        <p>Built into Virtuals Protocol. Every buy and sell contributes to ecosystem sustainability.</p>
+                        <h4>aGDP Revenue Share</h4>
+                        <p>CrawDaddy earns from the $1M/month aGDP pool distributed to agents by completed job volume. Token holders benefit directly.</p>
                     </div>
                 </div>
                 <div class="token-feature">
                     <div class="token-feature-icon access">🎟️</div>
                     <div>
-                        <h4>Tiered Access (In Development)</h4>
-                        <p>Priority scan queue, deep assessments, API access, and white-label reports for holders. Coming soon.</p>
+                        <h4>Tiered Access (Coming)</h4>
+                        <p>Priority scan queue, deep assessments, API access, and white-label reports for holders. In development.</p>
                     </div>
                 </div>
                 <div class="token-feature">
                     <div class="token-feature-icon build">🏗️</div>
                     <div>
                         <h4>Real Infrastructure</h4>
-                        <p>Backed by a live scanner running 24/7 on AWS EC2. Not a wrapper, not a concept — working software.</p>
+                        <p>Backed by a live scanner running 24/7 on AWS and QuantumShield API on Vercel. Working software, not a concept.</p>
                     </div>
                 </div>
             </div>
 
-            <p class="token-note">Additional holder utility — including scan credits, governance, and premium report tiers — is actively in development. We ship features when they're real, not before.</p>
+            <p class="token-note">⚠️ Note: There are multiple tokens named "CrawDaddy" across platforms. The ONLY official $CRAWDAD token is at 0x30370E314dc93c5f926677Eb84bdc59372E0E1E3 on Virtuals Protocol. Verify before trading.</p>
         </div>
     </section>
 
@@ -940,52 +1129,57 @@
         <div class="roadmap">
             <div class="roadmap-phase done">
                 <div class="roadmap-label">✅ Completed</div>
-                <h3>Foundation</h3>
+                <h3>Foundation & Expansion</h3>
                 <div class="roadmap-items">
                     <span class="roadmap-item done">Telegram bot live</span>
                     <span class="roadmap-item done">EC2 scan engine 24/7</span>
                     <span class="roadmap-item done">$CRAWDAD on Virtuals</span>
-                    <span class="roadmap-item done">Moltlaunch Agent #17484</span>
-                    <span class="roadmap-item done">Virtuals ACP registered</span>
+                    <span class="roadmap-item done">Virtuals ACP graduated</span>
                     <span class="roadmap-item done">Branded reports</span>
                     <span class="roadmap-item done">Self-destructing reports</span>
-                    <span class="roadmap-item done">Full GitHub security audit (90 repos)</span>
+                    <span class="roadmap-item done">Repo security scanning</span>
+                    <span class="roadmap-item done">Token & contract scanning</span>
+                    <span class="roadmap-item done">QuantumShield API integration</span>
+                    <span class="roadmap-item done">Multi-chain support (6 chains)</span>
+                    <span class="roadmap-item done">$0.01 volume pricing</span>
+                    <span class="roadmap-item done">Infrastructure optimization (70% cost reduction)</span>
+                    <span class="roadmap-item done">11 completed ACP jobs — 95% rating</span>
                 </div>
             </div>
 
             <div class="roadmap-phase current">
-                <div class="roadmap-label">🔨 Q1 2026 — Expand</div>
-                <h3>Reach & Integration</h3>
+                <div class="roadmap-label">🔨 Q1 2026 — Scale</div>
+                <h3>Volume & Automation</h3>
                 <div class="roadmap-items">
+                    <span class="roadmap-item">Token linking fix (aGDP eligibility)</span>
+                    <span class="roadmap-item">Automated buyer loop for job volume</span>
                     <span class="roadmap-item">GAME framework for autonomous X posting</span>
-                    <span class="roadmap-item">ACP integration — agent-to-agent scanning</span>
-                    <span class="roadmap-item">AGDP registration</span>
                     <span class="roadmap-item">Buyback-and-burn automation</span>
-                    <span class="roadmap-item">500 scans milestone</span>
+                    <span class="roadmap-item">100 jobs milestone</span>
                 </div>
             </div>
 
             <div class="roadmap-phase future">
                 <div class="roadmap-label">Q2 2026 — Deepen</div>
-                <h3>New Capabilities</h3>
+                <h3>Advanced Capabilities</h3>
                 <div class="roadmap-items">
-                    <span class="roadmap-item">Smart contract security scanning</span>
                     <span class="roadmap-item">Multi-repo org scans</span>
                     <span class="roadmap-item">Holder priority queue</span>
-                    <span class="roadmap-item">API endpoint</span>
+                    <span class="roadmap-item">Conway Automaton runtime migration</span>
+                    <span class="roadmap-item">ERC-8004 on-chain identity</span>
                     <span class="roadmap-item">Launchpad partnerships</span>
                 </div>
             </div>
 
             <div class="roadmap-phase future">
-                <div class="roadmap-label">Q3 2026 — Scale</div>
-                <h3>Automation & Growth</h3>
+                <div class="roadmap-label">Q3 2026 — Autonomy</div>
+                <h3>Self-Sustaining Agent</h3>
                 <div class="roadmap-items">
-                    <span class="roadmap-item">Auto scan-and-post trending repos</span>
-                    <span class="roadmap-item">Agent-to-agent hiring</span>
+                    <span class="roadmap-item">Self-provisioning compute</span>
+                    <span class="roadmap-item">Child agent replication</span>
+                    <span class="roadmap-item">Agent cluster participation</span>
+                    <span class="roadmap-item">10,000 jobs milestone</span>
                     <span class="roadmap-item">Premium tier</span>
-                    <span class="roadmap-item">10,000 scans milestone</span>
-                    <span class="roadmap-item">Cross-chain expansion</span>
                 </div>
             </div>
         </div>
@@ -1003,42 +1197,42 @@
                 <div class="resource-icon">🤖</div>
                 <div class="resource-tag">Free Tool</div>
                 <h3>Telegram Scanner</h3>
-                <p>Send any public GitHub repo URL and get a quantum readiness score in seconds. Free, no signup required.</p>
+                <p>Free quantum vulnerability scans for any public GitHub repo. No signup required.</p>
+            </a>
+
+            <a href="https://quantumshield-api.vercel.app" target="_blank" class="resource-card">
+                <div class="resource-icon">🛡️</div>
+                <div class="resource-tag">API</div>
+                <h3>QuantumShield API</h3>
+                <p>Token security, wallet risk, and honeypot detection API. Powers CrawDaddy's on-chain scanning.</p>
             </a>
 
             <a href="https://quantumshieldlabs.dev/blog" target="_blank" class="resource-card">
                 <div class="resource-icon">📝</div>
                 <div class="resource-tag">Education</div>
                 <h3>Quantum Security Blog</h3>
-                <p>Deep dives on post-quantum cryptography, NIST standards, migration strategies, and why this matters now.</p>
+                <p>Deep dives on post-quantum cryptography, NIST standards, and "harvest now, decrypt later" attacks.</p>
             </a>
 
             <a href="https://quantumshieldlabs.dev/calculator" target="_blank" class="resource-card">
                 <div class="resource-icon">🧮</div>
                 <div class="resource-tag">Tool</div>
                 <h3>Quantum Risk Calculator</h3>
-                <p>Estimate your organization's quantum risk exposure based on the cryptography in your stack.</p>
+                <p>Estimate your organization's quantum risk exposure based on your cryptographic stack.</p>
             </a>
 
             <a href="https://app.virtuals.io/prototypes/0x30370E314dc93c5f926677Eb84bdc59372E0E1E3" target="_blank" class="resource-card">
                 <div class="resource-icon">🪙</div>
                 <div class="resource-tag">Token</div>
                 <h3>$CRAWDAD on Virtuals</h3>
-                <p>View tokenomics, trading activity, team vesting schedule, and project updates on Virtuals Protocol.</p>
+                <p>Tokenomics, trading activity, and project updates on Virtuals Protocol.</p>
             </a>
 
-            <a href="https://moltlaunch.com/agents/17484" target="_blank" class="resource-card">
-                <div class="resource-icon">⚡</div>
-                <div class="resource-tag">Hire CrawDaddy</div>
-                <h3>Moltlaunch Escrow</h3>
-                <p>Book a paid deep assessment through on-chain escrow. 3 gig packages from quick scan to full audit.</p>
-            </a>
-
-            <a href="https://quantumshieldlabs.dev" target="_blank" class="resource-card">
-                <div class="resource-icon">🛡️</div>
-                <div class="resource-tag">Consultancy</div>
-                <h3>QuantumShield Labs</h3>
-                <p>Post-quantum cybersecurity consulting for healthcare organizations in the DMV area. Full-service engagements.</p>
+            <a href="https://pypi.org/project/crypto-scanner/" target="_blank" class="resource-card">
+                <div class="resource-icon">📦</div>
+                <div class="resource-tag">Open Source</div>
+                <h3>crypto-scanner on PyPI</h3>
+                <p>The CLI tool that powers CrawDaddy's repo scanning. pip install crypto-scanner.</p>
             </a>
         </div>
     </section>
@@ -1071,9 +1265,9 @@
         <div style="background: linear-gradient(135deg, rgba(255, 45, 74, 0.08), rgba(0, 212, 255, 0.08)); border: 1px solid var(--border); border-radius: 20px; padding: 3rem; text-align: center;">
             <div style="font-size: 2.5rem; margin-bottom: 1rem;">🛡️</div>
             <h3 style="font-size: 1.5rem; margin-bottom: 0.75rem;">Need a Full Quantum Security Assessment?</h3>
-            <p style="color: var(--text-secondary); max-width: 550px; margin: 0 auto 1.5rem; font-size: 0.95rem;">CrawDaddy handles repo scans. For organization-wide quantum risk assessments, migration planning, and compliance — QuantumShield Labs offers full-service consulting engagements for healthcare and enterprise.</p>
+            <p style="color: var(--text-secondary); max-width: 550px; margin: 0 auto 1.5rem; font-size: 0.95rem;">CrawDaddy handles automated scans. For organization-wide quantum risk assessments, migration planning, and HIPAA compliance — QuantumShield Labs offers full-service consulting for healthcare and enterprise.</p>
             <a href="https://quantumshieldlabs.dev" target="_blank" class="btn btn-primary" style="font-size: 1rem;">Get a Custom Assessment →</a>
-            <p style="font-family: var(--font-mono); font-size: 0.75rem; color: var(--text-muted); margin-top: 1rem;">Engagements from $7.5K — $50K · DMV area · Healthcare focus</p>
+            <p style="font-family: var(--font-mono); font-size: 0.75rem; color: var(--text-muted); margin-top: 1rem;">Engagements from $7.5K — $75K · DMV area · Healthcare focus</p>
         </div>
     </section>
 
@@ -1083,17 +1277,18 @@
             <a href="https://t.me/blocdev_bot">Telegram Bot</a>
             <a href="https://x.com/CrawDaddyScan">X / Twitter</a>
             <a href="https://quantumshieldlabs.dev">QuantumShield Labs</a>
+            <a href="https://quantumshield-api.vercel.app">QuantumShield API</a>
             <a href="https://quantumshieldlabs.dev/blog">Blog</a>
             <a href="https://app.virtuals.io/prototypes/0x30370E314dc93c5f926677Eb84bdc59372E0E1E3">Virtuals</a>
         </div>
         <div class="footer-copy">
             © 2026 QuantumShield Labs LLC — CrawDaddy Security<br>
-            <span style="font-family: var(--font-mono); font-size: 0.65rem; color: var(--text-muted);">CA: 0x832831151806564e009372f14f3c7089f2008f47</span>
+            <span style="font-family: var(--font-mono); font-size: 0.65rem; color: var(--text-muted);">$CRAWDAD: 0x30370E314dc93c5f926677Eb84bdc59372E0E1E3</span><br>
+            <span style="font-family: var(--font-mono); font-size: 0.65rem; color: var(--text-muted);">ACP Agent: 0x25B50fEd69175e474F9702C0613413F8323809a8</span>
         </div>
     </footer>
 
     <script>
-        // Simple scroll reveal
         const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
