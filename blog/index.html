@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Quantum Security Blog | Quantum Shield Labs</title>
     <meta name="description" content="Expert insights on post-quantum cryptography, healthcare cybersecurity, and preparing your organization for the quantum threat. Actionable guidance from Quantum Shield Labs.">
-    <meta name="keywords" content="quantum security, post-quantum cryptography, healthcare cybersecurity, HIPAA, quantum computing, encryption, cybersecurity blog">
+    <meta name="keywords" content="quantum security, post-quantum cryptography, healthcare cybersecurity, HIPAA, quantum computing, encryption, cybersecurity blog, supply chain security">
     <meta name="author" content="Quantum Shield Labs">
     <link rel="canonical" href="https://quantumshieldlabs.dev/blog/">
     
@@ -139,7 +139,170 @@
             padding: 3rem 1.5rem;
         }
         
-        /* ===== NEW: DUAL FEATURED POSTS ===== */
+        /* ===== FEATURED HERO POST (single, full-width) ===== */
+        .featured-hero-section {
+            margin-bottom: 3rem;
+        }
+
+        .featured-hero-label {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: linear-gradient(135deg, #ef4444, #f59e0b);
+            color: white;
+            padding: 0.4rem 1.25rem;
+            border-radius: 2rem;
+            font-weight: 700;
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 1.5rem;
+            animation: pulse-glow 2s ease-in-out infinite;
+        }
+
+        @keyframes pulse-glow {
+            0%, 100% { box-shadow: 0 0 8px rgba(239, 68, 68, 0.3); }
+            50% { box-shadow: 0 0 20px rgba(239, 68, 68, 0.5); }
+        }
+
+        .featured-hero-card {
+            background: linear-gradient(135deg, rgba(239, 68, 68, 0.08), rgba(245, 158, 11, 0.08), rgba(59, 130, 246, 0.08));
+            border: 1px solid rgba(239, 68, 68, 0.2);
+            border-radius: 1rem;
+            overflow: hidden;
+            display: grid;
+            grid-template-columns: 1fr 1.2fr;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .featured-hero-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 20px 50px rgba(239, 68, 68, 0.12);
+        }
+
+        .featured-hero-image {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 5rem;
+            background: linear-gradient(135deg, rgba(239, 68, 68, 0.15), rgba(245, 158, 11, 0.1));
+            position: relative;
+            min-height: 300px;
+        }
+
+        .featured-hero-image .new-pulse {
+            position: absolute;
+            top: 1.25rem;
+            left: 1.25rem;
+            background: linear-gradient(135deg, #ef4444, #dc2626);
+            color: white;
+            padding: 0.35rem 0.9rem;
+            border-radius: 0.3rem;
+            font-size: 0.7rem;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            display: flex;
+            align-items: center;
+            gap: 0.4rem;
+            animation: badge-pulse 1.5s ease-in-out infinite;
+        }
+
+        @keyframes badge-pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.7; }
+        }
+
+        .featured-hero-body {
+            padding: 2.5rem;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .featured-hero-tags {
+            display: flex;
+            gap: 0.4rem;
+            margin-bottom: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .featured-hero-tag {
+            background: rgba(239, 68, 68, 0.2);
+            color: #fca5a5;
+            padding: 0.2rem 0.6rem;
+            border-radius: 0.25rem;
+            font-size: 0.7rem;
+            font-weight: 600;
+            text-transform: uppercase;
+        }
+
+        .featured-hero-body h2 {
+            font-size: 1.6rem;
+            font-weight: 800;
+            color: white;
+            line-height: 1.3;
+            margin-bottom: 1rem;
+        }
+
+        .featured-hero-body h2 a {
+            color: white;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .featured-hero-body h2 a:hover {
+            color: #fbbf24;
+        }
+
+        .featured-hero-meta {
+            display: flex;
+            gap: 1.25rem;
+            margin-bottom: 1rem;
+            color: #94a3b8;
+            font-size: 0.8rem;
+            flex-wrap: wrap;
+        }
+
+        .featured-hero-meta span {
+            display: flex;
+            align-items: center;
+            gap: 0.4rem;
+        }
+
+        .featured-hero-meta i {
+            color: #f59e0b;
+            font-size: 0.75rem;
+        }
+
+        .featured-hero-excerpt {
+            color: #cbd5e1;
+            font-size: 0.95rem;
+            line-height: 1.7;
+            margin-bottom: 1.5rem;
+        }
+
+        .featured-hero-cta {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: linear-gradient(135deg, #ef4444, #f59e0b);
+            color: white;
+            padding: 0.75rem 1.5rem;
+            border-radius: 0.5rem;
+            font-weight: 600;
+            font-size: 0.95rem;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            width: fit-content;
+        }
+
+        .featured-hero-cta:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(239, 68, 68, 0.35);
+        }
+
+        /* ===== DUAL FEATURED POSTS ===== */
         .featured-duo-section {
             margin-bottom: 4rem;
         }
@@ -148,8 +311,9 @@
             display: inline-flex;
             align-items: center;
             gap: 0.5rem;
-            background: linear-gradient(135deg, #ef4444, #f59e0b);
-            color: white;
+            background: rgba(59, 130, 246, 0.15);
+            border: 1px solid rgba(59, 130, 246, 0.3);
+            color: #60a5fa;
             padding: 0.4rem 1.25rem;
             border-radius: 2rem;
             font-weight: 700;
@@ -166,8 +330,8 @@
         }
 
         .featured-duo-card {
-            background: linear-gradient(135deg, rgba(239, 68, 68, 0.12), rgba(245, 158, 11, 0.12));
-            border: 1px solid rgba(239, 68, 68, 0.25);
+            background: linear-gradient(135deg, rgba(59, 130, 246, 0.08), rgba(139, 92, 246, 0.08));
+            border: 1px solid rgba(59, 130, 246, 0.2);
             border-radius: 1rem;
             overflow: hidden;
             transition: transform 0.3s ease, box-shadow 0.3s ease;
@@ -177,7 +341,7 @@
 
         .featured-duo-card:hover {
             transform: translateY(-5px);
-            box-shadow: 0 20px 40px rgba(239, 68, 68, 0.15);
+            box-shadow: 0 20px 40px rgba(59, 130, 246, 0.12);
         }
 
         .featured-duo-card-image {
@@ -188,14 +352,7 @@
             font-size: 4rem;
             position: relative;
             overflow: hidden;
-        }
-
-        .featured-duo-card:first-child .featured-duo-card-image {
-            background: linear-gradient(135deg, rgba(59, 130, 246, 0.2), rgba(245, 158, 11, 0.2));
-        }
-
-        .featured-duo-card:last-child .featured-duo-card-image {
-            background: linear-gradient(135deg, rgba(139, 92, 246, 0.2), rgba(59, 130, 246, 0.2));
+            background: linear-gradient(135deg, rgba(59, 130, 246, 0.15), rgba(139, 92, 246, 0.15));
         }
 
         .featured-duo-card-image .new-badge {
@@ -227,8 +384,8 @@
         }
 
         .featured-duo-tag {
-            background: rgba(239, 68, 68, 0.2);
-            color: #fca5a5;
+            background: rgba(59, 130, 246, 0.2);
+            color: #93c5fd;
             padding: 0.2rem 0.6rem;
             border-radius: 0.25rem;
             font-size: 0.7rem;
@@ -251,7 +408,7 @@
         }
 
         .featured-duo-card-body h3 a:hover {
-            color: #fbbf24;
+            color: #60a5fa;
         }
 
         .featured-duo-meta {
@@ -270,7 +427,7 @@
         }
 
         .featured-duo-meta i {
-            color: #f59e0b;
+            color: #3b82f6;
             font-size: 0.75rem;
         }
 
@@ -286,7 +443,7 @@
             display: inline-flex;
             align-items: center;
             gap: 0.5rem;
-            background: linear-gradient(135deg, #ef4444, #f59e0b);
+            background: linear-gradient(135deg, #3b82f6, #6366f1);
             color: white;
             padding: 0.65rem 1.25rem;
             border-radius: 0.5rem;
@@ -299,7 +456,7 @@
 
         .featured-duo-cta:hover {
             transform: translateY(-2px);
-            box-shadow: 0 8px 20px rgba(239, 68, 68, 0.3);
+            box-shadow: 0 8px 20px rgba(59, 130, 246, 0.3);
         }
         
         /* ===== SECTION TITLE ===== */
@@ -333,12 +490,32 @@
             transition: all 0.3s ease;
             display: flex;
             flex-direction: column;
+            position: relative;
         }
         
         .blog-post-card:hover {
             transform: translateY(-5px);
             border-color: rgba(59, 130, 246, 0.4);
             box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
+        }
+
+        /* NEW badge for regular cards */
+        .card-new-badge {
+            position: absolute;
+            top: 0.75rem;
+            right: 0.75rem;
+            background: linear-gradient(135deg, #ef4444, #f59e0b);
+            color: white;
+            padding: 0.2rem 0.6rem;
+            border-radius: 0.2rem;
+            font-size: 0.65rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            z-index: 2;
+            display: flex;
+            align-items: center;
+            gap: 0.3rem;
         }
         
         .blog-post-card-image {
@@ -539,6 +716,22 @@
                 font-size: 1.75rem;
             }
 
+            .featured-hero-card {
+                grid-template-columns: 1fr;
+            }
+
+            .featured-hero-image {
+                min-height: 200px;
+            }
+
+            .featured-hero-body {
+                padding: 1.5rem;
+            }
+
+            .featured-hero-body h2 {
+                font-size: 1.3rem;
+            }
+
             .featured-duo-grid {
                 grid-template-columns: 1fr;
             }
@@ -585,18 +778,55 @@
     <!-- Main Content -->
     <main class="blog-main">
         
-        <!-- ===== NEW: DUAL FEATURED POSTS ===== -->
+        <!-- ===== FEATURED HERO: XZ Backdoor (Full Width) ===== -->
+        <section class="featured-hero-section">
+            <div class="featured-hero-label">
+                <i class="fas fa-fire"></i> Latest Analysis
+            </div>
+            <article class="featured-hero-card">
+                <div class="featured-hero-image">
+                    🕵️
+                    <span class="new-pulse"><i class="fas fa-bolt"></i> New Post</span>
+                </div>
+                <div class="featured-hero-body">
+                    <div class="featured-hero-tags">
+                        <span class="featured-hero-tag" style="background: rgba(239, 68, 68, 0.2); color: #fca5a5;">Supply Chain</span>
+                        <span class="featured-hero-tag" style="background: rgba(239, 68, 68, 0.2); color: #fca5a5;">Nation-State</span>
+                        <span class="featured-hero-tag" style="background: rgba(239, 68, 68, 0.2); color: #fca5a5;">Open Source</span>
+                        <span class="featured-hero-tag" style="background: rgba(239, 68, 68, 0.2); color: #fca5a5;">Healthcare</span>
+                    </div>
+                    <h2>
+                        <a href="xz-backdoor-supply-chain-attack.html">
+                            The XZ Utils Backdoor: A Nation-State Spent 2.5 Years Social Engineering One Unpaid Developer — And Almost Owned Every Server on Earth
+                        </a>
+                    </h2>
+                    <div class="featured-hero-meta">
+                        <span><i class="far fa-calendar"></i> Feb 28, 2026</span>
+                        <span><i class="far fa-user"></i> Michael Bennett</span>
+                        <span><i class="far fa-clock"></i> 14 min</span>
+                    </div>
+                    <p class="featured-hero-excerpt">
+                        A Microsoft engineer noticed a 500ms delay in SSH. That half-second uncovered the most sophisticated supply chain attack ever attempted — a backdoor that would have given a nation-state root access to millions of servers running hospitals, banks, and nuclear infrastructure. Every EHR system running Linux was weeks away from compromise.
+                    </p>
+                    <a href="xz-backdoor-supply-chain-attack.html" class="featured-hero-cta">
+                        Read Full Analysis <i class="fas fa-arrow-right"></i>
+                    </a>
+                </div>
+            </article>
+        </section>
+
+        <!-- ===== RECENT PICKS (prev featured, now duo) ===== -->
         <section class="featured-duo-section">
             <div class="featured-duo-label">
-                <i class="fas fa-fire"></i> New This Week
+                <i class="fas fa-star"></i> Recent Picks
             </div>
             <div class="featured-duo-grid">
 
-                <!-- Featured 1: Frozen Light -->
+                <!-- Frozen Light -->
                 <article class="featured-duo-card">
                     <div class="featured-duo-card-image">
                         🔐
-                        <span class="new-badge"><i class="fas fa-bolt"></i> New</span>
+                        <span class="new-badge"><i class="fas fa-bolt"></i> Recent</span>
                     </div>
                     <div class="featured-duo-card-body">
                         <div class="featured-duo-tags">
@@ -615,26 +845,25 @@
                             <span><i class="far fa-clock"></i> 12 min</span>
                         </div>
                         <p class="featured-duo-excerpt">
-                            David Bohm said "matter is frozen light." Your encrypted data is frozen trust. When quantum computing raises the temperature, the mathematical confinement dissolves — and 50 years of patient records melt into plaintext. The physics of why your encryption has an expiration date.
+                            David Bohm said "matter is frozen light." Your encrypted data is frozen trust. When quantum computing raises the temperature, the mathematical confinement dissolves — and 50 years of patient records melt into plaintext.
                         </p>
                         <a href="blog-2-frozen-light-encryption.html" class="featured-duo-cta">
-                            Read Full Article <i class="fas fa-arrow-right"></i>
+                            Read Article <i class="fas fa-arrow-right"></i>
                         </a>
                     </div>
                 </article>
 
-                <!-- Featured 2: AI Energy Wall -->
+                <!-- AI Energy Wall -->
                 <article class="featured-duo-card">
                     <div class="featured-duo-card-image">
                         ⚡
-                        <span class="new-badge"><i class="fas fa-bolt"></i> New</span>
+                        <span class="new-badge"><i class="fas fa-bolt"></i> Recent</span>
                     </div>
                     <div class="featured-duo-card-body">
                         <div class="featured-duo-tags">
                             <span class="featured-duo-tag">Energy</span>
                             <span class="featured-duo-tag">Quantum</span>
                             <span class="featured-duo-tag">Photonic</span>
-                            <span class="featured-duo-tag">Policy</span>
                         </div>
                         <h3>
                             <a href="blog-1-ai-energy-wall.html">
@@ -647,10 +876,10 @@
                             <span><i class="far fa-clock"></i> 14 min</span>
                         </div>
                         <p class="featured-duo-excerpt">
-                            Google's quantum milestone, photonic computing breakthroughs, and the EPA endangerment rollback are one story. The same technologies racing to solve AI's energy crisis are racing to break every encryption standard protecting your data.
+                            Google's quantum milestone, photonic computing breakthroughs, and the EPA rollback are one story. The same technologies racing to solve AI's energy crisis are racing to break your encryption.
                         </p>
                         <a href="blog-1-ai-energy-wall.html" class="featured-duo-cta">
-                            Read Full Article <i class="fas fa-arrow-right"></i>
+                            Read Article <i class="fas fa-arrow-right"></i>
                         </a>
                     </div>
                 </article>
@@ -663,8 +892,9 @@
             <h2 class="section-title"><i class="fas fa-newspaper"></i> All Articles</h2>
             <div class="blog-grid">
 
-                <!-- Post: Wall Street Bitcoin Quantum Fears (prev featured) -->
+                <!-- Post: Wall Street Bitcoin Quantum Fears -->
                 <article class="blog-post-card">
+                    <span class="card-new-badge"><i class="fas fa-circle" style="font-size: 0.4rem;"></i> New</span>
                     <div class="blog-post-card-image">🚨</div>
                     <div class="blog-post-card-content">
                         <span class="blog-post-card-tag">Breaking Analysis</span>
@@ -689,7 +919,7 @@
                         </h3>
                         <p class="blog-post-card-excerpt">When trained economists walk away from OpenAI over allegedly buried research, security leaders should pay attention. The same organizational pattern threatens quantum preparedness.</p>
                         <div class="blog-post-card-meta">
-                            <span><i class="far fa-calendar"></i> Dec 2024</span>
+                            <span><i class="far fa-calendar"></i> Dec 2025</span>
                             <span><i class="far fa-clock"></i> 8 min</span>
                         </div>
                     </div>
