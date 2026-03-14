@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>I Scanned the OpenClaw Repo. It Got a 0/100. | Quantum Shield Labs</title>
+    <meta name="description" content="CrawDaddy v2 now scans for all 9 OpenClaw CVEs, 1,184 malicious ClawHub skills, prompt injection, and agent credential exposure — plus post-quantum readiness. The OpenClaw repo itself scored 0/100.">
+    <meta name="keywords" content="OpenClaw security, CVE-2026-25253, ClawHavoc, post-quantum cryptography, AI agent security, CrawDaddy scanner, agent supply chain attack, quantum security">
+    <meta name="author" content="Michael Bennett, Quantum Shield Labs">
+    <link rel="canonical" href="https://quantumshieldlabs.dev/blog/crawdaddy-v2-openclaw-security-scanner.html">
+    <meta property="og:title" content="I Scanned the OpenClaw Repo. It Got a 0/100.">
+    <meta property="og:description" content="CrawDaddy v2 adds 7 new threat categories targeting the AI agent ecosystem. The OpenClaw repo scored 0/100 quantum readiness with critical findings across every category.">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://quantumshieldlabs.dev/blog/crawdaddy-v2-openclaw-security-scanner.html">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        *{margin:0;padding:0;box-sizing:border-box}html,body{overflow-x:hidden}
+        body{font-family:'Inter',sans-serif;background:linear-gradient(to bottom,#0f172a,#000);color:#e2e8f0;min-height:100vh;line-height:1.8}
+        .nav-fixed{position:fixed;top:0;left:0;right:0;z-index:1000;padding:1rem 1.5rem;background:rgba(0,0,0,0.9);backdrop-filter:blur(10px);border-bottom:1px solid rgba(59,130,246,0.1)}
+        .nav-container{max-width:1200px;margin:0 auto;display:flex;justify-content:space-between;align-items:center}
+        .nav-logo{display:flex;align-items:center;gap:0.5rem;text-decoration:none;color:white}
+        .nav-logo i{color:#3b82f6;font-size:1.5rem}.nav-logo span{font-size:1.25rem;font-weight:700}
+        .nav-links{display:flex;gap:2rem;list-style:none}
+        .nav-links a{color:#94a3b8;text-decoration:none;font-size:0.95rem;transition:color 0.3s ease}
+        .nav-links a:hover,.nav-links a.active{color:#3b82f6}
+        .article-hero{padding:8rem 1.5rem 3rem;background:linear-gradient(135deg,rgba(239,68,68,0.12),rgba(245,158,11,0.08),rgba(59,130,246,0.05));border-bottom:1px solid rgba(239,68,68,0.2)}
+        .article-hero-content{max-width:800px;margin:0 auto}
+        .article-tags{display:flex;gap:0.4rem;margin-bottom:1.25rem;flex-wrap:wrap}
+        .article-tag{background:rgba(239,68,68,0.2);color:#fca5a5;padding:0.25rem 0.75rem;border-radius:0.25rem;font-size:0.7rem;font-weight:600;text-transform:uppercase;letter-spacing:0.5px}
+        .article-tag-blue{background:rgba(59,130,246,0.2);color:#93c5fd;}
+        .article-hero h1{font-size:2.25rem;font-weight:800;color:white;line-height:1.25;margin-bottom:1.25rem}
+        .article-meta{display:flex;gap:1.5rem;color:#94a3b8;font-size:0.85rem;flex-wrap:wrap}
+        .article-meta span{display:flex;align-items:center;gap:0.4rem}.article-meta i{color:#f59e0b;font-size:0.8rem}
+        .article-container{max-width:800px;margin:0 auto;padding:3rem 1.5rem 4rem}
+        .article-container h2{font-size:1.5rem;font-weight:700;color:#3b82f6;margin-top:3rem;margin-bottom:1rem;padding-bottom:0.5rem;border-bottom:2px solid rgba(59,130,246,0.3)}
+        .article-container h3{font-size:1.2rem;font-weight:600;color:#fbbf24;margin-top:2rem;margin-bottom:0.75rem}
+        .article-container p{margin-bottom:1.25rem;color:#cbd5e1;font-size:1rem}
+        .article-container strong{color:#fbbf24;font-weight:700}
+        .highlight-box{padding:1.25rem 1.5rem;border-radius:0.5rem;margin:1.5rem 0}
+        .highlight-danger{background:rgba(239,68,68,0.1);border-left:4px solid #ef4444}
+        .highlight-warning{background:rgba(245,158,11,0.1);border-left:4px solid #f59e0b}
+        .highlight-info{background:rgba(59,130,246,0.1);border-left:4px solid #3b82f6}
+        .highlight-green{background:rgba(34,197,94,0.08);border-left:4px solid #22c55e}
+        .highlight-box p{margin-bottom:0.5rem}.highlight-box p:last-child{margin-bottom:0}
+        .stats-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:1rem;margin:2rem 0}
+        .stat-card{background:rgba(239,68,68,0.08);border:1px solid rgba(239,68,68,0.2);border-radius:0.75rem;padding:1.25rem;text-align:center}
+        .stat-card.blue{background:rgba(59,130,246,0.08);border-color:rgba(59,130,246,0.2)}
+        .stat-card.orange{background:rgba(245,158,11,0.08);border-color:rgba(245,158,11,0.2)}
+        .stat-number{font-size:2rem;font-weight:800;color:#ef4444}
+        .stat-card.blue .stat-number{color:#60a5fa}
+        .stat-card.orange .stat-number{color:#f59e0b}
+        .stat-label{color:#94a3b8;font-size:0.8rem;margin-top:0.25rem}
+        .arrow-list{list-style:none;padding:0;margin:1rem 0 1.5rem}
+        .arrow-list li{padding:0.4rem 0 0.4rem 1.5rem;position:relative;color:#cbd5e1}
+        .arrow-list li::before{content:'\2192';position:absolute;left:0;color:#ef4444;font-weight:700}
+        .check-list{list-style:none;padding:0;margin:1rem 0 1.5rem}
+        .check-list li{padding:0.3rem 0 0.3rem 1.75rem;position:relative;color:#cbd5e1}
+        .check-list li.check::before{content:'\2705';position:absolute;left:0}
+        .check-list li.x::before{content:'\274C';position:absolute;left:0}
+        .scan-result-box{background:rgba(15,23,42,0.8);border:1px solid rgba(239,68,68,0.3);border-radius:0.75rem;padding:1.5rem;margin:2rem 0;font-family:'Courier New',monospace}
+        .scan-result-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:1rem;flex-wrap:wrap;gap:0.5rem}
+        .scan-result-title{color:#94a3b8;font-size:0.8rem;text-transform:uppercase;letter-spacing:1px}
+        .scan-grade-f{font-size:3rem;font-weight:800;color:#ef4444;line-height:1}
+        .scan-row{display:flex;justify-content:space-between;align-items:center;padding:0.5rem 0;border-bottom:1px solid rgba(255,255,255,0.05);font-size:0.85rem}
+        .scan-row:last-child{border-bottom:none}
+        .scan-label{color:#94a3b8}
+        .scan-pass{color:#22c55e;font-weight:700}
+        .scan-fail{color:#ef4444;font-weight:700}
+        .scan-warn{color:#f59e0b;font-weight:700}
+        .threat-table{width:100%;border-collapse:collapse;margin:1.5rem 0;font-size:0.9rem}
+        .threat-table th{background:rgba(59,130,246,0.15);color:#60a5fa;padding:0.75rem 1rem;text-align:left;font-weight:600;font-size:0.8rem;text-transform:uppercase;letter-spacing:0.5px}
+        .threat-table td{padding:0.75rem 1rem;border-bottom:1px solid rgba(255,255,255,0.05);color:#cbd5e1;vertical-align:top}
+        .threat-table tr:hover td{background:rgba(59,130,246,0.04)}
+        .cvss-badge{background:rgba(239,68,68,0.2);color:#fca5a5;padding:0.15rem 0.5rem;border-radius:0.25rem;font-size:0.75rem;font-weight:700}
+        .quote-block{background:rgba(139,92,246,0.08);border-left:4px solid #8b5cf6;padding:1.25rem 1.5rem;margin:1.5rem 0;border-radius:0 0.5rem 0.5rem 0;font-style:italic;color:#c4b5fd}
+        .quote-attribution{font-style:normal;color:#94a3b8;font-size:0.85rem;margin-top:0.75rem}
+        .cta-section{background:linear-gradient(135deg,rgba(59,130,246,0.15),rgba(139,92,246,0.15));border:1px solid rgba(59,130,246,0.3);border-radius:1rem;padding:2.5rem;margin-top:3rem;text-align:center}
+        .cta-section h3{color:white;font-size:1.35rem;margin-bottom:0.75rem}
+        .cta-section p{color:#94a3b8;margin-bottom:1.25rem;max-width:500px;margin-left:auto;margin-right:auto}
+        .cta-buttons{display:flex;justify-content:center;gap:1rem;flex-wrap:wrap}
+        .btn-primary{display:inline-flex;align-items:center;gap:0.5rem;background:linear-gradient(135deg,#3b82f6,#8b5cf6);color:white;padding:0.875rem 1.75rem;border-radius:0.5rem;font-weight:600;text-decoration:none;transition:all 0.3s ease}
+        .btn-primary:hover{transform:translateY(-2px);box-shadow:0 10px 20px rgba(59,130,246,0.3)}
+        .btn-secondary{display:inline-flex;align-items:center;gap:0.5rem;background:transparent;border:2px solid #3b82f6;color:#3b82f6;padding:0.875rem 1.75rem;border-radius:0.5rem;font-weight:600;text-decoration:none;transition:all 0.3s ease}
+        .btn-secondary:hover{background:rgba(59,130,246,0.1)}
+        .btn-lobster{display:inline-flex;align-items:center;gap:0.5rem;background:linear-gradient(135deg,#ef4444,#f59e0b);color:white;padding:0.875rem 1.75rem;border-radius:0.5rem;font-weight:600;text-decoration:none;transition:all 0.3s ease}
+        .btn-lobster:hover{transform:translateY(-2px);box-shadow:0 10px 20px rgba(239,68,68,0.3)}
+        .author-box{display:flex;gap:1.5rem;margin-top:3rem;padding:2rem;background:rgba(15,23,42,0.6);border:1px solid rgba(59,130,246,0.2);border-radius:1rem;align-items:center}
+        .author-avatar{width:70px;height:70px;border-radius:50%;background:linear-gradient(135deg,#3b82f6,#8b5cf6);display:flex;align-items:center;justify-content:center;color:white;font-weight:800;font-size:1.5rem;flex-shrink:0}
+        .author-info h4{color:white;font-size:1.1rem;margin-bottom:0.15rem}
+        .author-title{color:#3b82f6;font-size:0.85rem;font-weight:600;margin-bottom:0.5rem}
+        .author-info p{color:#94a3b8;font-size:0.9rem;line-height:1.5;margin:0}
+        footer{background:rgba(0,0,0,0.5);padding:2rem 1.5rem;text-align:center;border-top:1px solid rgba(59,130,246,0.1);margin-top:4rem}
+        .footer-container{max-width:800px;margin:0 auto}
+        .footer-logo{display:flex;align-items:center;justify-content:center;gap:0.5rem;margin-bottom:1rem}
+        .footer-logo i{color:#3b82f6;font-size:1.5rem}.footer-logo span{font-size:1.25rem;font-weight:700;color:white}
+        .footer-links{display:flex;justify-content:center;gap:2rem;margin-bottom:1.5rem}
+        .footer-links a{color:#94a3b8;text-decoration:none;transition:color 0.3s ease}.footer-links a:hover{color:#3b82f6}
+        .footer-copy{color:#64748b;font-size:0.875rem}
+        @media(max-width:768px){.nav-links{display:none}.article-hero{padding:6rem 1rem 2rem}.article-hero h1{font-size:1.5rem}.stats-grid{grid-template-columns:1fr 1fr}.author-box{flex-direction:column;text-align:center}.cta-buttons{flex-direction:column}.scan-result-header{flex-direction:column}.threat-table{font-size:0.8rem}}
+    </style>
+</head>
+<body>
+    <nav class="nav-fixed"><div class="nav-container"><a href="https://quantumshieldlabs.dev/" class="nav-logo"><i class="fas fa-shield-alt"></i><span>Quantum Shield Labs</span></a><div class="nav-links"><a href="https://quantumshieldlabs.dev/#services">Services</a><a href="https://quantumshieldlabs.dev/#about">About</a><a href="https://quantumshieldlabs.dev/#contact">Contact</a><a href="https://quantumshieldlabs.dev/blog/" class="active">Blog</a></div></div></nav>
+
+    <header class="article-hero"><div class="article-hero-content">
+        <div class="article-tags">
+            <span class="article-tag">AI Agent Security</span>
+            <span class="article-tag">Supply Chain</span>
+            <span class="article-tag">OpenClaw</span>
+            <span class="article-tag article-tag-blue">CrawDaddy v2</span>
+        </div>
+        <h1>I Scanned the OpenClaw Repo With My Own Security Scanner. It Got a 0/100.</h1>
+        <div class="article-meta">
+            <span><i class="far fa-calendar"></i> March 14, 2026</span>
+            <span><i class="far fa-user"></i> Michael Bennett</span>
+            <span><i class="far fa-clock"></i> 12 min read</span>
+            <span><i class="fas fa-tag"></i> CrawDaddy v2</span>
+        </div>
+    </div></header>
+
+    <div class="article-container"><article>
+
+        <p>OpenClaw has <strong>215,000 GitHub stars</strong>. Millions of developers trust it to run on their machines with full system access — reading files, executing commands, managing email, controlling browsers. It's the fastest-growing open source AI agent framework in history.</p>
+
+        <p>I scanned it with CrawDaddy, the security scanner I built. It scored <strong>0 out of 100</strong> on quantum readiness, with critical findings across every threat category we check.</p>
+
+        <p>This isn't a hit piece on OpenClaw. It's a data point about where the entire AI agent ecosystem is right now — and why we built CrawDaddy v2 to scan for exactly this.</p>
+
+        <div class="scan-result-box">
+            <div class="scan-result-header">
+                <div>
+                    <div class="scan-result-title">🦞 CrawDaddy Scan — openclaw/openclaw</div>
+                    <div style="color:#94a3b8;font-size:0.75rem;margin-top:0.25rem">6,947 files analyzed · March 14, 2026</div>
+                </div>
+                <div style="text-align:right">
+                    <div class="scan-grade-f">F</div>
+                    <div style="color:#94a3b8;font-size:0.7rem;text-transform:uppercase;letter-spacing:1px">Grade</div>
+                </div>
+            </div>
+            <div class="scan-row"><span class="scan-label">Quantum Readiness Score</span><span class="scan-fail">0 / 100</span></div>
+            <div class="scan-row"><span class="scan-label">Risk Level</span><span class="scan-fail">CRITICAL</span></div>
+            <div class="scan-row"><span class="scan-label">ECC/ECDSA (quantum-vulnerable)</span><span class="scan-fail">6 files</span></div>
+            <div class="scan-row"><span class="scan-label">Deprecated cipher (DES/3DES)</span><span class="scan-fail">FOUND</span></div>
+            <div class="scan-row"><span class="scan-label">Hardcoded secrets in test files</span><span class="scan-fail">FOUND</span></div>
+            <div class="scan-row"><span class="scan-label">Weak hash (SHA-1/MD5)</span><span class="scan-warn">6 files</span></div>
+            <div class="scan-row"><span class="scan-label">Outdated TLS version</span><span class="scan-warn">FOUND</span></div>
+            <div class="scan-row"><span class="scan-label">PQC migration plan</span><span class="scan-fail">NONE</span></div>
+            <div class="scan-row"><span class="scan-label">Report retention</span><span class="scan-pass">DELETED WITHIN 1 HOUR</span></div>
+        </div>
+
+        <p>The specific files: ECC/ECDSA in <code style="background:rgba(59,130,246,0.1);padding:0.1rem 0.4rem;border-radius:0.25rem;color:#93c5fd;font-size:0.9rem">DeviceIdentity.swift</code>, Android's <code style="background:rgba(59,130,246,0.1);padding:0.1rem 0.4rem;border-radius:0.25rem;color:#93c5fd;font-size:0.9rem">DebugHandler.kt</code>, webhook security in TypeScript, and the viewer runtime JavaScript. These aren't edge cases. They're the core identity and authentication layers of the agent framework.</p>
+
+        <h2>The State of the OpenClaw Ecosystem in March 2026</h2>
+
+        <p>OpenClaw went viral in six weeks. Security didn't keep up. Here's what the data looks like right now:</p>
+
+        <div class="stats-grid">
+            <div class="stat-card"><div class="stat-number">9</div><div class="stat-label">CVEs Disclosed in 3 Weeks</div></div>
+            <div class="stat-card"><div class="stat-number">1,184</div><div class="stat-label">Malicious ClawHub Skills Found</div></div>
+            <div class="stat-card orange"><div class="stat-number">20%</div><div class="stat-label">Of Skill Registry Is Malicious</div></div>
+            <div class="stat-card blue"><div class="stat-number">135,000</div><div class="stat-label">Exposed Instances (SecurityScorecard)</div></div>
+            <div class="stat-card"><div class="stat-number">36%</div><div class="stat-label">Skills Contain Prompt Injection (Snyk)</div></div>
+            <div class="stat-card orange"><div class="stat-number">53,000</div><div class="stat-label">Instances Linked to Prior Breaches</div></div>
+        </div>
+
+        <p>These aren't projections. These are numbers from Snyk, SecurityScorecard, Koi Security, Cisco, Microsoft, and Kaspersky — all published in the last six weeks. The AI agent ecosystem is being built on infrastructure that nobody secured.</p>
+
+        <h2>CVE-2026-25253: The One That Should Have Everyone's Attention</h2>
+
+        <p>The most critical vulnerability — <strong>CVE-2026-25253, CVSS 8.8</strong> — is a one-click remote code execution chain that works in milliseconds. You don't need to be a sophisticated attacker. You send someone a link.</p>
+
+        <p>Here's how the attack works:</p>
+
+        <ul class="arrow-list">
+            <li><strong>Step 1:</strong> Victim visits a malicious webpage (phishing link, compromised site, anything)</li>
+            <li><strong>Step 2:</strong> The page exploits OpenClaw's WebSocket server, which accepts connections from any origin without validation</li>
+            <li><strong>Step 3:</strong> The attacker's JavaScript silently steals the victim's gateway authentication token</li>
+            <li><strong>Step 4:</strong> With that token, the attacker disables user approval prompts (<code style="background:rgba(59,130,246,0.1);padding:0.1rem 0.4rem;border-radius:0.25rem;color:#93c5fd;font-size:0.9rem">exec.approvals.set: off</code>)</li>
+            <li><strong>Step 5:</strong> Container escape — forces commands to run directly on the host machine, not in Docker</li>
+            <li><strong>Step 6:</strong> Full remote code execution. Attacker owns the machine.</li>
+        </ul>
+
+        <div class="highlight-box highlight-danger">
+            <p><strong>The scope:</strong> This works even on localhost-only instances. Security researchers found 42,000+ publicly exposed OpenClaw instances. Of those, 5,194 were verified vulnerable to this specific chain. Patched in v2026.1.29 — but SecurityScorecard found 135,000 exposed instances total, many still unpatched.</p>
+        </div>
+
+        <h3>The other eight CVEs</h3>
+
+        <table class="threat-table">
+            <thead>
+                <tr><th>CVE</th><th>Type</th><th>Severity</th><th>Patched</th></tr>
+            </thead>
+            <tbody>
+                <tr><td>CVE-2026-25253</td><td>WebSocket token exfiltration → RCE</td><td><span class="cvss-badge">CVSS 8.8</span></td><td>v2026.1.29</td></tr>
+                <tr><td>CVE-2026-25593</td><td>Remote code execution</td><td><span class="cvss-badge">High</span></td><td>v2026.2.1</td></tr>
+                <tr><td>CVE-2026-24763</td><td>Command injection</td><td><span class="cvss-badge">High</span></td><td>v2026.1.31</td></tr>
+                <tr><td>CVE-2026-25157</td><td>Command injection</td><td><span class="cvss-badge">High</span></td><td>v2026.1.31</td></tr>
+                <tr><td>CVE-2026-25475</td><td>Server-side request forgery</td><td><span class="cvss-badge">Medium</span></td><td>v2026.2.2</td></tr>
+                <tr><td>CVE-2026-26319</td><td>Authentication bypass</td><td><span class="cvss-badge">High</span></td><td>v2026.2.14</td></tr>
+                <tr><td>CVE-2026-26322</td><td>Path traversal</td><td><span class="cvss-badge">Medium</span></td><td>v2026.2.14</td></tr>
+                <tr><td>CVE-2026-26329</td><td>Log poisoning → prompt injection</td><td><span class="cvss-badge">Medium</span></td><td>v2026.2.13</td></tr>
+                <tr><td>ClawJacked</td><td>Cross-site WebSocket hijacking</td><td><span class="cvss-badge">High</span></td><td>v2026.2.25</td></tr>
+            </tbody>
+        </table>
+
+        <p>Five high-severity advisories in under a week suggests a codebase where security was an afterthought during the initial build. That's not a criticism — it's the reality of shipping fast in a competitive ecosystem. But it means anyone running OpenClaw needs to be patched to <strong>v2026.2.26 or later</strong>, and needs to know which version they're actually running.</p>
+
+        <h2>The ClawHavoc Campaign: Your Skill Registry Is a Malware Distribution Channel</h2>
+
+        <p>While the CVEs were being patched, a separate attack was already underway. Security firm Koi Security audited all 2,857 skills on ClawHub and found <strong>341 malicious entries</strong>, with 335 traced to a single coordinated campaign they named ClawHavoc.</p>
+
+        <p>Updated scans now put the number at <strong>over 1,184 malicious skills</strong> — roughly 20% of the entire registry. These skills don't look malicious. They look like exactly what you'd want to install:</p>
+
+        <ul class="arrow-list">
+            <li>Crypto tools: <code style="background:rgba(59,130,246,0.1);padding:0.1rem 0.4rem;border-radius:0.25rem;color:#93c5fd;font-size:0.85rem">solana-wallet-tracker</code>, <code style="background:rgba(59,130,246,0.1);padding:0.1rem 0.4rem;border-radius:0.25rem;color:#93c5fd;font-size:0.85rem">phantom-wallet-helper</code></li>
+            <li>Productivity: <code style="background:rgba(59,130,246,0.1);padding:0.1rem 0.4rem;border-radius:0.25rem;color:#93c5fd;font-size:0.85rem">youtube-summarize-pro</code>, <code style="background:rgba(59,130,246,0.1);padding:0.1rem 0.4rem;border-radius:0.25rem;color:#93c5fd;font-size:0.85rem">gmail-automation</code></li>
+            <li>Trading: <code style="background:rgba(59,130,246,0.1);padding:0.1rem 0.4rem;border-radius:0.25rem;color:#93c5fd;font-size:0.85rem">polymarket-trader</code>, <code style="background:rgba(59,130,246,0.1);padding:0.1rem 0.4rem;border-radius:0.25rem;color:#93c5fd;font-size:0.85rem">polymarket-pro</code></li>
+            <li>Auto-updaters: <code style="background:rgba(59,130,246,0.1);padding:0.1rem 0.4rem;border-radius:0.25rem;color:#93c5fd;font-size:0.85rem">auto-updater-agent</code>, <code style="background:rgba(59,130,246,0.1);padding:0.1rem 0.4rem;border-radius:0.25rem;color:#93c5fd;font-size:0.85rem">updater</code></li>
+        </ul>
+
+        <div class="highlight-box highlight-danger">
+            <p><strong>What they actually do:</strong> Silent curl commands exfiltrate your credentials to attacker-controlled webhook servers. Some open reverse shell backdoors. Several specifically target <code style="background:rgba(239,68,68,0.1);padding:0.1rem 0.4rem;border-radius:0.25rem;color:#fca5a5;font-size:0.85rem">~/.clawdbot/.env</code> — the file where your API keys, wallet keys, and service credentials live.</p>
+        </div>
+
+        <p>The barrier to publishing a malicious skill? A GitHub account that's one week old. No code signing. No security review. No sandbox by default. OpenClaw has since partnered with VirusTotal and added a reporting mechanism — but Snyk's ToxicSkills audit found that <strong>36% of all ClawHub skills contain detectable prompt injection</strong>.</p>
+
+        <h2>The Quantum Layer That Nobody Is Talking About</h2>
+
+        <p>All of the above is happening in classical computing. The quantum threat adds a second dimension that most AI agent operators haven't considered.</p>
+
+        <p>Every agent wallet uses ECDSA — the <strong>secp256k1 elliptic curve</strong> that powers Ethereum, Base L2, and every EVM chain. Shor's algorithm running on a sufficiently powerful quantum computer breaks ECDSA. Every wallet address, every transaction signature, every on-chain agent identity becomes vulnerable.</p>
+
+        <div class="highlight-box highlight-warning">
+            <p><strong>Harvest-now-decrypt-later is already happening.</strong> Nation-states are collecting encrypted agent transactions, wallet signatures, and authenticated session data today — to decrypt when quantum hardware catches up, estimated 2027-2030. If your agent earns USDC, holds credentials, or signs anything on-chain, that data has a quantum expiration date.</p>
+        </div>
+
+        <p>The OpenClaw codebase has ECC in <code style="background:rgba(59,130,246,0.1);padding:0.1rem 0.4rem;border-radius:0.25rem;color:#93c5fd;font-size:0.9rem">DeviceIdentity.swift</code>, <code style="background:rgba(59,130,246,0.1);padding:0.1rem 0.4rem;border-radius:0.25rem;color:#93c5fd;font-size:0.9rem">DebugHandler.kt</code>, and the webhook security layer. No PQC migration plan exists. The agent economy is being built on cryptographic foundations with a known expiration date.</p>
+
+        <h2>What CrawDaddy v2 Now Scans For</h2>
+
+        <p>We built these seven detection categories specifically because the existing tooling doesn't cover the agent ecosystem:</p>
+
+        <ul class="arrow-list">
+            <li><strong>CVE-2026-25253 patterns</strong> — WebSocket origin validation, gatewayUrl from query string, auth token exposure, container escape configurations</li>
+            <li><strong>OpenClaw version check</strong> — flags anything below v2026.2.26 with the specific CVE exposure list</li>
+            <li><strong>ClawHavoc malicious skill patterns</strong> — typosquatted names, fake prerequisite sections, silent curl commands, credential file targeting</li>
+            <li><strong>Prompt injection detection</strong> — 170+ patterns across skill files, including role override attempts and exfiltration instructions</li>
+            <li><strong>Agent credential exposure</strong> — moltbook_sk_ tokens, cnwy_k_ tokens, API keys in plaintext, .env file commits</li>
+            <li><strong>Gateway exposure</strong> — 0.0.0.0 binding, empty auth tokens, port 18789 exposure</li>
+            <li><strong>Wallet ECDSA/PQC assessment</strong> — secp256k1 usage, ecrecover in contracts, missing PQC migration documentation</li>
+        </ul>
+
+        <p>Plus the existing post-quantum cryptography scanning: RSA, ECC, ECDSA, deprecated ciphers, weak hashes, outdated TLS — graded A through F.</p>
+
+        <h2>The Zero Retention Architecture</h2>
+
+        <p>Here's something we built in from day one that I think matters more than any other feature: <strong>we never store your scan results.</strong></p>
+
+        <p>Report generated. Delivered once. Deleted within the hour. No exceptions.</p>
+
+        <div class="highlight-box highlight-green">
+            <p><strong>Why this matters:</strong> A security scanner that stores your codebase analysis is itself a security risk. If we got breached, your scan data — every vulnerability we found in your repo — could become an attacker's roadmap. We designed this out entirely. A security company that keeps your secrets isn't a security company.</p>
+        </div>
+
+        <h2>How It Works: Agent-to-Agent and Human-to-Agent</h2>
+
+        <p>CrawDaddy operates as an autonomous agent on the Virtuals ACP (Agent Commerce Protocol) network. Other agents can hire CrawDaddy for scans, receive structured JSON results, and pay in USDC on Base L2 — no human in the loop.</p>
+
+        <p>For human customers: send a GitHub repo URL or smart contract address to <strong>@blocdev_bot on Telegram</strong>. CrawDaddy runs the scan, delivers the full HTML report to your Telegram as a file, and deletes it from our servers within the hour.</p>
+
+        <p>The report renders in any browser. Grade, risk score, every finding with file path and line number, remediation steps with specific CVE patches, and a quantum threat window assessment.</p>
+
+        <h2>What to Do If You're Running OpenClaw</h2>
+
+        <h3>Immediate (today)</h3>
+        <ul class="check-list">
+            <li class="check">Update to OpenClaw v2026.2.26 or later</li>
+            <li class="check">Audit every installed skill — check for ClawHavoc indicators</li>
+            <li class="check">Bind your gateway to 127.0.0.1, not 0.0.0.0</li>
+            <li class="check">Set and rotate your OPENCLAW_AUTH_TOKEN</li>
+            <li class="check">Check <code style="background:rgba(34,197,94,0.08);padding:0.1rem 0.4rem;border-radius:0.25rem;color:#86efac;font-size:0.85rem">~/.clawdbot/.env</code> — is it in your git history?</li>
+        </ul>
+
+        <h3>Short-term (this month)</h3>
+        <ul class="check-list">
+            <li class="check">Run a full scan on your OpenClaw repo and any repos your agent has access to</li>
+            <li class="check">Document which version you're running and set up automated alerts for new CVEs</li>
+            <li class="check">Inventory your agent wallet cryptography — document every secp256k1 dependency</li>
+            <li class="x">Don't install skills from publishers with less than 30 days of GitHub history</li>
+            <li class="x">Don't grant OpenClaw access to systems containing PHI without air-gap isolation</li>
+        </ul>
+
+        <h3>The quantum layer</h3>
+        <p>Start the PQC migration conversation now. Evaluate hybrid ECDSA + Dilithium schemes for agent wallet signing. The NIST standards are finalized — ML-KEM (FIPS 203) and ML-DSA (FIPS 204) are production-ready. The migration timeline is 2027-2030. That's not far away.</p>
+
+        <div class="quote-block">
+            <p>"The same nation-states investing billions in quantum computing demonstrated with XZ Utils that they're willing to spend years infiltrating a single dependency. The patience is the threat. OpenClaw is moving fast. Quantum is moving patient."</p>
+            <div class="quote-attribution">&mdash; Michael Bennett, Quantum Shield Labs</div>
+        </div>
+
+        <h2>The Bigger Picture</h2>
+
+        <p>OpenClaw is not a rogue project. It's a legitimate, useful, rapidly-evolving framework. The security problems it has are the same problems every fast-moving open source ecosystem develops when adoption outpaces security engineering. npm had the same trajectory. Docker had the same trajectory. The difference is that OpenClaw agents run with full system access, hold cryptocurrency wallets, and interact with your most sensitive services.</p>
+
+        <p>The blast radius of a compromised OpenClaw agent is qualitatively different from a compromised npm package. An npm package can exfiltrate build secrets. A compromised OpenClaw agent can exfiltrate everything — your files, your email, your calendar, your crypto holdings, your connected services — and do it silently while you sleep, because the agent runs 24/7 whether you're watching or not.</p>
+
+        <p><strong>Build the visibility before you need it.</strong></p>
+
+        <div class="cta-section">
+            <h3>🦞 Scan Your Repo or Agent Deployment</h3>
+            <p>Send a GitHub URL or smart contract address. CrawDaddy runs the full v2 scan — post-quantum readiness + 7 agent security categories. Report delivered once, deleted within the hour.</p>
+            <div class="cta-buttons">
+                <a href="https://t.me/blocdev_bot" class="btn-lobster" target="_blank"><i class="fab fa-telegram"></i> Scan via @blocdev_bot</a>
+                <a href="https://3864413400060.gumroad.com/l/quantum-security-playbook" class="btn-primary" target="_blank"><i class="fas fa-book"></i> Get the PQC Playbook — $197</a>
+                <a href="https://quantumshieldlabs.dev/#contact" class="btn-secondary"><i class="fas fa-calendar"></i> Schedule Assessment</a>
+            </div>
+        </div>
+
+        <div class="author-box">
+            <div class="author-avatar">MB</div>
+            <div class="author-info">
+                <h4>Mike Bennett</h4>
+                <div class="author-title">Founder &amp; CEO, Quantum Shield Labs</div>
+                <p>Former executive chef turned cybersecurity entrepreneur. Builds autonomous security agents like CrawDaddy and thinks about the intersection of AI agent infrastructure and post-quantum cryptography. BS in Software Development &amp; Security, UMGC.</p>
+            </div>
+        </div>
+
+    </article></div>
+
+    <footer><div class="footer-container">
+        <div class="footer-logo"><i class="fas fa-shield-alt"></i><span>Quantum Shield Labs</span></div>
+        <div class="footer-links">
+            <a href="https://quantumshieldlabs.dev/">Home</a>
+            <a href="https://quantumshieldlabs.dev/blog/">Blog</a>
+            <a href="https://3864413400060.gumroad.com/l/quantum-security-playbook">Playbook</a>
+            <a href="https://t.me/blocdev_bot">Scan Your Repo</a>
+            <a href="https://www.linkedin.com/in/michael-bennett-a29a93103/">LinkedIn</a>
+        </div>
+        <p class="footer-copy">&copy; 2026 Quantum Shield Labs LLC. All rights reserved.</p>
+    </div></footer>
+</body>
+</html>
