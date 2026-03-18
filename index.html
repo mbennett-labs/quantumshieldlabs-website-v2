@@ -3,9 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Quantum Shield Labs - Advanced Security Solutions</title>
-    <meta name="description" content="Quantum Shield Labs provides advanced cybersecurity, blockchain, and AI-driven security solutions for the quantum age.">
-<!-- Favicon -->
+    <title>Quantum Shield Labs - Post-Quantum Security for the AI Age</title>
+    <meta name="description" content="Quantum Shield Labs provides post-quantum cryptography consulting for healthcare, autonomous AI security agents, and blockchain security tools.">
     <link rel="icon" type="image/x-icon" href="/favicon.ico">
     <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
     <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
@@ -14,7 +13,6 @@
     <link rel="stylesheet" href="css/styles.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        /* Base styles */
         body {
             background: linear-gradient(to bottom, #0f172a, #000);
             color: white;
@@ -33,9 +31,7 @@
             box-shadow: 0 10px 25px rgba(59, 130, 246, 0.1);
         }
         
-        .navbar {
-            transition: all 0.3s ease;
-        }
+        .navbar { transition: all 0.3s ease; }
         
         .navbar-scrolled {
             background-color: rgba(0, 0, 0, 0.8);
@@ -51,42 +47,17 @@
             to { opacity: 1; transform: translateY(0); }
         }
         
-        .profile-image {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
+        .profile-image { width: 100%; height: 100%; object-fit: cover; }
 
-        .project-card {
-            height: 100%;
-            display: flex;
-            flex-direction: column;
-        }
-        
-        .project-img-container {
-            height: 220px;
-            overflow: hidden;
-            position: relative;
-        }
-        
-        .project-img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
-        
-        .project-content {
-            flex-grow: 1;
-            display: flex;
-            flex-direction: column;
-        }
-        
-        .project-description {
-            flex-grow: 1;
-        }
+        .project-card { height: 100%; display: flex; flex-direction: column; }
+        .project-img-container { height: 220px; overflow: hidden; position: relative; }
+        .project-img { width: 100%; height: 100%; object-fit: cover; }
+        .project-content { flex-grow: 1; display: flex; flex-direction: column; }
+        .project-description { flex-grow: 1; }
 
-        .launch-banner {
-            background: linear-gradient(270deg, #2563eb, #1e40af);
+        /* Live banner - updated to show active status */
+        .live-banner {
+            background: linear-gradient(270deg, #059669, #0d9488);
             background-size: 200% 200%;
             animation: gradientAnimation 3s ease infinite;
         }
@@ -96,15 +67,8 @@
             50% {background-position: 100% 50%}
             100% {background-position: 0% 50%}
         }
-        
-        @media (min-width: 768px) {
-            .project-grid > * {
-                display: flex;
-                flex-direction: column;
-            }
-        }
 
-        /* FIXED CONTACT FORM STYLING */
+        /* Contact form */
         .contact-input {
             background-color: rgba(15, 23, 42, 0.9) !important;
             border: 2px solid rgba(59, 130, 246, 0.3) !important;
@@ -115,18 +79,13 @@
             transition: all 0.3s ease;
             font-size: 1rem;
         }
-
         .contact-input:focus {
             outline: none !important;
             border-color: #3b82f6 !important;
             box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1) !important;
             background-color: rgba(15, 23, 42, 1) !important;
         }
-
-        .contact-input::placeholder {
-            color: rgba(156, 163, 175, 0.7) !important;
-        }
-
+        .contact-input::placeholder { color: rgba(156, 163, 175, 0.7) !important; }
         .contact-select {
             background-color: rgba(15, 23, 42, 0.9) !important;
             border: 2px solid rgba(59, 130, 246, 0.3) !important;
@@ -136,80 +95,52 @@
             width: 100%;
             transition: all 0.3s ease;
         }
-
         .contact-select:focus {
             outline: none !important;
             border-color: #3b82f6 !important;
             box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1) !important;
         }
+        .contact-select option { background-color: #1e293b; color: white; }
+        .contact-checkbox { accent-color: #3b82f6; transform: scale(1.2); }
+        .contact-label { color: white !important; font-weight: 500; margin-bottom: 0.5rem; display: block; font-size: 0.875rem; }
 
-        .contact-select option {
-            background-color: #1e293b;
-            color: white;
-        }
-
-        .contact-checkbox {
-            accent-color: #3b82f6;
-            transform: scale(1.2);
-        }
-
-        .contact-label {
-            color: white !important;
-            font-weight: 500;
-            margin-bottom: 0.5rem;
-            display: block;
-            font-size: 0.875rem;
-        }
-
-        /* CALCULATOR BUTTON PULSE ANIMATION */
         @keyframes pulse-glow {
-          0%, 100% { 
-            box-shadow: 0 0 15px rgba(34, 197, 94, 0.4);
-            transform: scale(1);
-          }
-          50% { 
-            box-shadow: 0 0 25px rgba(34, 197, 94, 0.6);
-            transform: scale(1.02);
-          }
+          0%, 100% { box-shadow: 0 0 15px rgba(34, 197, 94, 0.4); transform: scale(1); }
+          50% { box-shadow: 0 0 25px rgba(34, 197, 94, 0.6); transform: scale(1.02); }
+        }
+        .animate-pulse-glow { animation: pulse-glow 2s ease-in-out infinite; }
+
+        .hero .container { position: relative; z-index: 10; }
+        .hero a { position: relative; z-index: 20; cursor: pointer; }
+        .bg-pattern { pointer-events: none; }
+        .hero > .absolute { pointer-events: none; }
+
+        /* Agent card special styling */
+        .agent-card {
+            background: linear-gradient(135deg, rgba(15, 23, 42, 0.9), rgba(17, 24, 39, 0.95));
+            border: 1px solid rgba(16, 185, 129, 0.2);
+        }
+        .agent-card:hover {
+            border-color: rgba(16, 185, 129, 0.5);
+            box-shadow: 0 10px 40px rgba(16, 185, 129, 0.08);
         }
 
-        .animate-pulse-glow {
-          animation: pulse-glow 2s ease-in-out infinite;
+        .hackathon-badge {
+            background: linear-gradient(135deg, rgba(245, 158, 11, 0.15), rgba(234, 88, 12, 0.15));
+            border: 1px solid rgba(245, 158, 11, 0.4);
         }
-
-        /* FIX: Ensure hero buttons are clickable */
-.hero .container {
-    position: relative;
-    z-index: 10;
-}
-
-.hero a {
-    position: relative;
-    z-index: 20;
-    cursor: pointer;
-}
-
-/* Make sure bg-pattern doesn't block clicks */
-.bg-pattern {
-    pointer-events: none;
-}
-
-/* Ensure the scroll indicator doesn't block hero content */
-.hero > .absolute {
-    pointer-events: none;
-}
     </style>
 </head>
 <body>
-    <!-- Launch Announcement Banner -->
-    <div class="launch-banner text-white py-3 px-4 text-center shadow-lg">
+    <!-- Live Status Banner -->
+    <div class="live-banner text-white py-3 px-4 text-center shadow-lg">
         <div class="container mx-auto flex flex-col md:flex-row justify-center items-center space-y-2 md:space-y-0 md:space-x-4">
             <div class="flex items-center">
-                <i class="fas fa-rocket mr-2"></i>
-                <p class="font-medium">Quantum Shield Labs is preparing for official launch in Q1 2026</p>
+                <i class="fas fa-circle text-green-300 mr-2 text-xs animate-pulse"></i>
+                <p class="font-medium">CrawDaddy Security is LIVE on Virtuals ACP — autonomous AI security scanning, powered by x402</p>
             </div>
-            <a href="#contact" class="inline-block bg-white bg-opacity-20 hover:bg-opacity-30 px-4 py-1 rounded-full text-sm transition">
-                Join Early Access
+            <a href="https://quantumshieldlabs.dev/agent/" class="inline-block bg-white bg-opacity-20 hover:bg-opacity-30 px-4 py-1 rounded-full text-sm transition">
+                View Agent →
             </a>
         </div>
     </div>
@@ -221,347 +152,359 @@
                 <i class="fas fa-shield-alt text-blue-500 text-2xl"></i>
                 <span class="text-xl font-bold">Quantum Shield Labs</span>
             </a>
-            
             <div class="hidden md:flex space-x-8">
                 <a href="#services" class="hover:text-blue-500 transition">Services</a>
                 <a href="#projects" class="hover:text-blue-500 transition">Projects</a>
                 <a href="#about" class="hover:text-blue-500 transition">About</a>
                 <a href="#resources" class="hover:text-blue-500 transition">Resources</a>
                 <a href="https://quantumshieldlabs.dev/blog/" class="hover:text-blue-500 transition flex items-center">
-                    <i class="fas fa-graduation-cap mr-2"></i>Educational Content
+                    <i class="fas fa-graduation-cap mr-2"></i>Blog
                 </a>
-                <a href="#roadmap" class="hover:text-blue-500 transition">Launch Roadmap</a>
+                <a href="#roadmap" class="hover:text-blue-500 transition">Roadmap</a>
                 <a href="#contact" class="hover:text-blue-500 transition">Contact</a>
             </div>
-            
             <button id="mobile-menu-button" class="md:hidden text-white focus:outline-none">
                 <i class="fas fa-bars text-xl"></i>
             </button>
         </div>
-        
-        <!-- Mobile Menu -->
         <div id="mobile-menu" class="md:hidden hidden bg-gray-900 bg-opacity-95 backdrop-blur-lg">
             <div class="container mx-auto px-4 py-4 flex flex-col space-y-4">
                 <a href="#services" class="block py-2 hover:text-blue-500 transition">Services</a>
                 <a href="#projects" class="block py-2 hover:text-blue-500 transition">Projects</a>
                 <a href="#about" class="block py-2 hover:text-blue-500 transition">About</a>
                 <a href="#resources" class="block py-2 hover:text-blue-500 transition">Resources</a>
-                <a href="https://quantumshieldlabs.dev/blog/" class="block py-2 hover:text-blue-500 transition flex items-center">
-                    <i class="fas fa-graduation-cap mr-2"></i>Educational Content
-                </a>
-                <a href="#roadmap" class="block py-2 hover:text-blue-500 transition">Launch Roadmap</a>
+                <a href="https://quantumshieldlabs.dev/blog/" class="block py-2 hover:text-blue-500 transition">Blog</a>
+                <a href="#roadmap" class="block py-2 hover:text-blue-500 transition">Roadmap</a>
                 <a href="#contact" class="block py-2 hover:text-blue-500 transition">Contact</a>
             </div>
         </div>
     </nav>
 
-   <!-- COMPLETE HERO SECTION REPLACEMENT -->
-<!-- Find <section class="hero flex items-center justify-center"> and replace the ENTIRE section down to its closing </section> tag -->
+    <!-- Hero Section -->
+    <section class="hero flex items-center justify-center">
+        <div class="container mx-auto px-4 text-center">
+            <div class="animate-fade-in">
+                <i class="fas fa-shield-alt text-blue-500 text-6xl mb-8"></i>
+                <h1 class="text-5xl md:text-7xl font-bold mb-6 bg-clip-text text-transparent bg-gradient-to-r from-blue-500 to-purple-500">
+                    Quantum Shield Labs
+                </h1>
+                <h2 class="text-2xl md:text-3xl font-semibold mb-6 text-blue-200">
+                    Post-Quantum Security for the AI Agent Economy
+                </h2>
+                <p class="text-xl md:text-2xl text-gray-300 mb-12 max-w-3xl mx-auto">
+                    PQC consulting for healthcare. Autonomous AI security agents on Base. The security layer the quantum age needs — built in public.
+                </p>
+                <div class="flex flex-col sm:flex-row items-center justify-center gap-4 flex-wrap">
+                    <a href="https://quantumshieldlabs.dev/agent/" 
+                       class="inline-flex items-center gap-2 bg-gradient-to-r from-green-500 to-emerald-600 hover:from-green-600 hover:to-emerald-700 text-white px-6 py-3 md:px-8 md:py-4 rounded-full text-base md:text-lg font-semibold transition transform hover:scale-105 shadow-lg hover:shadow-green-500/30 animate-pulse-glow whitespace-nowrap">
+                        <span>🦞</span>
+                        <span>CrawDaddy Security Agent</span>
+                        <i class="fas fa-external-link-alt text-xs"></i>
+                    </a>
+                    <a href="#services" 
+                       onclick="document.getElementById('services').scrollIntoView({behavior: 'smooth', block: 'start'}); return false;"
+                       class="inline-flex items-center gap-2 bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 md:px-8 md:py-4 rounded-full text-base md:text-lg font-semibold transition transform hover:scale-105 shadow-lg hover:shadow-blue-500/30 whitespace-nowrap">
+                        <span>Explore Services</span>
+                        <i class="fas fa-arrow-right"></i>
+                    </a>
+                    <a href="https://quantumshieldlabs.dev/quantum-risk-calculator/" 
+                       class="inline-flex items-center gap-2 bg-transparent border-2 border-blue-400 hover:border-blue-300 hover:bg-blue-500/10 text-white px-6 py-3 md:px-8 md:py-4 rounded-full text-base md:text-lg font-semibold transition transform hover:scale-105 whitespace-nowrap">
+                        <i class="fas fa-calculator"></i>
+                        <span>Free Risk Calculator</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="absolute bottom-8 left-0 right-0 flex justify-center animate-bounce">
+            <div class="w-8 h-12 rounded-full border-2 border-white/30 flex justify-center">
+                <div class="w-1 h-3 bg-white/60 rounded-full mt-2 animate-pulse"></div>
+            </div>
+        </div>
+    </section>
 
-<!-- Hero Section -->
-<section class="hero flex items-center justify-center">
-    <div class="container mx-auto px-4 text-center">
-        <div class="animate-fade-in">
-            <i class="fas fa-shield-alt text-blue-500 text-6xl mb-8"></i>
-            <h1 class="text-5xl md:text-7xl font-bold mb-6 bg-clip-text text-transparent bg-gradient-to-r from-blue-500 to-purple-500">
-                Quantum Shield Labs
-            </h1>
-            <h2 class="text-2xl md:text-3xl font-semibold mb-6 text-blue-200">
-                Advanced Security Solutions for the Quantum Age
-            </h2>
-            <p class="text-xl md:text-2xl text-gray-300 mb-12 max-w-3xl mx-auto">
-                Cybersecurity, blockchain, and AI expertise to protect your digital assets in an evolving technological landscape.
+    <!-- Services Section -->
+    <section id="services" class="py-20 bg-gray-900/50">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl md:text-5xl font-bold mb-4">
+                    <span class="bg-gradient-to-r from-blue-400 to-purple-500 bg-clip-text text-transparent">Our Services</span>
+                </h2>
+                <p class="text-gray-400 text-lg max-w-2xl mx-auto">
+                    Quantum-ready security solutions for healthcare — and autonomous security agents for the AI economy.
+                </p>
+            </div>
+            <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8 max-w-7xl mx-auto">
+                <div class="service-card bg-gray-800/50 backdrop-blur-sm rounded-xl p-6 border border-gray-700/50 hover:border-blue-500/50 transition-all duration-300">
+                    <div class="w-14 h-14 bg-blue-500/20 rounded-lg flex items-center justify-center mb-4">
+                        <i class="fas fa-shield-alt text-blue-400 text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold text-white mb-3">Quantum Risk Assessment</h3>
+                    <p class="text-gray-400 text-sm mb-4">Comprehensive evaluation of your cryptographic infrastructure against quantum computing threats. NIST-aligned findings with clear remediation roadmaps.</p>
+                    <ul class="text-gray-500 text-sm space-y-2">
+                        <li class="flex items-center"><i class="fas fa-check text-green-400 mr-2 text-xs"></i>Cryptographic inventory audit</li>
+                        <li class="flex items-center"><i class="fas fa-check text-green-400 mr-2 text-xs"></i>Risk scoring & prioritization</li>
+                        <li class="flex items-center"><i class="fas fa-check text-green-400 mr-2 text-xs"></i>Executive summary report</li>
+                    </ul>
+                </div>
+                <div class="service-card bg-gray-800/50 backdrop-blur-sm rounded-xl p-6 border border-gray-700/50 hover:border-purple-500/50 transition-all duration-300">
+                    <div class="w-14 h-14 bg-purple-500/20 rounded-lg flex items-center justify-center mb-4">
+                        <i class="fas fa-route text-purple-400 text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold text-white mb-3">PQC Migration Planning</h3>
+                    <p class="text-gray-400 text-sm mb-4">Strategic roadmaps for transitioning to NIST-approved post-quantum algorithms — ML-KEM (FIPS 203), ML-DSA (FIPS 204), SLH-DSA (FIPS 205).</p>
+                    <ul class="text-gray-500 text-sm space-y-2">
+                        <li class="flex items-center"><i class="fas fa-check text-green-400 mr-2 text-xs"></i>NIST FIPS 203/204/205 alignment</li>
+                        <li class="flex items-center"><i class="fas fa-check text-green-400 mr-2 text-xs"></i>Phased implementation plan</li>
+                        <li class="flex items-center"><i class="fas fa-check text-green-400 mr-2 text-xs"></i>Budget & timeline estimates</li>
+                    </ul>
+                </div>
+                <div class="service-card bg-gray-800/50 backdrop-blur-sm rounded-xl p-6 border border-gray-700/50 hover:border-cyan-500/50 transition-all duration-300">
+                    <div class="w-14 h-14 bg-cyan-500/20 rounded-lg flex items-center justify-center mb-4">
+                        <i class="fas fa-hospital text-cyan-400 text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold text-white mb-3">Healthcare Compliance</h3>
+                    <p class="text-gray-400 text-sm mb-4">HIPAA and HITECH-focused quantum security strategies protecting PHI with 50+ year retention requirements. G7 2030-2032 compliance roadmaps.</p>
+                    <ul class="text-gray-500 text-sm space-y-2">
+                        <li class="flex items-center"><i class="fas fa-check text-green-400 mr-2 text-xs"></i>HIPAA security rule mapping</li>
+                        <li class="flex items-center"><i class="fas fa-check text-green-400 mr-2 text-xs"></i>PHI encryption assessment</li>
+                        <li class="flex items-center"><i class="fas fa-check text-green-400 mr-2 text-xs"></i>Compliance documentation</li>
+                    </ul>
+                </div>
+                <div class="service-card bg-gray-800/50 backdrop-blur-sm rounded-xl p-6 border border-gray-700/50 hover:border-green-500/50 transition-all duration-300">
+                    <div class="w-14 h-14 bg-green-500/20 rounded-lg flex items-center justify-center mb-4">
+                        <i class="fas fa-robot text-green-400 text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold text-white mb-3">AI Agent Security</h3>
+                    <p class="text-gray-400 text-sm mb-4">Autonomous security scanning for the agent economy. CrawDaddy Security scans repos and smart contracts via Virtuals ACP with x402 micropayments.</p>
+                    <ul class="text-gray-500 text-sm space-y-2">
+                        <li class="flex items-center"><i class="fas fa-check text-green-400 mr-2 text-xs"></i>Agent-to-agent security scans</li>
+                        <li class="flex items-center"><i class="fas fa-check text-green-400 mr-2 text-xs"></i>Smart contract audits</li>
+                        <li class="flex items-center"><i class="fas fa-check text-green-400 mr-2 text-xs"></i>$0.49 per scan via ACP</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="text-center mt-12">
+                <a href="/quantum-risk-calculator/" class="inline-flex items-center px-8 py-4 bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white font-semibold rounded-full transition-all duration-300 shadow-lg hover:shadow-blue-500/25">
+                    <i class="fas fa-calculator mr-2"></i>Start With Free Risk Assessment<i class="fas fa-arrow-right ml-2"></i>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects Section - FULLY UPDATED -->
+    <section id="projects" class="py-20">
+        <div class="container mx-auto px-4">
+            <h2 class="text-3xl md:text-4xl font-bold text-center mb-6">Live Projects & Tools</h2>
+            <p class="text-center text-gray-300 mb-16 max-w-3xl mx-auto">
+                Production infrastructure running right now. Autonomous agents, blockchain tools, and security APIs — not demos, not prototypes.
             </p>
             
-            <!-- FIXED: Hero CTA Buttons -->
-            <div class="flex flex-col sm:flex-row items-center justify-center gap-4 flex-wrap">
-                <!-- Calculator Button -->
-                <a href="https://quantumshieldlabs.dev/quantum-risk-calculator/" 
-                   class="inline-flex items-center gap-2 bg-gradient-to-r from-green-500 to-emerald-600 hover:from-green-600 hover:to-emerald-700 text-white px-6 py-3 md:px-8 md:py-4 rounded-full text-base md:text-lg font-semibold transition transform hover:scale-105 shadow-lg hover:shadow-green-500/30 animate-pulse-glow whitespace-nowrap">
-                    <i class="fas fa-calculator"></i>
-                    <span>Try Free Risk Calculator</span>
-                    <i class="fas fa-external-link-alt text-xs"></i>
-                </a>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 project-grid mb-8">
                 
-                <!-- Explore Services Button -->
-              <a href="#services" 
-   onclick="document.getElementById('services').scrollIntoView({behavior: 'smooth', block: 'start'}); return false;"
-   class="inline-flex items-center gap-2 bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 md:px-8 md:py-4 rounded-full text-base md:text-lg font-semibold transition transform hover:scale-105 shadow-lg hover:shadow-blue-500/30 whitespace-nowrap">
- <span>Explore Services</span>
-                    <i class="fas fa-arrow-right"></i>
-                </a>
-                
-                <!-- Launch Timeline Button -->
-                <a href="#roadmap" 
-                   class="inline-flex items-center gap-2 bg-transparent border-2 border-blue-400 hover:border-blue-300 hover:bg-blue-500/10 text-white px-6 py-3 md:px-8 md:py-4 rounded-full text-base md:text-lg font-semibold transition transform hover:scale-105 whitespace-nowrap">
-                    <span>Launch Timeline</span>
-                    <i class="fas fa-calendar-alt"></i>
-                </a>
-            </div>
-        </div>
-    </div>
-    
-    <!-- Scroll indicator -->
-    <div class="absolute bottom-8 left-0 right-0 flex justify-center animate-bounce">
-        <div class="w-8 h-12 rounded-full border-2 border-white/30 flex justify-center">
-            <div class="w-1 h-3 bg-white/60 rounded-full mt-2 animate-pulse"></div>
-        </div>
-    </div>
-</section>
-    <!-- SERVICES SECTION - Add this after the hero section (after </section> that closes the hero) -->
-
-<section id="services" class="py-20 bg-gray-900/50">
-    <div class="container mx-auto px-4">
-        <!-- Section Header -->
-        <div class="text-center mb-16">
-            <h2 class="text-4xl md:text-5xl font-bold mb-4">
-                <span class="bg-gradient-to-r from-blue-400 to-purple-500 bg-clip-text text-transparent">
-                    Our Services
-                </span>
-            </h2>
-            <p class="text-gray-400 text-lg max-w-2xl mx-auto">
-                Comprehensive quantum-ready security solutions designed specifically for healthcare organizations
-            </p>
-        </div>
-
-        <!-- Services Grid -->
-        <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8 max-w-7xl mx-auto">
-            
-            <!-- Service Card 1: Quantum Risk Assessment -->
-            <div class="service-card bg-gray-800/50 backdrop-blur-sm rounded-xl p-6 border border-gray-700/50 hover:border-blue-500/50 transition-all duration-300">
-                <div class="w-14 h-14 bg-blue-500/20 rounded-lg flex items-center justify-center mb-4">
-                    <i class="fas fa-shield-alt text-blue-400 text-2xl"></i>
-                </div>
-                <h3 class="text-xl font-semibold text-white mb-3">Quantum Risk Assessment</h3>
-                <p class="text-gray-400 text-sm mb-4">
-                    Comprehensive evaluation of your cryptographic infrastructure to identify vulnerabilities to quantum computing threats.
-                </p>
-                <ul class="text-gray-500 text-sm space-y-2">
-                    <li class="flex items-center">
-                        <i class="fas fa-check text-green-400 mr-2 text-xs"></i>
-                        Cryptographic inventory audit
-                    </li>
-                    <li class="flex items-center">
-                        <i class="fas fa-check text-green-400 mr-2 text-xs"></i>
-                        Risk scoring & prioritization
-                    </li>
-                    <li class="flex items-center">
-                        <i class="fas fa-check text-green-400 mr-2 text-xs"></i>
-                        Executive summary report
-                    </li>
-                </ul>
-            </div>
-
-            <!-- Service Card 2: PQC Migration Planning -->
-            <div class="service-card bg-gray-800/50 backdrop-blur-sm rounded-xl p-6 border border-gray-700/50 hover:border-purple-500/50 transition-all duration-300">
-                <div class="w-14 h-14 bg-purple-500/20 rounded-lg flex items-center justify-center mb-4">
-                    <i class="fas fa-route text-purple-400 text-2xl"></i>
-                </div>
-                <h3 class="text-xl font-semibold text-white mb-3">PQC Migration Planning</h3>
-                <p class="text-gray-400 text-sm mb-4">
-                    Strategic roadmaps for transitioning to NIST-approved post-quantum cryptographic algorithms.
-                </p>
-                <ul class="text-gray-500 text-sm space-y-2">
-                    <li class="flex items-center">
-                        <i class="fas fa-check text-green-400 mr-2 text-xs"></i>
-                        NIST FIPS 203/204/205 alignment
-                    </li>
-                    <li class="flex items-center">
-                        <i class="fas fa-check text-green-400 mr-2 text-xs"></i>
-                        Phased implementation plan
-                    </li>
-                    <li class="flex items-center">
-                        <i class="fas fa-check text-green-400 mr-2 text-xs"></i>
-                        Budget & timeline estimates
-                    </li>
-                </ul>
-            </div>
-
-            <!-- Service Card 3: Healthcare Compliance -->
-            <div class="service-card bg-gray-800/50 backdrop-blur-sm rounded-xl p-6 border border-gray-700/50 hover:border-cyan-500/50 transition-all duration-300">
-                <div class="w-14 h-14 bg-cyan-500/20 rounded-lg flex items-center justify-center mb-4">
-                    <i class="fas fa-hospital text-cyan-400 text-2xl"></i>
-                </div>
-                <h3 class="text-xl font-semibold text-white mb-3">Healthcare Compliance</h3>
-                <p class="text-gray-400 text-sm mb-4">
-                    HIPAA and HITECH-focused quantum security strategies for protecting PHI with 50+ year retention requirements.
-                </p>
-                <ul class="text-gray-500 text-sm space-y-2">
-                    <li class="flex items-center">
-                        <i class="fas fa-check text-green-400 mr-2 text-xs"></i>
-                        HIPAA security rule mapping
-                    </li>
-                    <li class="flex items-center">
-                        <i class="fas fa-check text-green-400 mr-2 text-xs"></i>
-                        PHI encryption assessment
-                    </li>
-                    <li class="flex items-center">
-                        <i class="fas fa-check text-green-400 mr-2 text-xs"></i>
-                        Compliance documentation
-                    </li>
-                </ul>
-            </div>
-
-            <!-- Service Card 4: Executive Briefings -->
-            <div class="service-card bg-gray-800/50 backdrop-blur-sm rounded-xl p-6 border border-gray-700/50 hover:border-green-500/50 transition-all duration-300">
-                <div class="w-14 h-14 bg-green-500/20 rounded-lg flex items-center justify-center mb-4">
-                    <i class="fas fa-chalkboard-teacher text-green-400 text-2xl"></i>
-                </div>
-                <h3 class="text-xl font-semibold text-white mb-3">Executive Briefings</h3>
-                <p class="text-gray-400 text-sm mb-4">
-                    Board-ready presentations explaining quantum threats and mitigation strategies in business terms.
-                </p>
-                <ul class="text-gray-500 text-sm space-y-2">
-                    <li class="flex items-center">
-                        <i class="fas fa-check text-green-400 mr-2 text-xs"></i>
-                        C-suite presentations
-                    </li>
-                    <li class="flex items-center">
-                        <i class="fas fa-check text-green-400 mr-2 text-xs"></i>
-                        Risk quantification
-                    </li>
-                    <li class="flex items-center">
-                        <i class="fas fa-check text-green-400 mr-2 text-xs"></i>
-                        ROI analysis
-                    </li>
-                </ul>
-            </div>
-
-        </div>
-
-        <!-- CTA below services -->
-        <div class="text-center mt-12">
-            <a href="/quantum-risk-calculator/" class="inline-flex items-center px-8 py-4 bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white font-semibold rounded-full transition-all duration-300 shadow-lg hover:shadow-blue-500/25">
-                <i class="fas fa-calculator mr-2"></i>
-                Start With Free Risk Assessment
-                <i class="fas fa-arrow-right ml-2"></i>
-            </a>
-        </div>
-    </div>
-</section>
-
-   <!-- Projects Section - UPDATED WITH BTC BATTLE -->
-<!-- Replace the entire <section id="projects"> ... </section> in your index.html -->
-
-<section id="projects" class="py-20">
-    <div class="container mx-auto px-4">
-        <h2 class="text-3xl md:text-4xl font-bold text-center mb-6">Featured Projects</h2>
-        <p class="text-center text-gray-300 mb-16 max-w-3xl mx-auto">
-            Live applications and tools demonstrating our blockchain, security, and Web3 development capabilities.
-        </p>
-        
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-8 project-grid">
-            
-            <!-- PROJECT 1: BTC Battle (FEATURED) -->
-            <div class="project-card bg-gray-900/30 rounded-xl overflow-hidden shadow-lg hover:shadow-blue-500/10 transition-all duration-300 transform hover:-translate-y-2 border border-blue-500/30">
-                <div class="project-img-container relative">
-                    <img src="https://base-signal.vercel.app/screenshot-1.png" alt="BTC Battle - Whale War Visualization" class="project-img" onerror="this.src='https://images.unsplash.com/photo-1639762681485-074b7f938ba0?q=80&w=2832&auto=format&fit=crop'">
-                    <div class="absolute inset-0 bg-gradient-to-t from-gray-900 via-gray-900/60 to-transparent"></div>
-                    <div class="absolute top-3 left-3 bg-green-500 text-white text-xs px-3 py-1 rounded-full font-semibold">
-                        <i class="fas fa-circle text-xs mr-1 animate-pulse"></i> LIVE
+                <!-- PROJECT 1: CrawDaddy Security (FEATURED) -->
+                <div class="project-card agent-card rounded-xl overflow-hidden shadow-lg transition-all duration-300 transform hover:-translate-y-2">
+                    <div class="project-img-container relative">
+                        <div class="w-full h-full flex items-center justify-center" style="background: linear-gradient(135deg, #0a0a0f 0%, #111118 100%);">
+                            <span style="font-size: 5rem;">🦞</span>
+                        </div>
+                        <div class="absolute inset-0 bg-gradient-to-t from-gray-900 via-transparent to-transparent"></div>
+                        <div class="absolute top-3 left-3 bg-green-500 text-white text-xs px-3 py-1 rounded-full font-semibold">
+                            <i class="fas fa-circle text-xs mr-1 animate-pulse"></i> LIVE
+                        </div>
+                        <div class="absolute top-3 right-3 hackathon-badge text-yellow-300 text-xs px-3 py-1 rounded-full font-semibold">
+                            🏆 Synthesis Hackathon
+                        </div>
                     </div>
-                    <div class="absolute top-3 right-3 bg-blue-600 text-white text-xs px-3 py-1 rounded-full font-semibold">
-                        Featured
+                    <div class="p-6 project-content">
+                        <h3 class="text-xl font-semibold mb-1">CrawDaddy Security</h3>
+                        <p class="text-green-400 text-xs font-mono mb-3">Conway Security Cluster · ERC-8004 · x402</p>
+                        <p class="text-gray-300 text-sm mb-3 project-description">Fully autonomous AI security agent on Virtuals ACP. Scans GitHub repos for quantum-vulnerable cryptography and tokens for honeypots across 6 chains. Pays for upstream data via x402 micropayments. Zero humans in the loop.</p>
+                        <div class="bg-gray-800/50 rounded-lg p-3 mb-4 text-xs font-mono">
+                            <div class="flex justify-between text-gray-400 mb-1"><span>Jobs Completed</span><span class="text-green-400">36+</span></div>
+                            <div class="flex justify-between text-gray-400 mb-1"><span>Success Rate</span><span class="text-green-400">94%</span></div>
+                            <div class="flex justify-between text-gray-400"><span>Price per scan</span><span class="text-green-400">$0.49 USDC</span></div>
+                        </div>
+                        <div class="flex flex-wrap gap-2 mb-4">
+                            <span class="text-xs bg-green-500/20 text-green-300 px-2 py-1 rounded-full">Virtuals ACP</span>
+                            <span class="text-xs bg-blue-500/20 text-blue-300 px-2 py-1 rounded-full">x402</span>
+                            <span class="text-xs bg-purple-500/20 text-purple-300 px-2 py-1 rounded-full">ERC-8004</span>
+                            <span class="text-xs bg-yellow-500/20 text-yellow-300 px-2 py-1 rounded-full">Base</span>
+                        </div>
+                        <div class="flex items-center justify-between">
+                            <a href="https://quantumshieldlabs.dev/agent/" target="_blank" class="flex items-center text-green-400 hover:text-green-300 transition-all duration-300 text-sm">
+                                <i class="fas fa-external-link-alt mr-2"></i>Agent Page
+                            </a>
+                            <a href="https://agdp.io/agent/2037" target="_blank" class="flex items-center text-blue-400 hover:text-blue-300 transition-all duration-300 text-sm">
+                                <i class="fas fa-chart-bar mr-2"></i>Live Stats
+                            </a>
+                        </div>
                     </div>
                 </div>
-                <div class="p-6 project-content">
-                    <h3 class="text-xl font-semibold mb-2">BTC Battle</h3>
-                    <p class="text-gray-300 text-sm mb-4 project-description">Real-time whale war visualization on Base L2. Watch bulls vs bears battle for market dominance with live Farcaster social feed integration.</p>
-                    
-                    <div>
+                
+                <!-- PROJECT 2: QuantumShield API -->
+                <div class="project-card bg-gray-900/30 rounded-xl overflow-hidden shadow-lg hover:shadow-blue-500/10 transition-all duration-300 transform hover:-translate-y-2">
+                    <div class="project-img-container relative">
+                        <div class="w-full h-full flex items-center justify-center" style="background: linear-gradient(135deg, #0f172a 0%, #1e3a5f 100%);">
+                            <i class="fas fa-shield-alt text-blue-400" style="font-size: 4rem;"></i>
+                        </div>
+                        <div class="absolute inset-0 bg-gradient-to-t from-gray-900 via-transparent to-transparent"></div>
+                        <div class="absolute top-3 left-3 bg-green-500 text-white text-xs px-3 py-1 rounded-full font-semibold">
+                            <i class="fas fa-circle text-xs mr-1 animate-pulse"></i> LIVE
+                        </div>
+                        <div class="absolute top-3 right-3 bg-blue-600 text-white text-xs px-3 py-1 rounded-full font-semibold">API</div>
+                    </div>
+                    <div class="p-6 project-content">
+                        <h3 class="text-xl font-semibold mb-1">QuantumShield API</h3>
+                        <p class="text-blue-400 text-xs font-mono mb-3">Vercel · x402 payments · Multi-chain</p>
+                        <p class="text-gray-300 text-sm mb-3 project-description">Live security API powering CrawDaddy's on-chain scanning. Token risk scoring, honeypot detection, wallet analysis across Base, Ethereum, BSC, Arbitrum, Polygon, and Solana. Accepts x402 micropayments natively.</p>
+                        <div class="flex flex-wrap gap-2 mb-4">
+                            <span class="text-xs bg-blue-500/20 text-blue-300 px-2 py-1 rounded-full">REST API</span>
+                            <span class="text-xs bg-green-500/20 text-green-300 px-2 py-1 rounded-full">x402</span>
+                            <span class="text-xs bg-purple-500/20 text-purple-300 px-2 py-1 rounded-full">6 Chains</span>
+                        </div>
+                        <div class="flex items-center justify-between">
+                            <a href="https://quantumshield-api.vercel.app" target="_blank" class="flex items-center text-green-400 hover:text-green-300 transition-all duration-300 text-sm">
+                                <i class="fas fa-external-link-alt mr-2"></i>Live API
+                            </a>
+                            <a href="https://github.com/mbennett-labs" target="_blank" class="flex items-center text-blue-500 hover:text-blue-400 transition-all duration-300 text-sm">
+                                <i class="fab fa-github mr-2"></i>Code
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- PROJECT 3: BTC Battle / Base Signal -->
+                <div class="project-card bg-gray-900/30 rounded-xl overflow-hidden shadow-lg hover:shadow-blue-500/10 transition-all duration-300 transform hover:-translate-y-2 border border-blue-500/30">
+                    <div class="project-img-container relative">
+                        <img src="https://base-signal.vercel.app/screenshot-1.png" alt="BTC Battle" class="project-img" onerror="this.src='https://images.unsplash.com/photo-1639762681485-074b7f938ba0?q=80&w=2832&auto=format&fit=crop'">
+                        <div class="absolute inset-0 bg-gradient-to-t from-gray-900 via-gray-900/60 to-transparent"></div>
+                        <div class="absolute top-3 left-3 bg-green-500 text-white text-xs px-3 py-1 rounded-full font-semibold">
+                            <i class="fas fa-circle text-xs mr-1 animate-pulse"></i> LIVE
+                        </div>
+                        <div class="absolute top-3 right-3 bg-blue-600 text-white text-xs px-3 py-1 rounded-full font-semibold">Base Mini App</div>
+                    </div>
+                    <div class="p-6 project-content">
+                        <h3 class="text-xl font-semibold mb-1">BTC Battle</h3>
+                        <p class="text-blue-400 text-xs font-mono mb-3">Base L2 · Farcaster · Next.js</p>
+                        <p class="text-gray-300 text-sm mb-3 project-description">Real-time whale war visualization on Base L2. Bulls vs bears battle for market dominance with live Farcaster social feed integration. Base Builder airdrop tracking via on-chain activity.</p>
                         <div class="flex flex-wrap gap-2 mb-4">
                             <span class="text-xs bg-blue-500/20 text-blue-300 px-2 py-1 rounded-full">Base L2</span>
                             <span class="text-xs bg-purple-500/20 text-purple-300 px-2 py-1 rounded-full">Farcaster</span>
                             <span class="text-xs bg-green-500/20 text-green-300 px-2 py-1 rounded-full">Next.js</span>
-                            <span class="text-xs bg-yellow-500/20 text-yellow-300 px-2 py-1 rounded-full">Mini App</span>
                         </div>
-                        
                         <div class="flex items-center justify-between">
-                            <a href="https://base-signal.vercel.app" target="_blank" class="flex items-center text-green-400 hover:text-green-300 transition-all duration-300">
-                                <i class="fas fa-external-link-alt mr-2"></i>
-                                <span>Live Demo</span>
+                            <a href="https://base-signal.vercel.app" target="_blank" class="flex items-center text-green-400 hover:text-green-300 transition-all duration-300 text-sm">
+                                <i class="fas fa-external-link-alt mr-2"></i>Live Demo
                             </a>
-                            <a href="https://github.com/mbennett-labs/base-signal" target="_blank" class="flex items-center text-blue-500 hover:text-blue-400 transition-all duration-300">
-                                <i class="fab fa-github mr-2"></i>
-                                <span>Code</span>
+                            <a href="https://github.com/mbennett-labs/base-signal" target="_blank" class="flex items-center text-blue-500 hover:text-blue-400 transition-all duration-300 text-sm">
+                                <i class="fab fa-github mr-2"></i>Code
                             </a>
                         </div>
                     </div>
                 </div>
             </div>
-            
-            <!-- PROJECT 2: Quantum Risk Calculator -->
-            <div class="project-card bg-gray-900/30 rounded-xl overflow-hidden shadow-lg hover:shadow-blue-500/10 transition-all duration-300 transform hover:-translate-y-2">
-                <div class="project-img-container relative">
-                    <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=2940&auto=format&fit=crop" alt="Quantum Risk Calculator" class="project-img">
-                    <div class="absolute inset-0 bg-gradient-to-t from-gray-900 via-gray-900/60 to-transparent"></div>
-                    <div class="absolute top-3 left-3 bg-green-500 text-white text-xs px-3 py-1 rounded-full font-semibold">
-                        <i class="fas fa-circle text-xs mr-1 animate-pulse"></i> LIVE
+
+            <!-- Second row -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 project-grid">
+
+                <!-- PROJECT 4: Conway Security Cluster -->
+                <div class="project-card agent-card rounded-xl overflow-hidden shadow-lg transition-all duration-300 transform hover:-translate-y-2">
+                    <div class="project-img-container relative">
+                        <div class="w-full h-full flex items-center justify-center" style="background: linear-gradient(135deg, #0a0a0f 0%, #0d1117 100%);">
+                            <div class="text-center">
+                                <div style="font-size: 2.5rem; margin-bottom: 0.5rem;">🤖</div>
+                                <div class="text-xs font-mono text-green-400">Agent Zero · CrawDaddy · Bastion</div>
+                            </div>
+                        </div>
+                        <div class="absolute inset-0 bg-gradient-to-t from-gray-900 via-transparent to-transparent"></div>
+                        <div class="absolute top-3 left-3 bg-green-500 text-white text-xs px-3 py-1 rounded-full font-semibold">
+                            <i class="fas fa-circle text-xs mr-1 animate-pulse"></i> RUNNING
+                        </div>
+                    </div>
+                    <div class="p-6 project-content">
+                        <h3 class="text-xl font-semibold mb-1">Conway Security Cluster</h3>
+                        <p class="text-green-400 text-xs font-mono mb-3">Multi-agent swarm · systemd · Telegram</p>
+                        <p class="text-gray-300 text-sm mb-3 project-description">Three-agent autonomous swarm running 24/7 on AWS EC2. Agent Zero orchestrates, CrawDaddy executes security scans, Bastion holds sovereign ERC-8004 identity. Think→Act→Observe loop with self-repair capability.</p>
+                        <div class="flex flex-wrap gap-2 mb-4">
+                            <span class="text-xs bg-green-500/20 text-green-300 px-2 py-1 rounded-full">Multi-agent</span>
+                            <span class="text-xs bg-blue-500/20 text-blue-300 px-2 py-1 rounded-full">AWS EC2</span>
+                            <span class="text-xs bg-purple-500/20 text-purple-300 px-2 py-1 rounded-full">OpenClaw</span>
+                        </div>
+                        <a href="https://github.com/mbennett-labs/crawdaddy-security" target="_blank" class="flex items-center text-blue-500 hover:text-blue-400 transition-all duration-300 text-sm">
+                            <i class="fab fa-github mr-2"></i>View Repo
+                        </a>
                     </div>
                 </div>
-                <div class="p-6 project-content">
-                    <h3 class="text-xl font-semibold mb-2">Quantum Risk Calculator</h3>
-                    <p class="text-gray-300 text-sm mb-4 project-description">Free security assessment tool for healthcare organizations. Instant quantum threat analysis with professional PDF reports.</p>
-                    
-                    <div>
+
+                <!-- PROJECT 5: Quantum Risk Calculator -->
+                <div class="project-card bg-gray-900/30 rounded-xl overflow-hidden shadow-lg hover:shadow-blue-500/10 transition-all duration-300 transform hover:-translate-y-2">
+                    <div class="project-img-container relative">
+                        <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=2940&auto=format&fit=crop" alt="Quantum Risk Calculator" class="project-img">
+                        <div class="absolute inset-0 bg-gradient-to-t from-gray-900 via-gray-900/60 to-transparent"></div>
+                        <div class="absolute top-3 left-3 bg-green-500 text-white text-xs px-3 py-1 rounded-full font-semibold">
+                            <i class="fas fa-circle text-xs mr-1 animate-pulse"></i> LIVE
+                        </div>
+                        <div class="absolute top-3 right-3 bg-green-700 text-white text-xs px-3 py-1 rounded-full font-semibold">Free Tool</div>
+                    </div>
+                    <div class="p-6 project-content">
+                        <h3 class="text-xl font-semibold mb-1">Quantum Risk Calculator</h3>
+                        <p class="text-blue-400 text-xs font-mono mb-3">Healthcare · HIPAA · PDF reports</p>
+                        <p class="text-gray-300 text-sm mb-3 project-description">Free security assessment tool for healthcare organizations. Instant quantum threat analysis with professional PDF reports. Used by healthcare CISOs to quantify quantum exposure before their board presentations.</p>
                         <div class="flex flex-wrap gap-2 mb-4">
-                            <span class="text-xs bg-blue-500/20 text-blue-300 px-2 py-1 rounded-full">Security</span>
                             <span class="text-xs bg-blue-500/20 text-blue-300 px-2 py-1 rounded-full">Healthcare</span>
-                            <span class="text-xs bg-blue-500/20 text-blue-300 px-2 py-1 rounded-full">Assessment</span>
+                            <span class="text-xs bg-green-500/20 text-green-300 px-2 py-1 rounded-full">Free</span>
+                            <span class="text-xs bg-purple-500/20 text-purple-300 px-2 py-1 rounded-full">PDF Export</span>
                         </div>
-                        
-                        <a href="https://quantumshieldlabs.dev/quantum-risk-calculator/" target="_blank" class="flex items-center text-green-400 hover:text-green-300 transition-all duration-300">
-                            <i class="fas fa-calculator mr-2"></i>
-                            <span>Try Calculator</span>
+                        <a href="https://quantumshieldlabs.dev/quantum-risk-calculator/" target="_blank" class="flex items-center text-green-400 hover:text-green-300 transition-all duration-300 text-sm">
+                            <i class="fas fa-calculator mr-2"></i>Try Free Calculator
+                        </a>
+                    </div>
+                </div>
+
+                <!-- PROJECT 6: PQC Playbook -->
+                <div class="project-card bg-gray-900/30 rounded-xl overflow-hidden shadow-lg hover:shadow-blue-500/10 transition-all duration-300 transform hover:-translate-y-2">
+                    <div class="project-img-container relative">
+                        <div class="w-full h-full flex items-center justify-center" style="background: linear-gradient(135deg, #1a0533 0%, #2d1b69 100%);">
+                            <div class="text-center px-4">
+                                <i class="fas fa-book text-purple-400 text-5xl mb-2"></i>
+                                <div class="text-purple-300 text-xs font-mono">125,000+ words</div>
+                            </div>
+                        </div>
+                        <div class="absolute inset-0 bg-gradient-to-t from-gray-900 via-transparent to-transparent"></div>
+                        <div class="absolute top-3 left-3 bg-purple-600 text-white text-xs px-3 py-1 rounded-full font-semibold">Published</div>
+                    </div>
+                    <div class="p-6 project-content">
+                        <h3 class="text-xl font-semibold mb-1">PQC Healthcare Playbook</h3>
+                        <p class="text-purple-400 text-xs font-mono mb-3">125K words · 25 chapters · Gumroad</p>
+                        <p class="text-gray-300 text-sm mb-3 project-description">The definitive post-quantum cryptography migration guide for healthcare organizations. Covers NIST standards, HIPAA compliance, vendor assessment, and implementation roadmaps. Cited by healthcare CISOs nationwide.</p>
+                        <div class="flex flex-wrap gap-2 mb-4">
+                            <span class="text-xs bg-purple-500/20 text-purple-300 px-2 py-1 rounded-full">Healthcare</span>
+                            <span class="text-xs bg-blue-500/20 text-blue-300 px-2 py-1 rounded-full">NIST</span>
+                            <span class="text-xs bg-green-500/20 text-green-300 px-2 py-1 rounded-full">HIPAA</span>
+                        </div>
+                        <a href="https://3864413400060.gumroad.com/l/quantum-security-playbook" target="_blank" class="flex items-center text-purple-400 hover:text-purple-300 transition-all duration-300 text-sm">
+                            <i class="fas fa-external-link-alt mr-2"></i>View Playbook
                         </a>
                     </div>
                 </div>
             </div>
             
-            <!-- PROJECT 3: Ethereum Smart Contracts -->
-            <div class="project-card bg-gray-900/30 rounded-xl overflow-hidden shadow-lg hover:shadow-blue-500/10 transition-all duration-300 transform hover:-translate-y-2">
-                <div class="project-img-container">
-                    <img src="https://images.unsplash.com/photo-1639762681057-408e52192e55?q=80&w=2832&auto=format&fit=crop" alt="Ethereum Smart Contracts" class="project-img">
-                    <div class="absolute inset-0 bg-gradient-to-t from-gray-900 via-gray-900/60 to-transparent"></div>
-                </div>
-                <div class="p-6 project-content">
-                    <h3 class="text-xl font-semibold mb-2">Smart Contract Security</h3>
-                    <p class="text-gray-300 text-sm mb-4 project-description">Collection of audited Ethereum smart contracts demonstrating security best practices, gas optimization, and DeFi patterns.</p>
-                    
-                    <div>
-                        <div class="flex flex-wrap gap-2 mb-4">
-                            <span class="text-xs bg-blue-500/20 text-blue-300 px-2 py-1 rounded-full">Solidity</span>
-                            <span class="text-xs bg-blue-500/20 text-blue-300 px-2 py-1 rounded-full">Security</span>
-                            <span class="text-xs bg-blue-500/20 text-blue-300 px-2 py-1 rounded-full">DeFi</span>
-                        </div>
-                        
-                        <a href="https://github.com/mbennett-labs/ethereum-smart-contracts" target="_blank" class="flex items-center text-blue-500 hover:text-blue-400 transition-all duration-300">
-                            <span>View Project</span> <i class="fas fa-arrow-right ml-2"></i>
-                        </a>
-                    </div>
-                </div>
+            <div class="text-center mt-12">
+                <a href="https://github.com/mbennett-labs" target="_blank" class="px-6 py-3 bg-gradient-to-r from-blue-600 to-blue-500 hover:from-blue-700 hover:to-blue-600 text-white rounded-lg shadow-lg hover:shadow-blue-500/30 transition">
+                    <i class="fab fa-github mr-2"></i>View All Projects on GitHub
+                </a>
             </div>
         </div>
-        
-        <div class="text-center mt-12">
-            <a href="https://github.com/mbennett-labs" target="_blank" class="px-6 py-3 bg-gradient-to-r from-blue-600 to-blue-500 hover:from-blue-700 hover:to-blue-600 text-white rounded-lg shadow-lg hover:shadow-blue-500/30 transition">
-                <i class="fab fa-github mr-2"></i>View All Projects
-            </a>
-        </div>
-    </div>
-</section>
+    </section>
+
     <!-- About Section -->
     <section id="about" class="py-20 bg-black bg-opacity-30">
         <div class="container mx-auto px-4">
             <div class="max-w-4xl mx-auto text-center mb-16">
                 <h2 class="text-3xl md:text-4xl font-bold mb-6">About Us</h2>
-                <p class="text-xl text-gray-300 mb-8">
-                    Quantum Shield Labs was established with a vision to redefine cybersecurity in the age of quantum computing.
-                </p>
+                <p class="text-xl text-gray-300 mb-8">Building the security layer the quantum age needs — from healthcare consulting to autonomous AI agents.</p>
                 <div class="bg-gray-900 bg-opacity-50 backdrop-blur-lg rounded-xl p-8 shadow-lg">
-                    <p class="text-gray-300 leading-relaxed">
-                        Founded by seasoned security professionals, we combine expertise in cryptography, blockchain technology, and artificial intelligence to create comprehensive security solutions.
-                    </p>
+                    <p class="text-gray-300 leading-relaxed">Quantum Shield Labs was founded with a single thesis: the cryptographic foundations of the internet have an expiration date, and the window to migrate is closing. We serve two markets — healthcare organizations preparing for NIST PQC mandates, and the AI agent economy that needs security infrastructure it can hire autonomously.</p>
                 </div>
             </div>
             
@@ -573,19 +516,41 @@
                         </div>
                     </div>
                     <div class="md:w-2/3">
-                        <h3 class="text-2xl font-semibold mb-3">Our Founder</h3>
-                        <p class="text-gray-300 mb-4">
-                            Michael Bennett brings a unique perspective through his diverse career background, including Executive Chef experience and skilled trades.
-                        </p>
-                        <p class="text-gray-300">
-                            This unconventional journey equipped him with distinctive problem-solving approaches that drive innovative security solutions.
-                        </p>
-                        <div class="mt-4">
-                            <a href="https://github.com/mbennett-labs" class="text-blue-400 hover:text-blue-300 flex items-center">
-                                <i class="fab fa-github mr-2"></i> View GitHub Profile
+                        <h3 class="text-2xl font-semibold mb-3">Mike Bennett — Founder & CEO</h3>
+                        <p class="text-gray-300 mb-4">Former Executive Chef at DC establishments including the Cosmos Club. BS Software Development & Security, UMGC 2024. Built CrawDaddy, a live autonomous AI security agent earning USDC on Base.</p>
+                        <p class="text-gray-300 mb-4">The unconventional path from kitchen to cybersecurity founder gives a different perspective on how systems fail under pressure — and how they recover.</p>
+                        <div class="flex gap-4 mt-4 flex-wrap">
+                            <a href="https://github.com/mbennett-labs" class="text-blue-400 hover:text-blue-300 flex items-center text-sm">
+                                <i class="fab fa-github mr-2"></i>GitHub
+                            </a>
+                            <a href="https://x.com/QuarkMichael" class="text-blue-400 hover:text-blue-300 flex items-center text-sm">
+                                <i class="fab fa-twitter mr-2"></i>@QuarkMichael
+                            </a>
+                            <a href="https://linkedin.com/in/michael-bennett-a29a93103" class="text-blue-400 hover:text-blue-300 flex items-center text-sm">
+                                <i class="fab fa-linkedin mr-2"></i>LinkedIn
                             </a>
                         </div>
                     </div>
+                </div>
+            </div>
+
+            <!-- Stats -->
+            <div class="max-w-4xl mx-auto grid grid-cols-2 md:grid-cols-4 gap-6 text-center mb-16">
+                <div class="bg-gray-900/30 rounded-xl p-6">
+                    <div class="text-3xl font-bold text-green-400">36+</div>
+                    <div class="text-gray-400 text-sm mt-1">ACP Jobs Completed</div>
+                </div>
+                <div class="bg-gray-900/30 rounded-xl p-6">
+                    <div class="text-3xl font-bold text-green-400">125K+</div>
+                    <div class="text-gray-400 text-sm mt-1">Words in PQC Playbook</div>
+                </div>
+                <div class="bg-gray-900/30 rounded-xl p-6">
+                    <div class="text-3xl font-bold text-blue-400">3</div>
+                    <div class="text-gray-400 text-sm mt-1">Live Autonomous Agents</div>
+                </div>
+                <div class="bg-gray-900/30 rounded-xl p-6">
+                    <div class="text-3xl font-bold text-blue-400">6</div>
+                    <div class="text-gray-400 text-sm mt-1">Chains Supported</div>
                 </div>
             </div>
             
@@ -593,35 +558,24 @@
                 <h3 class="text-2xl font-semibold text-center mb-12">Our Core Values</h3>
                 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
                     <div class="bg-gradient-to-br from-gray-900 to-gray-800 bg-opacity-20 backdrop-blur-lg rounded-xl p-6 shadow-lg hover:shadow-blue-500/10 transition-all duration-300 transform hover:-translate-y-1">
-                        <div class="p-3 bg-blue-500 bg-opacity-10 rounded-lg w-fit mb-4">
-                            <i class="fas fa-shield-alt text-blue-500 text-xl"></i>
-                        </div>
+                        <div class="p-3 bg-blue-500 bg-opacity-10 rounded-lg w-fit mb-4"><i class="fas fa-shield-alt text-blue-500 text-xl"></i></div>
                         <h4 class="text-xl font-semibold mb-3">Integrity</h4>
-                        <p class="text-gray-400">Unwavering ethical standards and transparency in all engagements.</p>
+                        <p class="text-gray-400">Unwavering ethical standards. Build in public. No vaporware.</p>
                     </div>
-                    
                     <div class="bg-gradient-to-br from-gray-900 to-gray-800 bg-opacity-20 backdrop-blur-lg rounded-xl p-6 shadow-lg hover:shadow-blue-500/10 transition-all duration-300 transform hover:-translate-y-1">
-                        <div class="p-3 bg-blue-500 bg-opacity-10 rounded-lg w-fit mb-4">
-                            <i class="fas fa-code text-blue-500 text-xl"></i>
-                        </div>
-                        <h4 class="text-xl font-semibold mb-3">Innovation</h4>
-                        <p class="text-gray-400">Continuously pioneering solutions to stay ahead of evolving threats.</p>
+                        <div class="p-3 bg-blue-500 bg-opacity-10 rounded-lg w-fit mb-4"><i class="fas fa-code text-blue-500 text-xl"></i></div>
+                        <h4 class="text-xl font-semibold mb-3">Ship First</h4>
+                        <p class="text-gray-400">Working software over endless planning. CrawDaddy runs 24/7.</p>
                     </div>
-                    
                     <div class="bg-gradient-to-br from-gray-900 to-gray-800 bg-opacity-20 backdrop-blur-lg rounded-xl p-6 shadow-lg hover:shadow-blue-500/10 transition-all duration-300 transform hover:-translate-y-1">
-                        <div class="p-3 bg-blue-500 bg-opacity-10 rounded-lg w-fit mb-4">
-                            <i class="fas fa-chart-bar text-blue-500 text-xl"></i>
-                        </div>
-                        <h4 class="text-xl font-semibold mb-3">Excellence</h4>
-                        <p class="text-gray-400">Committed to delivering superior quality in every service and solution.</p>
+                        <div class="p-3 bg-blue-500 bg-opacity-10 rounded-lg w-fit mb-4"><i class="fas fa-chart-bar text-blue-500 text-xl"></i></div>
+                        <h4 class="text-xl font-semibold mb-3">Evidence-Based</h4>
+                        <p class="text-gray-400">NIST standards, real threat timelines, no FUD.</p>
                     </div>
-                    
                     <div class="bg-gradient-to-br from-gray-900 to-gray-800 bg-opacity-20 backdrop-blur-lg rounded-xl p-6 shadow-lg hover:shadow-blue-500/10 transition-all duration-300 transform hover:-translate-y-1">
-                        <div class="p-3 bg-blue-500 bg-opacity-10 rounded-lg w-fit mb-4">
-                            <i class="fas fa-clock text-blue-500 text-xl"></i>
-                        </div>
-                        <h4 class="text-xl font-semibold mb-3">Responsiveness</h4>
-                        <p class="text-gray-400">Security concerns need immediate attention and swift resolution.</p>
+                        <div class="p-3 bg-blue-500 bg-opacity-10 rounded-lg w-fit mb-4"><i class="fas fa-robot text-blue-500 text-xl"></i></div>
+                        <h4 class="text-xl font-semibold mb-3">Autonomous First</h4>
+                        <p class="text-gray-400">Security that doesn't need a human to run every scan.</p>
                     </div>
                 </div>
             </div>
@@ -633,81 +587,72 @@
         <div class="container mx-auto px-4">
             <div class="max-w-4xl mx-auto text-center mb-12">
                 <h2 class="text-3xl md:text-4xl font-bold mb-6">Resources</h2>
-                <p class="text-lg text-gray-300">
-                    Our resource center is under development. We'll be publishing guides, whitepapers, and tools to help address cybersecurity challenges.
-                </p>
+                <p class="text-lg text-gray-300">Free tools, educational content, and open-source libraries for the quantum security community.</p>
             </div>
-            
             <div class="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-5xl mx-auto">
-                <div class="bg-gray-900/30 backdrop-blur-lg rounded-xl overflow-hidden shadow-lg transition-all duration-300 flex flex-col">
+                <div class="bg-gray-900/30 backdrop-blur-lg rounded-xl overflow-hidden shadow-lg flex flex-col">
                     <div class="p-6">
-                        <div class="bg-blue-500/10 w-16 h-16 rounded-full flex items-center justify-center mb-6 mx-auto">
-                            <i class="fas fa-file-alt text-blue-500 text-2xl"></i>
+                        <div class="bg-green-500/10 w-16 h-16 rounded-full flex items-center justify-center mb-6 mx-auto">
+                            <i class="fas fa-calculator text-green-500 text-2xl"></i>
                         </div>
-                        <h3 class="text-xl font-semibold text-center mb-2">Whitepapers</h3>
-                        <p class="text-gray-400 text-center mb-4">In-depth research and analysis of quantum cryptography and blockchain vulnerabilities.</p>
-                        <div class="bg-blue-600/10 rounded-lg p-3 text-center text-blue-300">
-                            <i class="fas fa-clock mr-2"></i> Coming Q1 2026
-                        </div>
+                        <h3 class="text-xl font-semibold text-center mb-2">Risk Calculator</h3>
+                        <p class="text-gray-400 text-center mb-4">Free quantum risk assessment with PDF reports for healthcare organizations.</p>
+                        <a href="https://quantumshieldlabs.dev/quantum-risk-calculator/" target="_blank" class="block bg-green-600/20 rounded-lg p-3 text-center text-green-300 hover:bg-green-600/30 transition">
+                            <i class="fas fa-external-link-alt mr-2"></i>Try Free Tool
+                        </a>
                     </div>
                 </div>
-                
-                <div class="bg-gray-900/30 backdrop-blur-lg rounded-xl overflow-hidden shadow-lg transition-all duration-300 flex flex-col">
+                <div class="bg-gray-900/30 backdrop-blur-lg rounded-xl overflow-hidden shadow-lg flex flex-col">
                     <div class="p-6">
                         <div class="bg-blue-500/10 w-16 h-16 rounded-full flex items-center justify-center mb-6 mx-auto">
-                            <i class="fas fa-video text-blue-500 text-2xl"></i>
+                            <i class="fas fa-graduation-cap text-blue-500 text-2xl"></i>
                         </div>
-                        <h3 class="text-xl font-semibold text-center mb-2">Webinars</h3>
-                        <p class="text-gray-400 text-center mb-4">Educational webinars on emerging security threats and quantum-resistant implementations.</p>
-                        <div class="bg-blue-600/10 rounded-lg p-3 text-center text-blue-300">
-                            <i class="fas fa-clock mr-2"></i> Coming Q1 2026
-                        </div>
+                        <h3 class="text-xl font-semibold text-center mb-2">Security Blog</h3>
+                        <p class="text-gray-400 text-center mb-4">Deep dives on PQC, NIST standards, harvest-now-decrypt-later attacks, and the agent economy.</p>
+                        <a href="https://quantumshieldlabs.dev/blog/" target="_blank" class="block bg-blue-600/20 rounded-lg p-3 text-center text-blue-300 hover:bg-blue-600/30 transition">
+                            <i class="fas fa-arrow-right mr-2"></i>Read the Blog
+                        </a>
                     </div>
                 </div>
-                
-                <div class="bg-gray-900/30 backdrop-blur-lg rounded-xl overflow-hidden shadow-lg transition-all duration-300 flex flex-col">
+                <div class="bg-gray-900/30 backdrop-blur-lg rounded-xl overflow-hidden shadow-lg flex flex-col">
                     <div class="p-6">
-                        <div class="bg-blue-500/10 w-16 h-16 rounded-full flex items-center justify-center mb-6 mx-auto">
-                            <i class="fas fa-tools text-blue-500 text-2xl"></i>
+                        <div class="bg-purple-500/10 w-16 h-16 rounded-full flex items-center justify-center mb-6 mx-auto">
+                            <i class="fas fa-cube text-purple-500 text-2xl"></i>
                         </div>
-                        <h3 class="text-xl font-semibold text-center mb-2">Security Tools</h3>
-                        <p class="text-gray-400 text-center mb-4">Open-source security assessment tools and quantum-resistant implementation frameworks.</p>
-                        <div class="bg-blue-600/10 rounded-lg p-3 text-center text-blue-300">
-                            <i class="fas fa-clock mr-2"></i> Coming Q2 2026
-                        </div>
+                        <h3 class="text-xl font-semibold text-center mb-2">crypto-scanner PyPI</h3>
+                        <p class="text-gray-400 text-center mb-4">Open-source CLI tool for quantum vulnerability scanning. Powers CrawDaddy's repo analysis.</p>
+                        <a href="https://pypi.org/project/crypto-scanner/" target="_blank" class="block bg-purple-600/20 rounded-lg p-3 text-center text-purple-300 hover:bg-purple-600/30 transition">
+                            <i class="fab fa-python mr-2"></i>pip install crypto-scanner
+                        </a>
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
-   <!-- Launch Roadmap Section - UPDATED -->
+    <!-- Roadmap Section -->
     <section id="roadmap" class="py-20 bg-black bg-opacity-30">
         <div class="container mx-auto px-4">
             <div class="max-w-4xl mx-auto text-center mb-16">
                 <h2 class="text-3xl md:text-4xl font-bold mb-6">Our Journey</h2>
-                <p class="text-gray-300 text-lg">
-                    Building the foundation for quantum-safe healthcare security — from concept to industry-leading solutions.
-                </p>
+                <p class="text-gray-300 text-lg">Building in public. Here's what's done, what's running, and what's next.</p>
             </div>
             
             <div class="max-w-5xl mx-auto">
-                <!-- Timeline -->
                 <div class="relative">
-                    <!-- Timeline line -->
                     <div class="absolute top-0 left-1/2 w-1 h-full bg-blue-500 bg-opacity-30 transform -translate-x-1/2"></div>
                     
-                    <!-- Achievement 1: Foundation -->
+                    <!-- Done: Foundation -->
                     <div class="relative z-10 mb-12">
                         <div class="flex flex-col md:flex-row items-center">
                             <div class="flex items-center justify-center order-1 md:order-1 w-full md:w-1/2 mb-6 md:mb-0 md:pr-10 text-right">
                                 <div class="bg-gray-900 bg-opacity-70 backdrop-blur-lg p-6 rounded-xl shadow-lg border-l-4 border-green-500 ml-auto">
                                     <div class="flex items-center justify-end mb-2">
-                                        <h3 class="text-xl font-semibold text-green-400">Foundation & Launch</h3>
+                                        <h3 class="text-xl font-semibold text-green-400">Foundation & Products</h3>
                                         <i class="fas fa-check-circle text-green-500 ml-2"></i>
                                     </div>
-                                    <p class="text-sm text-green-300">2024 - Q1 2025 • Completed</p>
-                                    <p class="text-gray-300 mt-3">Company established, core infrastructure built, and service offerings designed for the healthcare quantum security market.</p>
+                                    <p class="text-sm text-green-300">2024 - Q3 2025 • Completed</p>
+                                    <p class="text-gray-300 mt-3">QSL established. PQC Playbook published (125K+ words). Quantum Risk Calculator live. Educational blog launched.</p>
                                 </div>
                             </div>
                             <div class="absolute left-1/2 transform -translate-x-1/2 flex items-center justify-center">
@@ -718,8 +663,8 @@
                             <div class="w-full md:w-1/2 order-2 md:pl-10 invisible md:visible"></div>
                         </div>
                     </div>
-                    
-                    <!-- Achievement 2: Playbook Launch -->
+
+                    <!-- Done: CrawDaddy -->
                     <div class="relative z-10 mb-12">
                         <div class="flex flex-col md:flex-row items-center">
                             <div class="w-full md:w-1/2 order-2 md:order-1 md:pr-10 invisible md:visible"></div>
@@ -732,164 +677,110 @@
                                 <div class="bg-gray-900 bg-opacity-70 backdrop-blur-lg p-6 rounded-xl shadow-lg border-r-4 border-green-500">
                                     <div class="flex items-center mb-2">
                                         <i class="fas fa-check-circle text-green-500 mr-2"></i>
-                                        <h3 class="text-xl font-semibold text-green-400">Security Playbook Published</h3>
+                                        <h3 class="text-xl font-semibold text-green-400">CrawDaddy + Conway Cluster</h3>
                                     </div>
-                                    <p class="text-sm text-green-300">Q3 2025 • Completed</p>
-                                    <p class="text-gray-300 mt-3">Released the Post-Quantum Security Playbook for Healthcare — 125,000+ words of comprehensive migration guidance, templates, and frameworks.</p>
-                                    <a href="https://3864413400060.gumroad.com/l/quantum-security-playbook" target="_blank" class="inline-flex items-center text-green-400 hover:text-green-300 mt-2 text-sm">
-                                        <i class="fas fa-external-link-alt mr-1"></i> View Playbook
-                                    </a>
+                                    <p class="text-sm text-green-300">Q4 2025 - Q1 2026 • Completed</p>
+                                    <p class="text-gray-300 mt-3">CrawDaddy launched on Virtuals ACP. 36+ completed jobs. x402 autonomous micropayments implemented. ERC-8004 identity on Base. Conway multi-agent swarm deployed.</p>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    
-                    <!-- Achievement 3: Risk Calculator -->
+
+                    <!-- Current -->
                     <div class="relative z-10 mb-12">
                         <div class="flex flex-col md:flex-row items-center">
                             <div class="flex items-center justify-center order-1 md:order-1 w-full md:w-1/2 mb-6 md:mb-0 md:pr-10 text-right">
-                                <div class="bg-gray-900 bg-opacity-70 backdrop-blur-lg p-6 rounded-xl shadow-lg border-l-4 border-green-500 ml-auto">
+                                <div class="bg-gradient-to-r from-blue-900/50 to-purple-900/50 backdrop-blur-lg p-6 rounded-xl shadow-lg border-l-4 border-blue-400 ml-auto">
                                     <div class="flex items-center justify-end mb-2">
-                                        <h3 class="text-xl font-semibold text-green-400">Risk Calculator Live</h3>
-                                        <i class="fas fa-check-circle text-green-500 ml-2"></i>
+                                        <h3 class="text-xl font-semibold text-blue-400">Active — March 2026</h3>
+                                        <span class="inline-block bg-blue-500/30 text-blue-300 px-2 py-1 rounded text-xs font-semibold ml-2">NOW</span>
                                     </div>
-                                    <p class="text-sm text-green-300">Q4 2025 • Completed</p>
-                                    <p class="text-gray-300 mt-3">Launched free Quantum Security Risk Calculator — instant assessments with professional PDF reports for healthcare organizations.</p>
-                                    <a href="https://quantumshieldlabs.dev/quantum-risk-calculator/" target="_blank" class="inline-flex items-center text-green-400 hover:text-green-300 mt-2 text-sm">
-                                        <i class="fas fa-calculator mr-1"></i> Try Calculator
-                                    </a>
+                                    <p class="text-sm text-blue-300">Current Phase</p>
+                                    <p class="text-gray-300 mt-3">The Synthesis hackathon submitted. Price raised to $0.49/scan. Moltbook presence active. TherapistIndex SEO building. G2i interview pipeline open.</p>
                                 </div>
                             </div>
                             <div class="absolute left-1/2 transform -translate-x-1/2 flex items-center justify-center">
-                                <div class="w-12 h-12 bg-green-600 border-4 border-gray-900 rounded-full flex items-center justify-center">
-                                    <i class="fas fa-check text-white"></i>
-                                </div>
-                            </div>
-                            <div class="w-full md:w-1/2 order-2 md:pl-10 invisible md:visible"></div>
-                        </div>
-                    </div>
-                    
-                    <!-- Current: Active Engagement -->
-                    <div class="relative z-10 mb-12">
-                        <div class="flex flex-col md:flex-row items-center">
-                            <div class="w-full md:w-1/2 order-2 md:order-1 md:pr-10 invisible md:visible"></div>
-                            <div class="absolute left-1/2 transform -translate-x-1/2 flex items-center justify-center">
-                                <div class="w-12 h-12 bg-blue-600 border-4 border-gray-900 rounded-full flex items-center justify-center text-white font-bold animate-pulse">
+                                <div class="w-12 h-12 bg-blue-600 border-4 border-gray-900 rounded-full flex items-center justify-center text-white animate-pulse">
                                     <i class="fas fa-bolt"></i>
                                 </div>
                             </div>
-                            <div class="flex items-center justify-center order-1 md:order-2 w-full md:w-1/2 mb-6 md:mb-0 md:pl-10">
-                                <div class="bg-gradient-to-r from-blue-900/50 to-purple-900/50 backdrop-blur-lg p-6 rounded-xl shadow-lg border-r-4 border-blue-400">
-                                    <div class="flex items-center mb-2">
-                                        <span class="inline-block bg-blue-500/30 text-blue-300 px-2 py-1 rounded text-xs font-semibold mr-2">NOW</span>
-                                        <h3 class="text-xl font-semibold text-blue-400">Active Client Engagement</h3>
-                                    </div>
-                                    <p class="text-sm text-blue-300">Q4 2025 - Q1 2026 • Current Phase</p>
-                                    <p class="text-gray-300 mt-3">Conducting quantum readiness assessments, expanding educational content, and building assessment template library for healthcare CISOs.</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <!-- Coming: CISO Toolkit -->
-                    <div class="relative z-10 mb-12">
-                        <div class="flex flex-col md:flex-row items-center">
-                            <div class="flex items-center justify-center order-1 md:order-1 w-full md:w-1/2 mb-6 md:mb-0 md:pr-10 text-right">
-                                <div class="bg-gray-900 bg-opacity-70 backdrop-blur-lg p-6 rounded-xl shadow-lg border-l-4 border-yellow-500 ml-auto opacity-90">
-                                    <div class="flex items-center justify-end mb-2">
-                                        <h3 class="text-xl font-semibold text-yellow-400">CISO Board Presentation Kit</h3>
-                                        <i class="fas fa-clock text-yellow-500 ml-2"></i>
-                                    </div>
-                                    <p class="text-sm text-yellow-300">Q1 2026 • Coming Soon</p>
-                                    <p class="text-gray-400 mt-3">Ready-to-use board presentation deck, executive summary templates, ROI calculators, and speaker notes for quantum security budget approval.</p>
-                                </div>
-                            </div>
-                            <div class="absolute left-1/2 transform -translate-x-1/2 flex items-center justify-center">
-                                <div class="w-12 h-12 bg-yellow-600 border-4 border-gray-900 rounded-full flex items-center justify-center text-white">
-                                    <i class="fas fa-presentation"></i>
-                                </div>
-                            </div>
                             <div class="w-full md:w-1/2 order-2 md:pl-10 invisible md:visible"></div>
                         </div>
                     </div>
-                    
-                    <!-- Coming: Vendor Assessment -->
+
+                    <!-- Q2 -->
                     <div class="relative z-10 mb-12">
                         <div class="flex flex-col md:flex-row items-center">
                             <div class="w-full md:w-1/2 order-2 md:order-1 md:pr-10 invisible md:visible"></div>
                             <div class="absolute left-1/2 transform -translate-x-1/2 flex items-center justify-center">
                                 <div class="w-12 h-12 bg-yellow-600 border-4 border-gray-900 rounded-full flex items-center justify-center text-white">
-                                    <i class="fas fa-clipboard-check"></i>
+                                    <i class="fas fa-rocket"></i>
                                 </div>
                             </div>
                             <div class="flex items-center justify-center order-1 md:order-2 w-full md:w-1/2 mb-6 md:mb-0 md:pl-10">
                                 <div class="bg-gray-900 bg-opacity-70 backdrop-blur-lg p-6 rounded-xl shadow-lg border-r-4 border-yellow-500 opacity-90">
                                     <div class="flex items-center mb-2">
                                         <i class="fas fa-clock text-yellow-500 mr-2"></i>
-                                        <h3 class="text-xl font-semibold text-yellow-400">Vendor Assessment Templates</h3>
+                                        <h3 class="text-xl font-semibold text-yellow-400">Q2 2026 — Scale</h3>
                                     </div>
-                                    <p class="text-sm text-yellow-300">Q1-Q2 2026 • In Development</p>
-                                    <p class="text-gray-400 mt-3">Complete vendor quantum readiness questionnaire pack with scoring rubrics, risk ratings, and compliance mapping for healthcare procurement teams.</p>
+                                    <p class="text-gray-400 mt-3">100 ACP jobs milestone. Buyback-and-burn live. First QSL consulting client. TherapistIndex AdSense approval. GoKite Agent Store listing. WatchDog agent added to Conway cluster.</p>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    
-                    <!-- Future: Full Toolkit & AI -->
+
+                    <!-- Q3+ -->
                     <div class="relative z-10">
                         <div class="flex flex-col md:flex-row items-center">
                             <div class="flex items-center justify-center order-1 md:order-1 w-full md:w-1/2 mb-6 md:mb-0 md:pr-10 text-right">
                                 <div class="bg-gray-900 bg-opacity-70 backdrop-blur-lg p-6 rounded-xl shadow-lg border-l-4 border-gray-600 ml-auto opacity-80">
                                     <div class="flex items-center justify-end mb-2">
-                                        <h3 class="text-xl font-semibold text-gray-400">AI-Powered Security Tools</h3>
+                                        <h3 class="text-xl font-semibold text-gray-400">Q3+ 2026 — Full Autonomy</h3>
                                         <i class="fas fa-rocket text-gray-500 ml-2"></i>
                                     </div>
-                                    <p class="text-sm text-gray-400">Q3+ 2026 • Future</p>
-                                    <p class="text-gray-500 mt-3">Complete assessment automation toolkit, AI-powered compliance monitoring, and partnership integrations with leading healthcare security platforms.</p>
+                                    <p class="text-gray-500 mt-3">NemoClaw enterprise integration. Bastion token launch (after $500/mo sustained). 10,000 scans milestone. PQC vendor directory under QSL brand. AWS Marketplace enterprise listing.</p>
                                 </div>
                             </div>
                             <div class="absolute left-1/2 transform -translate-x-1/2 flex items-center justify-center">
                                 <div class="w-12 h-12 bg-gray-700 border-4 border-gray-900 rounded-full flex items-center justify-center text-white">
-                                    <i class="fas fa-robot"></i>
+                                    <i class="fas fa-star"></i>
                                 </div>
                             </div>
                             <div class="w-full md:w-1/2 order-2 md:pl-10 invisible md:visible"></div>
                         </div>
                     </div>
                 </div>
-                
-                <!-- Achievements Summary -->
+
+                <!-- Stats -->
                 <div class="mt-16 bg-gradient-to-r from-green-900/20 to-blue-900/20 rounded-xl p-8 border border-green-500/20">
-                    <h3 class="text-2xl font-semibold text-center mb-8">What We've Built</h3>
+                    <h3 class="text-2xl font-semibold text-center mb-8">Live as of March 2026</h3>
                     <div class="grid grid-cols-2 md:grid-cols-4 gap-6 text-center">
                         <div>
-                            <div class="text-3xl font-bold text-green-400">125K+</div>
-                            <div class="text-gray-400 text-sm">Words in Playbook</div>
+                            <div class="text-3xl font-bold text-green-400">36+</div>
+                            <div class="text-gray-400 text-sm">ACP Jobs Done</div>
                         </div>
                         <div>
-                            <div class="text-3xl font-bold text-green-400">25</div>
-                            <div class="text-gray-400 text-sm">Chapters & Guides</div>
+                            <div class="text-3xl font-bold text-green-400">$60+</div>
+                            <div class="text-gray-400 text-sm">Agent Wallet Balance</div>
                         </div>
                         <div>
-                            <div class="text-3xl font-bold text-blue-400">Free</div>
-                            <div class="text-gray-400 text-sm">Risk Calculator</div>
+                            <div class="text-3xl font-bold text-blue-400">3</div>
+                            <div class="text-gray-400 text-sm">Autonomous Agents</div>
                         </div>
                         <div>
-                            <div class="text-3xl font-bold text-blue-400">Live</div>
-                            <div class="text-gray-400 text-sm">Educational Blog</div>
+                            <div class="text-3xl font-bold text-blue-400">24/7</div>
+                            <div class="text-gray-400 text-sm">Running on EC2</div>
                         </div>
                     </div>
                 </div>
-                
-                <!-- Call to Action -->
+
                 <div class="mt-12 text-center">
-                    <h3 class="text-2xl font-semibold mb-6">Ready to Prepare for the Quantum Future?</h3>
                     <div class="flex flex-col md:flex-row items-center justify-center space-y-4 md:space-y-0 md:space-x-4">
                         <a href="https://quantumshieldlabs.dev/quantum-risk-calculator/" class="inline-block bg-gradient-to-r from-green-500 to-emerald-600 hover:from-green-600 hover:to-emerald-700 text-white px-8 py-4 rounded-lg shadow-lg hover:shadow-green-500/30 transition">
-                            <i class="fas fa-calculator mr-2"></i> Try Free Risk Calculator
+                            <i class="fas fa-calculator mr-2"></i>Free Risk Calculator
                         </a>
                         <a href="#contact" class="inline-block bg-blue-600 hover:bg-blue-700 text-white px-8 py-4 rounded-lg shadow-lg hover:shadow-blue-500/30 transition">
-                            <i class="fas fa-envelope mr-2"></i> Request Consultation
+                            <i class="fas fa-envelope mr-2"></i>Request Consultation
                         </a>
                     </div>
                 </div>
@@ -897,20 +788,13 @@
         </div>
     </section>
 
-    <!-- FIXED CONTACT SECTION -->
+    <!-- Contact Section -->
     <section id="contact" class="py-20">
         <div class="container mx-auto px-4">
             <h2 class="text-3xl md:text-4xl font-bold text-center mb-6">Contact Us</h2>
-            <p class="text-center text-gray-300 mb-6 max-w-3xl mx-auto">
-                Interested in our early access program? Get in touch with our team to discuss your security needs.
-            </p>
-            <div class="text-center max-w-3xl mx-auto bg-blue-900 bg-opacity-10 rounded-lg p-4 mb-12">
-                <i class="fas fa-info-circle text-blue-400 mr-2"></i>
-                <span class="text-blue-300">Currently accepting a limited number of early access partnerships.</span>
-            </div>
+            <p class="text-center text-gray-300 mb-6 max-w-3xl mx-auto">Healthcare organization preparing for PQC mandates? Let's talk. Consulting engagements from $7.5K.</p>
             
             <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 max-w-5xl mx-auto">
-                <!-- Contact Information -->
                 <div class="space-y-8">
                     <div class="flex items-start space-x-4">
                         <div class="p-3 bg-blue-500 bg-opacity-10 rounded-lg">
@@ -921,7 +805,6 @@
                             <p class="text-gray-300">(240) 659-8286</p>
                         </div>
                     </div>
-                    
                     <div class="flex items-start space-x-4">
                         <div class="p-3 bg-blue-500 bg-opacity-10 rounded-lg">
                             <i class="fas fa-envelope text-blue-500 text-xl"></i>
@@ -931,259 +814,89 @@
                             <p class="text-gray-300">michael@quantumshieldlabs.dev</p>
                         </div>
                     </div>
-
                     <div class="flex items-start space-x-4">
                         <div class="p-3 bg-blue-500 bg-opacity-10 rounded-lg">
                             <i class="fas fa-map-marker-alt text-blue-500 text-xl"></i>
                         </div>
                         <div>
                             <h3 class="text-xl font-semibold mb-2">Location</h3>
-                            <p class="text-gray-300">6814 Westmoreland Ave<br>Takoma Park, Maryland 20912</p>
+                            <p class="text-gray-300">Takoma Park, Maryland 20912<br>Serving DMV area & remote</p>
                         </div>
                     </div>
-                    
-                    <!-- Business Hours -->
-                    <div class="mt-8 bg-gray-800 bg-opacity-20 rounded-lg p-6">
-                        <h3 class="text-xl font-semibold mb-4">Business Hours</h3>
-                        <ul class="space-y-2 text-gray-300">
-                            <li class="flex justify-between">
-                                <span>Monday - Friday:</span>
-                                <span>9:00 AM - 6:00 PM EST</span>
-                            </li>
-                            <li class="flex justify-between">
-                                <span>Saturday:</span>
-                                <span>10:00 AM - 4:00 PM EST</span>
-                            </li>
-                            <li class="flex justify-between">
-                                <span>Sunday:</span>
-                                <span>Closed</span>
-                            </li>
-                        </ul>
-                    </div>
-
-                    <!-- Lead Magnet -->
                     <div class="bg-gradient-to-r from-blue-900/30 to-purple-900/30 rounded-lg p-6">
-                        <h3 class="text-lg font-semibold mb-2">Free Security Assessment</h3>
-                        <p class="text-gray-300 text-sm mb-4">
-                            Get a complimentary quantum readiness evaluation for your organization.
-                        </p>
-                        <ul class="text-gray-300 text-sm space-y-1">
-                            <li>✓ Current vulnerability analysis</li>
-                            <li>✓ Quantum threat timeline</li>
-                            <li>✓ Mitigation strategy roadmap</li>
+                        <h3 class="text-lg font-semibold mb-2">What You Get</h3>
+                        <ul class="text-gray-300 text-sm space-y-2">
+                            <li>✓ Cryptographic inventory of your systems</li>
+                            <li>✓ Quantum threat timeline for your specific stack</li>
+                            <li>✓ NIST PQC migration roadmap</li>
+                            <li>✓ Board-ready executive summary</li>
+                            <li>✓ HIPAA compliance documentation</li>
                         </ul>
+                        <p class="text-gray-400 text-sm mt-4">Engagements from $7.5K — $75K</p>
                     </div>
                 </div>
 
-                <!-- FIXED Contact Form -->
                 <div class="bg-gray-900 bg-opacity-20 backdrop-blur-lg rounded-xl p-6 shadow-lg">
                     <div class="mb-6 bg-blue-900 bg-opacity-20 rounded-lg p-4 border-l-4 border-blue-500">
-                        <h3 class="font-semibold text-lg mb-2">Early Access Application</h3>
-                        <p class="text-gray-300 text-sm">
-                            Help us understand your security needs to provide the most relevant consultation.
-                        </p>
+                        <h3 class="font-semibold text-lg mb-2">Schedule a Consultation</h3>
+                        <p class="text-gray-300 text-sm">Tell us about your organization and we'll scope a quantum security engagement that fits your timeline and budget.</p>
                     </div>
                     
-                    <!-- FIXED Form with new classes -->
                     <form action="https://formspree.io/f/mjkrqvqj" method="POST" class="space-y-6" id="enhanced-contact-form">
-                        <!-- Hidden fields -->
-                        <input type="hidden" name="_subject" value="QSL Early Access Application - New Lead">
+                        <input type="hidden" name="_subject" value="QSL Consultation Request">
                         <input type="hidden" name="_next" value="https://quantumshieldlabs.dev/thank-you.html">
                         <input type="hidden" name="_cc" value="michael@quantumshieldlabs.dev">
                         
-                        <!-- Basic Information with FIXED classes -->
                         <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                             <div>
                                 <label for="name" class="contact-label">Name *</label>
-                                <input
-                                    id="name"
-                                    name="name"
-                                    type="text"
-                                    required
-                                    class="contact-input"
-                                    placeholder="Your name"
-                                />
+                                <input id="name" name="name" type="text" required class="contact-input" placeholder="Your name"/>
                             </div>
-                            
                             <div>
                                 <label for="title" class="contact-label">Job Title</label>
-                                <input
-                                    id="title"
-                                    name="title"
-                                    type="text"
-                                    class="contact-input"
-                                    placeholder="CTO, CISO, etc."
-                                />
+                                <input id="title" name="title" type="text" class="contact-input" placeholder="CISO, CTO, etc."/>
                             </div>
                         </div>
-                        
                         <div>
                             <label for="email" class="contact-label">Business Email *</label>
-                            <input
-                                id="email"
-                                name="email"
-                                type="email"
-                                required
-                                class="contact-input"
-                                placeholder="you@company.com"
-                            />
+                            <input id="email" name="email" type="email" required class="contact-input" placeholder="you@company.com"/>
                         </div>
-                        
                         <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                             <div>
                                 <label for="company" class="contact-label">Company *</label>
-                                <input
-                                    id="company"
-                                    name="company"
-                                    type="text"
-                                    required
-                                    class="contact-input"
-                                    placeholder="Your organization"
-                                />
+                                <input id="company" name="company" type="text" required class="contact-input" placeholder="Your organization"/>
                             </div>
-                            
-                            <div>
-                                <label for="phone" class="contact-label">Phone</label>
-                                <input
-                                    id="phone"
-                                    name="phone"
-                                    type="tel"
-                                    class="contact-input"
-                                    placeholder="(555) 123-4567"
-                                />
-                            </div>
-                        </div>
-                        
-                        <!-- Qualification Questions with FIXED classes -->
-                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                             <div>
                                 <label for="industry" class="contact-label">Industry *</label>
-                                <select
-                                    name="industry"
-                                    id="industry"
-                                    required
-                                    class="contact-select"
-                                >
-                                    <option value="">Select your industry</option>
+                                <select name="industry" id="industry" required class="contact-select">
+                                    <option value="">Select industry</option>
                                     <option value="healthcare">Healthcare</option>
                                     <option value="financial-services">Financial Services</option>
                                     <option value="government">Government</option>
                                     <option value="technology">Technology</option>
-                                    <option value="manufacturing">Manufacturing</option>
                                     <option value="critical-infrastructure">Critical Infrastructure</option>
-                                    <option value="defense">Defense/Aerospace</option>
                                     <option value="other">Other</option>
                                 </select>
                             </div>
-                            
-                            <div>
-                                <label for="company_size" class="contact-label">Company Size</label>
-                                <select
-                                    name="company_size"
-                                    id="company_size"
-                                    class="contact-select"
-                                >
-                                    <option value="">Select company size</option>
-                                    <option value="1-10">1-10 employees</option>
-                                    <option value="11-50">11-50 employees</option>
-                                    <option value="51-200">51-200 employees</option>
-                                    <option value="201-500">201-500 employees</option>
-                                    <option value="501-1000">501-1,000 employees</option>
-                                    <option value="1000+">1,000+ employees</option>
-                                </select>
-                            </div>
                         </div>
-                        
                         <div>
                             <label for="message" class="contact-label">Primary Security Concerns *</label>
-                            <textarea
-                                name="message"
-                                id="message"
-                                required
-                                class="contact-input"
-                                style="height: 120px; resize: vertical;"
-                                placeholder="What are your main security challenges? (e.g., quantum threat preparation, compliance requirements, data protection)"
-                            ></textarea>
+                            <textarea name="message" id="message" required class="contact-input" style="height: 120px; resize: vertical;" placeholder="What quantum security challenges are you facing? HIPAA compliance, migration planning, executive briefing?"></textarea>
                         </div>
-                        
-                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                            <div>
-                                <label for="timeline" class="contact-label">Implementation Timeline</label>
-                                <select
-                                    name="timeline"
-                                    id="timeline"
-                                    class="contact-select"
-                                >
-                                    <option value="">Select timeline</option>
-                                    <option value="immediate">Immediate (within 3 months)</option>
-                                    <option value="short-term">Short-term (3-6 months)</option>
-                                    <option value="medium-term">Medium-term (6-12 months)</option>
-                                    <option value="long-term">Long-term (12+ months)</option>
-                                    <option value="research">Research/Planning phase</option>
-                                </select>
-                            </div>
-                            
-                            <div>
-                                <label for="budget" class="contact-label">Budget Range</label>
-                                <select
-                                    name="budget"
-                                    id="budget"
-                                    class="contact-select"
-                                >
-                                    <option value="">Prefer not to specify</option>
-                                    <option value="under-25k">Under $25,000</option>
-                                    <option value="25k-50k">$25,000 - $50,000</option>
-                                    <option value="50k-100k">$50,000 - $100,000</option>
-                                    <option value="100k-250k">$100,000 - $250,000</option>
-                                    <option value="250k+">$250,000+</option>
-                                </select>
-                            </div>
-                        </div>
-
-                        <!-- Interest Areas with FIXED classes -->
                         <div>
-                            <label class="contact-label">Areas of Interest (Check all that apply)</label>
-                            <div class="grid grid-cols-2 gap-3 text-sm mt-3">
-                                <label class="flex items-center text-gray-300">
-                                    <input type="checkbox" name="interests" value="quantum-resistant-crypto" class="contact-checkbox mr-3">
-                                    <span>Quantum-resistant cryptography</span>
-                                </label>
-                                <label class="flex items-center text-gray-300">
-                                    <input type="checkbox" name="interests" value="security-assessment" class="contact-checkbox mr-3">
-                                    <span>Security assessments</span>
-                                </label>
-                                <label class="flex items-center text-gray-300">
-                                    <input type="checkbox" name="interests" value="compliance" class="contact-checkbox mr-3">
-                                    <span>Compliance consulting</span>
-                                </label>
-                                <label class="flex items-center text-gray-300">
-                                    <input type="checkbox" name="interests" value="ai-security" class="contact-checkbox mr-3">
-                                    <span>AI security</span>
-                                </label>
-                                <label class="flex items-center text-gray-300">
-                                    <input type="checkbox" name="interests" value="blockchain" class="contact-checkbox mr-3">
-                                    <span>Blockchain integration</span>
-                                </label>
-                                <label class="flex items-center text-gray-300">
-                                    <input type="checkbox" name="interests" value="training" class="contact-checkbox mr-3">
-                                    <span>Security training</span>
-                                </label>
-                            </div>
+                            <label for="timeline" class="contact-label">Timeline</label>
+                            <select name="timeline" id="timeline" class="contact-select">
+                                <option value="">Select timeline</option>
+                                <option value="immediate">Immediate (within 3 months)</option>
+                                <option value="short-term">Short-term (3-6 months)</option>
+                                <option value="medium-term">Medium-term (6-12 months)</option>
+                                <option value="research">Research/Planning phase</option>
+                            </select>
                         </div>
-                        
-                        <!-- Submit Button -->
-                        <button
-                            type="submit"
-                            class="w-full bg-blue-600 hover:bg-blue-700 text-white py-3 rounded-lg font-semibold transition flex items-center justify-center hover:transform hover:scale-105 shadow-lg hover:shadow-blue-500/30"
-                            id="submit-btn"
-                        >
-                            <i class="fas fa-shield-alt mr-2"></i>
-                            Apply for Early Access
+                        <button type="submit" class="w-full bg-blue-600 hover:bg-blue-700 text-white py-3 rounded-lg font-semibold transition flex items-center justify-center hover:transform hover:scale-105 shadow-lg hover:shadow-blue-500/30" id="submit-btn">
+                            <i class="fas fa-shield-alt mr-2"></i>Request Consultation
                         </button>
-                        
-                        <p class="text-xs text-gray-400 text-center">
-                            By submitting this form, you agree to receive communications from Quantum Shield Labs regarding our services. We respect your privacy and will never share your information.
-                        </p>
+                        <p class="text-xs text-gray-400 text-center">We respect your privacy and will never share your information.</p>
                     </form>
                 </div>
             </div>
@@ -1199,179 +912,68 @@
                     <span class="text-lg font-semibold">Quantum Shield Labs</span>
                 </div>
                 <div class="flex space-x-6">
-                    <a href="https://github.com/mbennett-labs" class="hover:text-blue-500 transition" aria-label="GitHub">
-                        <i class="fab fa-github text-xl"></i>
-                    </a>
-                    <a href="https://www.linkedin.com/in/michael-bennett-a29a93103/" class="hover:text-blue-500 transition" aria-label="LinkedIn">
-                        <i class="fab fa-linkedin text-xl"></i>
-                    </a>
-                    <a href="#" class="hover:text-blue-500 transition" aria-label="Twitter">
-                        <i class="fab fa-twitter text-xl"></i>
-                    </a>
+                    <a href="https://github.com/mbennett-labs" class="hover:text-blue-500 transition" aria-label="GitHub"><i class="fab fa-github text-xl"></i></a>
+                    <a href="https://www.linkedin.com/in/michael-bennett-a29a93103/" class="hover:text-blue-500 transition" aria-label="LinkedIn"><i class="fab fa-linkedin text-xl"></i></a>
+                    <a href="https://x.com/QuarkMichael" class="hover:text-blue-500 transition" aria-label="Twitter"><i class="fab fa-twitter text-xl"></i></a>
+                    <a href="https://quantumshieldlabs.dev/agent/" class="hover:text-green-500 transition" aria-label="CrawDaddy">🦞</a>
                 </div>
             </div>
             <div class="mt-8 text-center text-gray-400">
-                <p>&copy; 2025 Quantum Shield Labs. All rights reserved.</p>
+                <p>© 2026 Quantum Shield Labs LLC. All rights reserved.</p>
                 <p class="mt-2 text-sm text-gray-500">
-                    <i class="fas fa-rocket mr-1"></i> Currently in pre-launch phase. Full launch expected Q1 2026.
+                    Post-quantum security consulting · Autonomous AI agents · Built in public from Takoma Park, MD
                 </p>
             </div>
         </div>
     </footer>
 
-    <!-- NEW: Floating Calculator Button -->
-    <div id="floating-calculator" class="fixed bottom-6 right-6 z-50 hidden">
-        <a href="https://quantumshieldlabs.dev/quantum-risk-calculator/" class="flex items-center bg-gradient-to-r from-green-500 to-emerald-600 hover:from-green-600 hover:to-emerald-700 text-white px-6 py-3 rounded-full font-semibold shadow-2xl hover:shadow-green-500/50 transition-all duration-300 transform hover:scale-110">
-            <i class="fas fa-calculator text-xl mr-2"></i>
-            <span class="hidden md:inline">Risk Calculator</span>
-            <i class="fas fa-arrow-right ml-2"></i>
+    <!-- Floating CrawDaddy Button -->
+    <div id="floating-agent" class="fixed bottom-6 right-6 z-50 hidden">
+        <a href="https://quantumshieldlabs.dev/agent/" class="flex items-center bg-gradient-to-r from-green-600 to-emerald-700 hover:from-green-700 hover:to-emerald-800 text-white px-5 py-3 rounded-full font-semibold shadow-2xl hover:shadow-green-500/50 transition-all duration-300 transform hover:scale-110">
+            <span class="mr-2">🦞</span>
+            <span class="hidden md:inline text-sm">CrawDaddy Agent</span>
         </a>
     </div>
 
     <script>
-        // Navigation scroll effect
         const navbar = document.getElementById('navbar');
         window.addEventListener('scroll', () => {
-            if (window.scrollY > 50) {
-                navbar.classList.add('navbar-scrolled');
-            } else {
-                navbar.classList.remove('navbar-scrolled');
-            }
+            if (window.scrollY > 50) navbar.classList.add('navbar-scrolled');
+            else navbar.classList.remove('navbar-scrolled');
         });
         
-        // Mobile menu toggle
         const mobileMenuButton = document.getElementById('mobile-menu-button');
         const mobileMenu = document.getElementById('mobile-menu');
         mobileMenuButton.addEventListener('click', () => {
             mobileMenu.classList.toggle('hidden');
-            // Change icon based on menu state
             const icon = mobileMenuButton.querySelector('i');
-            if (mobileMenu.classList.contains('hidden')) {
-                icon.classList.remove('fa-times');
-                icon.classList.add('fa-bars');
-            } else {
-                icon.classList.remove('fa-bars');
-                icon.classList.add('fa-times');
-            }
+            icon.classList.toggle('fa-bars');
+            icon.classList.toggle('fa-times');
         });
         
-        // Close mobile menu when clicking on a link
-        const mobileLinks = mobileMenu.querySelectorAll('a');
-        mobileLinks.forEach(link => {
-            link.addEventListener('click', () => {
-                mobileMenu.classList.add('hidden');
-                const icon = mobileMenuButton.querySelector('i');
-                icon.classList.remove('fa-times');
-                icon.classList.add('fa-bars');
-            });
-        });
-        
-        // Smooth scrolling for navigation links
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
+            anchor.addEventListener('click', function(e) {
                 e.preventDefault();
-                
                 const targetId = this.getAttribute('href');
                 if (targetId === '#') return;
-                
                 const targetElement = document.querySelector(targetId);
                 if (targetElement) {
-                    window.scrollTo({
-                        top: targetElement.offsetTop - 80, // Offset for fixed navbar
-                        behavior: 'smooth'
-                    });
+                    window.scrollTo({ top: targetElement.offsetTop - 80, behavior: 'smooth' });
                 }
             });
         });
 
-        // Enhanced form submission handling
-        document.getElementById('enhanced-contact-form').addEventListener('submit', function(e) {
+        document.getElementById('enhanced-contact-form').addEventListener('submit', function() {
             const submitBtn = document.getElementById('submit-btn');
-            const originalText = submitBtn.innerHTML;
-            
-            submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin mr-2"></i> Submitting Application...';
+            submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin mr-2"></i>Sending...';
             submitBtn.disabled = true;
-            
-            // Form will be handled by Formspree
-            // This just provides user feedback
-            setTimeout(() => {
-                if (!window.location.href.includes('thank-you')) {
-                    submitBtn.innerHTML = originalText;
-                    submitBtn.disabled = false;
-                }
-            }, 3000);
         });
 
-        // Lead scoring client-side (for analytics)
-        function calculateLeadScore() {
-            let score = 0;
-            
-            // Industry scoring
-            const industry = document.getElementById('industry').value;
-            if (['healthcare', 'financial-services', 'government', 'defense'].includes(industry)) {
-                score += 30;
-            } else if (['technology', 'critical-infrastructure'].includes(industry)) {
-                score += 20;
-            }
-            
-            // Company size scoring
-            const companySize = document.getElementById('company_size').value;
-            if (['201-500', '501-1000', '1000+'].includes(companySize)) {
-                score += 25;
-            } else if (['51-200'].includes(companySize)) {
-                score += 15;
-            }
-            
-            // Timeline scoring
-            const timeline = document.getElementById('timeline').value;
-            if (['immediate', 'short-term'].includes(timeline)) {
-                score += 20;
-            } else if (timeline === 'medium-term') {
-                score += 10;
-            }
-            
-            // Budget scoring
-            const budget = document.getElementById('budget').value;
-            if (['100k-250k', '250k+'].includes(budget)) {
-                score += 25;
-            } else if (['50k-100k'].includes(budget)) {
-                score += 15;
-            }
-            
-            return score;
-        }
-
-        // Track lead score for analytics
-        document.getElementById('enhanced-contact-form').addEventListener('change', function() {
-            const score = calculateLeadScore();
-            // Send to analytics if you have tracking set up
-            if (typeof gtag !== 'undefined') {
-                gtag('event', 'lead_score_change', {
-                    'lead_score': score,
-                    'score_category': score >= 70 ? 'high' : score >= 40 ? 'medium' : 'low'
-                });
-            }
-        });
-
-        // NEW: Show floating calculator button on scroll
-        const floatingCalc = document.getElementById('floating-calculator');
-        let lastScrollTop = 0;
-
+        const floatingAgent = document.getElementById('floating-agent');
         window.addEventListener('scroll', () => {
-            const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
-            
-            // Show after scrolling past hero section
-            if (scrollTop > 800) {
-                floatingCalc.classList.remove('hidden');
-                floatingCalc.classList.add('animate-fade-in');
-            } else {
-                floatingCalc.classList.add('hidden');
-            }
-            
-            lastScrollTop = scrollTop;
+            if (window.pageYOffset > 800) floatingAgent.classList.remove('hidden');
+            else floatingAgent.classList.add('hidden');
         });
     </script>
 </body>
 </html>
-
-
