@@ -1,0 +1,743 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SELARIX — The Sovereign Fortress | Quantum Shield Labs</title>
+    <meta name="description" content="SELARIX: One founder, a cabinet of 25 autonomous AI agents. Post-quantum security as the moat. The swarm never sleeps.">
+    <link rel="icon" type="image/x-icon" href="/favicon.ico">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    <meta name="theme-color" content="#0f172a">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css">
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        body {
+            background: linear-gradient(to bottom, #0f172a, #000);
+            color: white;
+            font-family: 'Inter', sans-serif;
+        }
+        .navbar { transition: all 0.3s ease; }
+        .navbar-scrolled {
+            background-color: rgba(0, 0, 0, 0.8);
+            backdrop-filter: blur(10px);
+        }
+        .agent-card {
+            background: linear-gradient(135deg, rgba(15, 23, 42, 0.9), rgba(17, 24, 39, 0.95));
+            border: 1px solid rgba(16, 185, 129, 0.2);
+        }
+        .agent-card:hover {
+            border-color: rgba(16, 185, 129, 0.5);
+            box-shadow: 0 10px 40px rgba(16, 185, 129, 0.08);
+        }
+        .agent-card-planned {
+            background: linear-gradient(135deg, rgba(15, 23, 42, 0.5), rgba(17, 24, 39, 0.5));
+            border: 1px solid rgba(107, 114, 128, 0.2);
+            opacity: 0.5;
+        }
+        .status-dot-live { animation: pulse-dot 2s ease-in-out infinite; }
+        @keyframes pulse-dot {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.4; }
+        }
+        .build-log-entry { border-left: 2px solid rgba(16, 185, 129, 0.3); }
+        .build-log-entry:hover { border-left-color: rgba(16, 185, 129, 0.8); }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav id="navbar" class="fixed w-full z-50 py-4 px-6 navbar-scrolled">
+        <div class="container mx-auto flex justify-between items-center">
+            <div class="flex items-center space-x-4">
+                <a href="/" class="flex items-center space-x-2 text-gray-400 hover:text-white transition">
+                    <i class="fas fa-arrow-left"></i>
+                    <span class="text-sm">Back to QSL</span>
+                </a>
+                <span class="text-gray-600">|</span>
+                <a href="/selarix.html" class="flex items-center space-x-2">
+                    <span class="text-green-400 text-lg">⬡</span>
+                    <span class="text-xl font-bold">SELARIX</span>
+                </a>
+            </div>
+            <div class="hidden md:flex space-x-8 text-sm">
+                <a href="#agents" class="hover:text-green-400 transition">Agents</a>
+                <a href="#library" class="hover:text-green-400 transition">Library</a>
+                <a href="#treasury" class="hover:text-green-400 transition">Treasury</a>
+                <a href="#roadmap" class="hover:text-green-400 transition">Roadmap</a>
+                <a href="#build-log" class="hover:text-green-400 transition">Build Log</a>
+                <a href="https://qsl-dashboard.vercel.app" target="_blank" class="text-green-400 hover:text-green-300 transition">
+                    <i class="fas fa-chart-line mr-1"></i>Dashboard
+                </a>
+            </div>
+            <button id="mobile-menu-button" class="md:hidden text-white focus:outline-none">
+                <i class="fas fa-bars text-xl"></i>
+            </button>
+        </div>
+        <div id="mobile-menu" class="md:hidden hidden bg-gray-900 bg-opacity-95 backdrop-blur-lg">
+            <div class="container mx-auto px-4 py-4 flex flex-col space-y-4">
+                <a href="#agents" class="block py-2 hover:text-green-400 transition">Agents</a>
+                <a href="#library" class="block py-2 hover:text-green-400 transition">Library</a>
+                <a href="#treasury" class="block py-2 hover:text-green-400 transition">Treasury</a>
+                <a href="#roadmap" class="block py-2 hover:text-green-400 transition">Roadmap</a>
+                <a href="#build-log" class="block py-2 hover:text-green-400 transition">Build Log</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="pt-32 pb-20 px-4">
+        <div class="container mx-auto max-w-5xl text-center">
+            <div class="mb-6">
+                <span class="text-6xl">⬡</span>
+            </div>
+            <h1 class="text-5xl md:text-7xl font-bold mb-4">
+                <span class="bg-gradient-to-r from-green-400 to-emerald-500 bg-clip-text text-transparent">SELARIX</span>
+            </h1>
+            <p class="text-2xl md:text-3xl text-gray-300 font-light mb-2">The Sovereign Fortress</p>
+            <p class="text-gray-500 font-mono text-sm mb-8">sela (rock/fortress) + rix (sovereign)</p>
+            <p class="text-xl text-gray-300 max-w-3xl mx-auto mb-4">
+                One founder. A cabinet of autonomous agents. Post-quantum security as the moat.
+            </p>
+            <p class="text-gray-400 max-w-2xl mx-auto mb-10">
+                Built in public by Michael Bennett at Quantum Shield Labs. Every agent has real infrastructure, real economics, and a job to do. The swarm never sleeps.
+            </p>
+
+            <!-- Live status indicator -->
+            <div class="inline-flex items-center bg-gray-900/60 rounded-full px-6 py-3 border border-green-500/20 mb-10">
+                <span class="w-2 h-2 rounded-full bg-green-400 mr-3 status-dot-live"></span>
+                <span class="text-green-400 font-mono text-sm" id="hero-status">Loading swarm status...</span>
+                <span class="text-gray-600 font-mono text-xs ml-3" id="hero-updated"></span>
+            </div>
+
+            <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
+                <a href="https://qsl-dashboard.vercel.app" target="_blank" class="inline-flex items-center gap-2 bg-gradient-to-r from-green-600 to-emerald-700 hover:from-green-700 hover:to-emerald-800 text-white px-6 py-3 rounded-full font-semibold transition">
+                    <i class="fas fa-chart-line"></i> View Swarm Dashboard
+                </a>
+                <a href="https://x.com/QuarkMichael" target="_blank" class="inline-flex items-center gap-2 bg-gray-800 hover:bg-gray-700 text-white px-6 py-3 rounded-full font-semibold transition border border-gray-600">
+                    <i class="fab fa-twitter"></i> Follow @QuarkMichael
+                </a>
+                <a href="https://github.com/mbennett-labs" target="_blank" class="inline-flex items-center gap-2 bg-transparent border border-gray-600 hover:border-gray-400 text-gray-300 px-6 py-3 rounded-full font-semibold transition">
+                    <i class="fab fa-github"></i> View GitHub
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Live Agent Status Cards -->
+    <section id="agents" class="py-20 bg-gray-900/30">
+        <div class="container mx-auto px-4 max-w-6xl">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl font-bold mb-2">
+                    <span class="text-green-400 mr-2">▸</span> Live Agent Status
+                </h2>
+                <p class="text-gray-400">Real-time status from the SELARIX swarm. Auto-refreshes every 60 seconds.</p>
+                <p class="text-gray-600 text-xs font-mono mt-2" id="last-updated">Fetching...</p>
+            </div>
+
+            <div id="agent-status-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                <!-- Populated by JavaScript -->
+                <div class="agent-card rounded-xl p-6 text-center">
+                    <div class="animate-pulse">
+                        <div class="h-4 bg-gray-700 rounded w-3/4 mx-auto mb-3"></div>
+                        <div class="h-3 bg-gray-800 rounded w-1/2 mx-auto mb-2"></div>
+                        <div class="h-3 bg-gray-800 rounded w-2/3 mx-auto"></div>
+                    </div>
+                </div>
+                <div class="agent-card rounded-xl p-6 text-center">
+                    <div class="animate-pulse">
+                        <div class="h-4 bg-gray-700 rounded w-3/4 mx-auto mb-3"></div>
+                        <div class="h-3 bg-gray-800 rounded w-1/2 mx-auto mb-2"></div>
+                        <div class="h-3 bg-gray-800 rounded w-2/3 mx-auto"></div>
+                    </div>
+                </div>
+                <div class="agent-card rounded-xl p-6 text-center">
+                    <div class="animate-pulse">
+                        <div class="h-4 bg-gray-700 rounded w-3/4 mx-auto mb-3"></div>
+                        <div class="h-3 bg-gray-800 rounded w-1/2 mx-auto mb-2"></div>
+                        <div class="h-3 bg-gray-800 rounded w-2/3 mx-auto"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Treasury Section -->
+    <section id="treasury" class="py-20">
+        <div class="container mx-auto px-4 max-w-5xl">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl font-bold mb-2">
+                    <span class="text-yellow-400 mr-2">▸</span> Treasury
+                </h2>
+                <p class="text-gray-400">On-chain wallets and balances powering the swarm.</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+                <div class="bg-gray-900/60 rounded-xl p-5 border border-yellow-500/20">
+                    <div class="flex items-center mb-3">
+                        <span class="text-yellow-400 mr-2">💰</span>
+                        <span class="text-sm font-semibold">Conway Credits</span>
+                    </div>
+                    <div class="text-2xl font-bold text-yellow-400 font-mono" id="treasury-conway">--</div>
+                    <div class="text-gray-500 text-xs mt-1">Agent operations balance</div>
+                </div>
+                <div class="bg-gray-900/60 rounded-xl p-5 border border-green-500/20">
+                    <div class="flex items-center mb-3">
+                        <span class="text-green-400 mr-2">🦞</span>
+                        <span class="text-sm font-semibold">CrawDaddy Wallet</span>
+                    </div>
+                    <div class="text-2xl font-bold text-green-400 font-mono" id="treasury-crawdaddy">$72+</div>
+                    <div class="text-gray-500 text-xs mt-1 font-mono truncate">0x25B5...09a8</div>
+                </div>
+                <div class="bg-gray-900/60 rounded-xl p-5 border border-purple-500/20">
+                    <div class="flex items-center mb-3">
+                        <span class="text-purple-400 mr-2">🏰</span>
+                        <span class="text-sm font-semibold">Bastion Wallet</span>
+                    </div>
+                    <div class="text-2xl font-bold text-purple-400 font-mono" id="treasury-bastion">--</div>
+                    <div class="text-gray-500 text-xs mt-1 font-mono truncate">0xEEF6...DD4</div>
+                </div>
+                <div class="bg-gray-900/60 rounded-xl p-5 border border-blue-500/20">
+                    <div class="flex items-center mb-3">
+                        <span class="text-blue-400 mr-2">⛏️</span>
+                        <span class="text-sm font-semibold">SN61 TAO</span>
+                    </div>
+                    <div class="text-2xl font-bold text-blue-400 font-mono" id="treasury-tao">~6 TAO</div>
+                    <div class="text-gray-500 text-xs mt-1">Staked on finney mainnet</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SELARIX Agent Library -->
+    <section id="library" class="py-20 bg-gray-900/30">
+        <div class="container mx-auto px-4 max-w-6xl">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl font-bold mb-2">
+                    <span class="text-green-400 mr-2">▸</span> SELARIX Agent Library
+                </h2>
+                <p class="text-gray-400">25-agent cabinet across 6 divisions. 9 built, 16 planned.</p>
+            </div>
+
+            <!-- Wave 1 — Foundation -->
+            <div class="mb-12">
+                <div class="flex items-center mb-6">
+                    <span class="bg-green-500/20 text-green-400 text-xs font-mono px-3 py-1 rounded-full border border-green-500/30 mr-3">WAVE 1</span>
+                    <h3 class="text-lg font-semibold">Foundation Agents</h3>
+                    <span class="text-gray-500 text-xs ml-3">March 2026 — BUILT</span>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+                    <div class="agent-card rounded-xl p-5">
+                        <div class="flex items-center justify-between mb-2">
+                            <span class="text-lg">🎯</span>
+                            <span class="text-xs bg-green-500/20 text-green-400 px-2 py-1 rounded-full">BUILT</span>
+                        </div>
+                        <h4 class="font-semibold text-white text-sm">gotcha-enforcer</h4>
+                        <p class="text-gray-500 text-xs mt-1">Session Discipline Officer</p>
+                        <p class="text-gray-600 text-xs font-mono mt-2">/gotcha-enforcer</p>
+                    </div>
+                    <div class="agent-card rounded-xl p-5">
+                        <div class="flex items-center justify-between mb-2">
+                            <span class="text-lg">🚨</span>
+                            <span class="text-xs bg-green-500/20 text-green-400 px-2 py-1 rounded-full">BUILT</span>
+                        </div>
+                        <h4 class="font-semibold text-white text-sm">incident-responder</h4>
+                        <p class="text-gray-500 text-xs mt-1">Autonomous Swarm Repair</p>
+                        <p class="text-gray-600 text-xs font-mono mt-2">/incident-responder</p>
+                    </div>
+                    <div class="agent-card rounded-xl p-5">
+                        <div class="flex items-center justify-between mb-2">
+                            <span class="text-lg">🚀</span>
+                            <span class="text-xs bg-green-500/20 text-green-400 px-2 py-1 rounded-full">BUILT</span>
+                        </div>
+                        <h4 class="font-semibold text-white text-sm">deploy-reviewer</h4>
+                        <p class="text-gray-500 text-xs mt-1">Pre-Deployment Quality Gate</p>
+                        <p class="text-gray-600 text-xs font-mono mt-2">/deploy-reviewer</p>
+                    </div>
+                    <div class="agent-card rounded-xl p-5">
+                        <div class="flex items-center justify-between mb-2">
+                            <span class="text-lg">🎤</span>
+                            <span class="text-xs bg-green-500/20 text-green-400 px-2 py-1 rounded-full">BUILT</span>
+                        </div>
+                        <h4 class="font-semibold text-white text-sm">mike-voice</h4>
+                        <p class="text-gray-500 text-xs mt-1">Content Voice Engine</p>
+                        <p class="text-gray-600 text-xs font-mono mt-2">/mike-voice</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Wave 2 — Security Cluster -->
+            <div class="mb-12">
+                <div class="flex items-center mb-6">
+                    <span class="bg-blue-500/20 text-blue-400 text-xs font-mono px-3 py-1 rounded-full border border-blue-500/30 mr-3">WAVE 2</span>
+                    <h3 class="text-lg font-semibold">Security Cluster</h3>
+                    <span class="text-gray-500 text-xs ml-3">March 2026 — BUILT</span>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-4">
+                    <div class="agent-card rounded-xl p-5">
+                        <div class="flex items-center justify-between mb-2">
+                            <span class="text-lg">🔐</span>
+                            <span class="text-xs bg-blue-500/20 text-blue-400 px-2 py-1 rounded-full">BUILT</span>
+                        </div>
+                        <h4 class="font-semibold text-white text-sm">pqc-auditor</h4>
+                        <p class="text-gray-500 text-xs mt-1">Post-Quantum Crypto Scanner</p>
+                        <p class="text-green-500 text-xs font-mono mt-2">$2-10/scan</p>
+                    </div>
+                    <div class="agent-card rounded-xl p-5">
+                        <div class="flex items-center justify-between mb-2">
+                            <span class="text-lg">📜</span>
+                            <span class="text-xs bg-blue-500/20 text-blue-400 px-2 py-1 rounded-full">BUILT</span>
+                        </div>
+                        <h4 class="font-semibold text-white text-sm">contract-scanner</h4>
+                        <p class="text-gray-500 text-xs mt-1">Smart Contract Security</p>
+                        <p class="text-green-500 text-xs font-mono mt-2">$1-5/scan</p>
+                    </div>
+                    <div class="agent-card rounded-xl p-5">
+                        <div class="flex items-center justify-between mb-2">
+                            <span class="text-lg">🏥</span>
+                            <span class="text-xs bg-blue-500/20 text-blue-400 px-2 py-1 rounded-full">BUILT</span>
+                        </div>
+                        <h4 class="font-semibold text-white text-sm">hipaa-checker</h4>
+                        <p class="text-gray-500 text-xs mt-1">HIPAA + PQC Compliance</p>
+                        <p class="text-green-500 text-xs font-mono mt-2">$25-500/scan</p>
+                    </div>
+                    <div class="agent-card rounded-xl p-5">
+                        <div class="flex items-center justify-between mb-2">
+                            <span class="text-lg">🔑</span>
+                            <span class="text-xs bg-blue-500/20 text-blue-400 px-2 py-1 rounded-full">BUILT</span>
+                        </div>
+                        <h4 class="font-semibold text-white text-sm">secret-hunter</h4>
+                        <p class="text-gray-500 text-xs mt-1">Credential Exposure Scanner</p>
+                        <p class="text-green-500 text-xs font-mono mt-2">$1-3/scan</p>
+                    </div>
+                    <div class="agent-card rounded-xl p-5">
+                        <div class="flex items-center justify-between mb-2">
+                            <span class="text-lg">📦</span>
+                            <span class="text-xs bg-blue-500/20 text-blue-400 px-2 py-1 rounded-full">BUILT</span>
+                        </div>
+                        <h4 class="font-semibold text-white text-sm">supply-chain</h4>
+                        <p class="text-gray-500 text-xs mt-1">Dependency Security Scanner</p>
+                        <p class="text-green-500 text-xs font-mono mt-2">$1-3/scan</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Waves 3-6 — Planned -->
+            <div class="mb-8">
+                <div class="flex items-center mb-6">
+                    <span class="bg-gray-700/50 text-gray-400 text-xs font-mono px-3 py-1 rounded-full border border-gray-600/30 mr-3">WAVES 3-6</span>
+                    <h3 class="text-lg font-semibold text-gray-400">Planned Agents</h3>
+                    <span class="text-gray-600 text-xs ml-3">Q2-Q4 2026</span>
+                </div>
+                <div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-8 gap-3">
+                    <div class="agent-card-planned rounded-lg p-3 text-center">
+                        <span class="text-sm">📣</span>
+                        <p class="text-gray-500 text-xs mt-1">outreach-bot</p>
+                        <span class="text-gray-600 text-xs">CMO</span>
+                    </div>
+                    <div class="agent-card-planned rounded-lg p-3 text-center">
+                        <span class="text-sm">💼</span>
+                        <p class="text-gray-500 text-xs mt-1">sales-bot</p>
+                        <span class="text-gray-600 text-xs">CRO</span>
+                    </div>
+                    <div class="agent-card-planned rounded-lg p-3 text-center">
+                        <span class="text-sm">📝</span>
+                        <p class="text-gray-500 text-xs mt-1">content-bot</p>
+                        <span class="text-gray-600 text-xs">CCO</span>
+                    </div>
+                    <div class="agent-card-planned rounded-lg p-3 text-center">
+                        <span class="text-sm">💰</span>
+                        <p class="text-gray-500 text-xs mt-1">treasury</p>
+                        <span class="text-gray-600 text-xs">CFO</span>
+                    </div>
+                    <div class="agent-card-planned rounded-lg p-3 text-center">
+                        <span class="text-sm">🧪</span>
+                        <p class="text-gray-500 text-xs mt-1">test-runner</p>
+                        <span class="text-gray-600 text-xs">QA</span>
+                    </div>
+                    <div class="agent-card-planned rounded-lg p-3 text-center">
+                        <span class="text-sm">📊</span>
+                        <p class="text-gray-500 text-xs mt-1">analytics</p>
+                        <span class="text-gray-600 text-xs">Data</span>
+                    </div>
+                    <div class="agent-card-planned rounded-lg p-3 text-center">
+                        <span class="text-sm">🛡️</span>
+                        <p class="text-gray-500 text-xs mt-1">swarm-medic</p>
+                        <span class="text-gray-600 text-xs">COO</span>
+                    </div>
+                    <div class="agent-card-planned rounded-lg p-3 text-center">
+                        <span class="text-sm">☁️</span>
+                        <p class="text-gray-500 text-xs mt-1">bedrock-ops</p>
+                        <span class="text-gray-600 text-xs">AWS</span>
+                    </div>
+                    <div class="agent-card-planned rounded-lg p-3 text-center">
+                        <span class="text-sm">📈</span>
+                        <p class="text-gray-500 text-xs mt-1">seo-agent</p>
+                        <span class="text-gray-600 text-xs">Growth</span>
+                    </div>
+                    <div class="agent-card-planned rounded-lg p-3 text-center">
+                        <span class="text-sm">🔗</span>
+                        <p class="text-gray-500 text-xs mt-1">link-builder</p>
+                        <span class="text-gray-600 text-xs">SEO</span>
+                    </div>
+                    <div class="agent-card-planned rounded-lg p-3 text-center">
+                        <span class="text-sm">📧</span>
+                        <p class="text-gray-500 text-xs mt-1">email-agent</p>
+                        <span class="text-gray-600 text-xs">Comms</span>
+                    </div>
+                    <div class="agent-card-planned rounded-lg p-3 text-center">
+                        <span class="text-sm">🎯</span>
+                        <p class="text-gray-500 text-xs mt-1">lead-scorer</p>
+                        <span class="text-gray-600 text-xs">Sales</span>
+                    </div>
+                    <div class="agent-card-planned rounded-lg p-3 text-center">
+                        <span class="text-sm">📋</span>
+                        <p class="text-gray-500 text-xs mt-1">proposal-gen</p>
+                        <span class="text-gray-600 text-xs">Sales</span>
+                    </div>
+                    <div class="agent-card-planned rounded-lg p-3 text-center">
+                        <span class="text-sm">🗂️</span>
+                        <p class="text-gray-500 text-xs mt-1">doc-writer</p>
+                        <span class="text-gray-600 text-xs">Eng</span>
+                    </div>
+                    <div class="agent-card-planned rounded-lg p-3 text-center">
+                        <span class="text-sm">🔍</span>
+                        <p class="text-gray-500 text-xs mt-1">code-reviewer</p>
+                        <span class="text-gray-600 text-xs">Eng</span>
+                    </div>
+                    <div class="agent-card-planned rounded-lg p-3 text-center">
+                        <span class="text-sm">🌐</span>
+                        <p class="text-gray-500 text-xs mt-1">marketplace</p>
+                        <span class="text-gray-600 text-xs">AWS</span>
+                    </div>
+                </div>
+                <p class="text-gray-600 text-xs text-center mt-4 font-mono">16 planned agents — shipping as Phase 1 completes</p>
+            </div>
+
+            <!-- Progress bar -->
+            <div class="bg-gray-900/60 rounded-xl p-6 border border-gray-700/30">
+                <div class="flex justify-between text-sm mb-2">
+                    <span class="text-gray-400">Agent Library Progress</span>
+                    <span class="text-green-400 font-mono">9 / 25</span>
+                </div>
+                <div class="w-full bg-gray-800 rounded-full h-3">
+                    <div class="bg-gradient-to-r from-green-500 to-emerald-600 h-3 rounded-full" style="width: 36%"></div>
+                </div>
+                <div class="flex justify-between text-xs mt-2 text-gray-600">
+                    <span>Wave 1: 4 built</span>
+                    <span>Wave 2: 5 built</span>
+                    <span>Waves 3-6: 16 planned</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Phase Roadmap -->
+    <section id="roadmap" class="py-20">
+        <div class="container mx-auto px-4 max-w-5xl">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl font-bold mb-2">
+                    <span class="text-blue-400 mr-2">▸</span> Build Phases & Revenue Targets
+                </h2>
+                <p class="text-gray-400">From the SELARIX Blueprint. Conservative targets, aggressive execution.</p>
+            </div>
+
+            <div class="space-y-4">
+                <!-- Phase 0 -->
+                <div class="bg-green-900/10 rounded-xl p-6 border border-green-500/20">
+                    <div class="flex items-start justify-between mb-3">
+                        <div>
+                            <div class="flex items-center gap-3">
+                                <i class="fas fa-check-circle text-green-500"></i>
+                                <h3 class="text-lg font-semibold text-green-400">Phase 0 — Foundation</h3>
+                            </div>
+                            <p class="text-gray-500 text-sm mt-1">Q4 2025 - Q1 2026</p>
+                        </div>
+                        <span class="bg-green-500/20 text-green-400 text-xs px-3 py-1 rounded-full">COMPLETE</span>
+                    </div>
+                    <ul class="text-gray-400 text-sm space-y-1 ml-8">
+                        <li>CrawDaddy live on Virtuals ACP — 47+ jobs, $72+ earned</li>
+                        <li>EC2 hardened, SSH key auth, swarm medic deployed</li>
+                        <li>6 TAO staked, Bastion ERC-8004 identity minted</li>
+                        <li>Conway multi-agent cluster operational</li>
+                    </ul>
+                    <div class="ml-8 mt-3">
+                        <span class="text-green-400 text-xs font-mono">Revenue: $72+ (proof of concept)</span>
+                    </div>
+                </div>
+
+                <!-- Phase 1 -->
+                <div class="bg-blue-900/10 rounded-xl p-6 border border-blue-500/30">
+                    <div class="flex items-start justify-between mb-3">
+                        <div>
+                            <div class="flex items-center gap-3">
+                                <i class="fas fa-bolt text-blue-400 animate-pulse"></i>
+                                <h3 class="text-lg font-semibold text-blue-400">Phase 1 — Build & Mine</h3>
+                            </div>
+                            <p class="text-gray-500 text-sm mt-1">Q1-Q2 2026 — ACTIVE NOW</p>
+                        </div>
+                        <span class="bg-blue-500/20 text-blue-400 text-xs px-3 py-1 rounded-full animate-pulse">ACTIVE</span>
+                    </div>
+                    <ul class="text-gray-400 text-sm space-y-1 ml-8">
+                        <li>SN61 RedTeam miner live (UID 57) — earning TAO daily</li>
+                        <li>25-agent SELARIX library — 9 built (Wave 1 + Wave 2)</li>
+                        <li>gstack quality gates installed (6 slash commands)</li>
+                        <li>Synthesis Hackathon — 3 tracks, $37K in prizes pending</li>
+                        <li>AWS Bedrock exploration for enterprise deployment</li>
+                    </ul>
+                    <div class="ml-8 mt-3">
+                        <span class="text-blue-400 text-xs font-mono">Revenue target: $100-500/mo</span>
+                    </div>
+                </div>
+
+                <!-- Phase 2 -->
+                <div class="bg-gray-900/30 rounded-xl p-6 border border-gray-700/30">
+                    <div class="flex items-start justify-between mb-3">
+                        <div>
+                            <div class="flex items-center gap-3">
+                                <div class="w-4 h-4 rounded-full border-2 border-gray-600"></div>
+                                <h3 class="text-lg font-semibold text-gray-400">Phase 2 — Content & Commerce</h3>
+                            </div>
+                            <p class="text-gray-600 text-sm mt-1">Q3 2026</p>
+                        </div>
+                        <span class="bg-gray-700/30 text-gray-500 text-xs px-3 py-1 rounded-full">PLANNED</span>
+                    </div>
+                    <ul class="text-gray-500 text-sm space-y-1 ml-8">
+                        <li>ContentBot daily publishing pipeline</li>
+                        <li>TherapistIndex.org DR5+, organic traffic</li>
+                        <li>$ATTEST token launch on Base</li>
+                        <li>Bastion migrated off Conway, independent revenue</li>
+                        <li>CrawDaddy Wave 2 handlers live on ACP</li>
+                    </ul>
+                    <div class="ml-8 mt-3">
+                        <span class="text-gray-500 text-xs font-mono">Revenue target: $500-2,000/mo</span>
+                    </div>
+                </div>
+
+                <!-- Phase 3 -->
+                <div class="bg-gray-900/30 rounded-xl p-6 border border-gray-700/30">
+                    <div class="flex items-start justify-between mb-3">
+                        <div>
+                            <div class="flex items-center gap-3">
+                                <div class="w-4 h-4 rounded-full border-2 border-gray-700"></div>
+                                <h3 class="text-lg font-semibold text-gray-500">Phase 3 — Enterprise & Scale</h3>
+                            </div>
+                            <p class="text-gray-600 text-sm mt-1">Q4 2026</p>
+                        </div>
+                        <span class="bg-gray-700/30 text-gray-600 text-xs px-3 py-1 rounded-full">PLANNED</span>
+                    </div>
+                    <ul class="text-gray-600 text-sm space-y-1 ml-8">
+                        <li>Full 25-agent cabinet operational</li>
+                        <li>First $10K healthcare consulting engagement</li>
+                        <li>AWS Marketplace listing — HIPAA-Checker</li>
+                        <li>SBIR/STTR submission</li>
+                        <li>10+ enterprise pipeline leads</li>
+                    </ul>
+                    <div class="ml-8 mt-3">
+                        <span class="text-gray-600 text-xs font-mono">Revenue target: $2,000-10,000/mo</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Build Log -->
+    <section id="build-log" class="py-20 bg-gray-900/30">
+        <div class="container mx-auto px-4 max-w-4xl">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl font-bold mb-2">
+                    <span class="text-green-400 mr-2">▸</span> Build Log
+                </h2>
+                <p class="text-gray-400">Latest updates from the fortress. Built in public.</p>
+            </div>
+
+            <div class="space-y-4">
+                <div class="build-log-entry pl-6 py-4">
+                    <div class="flex items-center gap-3 mb-1">
+                        <span class="text-green-400 font-mono text-xs">2026-03-25</span>
+                        <span class="bg-green-500/20 text-green-400 text-xs px-2 py-0.5 rounded">shipped</span>
+                    </div>
+                    <p class="text-gray-300 text-sm">Wave 2 security agent library shipped — 5 agents: pqc-auditor, contract-scanner, hipaa-checker, secret-hunter, supply-chain. Full CrawDaddy ACP offering specs with x402 pricing.</p>
+                </div>
+
+                <div class="build-log-entry pl-6 py-4">
+                    <div class="flex items-center gap-3 mb-1">
+                        <span class="text-green-400 font-mono text-xs">2026-03-25</span>
+                        <span class="bg-blue-500/20 text-blue-400 text-xs px-2 py-0.5 rounded">fix</span>
+                    </div>
+                    <p class="text-gray-300 text-sm">SN61 miner sudo fix — permanent via Docker volume mount. No more permission errors on container restart.</p>
+                </div>
+
+                <div class="build-log-entry pl-6 py-4">
+                    <div class="flex items-center gap-3 mb-1">
+                        <span class="text-green-400 font-mono text-xs">2026-03-25</span>
+                        <span class="bg-purple-500/20 text-purple-400 text-xs px-2 py-0.5 rounded">tooling</span>
+                    </div>
+                    <p class="text-gray-300 text-sm">gstack quality gates installed — 6 slash commands: /careful, /qa, /ship, /review, /eng-review, /ceo. Session discipline enforced.</p>
+                </div>
+
+                <div class="build-log-entry pl-6 py-4">
+                    <div class="flex items-center gap-3 mb-1">
+                        <span class="text-yellow-400 font-mono text-xs">2026-03-24</span>
+                        <span class="bg-yellow-500/20 text-yellow-400 text-xs px-2 py-0.5 rounded">root cause</span>
+                    </div>
+                    <p class="text-gray-300 text-sm">ACP config root cause found — LITE_AGENT_API_KEY was missing from runtime env. Single-line fix restored CrawDaddy's autonomous scanning capability.</p>
+                </div>
+
+                <div class="build-log-entry pl-6 py-4">
+                    <div class="flex items-center gap-3 mb-1">
+                        <span class="text-yellow-400 font-mono text-xs">2026-03-24</span>
+                        <span class="bg-blue-500/20 text-blue-400 text-xs px-2 py-0.5 rounded">improvement</span>
+                    </div>
+                    <p class="text-gray-300 text-sm">Swarm medic dedup — 30-minute alarm suppression across all 11 health checks. No more alert storms.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-black bg-opacity-50 backdrop-blur-lg py-8">
+        <div class="container mx-auto px-4">
+            <div class="flex flex-col md:flex-row justify-between items-center">
+                <div class="flex items-center space-x-4 mb-4 md:mb-0">
+                    <a href="/" class="flex items-center space-x-2">
+                        <i class="fas fa-shield-alt text-blue-500 text-xl"></i>
+                        <span class="text-lg font-semibold">Quantum Shield Labs</span>
+                    </a>
+                    <span class="text-gray-700">|</span>
+                    <span class="text-green-400 font-mono text-sm">⬡ SELARIX</span>
+                </div>
+                <div class="flex space-x-6">
+                    <a href="https://github.com/mbennett-labs" class="hover:text-blue-500 transition" aria-label="GitHub"><i class="fab fa-github text-xl"></i></a>
+                    <a href="https://www.linkedin.com/in/michael-bennett-a29a93103/" class="hover:text-blue-500 transition" aria-label="LinkedIn"><i class="fab fa-linkedin text-xl"></i></a>
+                    <a href="https://x.com/QuarkMichael" class="hover:text-blue-500 transition" aria-label="Twitter"><i class="fab fa-twitter text-xl"></i></a>
+                    <a href="https://quantumshieldlabs.dev/agent/" class="hover:text-green-500 transition" aria-label="CrawDaddy">🦞</a>
+                </div>
+            </div>
+            <div class="mt-8 text-center text-gray-400">
+                <p>&copy; 2026 Quantum Shield Labs LLC. All rights reserved.</p>
+                <p class="mt-2 text-sm text-gray-500">
+                    SELARIX — The Sovereign Fortress · Post-quantum security · Built in public from Takoma Park, MD
+                </p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile menu toggle
+        const mobileBtn = document.getElementById('mobile-menu-button');
+        const mobileMenu = document.getElementById('mobile-menu');
+        if (mobileBtn && mobileMenu) {
+            mobileBtn.addEventListener('click', () => mobileMenu.classList.toggle('hidden'));
+        }
+
+        // Navbar scroll effect
+        const navbar = document.getElementById('navbar');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 50) navbar.classList.add('navbar-scrolled');
+            else navbar.classList.remove('navbar-scrolled');
+        });
+
+        // Dashboard data fetch
+        const DASHBOARD_URL = 'https://qsl-dashboard.vercel.app/data/status.json';
+
+        function getStatusColor(status) {
+            if (!status) return 'bg-gray-600';
+            const s = status.toLowerCase();
+            if (s === 'live' || s === 'running' || s === 'active' || s === 'healthy') return 'bg-green-400';
+            if (s === 'paused' || s === 'dormant' || s === 'warning') return 'bg-yellow-400';
+            return 'bg-gray-600';
+        }
+
+        function getStatusBorder(status) {
+            if (!status) return 'border-gray-600/20';
+            const s = status.toLowerCase();
+            if (s === 'live' || s === 'running' || s === 'active' || s === 'healthy') return 'border-green-500/30';
+            if (s === 'paused' || s === 'dormant' || s === 'warning') return 'border-yellow-500/30';
+            return 'border-gray-600/20';
+        }
+
+        function timeAgo(timestamp) {
+            if (!timestamp) return '';
+            const now = new Date();
+            const then = new Date(timestamp);
+            const mins = Math.floor((now - then) / 60000);
+            if (mins < 1) return 'just now';
+            if (mins < 60) return mins + 'm ago';
+            const hours = Math.floor(mins / 60);
+            if (hours < 24) return hours + 'h ago';
+            return Math.floor(hours / 24) + 'd ago';
+        }
+
+        async function fetchStatus() {
+            try {
+                const resp = await fetch(DASHBOARD_URL, { cache: 'no-store' });
+                const data = await resp.json();
+
+                // Update hero status
+                const heroStatus = document.getElementById('hero-status');
+                const heroUpdated = document.getElementById('hero-updated');
+                const agents = data.agents || data.services || [];
+                const liveCount = agents.filter(a => {
+                    const s = (a.status || '').toLowerCase();
+                    return s === 'live' || s === 'running' || s === 'active' || s === 'healthy';
+                }).length;
+                heroStatus.textContent = liveCount + ' agents online · swarm operational';
+                if (data.timestamp || data.updated) {
+                    heroUpdated.textContent = 'Updated ' + timeAgo(data.timestamp || data.updated);
+                }
+
+                // Update last-updated
+                const lastUpdated = document.getElementById('last-updated');
+                lastUpdated.textContent = 'Last updated: ' + (data.timestamp || data.updated || new Date().toISOString());
+
+                // Build agent status cards
+                const grid = document.getElementById('agent-status-grid');
+                if (agents.length > 0) {
+                    grid.innerHTML = agents.map(agent => `
+                        <div class="agent-card rounded-xl p-5 border ${getStatusBorder(agent.status)}">
+                            <div class="flex items-center justify-between mb-3">
+                                <h4 class="font-semibold text-white text-sm">${agent.name || agent.service || 'Unknown'}</h4>
+                                <span class="flex items-center gap-1.5">
+                                    <span class="w-2 h-2 rounded-full ${getStatusColor(agent.status)} ${(agent.status || '').toLowerCase() === 'live' || (agent.status || '').toLowerCase() === 'running' ? 'status-dot-live' : ''}"></span>
+                                    <span class="text-xs text-gray-400 font-mono">${agent.status || 'unknown'}</span>
+                                </span>
+                            </div>
+                            <p class="text-gray-500 text-xs mb-2">${agent.role || agent.description || ''}</p>
+                            <div class="flex items-center justify-between text-xs text-gray-600">
+                                <span class="font-mono">${agent.host || agent.infra || ''}</span>
+                                <span>${agent.uptime ? 'Up ' + agent.uptime : ''}</span>
+                            </div>
+                        </div>
+                    `).join('');
+                }
+
+                // Update treasury if available
+                if (data.treasury || data.wallets) {
+                    const t = data.treasury || data.wallets;
+                    if (t.conway_credits !== undefined) {
+                        document.getElementById('treasury-conway').textContent = t.conway_credits;
+                    }
+                    if (t.crawdaddy_balance !== undefined) {
+                        document.getElementById('treasury-crawdaddy').textContent = '$' + t.crawdaddy_balance;
+                    }
+                    if (t.bastion_balance !== undefined) {
+                        document.getElementById('treasury-bastion').textContent = t.bastion_balance;
+                    }
+                    if (t.tao_balance !== undefined) {
+                        document.getElementById('treasury-tao').textContent = t.tao_balance + ' TAO';
+                    }
+                }
+            } catch (err) {
+                console.warn('Dashboard fetch failed:', err);
+                document.getElementById('hero-status').textContent = '4 agents configured · dashboard offline';
+                document.getElementById('last-updated').textContent = 'Dashboard unreachable — showing cached data';
+            }
+        }
+
+        // Initial fetch and auto-refresh every 60 seconds
+        fetchStatus();
+        setInterval(fetchStatus, 60000);
+    </script>
+</body>
+</html>
