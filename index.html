@@ -55,7 +55,6 @@
         .project-content { flex-grow: 1; display: flex; flex-direction: column; }
         .project-description { flex-grow: 1; }
 
-        /* Live banner - updated to show active status */
         .live-banner {
             background: linear-gradient(270deg, #059669, #0d9488);
             background-size: 200% 200%;
@@ -68,7 +67,6 @@
             100% {background-position: 0% 50%}
         }
 
-        /* Contact form */
         .contact-input {
             background-color: rgba(15, 23, 42, 0.9) !important;
             border: 2px solid rgba(59, 130, 246, 0.3) !important;
@@ -115,7 +113,6 @@
         .bg-pattern { pointer-events: none; }
         .hero > .absolute { pointer-events: none; }
 
-        /* Agent card special styling */
         .agent-card {
             background: linear-gradient(135deg, rgba(15, 23, 42, 0.9), rgba(17, 24, 39, 0.95));
             border: 1px solid rgba(16, 185, 129, 0.2);
@@ -293,7 +290,7 @@
         </div>
     </section>
 
-    <!-- Projects Section - FULLY UPDATED -->
+    <!-- Projects Section -->
     <section id="projects" class="py-20">
         <div class="container mx-auto px-4">
             <h2 class="text-3xl md:text-4xl font-bold text-center mb-6">Live Projects & Tools</h2>
@@ -303,7 +300,7 @@
             
             <div class="grid grid-cols-1 md:grid-cols-3 gap-8 project-grid mb-8">
                 
-                <!-- PROJECT 1: CrawDaddy Security (FEATURED) -->
+                <!-- PROJECT 1: CrawDaddy Security -->
                 <div class="project-card agent-card rounded-xl overflow-hidden shadow-lg transition-all duration-300 transform hover:-translate-y-2">
                     <div class="project-img-container relative">
                         <div class="w-full h-full flex items-center justify-center" style="background: linear-gradient(135deg, #0a0a0f 0%, #111118 100%);">
@@ -375,7 +372,7 @@
                     </div>
                 </div>
 
-                <!-- PROJECT 3: BTC Battle / Base Signal -->
+                <!-- PROJECT 3: BTC Battle -->
                 <div class="project-card bg-gray-900/30 rounded-xl overflow-hidden shadow-lg hover:shadow-blue-500/10 transition-all duration-300 transform hover:-translate-y-2 border border-blue-500/30">
                     <div class="project-img-container relative">
                         <img src="https://base-signal.vercel.app/screenshot-1.png" alt="BTC Battle" class="project-img" onerror="this.src='https://images.unsplash.com/photo-1639762681485-074b7f938ba0?q=80&w=2832&auto=format&fit=crop'">
@@ -408,7 +405,6 @@
 
             <!-- Second row -->
             <div class="grid grid-cols-1 md:grid-cols-3 gap-8 project-grid">
-
                 <!-- PROJECT 4: Conway Security Cluster -->
                 <div class="project-card agent-card rounded-xl overflow-hidden shadow-lg transition-all duration-300 transform hover:-translate-y-2">
                     <div class="project-img-container relative">
@@ -531,6 +527,9 @@
                             <a href="https://linkedin.com/in/michael-bennett-a29a93103" class="text-blue-400 hover:text-blue-300 flex items-center text-sm">
                                 <i class="fab fa-linkedin mr-2"></i>LinkedIn
                             </a>
+                            <a href="https://www.linkedin.com/company/quantumshieldlabs/" class="text-blue-400 hover:text-blue-300 flex items-center text-sm">
+                                <i class="fab fa-linkedin mr-2"></i>QSL Company
+                            </a>
                         </div>
                     </div>
                 </div>
@@ -644,7 +643,6 @@
                 <div class="relative">
                     <div class="absolute top-0 left-1/2 w-1 h-full bg-blue-500 bg-opacity-30 transform -translate-x-1/2"></div>
                     
-                    <!-- Done: Foundation -->
                     <div class="relative z-10 mb-12">
                         <div class="flex flex-col md:flex-row items-center">
                             <div class="flex items-center justify-center order-1 md:order-1 w-full md:w-1/2 mb-6 md:mb-0 md:pr-10 text-right">
@@ -666,7 +664,6 @@
                         </div>
                     </div>
 
-                    <!-- Done: CrawDaddy -->
                     <div class="relative z-10 mb-12">
                         <div class="flex flex-col md:flex-row items-center">
                             <div class="w-full md:w-1/2 order-2 md:order-1 md:pr-10 invisible md:visible"></div>
@@ -688,7 +685,6 @@
                         </div>
                     </div>
 
-                    <!-- Current -->
                     <div class="relative z-10 mb-12">
                         <div class="flex flex-col md:flex-row items-center">
                             <div class="flex items-center justify-center order-1 md:order-1 w-full md:w-1/2 mb-6 md:mb-0 md:pr-10 text-right">
@@ -710,7 +706,6 @@
                         </div>
                     </div>
 
-                    <!-- Q2 -->
                     <div class="relative z-10 mb-12">
                         <div class="flex flex-col md:flex-row items-center">
                             <div class="w-full md:w-1/2 order-2 md:order-1 md:pr-10 invisible md:visible"></div>
@@ -731,7 +726,6 @@
                         </div>
                     </div>
 
-                    <!-- Q3+ -->
                     <div class="relative z-10">
                         <div class="flex flex-col md:flex-row items-center">
                             <div class="flex items-center justify-center order-1 md:order-1 w-full md:w-1/2 mb-6 md:mb-0 md:pr-10 text-right">
@@ -753,7 +747,6 @@
                     </div>
                 </div>
 
-                <!-- Stats -->
                 <div class="mt-16 bg-gradient-to-r from-green-900/20 to-blue-900/20 rounded-xl p-8 border border-green-500/20">
                     <h3 class="text-2xl font-semibold text-center mb-8">Live as of March 2026</h3>
                     <div class="grid grid-cols-2 md:grid-cols-4 gap-6 text-center">
@@ -794,7 +787,6 @@
     <section id="selarix" class="py-20 bg-gradient-to-br from-gray-900/80 to-black">
       <div class="container mx-auto px-4">
         <div class="max-w-6xl mx-auto">
-
           <div class="text-center mb-16">
             <span class="inline-block bg-green-500/10 text-green-400 text-xs font-mono px-4 py-2 rounded-full mb-4 border border-green-500/20">
               ⬡ SELARIX — The Sovereign Fortress
@@ -807,10 +799,9 @@
             </p>
           </div>
 
-          <!-- Live stats bar -->
           <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-16">
             <div class="bg-gray-900/60 rounded-xl p-5 border border-green-500/20 text-center">
-              <div class="text-2xl font-bold text-green-400 font-mono" id="selarix-agents">4/25</div>
+              <div class="text-2xl font-bold text-green-400 font-mono">4/25</div>
               <div class="text-gray-400 text-sm mt-1">Cabinet agents built</div>
             </div>
             <div class="bg-gray-900/60 rounded-xl p-5 border border-blue-500/20 text-center">
@@ -827,13 +818,11 @@
             </div>
           </div>
 
-          <!-- Cabinet roster -->
           <div class="mb-16">
             <h3 class="text-xl font-semibold mb-6 flex items-center">
               <span class="text-green-400 mr-2">▸</span> The Cabinet — Agent Roster
             </h3>
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
-
               <div class="agent-card rounded-xl p-5 transition-all duration-300 transform hover:-translate-y-1">
                 <div class="flex items-center justify-between mb-3">
                   <span class="text-2xl">🦞</span>
@@ -848,7 +837,6 @@
                   <span class="text-xs text-gray-500 font-mono">EC2 · Virtuals ACP · x402</span>
                 </div>
               </div>
-
               <div class="agent-card rounded-xl p-5 transition-all duration-300 transform hover:-translate-y-1">
                 <div class="flex items-center justify-between mb-3">
                   <span class="text-2xl">⛏️</span>
@@ -863,7 +851,6 @@
                   <span class="text-xs text-gray-500 font-mono">Hostinger · Docker · SN61</span>
                 </div>
               </div>
-
               <div class="agent-card rounded-xl p-5 transition-all duration-300 transform hover:-translate-y-1">
                 <div class="flex items-center justify-between mb-3">
                   <span class="text-2xl">🔬</span>
@@ -878,7 +865,6 @@
                   <span class="text-xs text-gray-500 font-mono">EC2 · systemd · Telegram</span>
                 </div>
               </div>
-
               <div class="agent-card rounded-xl p-5 transition-all duration-300 transform hover:-translate-y-1" style="opacity: 0.7;">
                 <div class="flex items-center justify-between mb-3">
                   <span class="text-2xl">🏰</span>
@@ -891,14 +877,12 @@
                   <span class="text-xs text-gray-500 font-mono">Conway · Base · ERC-8004</span>
                 </div>
               </div>
-
             </div>
             <p class="text-gray-500 text-xs text-center mt-4 font-mono">
               21 more agents planned across Security, Intelligence, Engineering, Content, Operations, and AWS/Enterprise divisions
             </p>
           </div>
 
-          <!-- Phase roadmap -->
           <div class="mb-16">
             <h3 class="text-xl font-semibold mb-6 flex items-center">
               <span class="text-blue-400 mr-2">▸</span> SELARIX Build Phases
@@ -937,7 +921,6 @@
             </div>
           </div>
 
-          <!-- CTA -->
           <div class="text-center bg-gradient-to-r from-green-900/20 to-blue-900/20 rounded-2xl p-8 border border-green-500/20">
             <h3 class="text-xl font-semibold mb-2">Follow the build</h3>
             <p class="text-gray-400 mb-6">Everything is built in public. Watch the swarm grow in real time.</p>
@@ -953,12 +936,11 @@
               </a>
             </div>
           </div>
-
         </div>
       </div>
     </section>
 
-    <!-- Healthcare Consulting Focus Section -->
+    <!-- Healthcare Consulting Section -->
     <section class="py-20 bg-gradient-to-r from-blue-900/20 to-cyan-900/20">
         <div class="container mx-auto px-4">
             <div class="max-w-5xl mx-auto">
@@ -1219,7 +1201,7 @@
                 </div>
                 <div class="flex space-x-6">
                     <a href="https://github.com/mbennett-labs" class="hover:text-blue-500 transition" aria-label="GitHub"><i class="fab fa-github text-xl"></i></a>
-                    <a href="https://www.linkedin.com/in/michael-bennett-a29a93103/" class="hover:text-blue-500 transition" aria-label="LinkedIn"><i class="fab fa-linkedin text-xl"></i></a>
+                    <a href="https://www.linkedin.com/company/quantumshieldlabs/" class="hover:text-blue-500 transition" aria-label="LinkedIn Company"><i class="fab fa-linkedin text-xl"></i></a>
                     <a href="https://x.com/QuarkMichael" class="hover:text-blue-500 transition" aria-label="Twitter"><i class="fab fa-twitter text-xl"></i></a>
                     <a href="https://quantumshieldlabs.dev/agent/" class="hover:text-green-500 transition" aria-label="CrawDaddy">🦞</a>
                 </div>
