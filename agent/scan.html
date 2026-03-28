@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CrawDaddy Scanner — Pay & Scan</title>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600;700&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-deep: #0a0a0f;
+            --bg-card: #111118;
+            --bg-card-hover: #16161f;
+            --border: #1e1e2e;
+            --text-primary: #e8e6e3;
+            --text-secondary: #8a8a9a;
+            --text-muted: #55556a;
+            --accent-red: #ff2d4a;
+            --accent-green: #00ff88;
+            --accent-cyan: #00d4ff;
+            --gradient-fire: linear-gradient(135deg, #ff2d4a, #ff6b2d);
+            --gradient-scan: linear-gradient(135deg, #00ff88, #00d4ff);
+            --font-display: 'Outfit', sans-serif;
+            --font-mono: 'JetBrains Mono', monospace;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            background: var(--bg-deep);
+            color: var(--text-primary);
+            font-family: var(--font-display);
+            line-height: 1.6;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 520px;
+            padding: 1.5rem;
+        }
+
+        .header {
+            text-align: center;
+            padding: 2rem 0 1.5rem;
+        }
+
+        .header .brand {
+            font-size: 1.5rem;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+        }
+
+        .header .brand .lobster { font-size: 1.8rem; }
+
+        .header .brand-text {
+            background: var(--gradient-fire);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .header .subtitle {
+            font-family: var(--font-mono);
+            font-size: 0.75rem;
+            color: var(--text-muted);
+            margin-top: 0.25rem;
+        }
+
+        .card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .card h2 {
+            font-size: 1.1rem;
+            margin-bottom: 0.75rem;
+            font-weight: 600;
+        }
+
+        .step-label {
+            font-family: var(--font-mono);
+            font-size: 0.7rem;
+            color: var(--accent-green);
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            margin-bottom: 0.5rem;
+        }
+
+        .input-group {
+            margin-bottom: 1rem;
+        }
+
+        .input-group label {
+            display: block;
+            font-family: var(--font-mono);
+            font-size: 0.75rem;
+            color: var(--text-secondary);
+            margin-bottom: 0.4rem;
+        }
+
+        .input-group input {
+            width: 100%;
+            background: var(--bg-deep);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 0.75rem 1rem;
+            color: var(--text-primary);
+            font-family: var(--font-mono);
+            font-size: 0.85rem;
+            outline: none;
+            transition: border-color 0.2s;
+        }
+
+        .input-group input:focus {
+            border-color: var(--accent-cyan);
+        }
+
+        .input-group input::placeholder {
+            color: var(--text-muted);
+        }
+
+        .btn-primary {
+            width: 100%;
+            background: var(--gradient-scan);
+            border: none;
+            border-radius: 8px;
+            padding: 0.85rem;
+            color: #0a0a0f;
+            font-family: var(--font-display);
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: opacity 0.2s;
+        }
+
+        .btn-primary:hover { opacity: 0.9; }
+        .btn-primary:disabled {
+            opacity: 0.4;
+            cursor: not-allowed;
+        }
+
+        .error-msg {
+            font-family: var(--font-mono);
+            font-size: 0.75rem;
+            color: var(--accent-red);
+            text-align: center;
+            margin-top: 0.75rem;
+            display: none;
+        }
+
+        .success-card {
+            display: none;
+            text-align: center;
+            padding: 2rem 1rem;
+        }
+
+        .success-card .check {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        .success-card h2 {
+            color: var(--accent-green);
+            margin-bottom: 0.5rem;
+        }
+
+        .success-card p {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+
+        .success-card .tx-link {
+            font-family: var(--font-mono);
+            font-size: 0.7rem;
+            color: var(--accent-cyan);
+            margin-top: 1rem;
+            display: block;
+        }
+
+        .price-note {
+            font-family: var(--font-mono);
+            font-size: 0.7rem;
+            color: var(--text-muted);
+            text-align: center;
+            margin-top: 0.5rem;
+        }
+
+        .miniapp-footer {
+            text-align: center;
+            padding: 1.5rem 0;
+            font-family: var(--font-mono);
+            font-size: 0.65rem;
+            color: var(--text-muted);
+        }
+
+        .miniapp-footer a {
+            color: var(--text-secondary);
+            text-decoration: none;
+        }
+
+        .miniapp-footer a:hover {
+            color: var(--accent-green);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <div class="brand">
+                <span class="lobster">&#x1F99E;</span>
+                <span class="brand-text">CrawDaddy Scanner</span>
+            </div>
+            <div class="subtitle">// Pay & Scan — $0.49 USDC on Base</div>
+        </div>
+
+        <!-- Form -->
+        <div id="form-section">
+            <div class="card">
+                <div class="step-label" id="scan-type-label">Repo Scan</div>
+                <h2>Enter your target</h2>
+
+                <div class="input-group">
+                    <label id="target-label">GitHub Repository URL</label>
+                    <input type="text" id="target-input" placeholder="https://github.com/owner/repo">
+                </div>
+
+                <div class="input-group">
+                    <label>Telegram handle (for report delivery)</label>
+                    <input type="text" id="tg-input" placeholder="@username">
+                </div>
+
+                <button class="btn-primary" id="btn-pay" onclick="payAndScan()">Pay $0.49 & Scan</button>
+                <div class="price-note">0.49 USDC on Base (Chain 8453) via wallet</div>
+                <div class="error-msg" id="error-msg"></div>
+            </div>
+        </div>
+
+        <!-- Success -->
+        <div class="card success-card" id="success-section">
+            <div class="check">&#x2705;</div>
+            <h2>Payment confirmed!</h2>
+            <p>Scan queued &mdash; check your Telegram for the report.</p>
+            <a class="tx-link" id="tx-link" href="#" target="_blank">View transaction on BaseScan</a>
+        </div>
+
+        <div class="miniapp-footer">
+            <a href="https://quantumshieldlabs.dev">Quantum Shield Labs</a> &middot;
+            <a href="index.html">CrawDaddy Agent</a><br>
+            &copy; 2026 Quantum Shield Labs LLC
+        </div>
+    </div>
+
+    <script>
+        var API_URL = 'https://urw-promptly-responsibility-cad.trycloudflare.com/api/scan-request';
+        var WALLET = '0x25B50fEd69175e474F9702C0613413F8323809a8';
+        var USDC = '0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913';
+        var AMOUNT_RAW = 490000; // 0.49 USDC, 6 decimals
+        var BASE_CHAIN_ID = '0x2105';
+
+        // Read ?type= from URL
+        var params = new URLSearchParams(window.location.search);
+        var scanType = params.get('type') || 'repo';
+
+        if (scanType === 'token') {
+            document.getElementById('scan-type-label').textContent = 'Token / Contract Scan';
+            document.getElementById('target-label').textContent = 'Token Contract or Wallet Address';
+            document.getElementById('target-input').placeholder = '0x...';
+        }
+
+        function showError(msg) {
+            var el = document.getElementById('error-msg');
+            el.textContent = msg;
+            el.style.display = 'block';
+        }
+
+        function hideError() {
+            document.getElementById('error-msg').style.display = 'none';
+        }
+
+        async function payAndScan() {
+            var target = document.getElementById('target-input').value.trim();
+            var tgHandle = document.getElementById('tg-input').value.trim();
+
+            if (!target) {
+                document.getElementById('target-input').focus();
+                return;
+            }
+
+            hideError();
+            var btn = document.getElementById('btn-pay');
+            btn.disabled = true;
+
+            try {
+                // Check wallet
+                if (!window.ethereum) {
+                    throw new Error('No wallet detected. Install MetaMask or Coinbase Wallet.');
+                }
+
+                btn.textContent = 'Connecting wallet...';
+                var accounts = await window.ethereum.request({ method: 'eth_requestAccounts' });
+                var from = accounts[0];
+
+                // Switch to Base
+                btn.textContent = 'Switching to Base...';
+                try {
+                    await window.ethereum.request({
+                        method: 'wallet_switchEthereumChain',
+                        params: [{ chainId: BASE_CHAIN_ID }]
+                    });
+                } catch (switchErr) {
+                    await window.ethereum.request({
+                        method: 'wallet_addEthereumChain',
+                        params: [{
+                            chainId: BASE_CHAIN_ID,
+                            chainName: 'Base',
+                            nativeCurrency: { name: 'ETH', symbol: 'ETH', decimals: 18 },
+                            rpcUrls: ['https://mainnet.base.org'],
+                            blockExplorerUrls: ['https://basescan.org']
+                        }]
+                    });
+                }
+
+                // Build ERC-20 transfer: transfer(address,uint256)
+                btn.textContent = 'Confirm in wallet...';
+                var recipientPadded = WALLET.toLowerCase().replace('0x', '').padStart(64, '0');
+                var amountHex = AMOUNT_RAW.toString(16).padStart(64, '0');
+                var calldata = '0xa9059cbb' + recipientPadded + amountHex;
+
+                var txHash = await window.ethereum.request({
+                    method: 'eth_sendTransaction',
+                    params: [{
+                        from: from,
+                        to: USDC,
+                        data: calldata,
+                        value: '0x0'
+                    }]
+                });
+
+                // Register scan with backend
+                btn.textContent = 'Registering scan...';
+                await fetch(API_URL, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        scan_type: scanType,
+                        target: target,
+                        telegram_handle: tgHandle || null,
+                        telegram_id: null,
+                        tx_hash: txHash
+                    })
+                });
+
+                // Show success
+                document.getElementById('form-section').style.display = 'none';
+                document.getElementById('success-section').style.display = 'block';
+                document.getElementById('tx-link').href = 'https://basescan.org/tx/' + txHash;
+
+            } catch (err) {
+                btn.disabled = false;
+                btn.textContent = 'Pay $0.49 & Scan';
+                showError(err.message || 'Payment failed');
+            }
+        }
+    </script>
+</body>
+</html>
