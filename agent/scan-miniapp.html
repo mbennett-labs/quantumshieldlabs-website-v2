@@ -6,6 +6,7 @@
     <title>CrawDaddy Scanner — Pay & Scan</title>
     <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600;700&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <script src="https://telegram.org/js/telegram-web-app.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
     <style>
         :root {
             --bg-deep: #0a0a0f;
@@ -213,12 +214,68 @@
             cursor: not-allowed;
         }
 
-        .price-tag {
-            font-family: var(--font-mono);
-            font-size: 0.75rem;
-            color: var(--text-muted);
+        /* Payment step */
+        .payment-amount {
             text-align: center;
-            margin-top: 0.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .payment-amount .amount {
+            font-family: var(--font-mono);
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--accent-green);
+        }
+
+        .payment-amount .currency {
+            font-family: var(--font-mono);
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+        }
+
+        .payment-amount .network {
+            font-family: var(--font-mono);
+            font-size: 0.7rem;
+            color: var(--text-muted);
+            margin-top: 0.25rem;
+        }
+
+        .qr-container {
+            display: flex;
+            justify-content: center;
+            margin: 1.25rem 0;
+            padding: 1rem;
+            background: #ffffff;
+            border-radius: 12px;
+            width: fit-content;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .wallet-address {
+            background: var(--bg-deep);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 0.6rem 0.75rem;
+            font-family: var(--font-mono);
+            font-size: 0.65rem;
+            color: var(--text-secondary);
+            word-break: break-all;
+            text-align: center;
+            cursor: pointer;
+            transition: border-color 0.2s;
+            position: relative;
+        }
+
+        .wallet-address:hover {
+            border-color: var(--accent-cyan);
+        }
+
+        .wallet-address .copy-hint {
+            font-size: 0.6rem;
+            color: var(--text-muted);
+            display: block;
+            margin-top: 0.25rem;
         }
 
         /* Status step */
@@ -279,15 +336,6 @@
             color: var(--text-secondary);
         }
 
-        .error-msg {
-            font-family: var(--font-mono);
-            font-size: 0.75rem;
-            color: var(--accent-red);
-            text-align: center;
-            margin-top: 0.75rem;
-            display: none;
-        }
-
         /* Footer */
         .miniapp-footer {
             text-align: center;
@@ -314,13 +362,13 @@
                 <span class="lobster">&#x1F99E;</span>
                 <span class="brand-text">CrawDaddy Scanner</span>
             </div>
-            <div class="subtitle">// x402 Pay & Scan — $0.49 USDC on Base</div>
+            <div class="subtitle">// Pay & Scan — $0.49 USDC on Base</div>
         </div>
 
         <!-- STEP 1: Select scan type & enter target -->
         <div id="step1" class="step active">
             <div class="card">
-                <div class="step-label">Step 1 &mdash; Target & Pay</div>
+                <div class="step-label">Step 1 &mdash; Target</div>
                 <h2>What do you want to scan?</h2>
 
                 <div class="scan-types">
@@ -341,27 +389,54 @@
 
                 <div id="telegram-section"></div>
 
-                <button class="btn-primary" id="btn-pay" onclick="payAndScan()">Pay $0.49 & Scan</button>
-                <div class="price-tag">0.49 USDC on Base (Chain 8453) via x402</div>
-                <div class="error-msg" id="error-msg"></div>
+                <button class="btn-primary" id="btn-continue" onclick="goToPayment()">Continue to Payment</button>
             </div>
         </div>
 
-        <!-- STEP 2: Status polling -->
+        <!-- STEP 2: Payment -->
         <div id="step2" class="step">
             <div class="card">
-                <div class="step-label">Step 2 &mdash; Scan</div>
+                <div class="step-label">Step 2 &mdash; Payment</div>
+                <h2>Send USDC on Base</h2>
+
+                <div class="payment-amount">
+                    <div class="amount" id="pay-amount">$0.490000</div>
+                    <div class="currency">USDC on Base Network</div>
+                    <div class="network">Chain ID: 8453</div>
+                </div>
+
+                <div class="qr-container" id="qr-code"></div>
+
+                <div class="wallet-address" onclick="copyAddress()">
+                    0x25B50fEd69175e474F9702C0613413F8323809a8
+                    <span class="copy-hint">tap to copy</span>
+                </div>
+
+                <div class="session-info">
+                    <div>Session: <span class="val" id="session-id-display">—</span></div>
+                    <div>Exact amount: <span class="val" id="exact-amount-display">—</span></div>
+                    <div>Target: <span class="val" id="target-display">—</span></div>
+                </div>
+            </div>
+
+            <button class="btn-primary" onclick="goToStatus()">I've Sent Payment</button>
+        </div>
+
+        <!-- STEP 3: Status polling -->
+        <div id="step3" class="step">
+            <div class="card">
+                <div class="step-label">Step 3 &mdash; Scan</div>
                 <h2>Scan Status</h2>
 
                 <div class="status-display" id="status-display">
                     <div class="status-spinner"></div>
-                    <div class="status-text" id="status-text">Scanning in progress...</div>
+                    <div class="status-text" id="status-text">Waiting for payment...</div>
                     <div class="status-sub" id="status-sub">Checking every 5 seconds</div>
                 </div>
 
                 <div class="session-info">
                     <div>Session: <span class="val" id="status-session-id">—</span></div>
-                    <div>Amount: <span class="val" id="status-amount">$0.49 USDC</span></div>
+                    <div>Amount: <span class="val" id="status-amount">—</span></div>
                     <div>Target: <span class="val" id="status-target">—</span></div>
                 </div>
             </div>
@@ -377,15 +452,17 @@
     <script>
         // -- Config --
         var PROXY = 'https://quantumshieldlabs.dev/api/proxy.php?path=';
-        var PAY_URL = PROXY + 'api/pay';
+        var SCAN_REQUEST_URL = PROXY + 'api/scan-request';
         var STATUS_URL = PROXY + 'api/scan-status';
         var SESSION_KEY = 'crawdaddy_session';
-        var SESSION_TTL = 24 * 60 * 60 * 1000;
+        var SESSION_TTL = 24 * 60 * 60 * 1000; // 24 hours
 
         // -- State --
         var scanType = 'repo';
         var sessionId = '';
+        var exactAmount = 0;
         var pollTimer = null;
+        var WALLET = '0x25B50fEd69175e474F9702C0613413F8323809a8';
 
         // -- Telegram WebApp detection --
         var tg = window.Telegram && window.Telegram.WebApp;
@@ -417,34 +494,48 @@
         }
         buildTelegramSection();
 
-        // -- Session resume on page load --
+        // -- Session resume --
+        function tryResumeSession() {
+            try {
+                var raw = localStorage.getItem(SESSION_KEY);
+                if (!raw) return false;
+                var saved = JSON.parse(raw);
+                if (Date.now() - saved.created > SESSION_TTL) {
+                    localStorage.removeItem(SESSION_KEY);
+                    return false;
+                }
+                sessionId = saved.session_id;
+                exactAmount = saved.amount || 0.49;
+                scanType = saved.scan_type || 'repo';
+
+                document.getElementById('status-session-id').textContent = sessionId;
+                document.getElementById('status-amount').textContent = exactAmount.toFixed(6) + ' USDC';
+                var t = saved.target || '';
+                document.getElementById('status-target').textContent = t.length > 40 ? t.substring(0, 40) + '...' : t;
+
+                showStep(3);
+                startPolling();
+                return true;
+            } catch (e) {
+                return false;
+            }
+        }
+
+        // Show resume link if session exists
         (function() {
             try {
                 var raw = localStorage.getItem(SESSION_KEY);
                 if (!raw) return;
                 var saved = JSON.parse(raw);
-                if (Date.now() - saved.created > SESSION_TTL) {
-                    localStorage.removeItem(SESSION_KEY);
-                    return;
-                }
-                // Show resume link
+                if (Date.now() - saved.created > SESSION_TTL) return;
                 var link = document.createElement('div');
                 link.style.cssText = 'text-align:center;margin-top:0.75rem;';
-                link.innerHTML = '<a href="#" style="font-family:var(--font-mono);font-size:0.7rem;color:var(--accent-cyan);text-decoration:none;" onclick="resumeSession();return false;">Already paid? Resume session ' + saved.session_id + '</a>';
+                link.innerHTML = '<a href="#" style="font-family:var(--font-mono);font-size:0.7rem;color:var(--accent-cyan);text-decoration:none;" onclick="tryResumeSession();return false;">Already paid? Resume session ' + saved.session_id + '</a>';
                 document.getElementById('step1').querySelector('.card').appendChild(link);
             } catch (e) {}
         })();
 
-        function resumeSession() {
-            try {
-                var saved = JSON.parse(localStorage.getItem(SESSION_KEY));
-                sessionId = saved.session_id;
-                showScanStatus(saved.target || '');
-                startPolling();
-            } catch (e) {}
-        }
-
-        // -- Type selection --
+        // -- Step 1: Type selection --
         function selectType(type) {
             scanType = type;
             document.querySelectorAll('.scan-type-btn').forEach(function(btn) {
@@ -461,8 +552,8 @@
             }
         }
 
-        // -- x402 Pay & Scan flow --
-        function payAndScan() {
+        // -- Step 2: Payment --
+        function goToPayment() {
             var target = document.getElementById('target-input').value.trim();
             if (!target) {
                 document.getElementById('target-input').focus();
@@ -470,148 +561,82 @@
             }
 
             var tgId = telegramUser ? String(telegramUser.id) : null;
-            var errEl = document.getElementById('error-msg');
-            errEl.style.display = 'none';
+            var tgHandle = null;
+            if (!telegramUser) {
+                var handleEl = document.getElementById('tg-handle');
+                tgHandle = handleEl ? handleEl.value.trim() : null;
+            }
 
-            var btn = document.getElementById('btn-pay');
+            var btn = document.getElementById('btn-continue');
             btn.disabled = true;
-            btn.textContent = 'Connecting wallet...';
+            btn.textContent = 'Creating session...';
 
-            var body = JSON.stringify({
-                scan_type: scanType,
-                target: target,
-                telegram_id: tgId
-            });
-
-            // Step 1: Initial request — server returns 402 with payment requirements
-            fetch(PAY_URL, {
+            fetch(SCAN_REQUEST_URL, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
-                body: body
-            })
-            .then(function(r) {
-                if (r.status !== 402) {
-                    throw new Error('Expected 402, got ' + r.status);
-                }
-                return r.json().then(function(data) {
-                    return {
-                        amount: r.headers.get('X-Payment-Amount') || data.amount,
-                        asset: r.headers.get('X-Payment-Asset') || data.asset,
-                        recipient: r.headers.get('X-Payment-Recipient') || data.recipient,
-                        chain: r.headers.get('X-Payment-Chain') || data.chain
-                    };
-                });
-            })
-            .then(function(payReq) {
-                btn.textContent = 'Requesting payment...';
-
-                // Check for window.ethereum (MetaMask, Coinbase Wallet, etc.)
-                if (!window.ethereum) {
-                    throw new Error('No wallet detected. Install MetaMask or Coinbase Wallet.');
-                }
-
-                // Request wallet connection
-                return window.ethereum.request({ method: 'eth_requestAccounts' })
-                .then(function(accounts) {
-                    var from = accounts[0];
-
-                    // Switch to Base if needed
-                    return window.ethereum.request({
-                        method: 'wallet_switchEthereumChain',
-                        params: [{ chainId: '0x' + parseInt(payReq.chain).toString(16) }]
-                    }).catch(function() {
-                        // Chain not added — try adding Base
-                        return window.ethereum.request({
-                            method: 'wallet_addEthereumChain',
-                            params: [{
-                                chainId: '0x2105',
-                                chainName: 'Base',
-                                nativeCurrency: { name: 'ETH', symbol: 'ETH', decimals: 18 },
-                                rpcUrls: ['https://mainnet.base.org'],
-                                blockExplorerUrls: ['https://basescan.org']
-                            }]
-                        });
-                    }).then(function() {
-                        btn.textContent = 'Confirm in wallet...';
-
-                        // Build ERC-20 transfer calldata
-                        // transfer(address,uint256) selector = 0xa9059cbb
-                        var amountHex = parseInt(payReq.amount).toString(16).padStart(64, '0');
-                        var recipientPadded = payReq.recipient.toLowerCase().replace('0x', '').padStart(64, '0');
-                        var data = '0xa9059cbb' + recipientPadded + amountHex;
-
-                        return window.ethereum.request({
-                            method: 'eth_sendTransaction',
-                            params: [{
-                                from: from,
-                                to: payReq.asset,
-                                data: data,
-                                value: '0x0'
-                            }]
-                        });
-                    }).then(function(txHash) {
-                        btn.textContent = 'Payment sent! Starting scan...';
-
-                        // Build payment proof and retry with X-Payment-Payload
-                        var proof = btoa(JSON.stringify({
-                            tx_hash: txHash,
-                            amount: payReq.amount,
-                            recipient: payReq.recipient,
-                            asset: payReq.asset,
-                            chain: payReq.chain,
-                            from: from
-                        }));
-
-                        return fetch(PAY_URL, {
-                            method: 'POST',
-                            headers: {
-                                'Content-Type': 'application/json',
-                                'X-Payment-Payload': proof
-                            },
-                            body: body
-                        });
-                    });
-                });
+                body: JSON.stringify({
+                    scan_type: scanType,
+                    target: target,
+                    telegram_id: tgId,
+                    telegram_handle: tgHandle
+                })
             })
             .then(function(r) { return r.json(); })
             .then(function(data) {
-                if (!data.session_id) {
-                    throw new Error(data.error || 'No session returned');
-                }
-
                 sessionId = data.session_id;
+                exactAmount = parseFloat(data.amount);
 
-                // Persist to localStorage
+                // Persist session to localStorage
                 localStorage.setItem(SESSION_KEY, JSON.stringify({
                     session_id: sessionId,
+                    amount: exactAmount,
                     scan_type: scanType,
                     target: target,
                     created: Date.now()
                 }));
 
-                showScanStatus(target);
-                startPolling();
+                document.getElementById('pay-amount').textContent = '$' + exactAmount.toFixed(6);
+                document.getElementById('session-id-display').textContent = sessionId;
+                document.getElementById('exact-amount-display').textContent = exactAmount.toFixed(6) + ' USDC';
+                document.getElementById('target-display').textContent = target.length > 40 ? target.substring(0, 40) + '...' : target;
+
+                // Generate QR
+                var qrContainer = document.getElementById('qr-code');
+                qrContainer.innerHTML = '';
+                var qrData = 'ethereum:' + WALLET + '@8453?value=' + exactAmount.toFixed(6);
+                new QRCode(qrContainer, {
+                    text: qrData,
+                    width: 200,
+                    height: 200,
+                    colorDark: '#0a0a0f',
+                    colorLight: '#ffffff',
+                    correctLevel: QRCode.CorrectLevel.M
+                });
+
+                btn.disabled = false;
+                btn.textContent = 'Continue to Payment';
+                showStep(2);
             })
             .catch(function(err) {
                 btn.disabled = false;
-                btn.textContent = 'Pay $0.49 & Scan';
-                errEl.textContent = err.message || 'Payment failed';
-                errEl.style.display = 'block';
+                btn.textContent = 'Continue to Payment';
+                alert('Failed to create session: ' + err.message);
             });
         }
 
-        // -- Show scan status step --
-        function showScanStatus(target) {
+        // -- Step 3: Polling --
+        function goToStatus() {
             document.getElementById('status-session-id').textContent = sessionId;
-            var t = target || '';
-            document.getElementById('status-target').textContent = t.length > 40 ? t.substring(0, 40) + '...' : t;
-            showStep(2);
+            document.getElementById('status-amount').textContent = exactAmount.toFixed(6) + ' USDC';
+            var target = document.getElementById('target-input').value.trim();
+            document.getElementById('status-target').textContent = target.length > 40 ? target.substring(0, 40) + '...' : target;
+
+            showStep(3);
+            startPolling();
         }
 
-        // -- Polling --
         function startPolling() {
-            updateStatus('Scanning in progress...', 'Checking every 5 seconds');
-            checkStatus();
+            updateStatus('Waiting for payment...', 'Checking every 5 seconds');
             pollTimer = setInterval(checkStatus, 5000);
         }
 
@@ -619,7 +644,9 @@
             fetch(STATUS_URL + '/' + sessionId)
                 .then(function(r) { return r.json(); })
                 .then(function(data) {
-                    if (data.status === 'scanning') {
+                    if (data.status === 'payment_detected' || data.status === 'paid' || data.status === 'queued') {
+                        updateStatus('Payment detected! Scan queued...', 'CrawDaddy is working on your report');
+                    } else if (data.status === 'scanning') {
                         updateStatus('Scanning in progress...', 'CrawDaddy is analyzing your target');
                     } else if (data.status === 'complete' || data.status === 'delivered') {
                         updateStatus('Scan complete!', 'Your report is ready');
@@ -641,7 +668,9 @@
                         localStorage.removeItem(SESSION_KEY);
                     }
                 })
-                .catch(function() {});
+                .catch(function() {
+                    // Network error — keep polling silently
+                });
         }
 
         function updateStatus(text, sub) {
@@ -653,6 +682,15 @@
         function showStep(n) {
             document.querySelectorAll('.step').forEach(function(s) { s.classList.remove('active'); });
             document.getElementById('step' + n).classList.add('active');
+        }
+
+        // -- Copy address --
+        function copyAddress() {
+            navigator.clipboard.writeText(WALLET).then(function() {
+                var el = document.querySelector('.wallet-address .copy-hint');
+                el.textContent = 'copied!';
+                setTimeout(function() { el.textContent = 'tap to copy'; }, 2000);
+            });
         }
     </script>
 </body>
