@@ -456,8 +456,8 @@
         let exactAmount = 0;
         let pollTimer = null;
         const WALLET = '0x25B50fEd69175e474F9702C0613413F8323809a8';
-        const API_BASE = 'http://3.133.137.92:3001/api/scan-status';
-        const SCAN_REQUEST_URL = 'http://3.133.137.92:3001/api/scan-request';
+        const API_BASE = 'https://quantumshieldlabs.dev/api/proxy.php?path=api/scan-status';
+        const SCAN_REQUEST_URL = 'https://quantumshieldlabs.dev/api/proxy.php?path=api/scan-request';
         const SESSION_KEY = 'crawdaddy_session';
         const SESSION_TTL = 24 * 60 * 60 * 1000; // 24 hours
 
@@ -653,7 +653,7 @@
                         if (data.download_url) {
                             var dlLink = document.createElement('div');
                             dlLink.style.cssText = 'text-align:center;margin-top:1rem;';
-                            dlLink.innerHTML = '<a href="http://3.133.137.92:3001' + data.download_url + '" style="color:var(--accent-green);font-family:var(--font-mono);font-size:0.8rem;">Download PDF Report</a>';
+                            dlLink.innerHTML = '<a href="https://quantumshieldlabs.dev/api/proxy.php?path=' + data.download_url.replace(/^\//, '') + '" style="color:var(--accent-green);font-family:var(--font-mono);font-size:0.8rem;">Download PDF Report</a>';
                             document.getElementById('status-display').appendChild(dlLink);
                         }
                         if (tg) {
