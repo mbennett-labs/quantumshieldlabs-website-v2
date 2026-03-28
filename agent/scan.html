@@ -157,28 +157,49 @@
             display: none;
         }
 
-        .success-card {
+        .price-note {
+            font-family: var(--font-mono);
+            font-size: 0.7rem;
+            color: var(--text-muted);
+            text-align: center;
+            margin-top: 0.5rem;
+        }
+
+        /* Scan status section */
+        .scan-status {
             display: none;
             text-align: center;
             padding: 2rem 1rem;
         }
 
-        .success-card .check {
-            font-size: 3rem;
-            margin-bottom: 1rem;
+        .spinner {
+            width: 48px;
+            height: 48px;
+            border: 3px solid var(--border);
+            border-top-color: var(--accent-green);
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin: 0 auto 1.25rem;
         }
 
-        .success-card h2 {
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        .scan-status .status-text {
+            font-family: var(--font-mono);
+            font-size: 0.9rem;
             color: var(--accent-green);
             margin-bottom: 0.5rem;
         }
 
-        .success-card p {
-            color: var(--text-secondary);
-            font-size: 0.9rem;
+        .scan-status .status-sub {
+            font-family: var(--font-mono);
+            font-size: 0.7rem;
+            color: var(--text-muted);
         }
 
-        .success-card .tx-link {
+        .scan-status .tx-link {
             font-family: var(--font-mono);
             font-size: 0.7rem;
             color: var(--accent-cyan);
@@ -186,12 +207,30 @@
             display: block;
         }
 
-        .price-note {
+        /* Download button */
+        .btn-download {
+            display: inline-block;
+            background: var(--gradient-scan);
+            border: none;
+            border-radius: 10px;
+            padding: 1rem 2rem;
+            color: #0a0a0f;
+            font-family: var(--font-display);
+            font-size: 1.1rem;
+            font-weight: 700;
+            cursor: pointer;
+            text-decoration: none;
+            margin-top: 1.25rem;
+            transition: opacity 0.2s;
+        }
+
+        .btn-download:hover { opacity: 0.9; }
+
+        .destruct-note {
             font-family: var(--font-mono);
             font-size: 0.7rem;
-            color: var(--text-muted);
-            text-align: center;
-            margin-top: 0.5rem;
+            color: var(--accent-red);
+            margin-top: 0.75rem;
         }
 
         .miniapp-footer {
@@ -233,23 +272,20 @@
                     <input type="text" id="target-input" placeholder="https://github.com/owner/repo">
                 </div>
 
-                <div class="input-group">
-                    <label>Telegram handle (for report delivery)</label>
-                    <input type="text" id="tg-input" placeholder="@username">
-                </div>
-
                 <button class="btn-primary" id="btn-pay" onclick="payAndScan()">Pay $0.49 & Scan</button>
                 <div class="price-note">0.49 USDC on Base (Chain 8453) via wallet</div>
                 <div class="error-msg" id="error-msg"></div>
             </div>
         </div>
 
-        <!-- Success -->
-        <div class="card success-card" id="success-section">
-            <div class="check">&#x2705;</div>
-            <h2>Payment confirmed!</h2>
-            <p>Scan queued &mdash; check your Telegram for the report.</p>
+        <!-- Scan Status -->
+        <div class="card scan-status" id="status-section">
+            <div class="spinner" id="spinner"></div>
+            <div class="status-text" id="status-text">&#x23F3; Payment sent! Registering scan...</div>
+            <div class="status-sub" id="status-sub">Checking every 5 seconds</div>
             <a class="tx-link" id="tx-link" href="#" target="_blank">View transaction on BaseScan</a>
+
+            <div id="download-area"></div>
         </div>
 
         <div class="miniapp-footer">
@@ -260,15 +296,18 @@
     </div>
 
     <script>
-        var API_URL = 'https://urw-promptly-responsibility-cad.trycloudflare.com/api/scan-request';
+        var API_HOST = 'https://urw-promptly-responsibility-cad.trycloudflare.com';
+        var API_SCAN = API_HOST + '/api/scan-request';
+        var API_STATUS = API_HOST + '/api/scan-status/';
         var WALLET = '0x25B50fEd69175e474F9702C0613413F8323809a8';
         var USDC = '0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913';
-        var AMOUNT_RAW = 490000; // 0.49 USDC, 6 decimals
+        var AMOUNT_RAW = 490000;
         var BASE_CHAIN_ID = '0x2105';
 
-        // Read ?type= from URL
         var params = new URLSearchParams(window.location.search);
         var scanType = params.get('type') || 'repo';
+        var sessionId = null;
+        var pollTimer = null;
 
         if (scanType === 'token') {
             document.getElementById('scan-type-label').textContent = 'Token / Contract Scan';
@@ -288,8 +327,6 @@
 
         async function payAndScan() {
             var target = document.getElementById('target-input').value.trim();
-            var tgHandle = document.getElementById('tg-input').value.trim();
-
             if (!target) {
                 document.getElementById('target-input').focus();
                 return;
@@ -300,16 +337,16 @@
             btn.disabled = true;
 
             try {
-                // Check wallet
                 if (!window.ethereum) {
-                    throw new Error('No wallet detected. Install MetaMask or Coinbase Wallet.');
+                    alert('Please install MetaMask or Coinbase Wallet to pay');
+                    btn.disabled = false;
+                    return;
                 }
 
                 btn.textContent = 'Connecting wallet...';
                 var accounts = await window.ethereum.request({ method: 'eth_requestAccounts' });
                 var from = accounts[0];
 
-                // Switch to Base
                 btn.textContent = 'Switching to Base...';
                 try {
                     await window.ethereum.request({
@@ -329,7 +366,6 @@
                     });
                 }
 
-                // Build ERC-20 transfer: transfer(address,uint256)
                 btn.textContent = 'Confirm in wallet...';
                 var recipientPadded = WALLET.toLowerCase().replace('0x', '').padStart(64, '0');
                 var amountHex = AMOUNT_RAW.toString(16).padStart(64, '0');
@@ -345,30 +381,75 @@
                     }]
                 });
 
+                // Show status section
+                document.getElementById('form-section').style.display = 'none';
+                document.getElementById('status-section').style.display = 'block';
+                document.getElementById('tx-link').href = 'https://basescan.org/tx/' + txHash;
+                document.getElementById('status-text').innerHTML = '&#x23F3; Payment sent! Registering scan...';
+
                 // Register scan with backend
-                btn.textContent = 'Registering scan...';
-                await fetch(API_URL, {
+                var resp = await fetch(API_SCAN, {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify({
                         scan_type: scanType,
                         target: target,
-                        telegram_handle: tgHandle || null,
-                        telegram_id: null,
                         tx_hash: txHash
                     })
                 });
+                var data = await resp.json();
+                sessionId = data.session_id;
 
-                // Show success
-                document.getElementById('form-section').style.display = 'none';
-                document.getElementById('success-section').style.display = 'block';
-                document.getElementById('tx-link').href = 'https://basescan.org/tx/' + txHash;
+                document.getElementById('status-text').innerHTML = '&#x1F99E; Scanning in progress...';
+                document.getElementById('status-sub').textContent = 'Session: ' + sessionId;
+
+                // Start polling
+                pollTimer = setInterval(checkStatus, 5000);
 
             } catch (err) {
                 btn.disabled = false;
                 btn.textContent = 'Pay $0.49 & Scan';
                 showError(err.message || 'Payment failed');
             }
+        }
+
+        function checkStatus() {
+            if (!sessionId) return;
+
+            fetch(API_STATUS + sessionId)
+                .then(function(r) { return r.json(); })
+                .then(function(data) {
+                    if (data.status === 'scanning' || data.status === 'payment_detected') {
+                        document.getElementById('status-text').innerHTML = '&#x1F99E; Scanning in progress...';
+                        document.getElementById('status-sub').textContent = 'CrawDaddy is analyzing your target';
+                    } else if (data.status === 'pending_payment') {
+                        document.getElementById('status-text').innerHTML = '&#x23F3; Waiting for payment confirmation...';
+                        document.getElementById('status-sub').textContent = 'Blockchain confirmation pending';
+                    } else if (data.status === 'complete') {
+                        clearInterval(pollTimer);
+
+                        // Hide spinner
+                        document.getElementById('spinner').style.display = 'none';
+                        document.getElementById('status-text').innerHTML = '&#x2705; Scan complete!';
+                        document.getElementById('status-sub').textContent = '';
+
+                        if (data.download_url) {
+                            var area = document.getElementById('download-area');
+                            area.innerHTML =
+                                '<a class="btn-download" href="' + API_HOST + data.download_url + '" target="_blank">&#x2B07; Download Report</a>' +
+                                '<div class="destruct-note">&#x1F525; One-time link &middot; Self-destructs after download &middot; No copies stored</div>';
+                        } else {
+                            document.getElementById('status-sub').textContent = 'Score: ' + (data.scan_score || 'N/A') + '/100 — ' + (data.risk_level || 'UNKNOWN');
+                        }
+                    } else if (data.status === 'failed') {
+                        clearInterval(pollTimer);
+                        document.getElementById('spinner').style.display = 'none';
+                        document.getElementById('status-text').innerHTML = '&#x274C; Scan failed';
+                        document.getElementById('status-text').style.color = 'var(--accent-red)';
+                        document.getElementById('status-sub').textContent = data.error || 'Unknown error';
+                    }
+                })
+                .catch(function() {});
         }
     </script>
 </body>
