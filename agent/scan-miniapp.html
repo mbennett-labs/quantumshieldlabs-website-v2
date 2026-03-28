@@ -451,9 +451,9 @@
 
     <script>
         // -- Config --
-        var PROXY = 'https://quantumshieldlabs.dev/api/proxy.php?path=';
-        var SCAN_REQUEST_URL = PROXY + 'api/scan-request';
-        var STATUS_URL = PROXY + 'api/scan-status';
+        var API_HOST = 'https://urw-promptly-responsibility-cad.trycloudflare.com';
+        var SCAN_REQUEST_URL = API_HOST + '/api/scan-request';
+        var STATUS_URL = API_HOST + '/api/scan-status';
         var SESSION_KEY = 'crawdaddy_session';
         var SESSION_TTL = 24 * 60 * 60 * 1000; // 24 hours
 
@@ -656,7 +656,7 @@
                         if (data.download_url) {
                             var dlLink = document.createElement('div');
                             dlLink.style.cssText = 'text-align:center;margin-top:1rem;';
-                            dlLink.innerHTML = '<a href="https://quantumshieldlabs.dev/api/proxy.php?path=' + data.download_url.replace(/^\//, '') + '" style="color:var(--accent-green);font-family:var(--font-mono);font-size:0.8rem;">Download PDF Report</a>';
+                            dlLink.innerHTML = '<a href="' + API_HOST + data.download_url + '" style="color:var(--accent-green);font-family:var(--font-mono);font-size:0.8rem;">Download PDF Report</a>';
                             document.getElementById('status-display').appendChild(dlLink);
                         }
                         if (tg) {
