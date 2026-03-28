@@ -457,6 +457,9 @@
         let pollTimer = null;
         const WALLET = '0x25B50fEd69175e474F9702C0613413F8323809a8';
         const API_BASE = 'https://quantumshieldlabs.dev/api/scan-status';
+        const SCAN_REQUEST_URL = 'https://quantumshieldlabs.dev/api/scan-request';
+        const SESSION_KEY = 'crawdaddy_session';
+        const SESSION_TTL = 24 * 60 * 60 * 1000; // 24 hours
 
         // -- Telegram WebApp detection --
         const tg = window.Telegram && window.Telegram.WebApp;
@@ -488,6 +491,47 @@
         }
         buildTelegramSection();
 
+        // -- Session resume --
+        function tryResumeSession() {
+            try {
+                var raw = localStorage.getItem(SESSION_KEY);
+                if (!raw) return false;
+                var saved = JSON.parse(raw);
+                if (Date.now() - saved.created > SESSION_TTL) {
+                    localStorage.removeItem(SESSION_KEY);
+                    return false;
+                }
+                sessionId = saved.session_id;
+                exactAmount = saved.amount;
+                scanType = saved.scan_type || 'repo';
+
+                document.getElementById('status-session-id').textContent = sessionId;
+                document.getElementById('status-amount').textContent = exactAmount.toFixed(6) + ' USDC';
+                var t = saved.target || '';
+                document.getElementById('status-target').textContent = t.length > 40 ? t.substring(0, 40) + '...' : t;
+
+                showStep(3);
+                startPolling();
+                return true;
+            } catch (e) {
+                return false;
+            }
+        }
+
+        // Show resume link if session exists
+        (function() {
+            try {
+                var raw = localStorage.getItem(SESSION_KEY);
+                if (!raw) return;
+                var saved = JSON.parse(raw);
+                if (Date.now() - saved.created > SESSION_TTL) return;
+                var link = document.createElement('div');
+                link.style.cssText = 'text-align:center;margin-top:0.75rem;';
+                link.innerHTML = '<a href="#" style="font-family:var(--font-mono);font-size:0.7rem;color:var(--accent-cyan);text-decoration:none;" onclick="tryResumeSession();return false;">Already paid? Resume session ' + saved.session_id + '</a>';
+                document.getElementById('step1').querySelector('.card').appendChild(link);
+            } catch (e) {}
+        })();
+
         // -- Step 1: Type selection --
         function selectType(type) {
             scanType = type;
@@ -513,30 +557,68 @@
                 return;
             }
 
-            // Generate session amount: 0.49 + tiny random for uniqueness
-            var micro = Math.floor(Math.random() * 9) + 1; // 1-9
-            exactAmount = 0.49 + micro * 0.000001;
-            sessionId = Date.now().toString(36) + micro;
+            var tgId = telegramUser ? String(telegramUser.id) : null;
+            var tgHandle = null;
+            if (!telegramUser) {
+                var handleEl = document.getElementById('tg-handle');
+                tgHandle = handleEl ? handleEl.value.trim() : null;
+            }
 
-            document.getElementById('pay-amount').textContent = '$' + exactAmount.toFixed(6);
-            document.getElementById('session-id-display').textContent = sessionId;
-            document.getElementById('exact-amount-display').textContent = exactAmount.toFixed(6) + ' USDC';
-            document.getElementById('target-display').textContent = target.length > 40 ? target.substring(0, 40) + '...' : target;
+            var btn = document.getElementById('btn-continue');
+            btn.disabled = true;
+            btn.textContent = 'Creating session...';
 
-            // Generate QR
-            var qrContainer = document.getElementById('qr-code');
-            qrContainer.innerHTML = '';
-            var qrData = 'ethereum:' + WALLET + '@8453?value=' + exactAmount.toFixed(6);
-            new QRCode(qrContainer, {
-                text: qrData,
-                width: 200,
-                height: 200,
-                colorDark: '#0a0a0f',
-                colorLight: '#ffffff',
-                correctLevel: QRCode.CorrectLevel.M
+            fetch(SCAN_REQUEST_URL, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    scan_type: scanType,
+                    target: target,
+                    telegram_id: tgId,
+                    telegram_handle: tgHandle
+                })
+            })
+            .then(function(r) { return r.json(); })
+            .then(function(data) {
+                sessionId = data.session_id;
+                exactAmount = parseFloat(data.amount);
+
+                // Persist session to localStorage
+                localStorage.setItem(SESSION_KEY, JSON.stringify({
+                    session_id: sessionId,
+                    amount: exactAmount,
+                    scan_type: scanType,
+                    target: target,
+                    created: Date.now()
+                }));
+
+                document.getElementById('pay-amount').textContent = '$' + exactAmount.toFixed(6);
+                document.getElementById('session-id-display').textContent = sessionId;
+                document.getElementById('exact-amount-display').textContent = exactAmount.toFixed(6) + ' USDC';
+                document.getElementById('target-display').textContent = target.length > 40 ? target.substring(0, 40) + '...' : target;
+
+                // Generate QR
+                var qrContainer = document.getElementById('qr-code');
+                qrContainer.innerHTML = '';
+                var qrData = 'ethereum:' + WALLET + '@8453?value=' + exactAmount.toFixed(6);
+                new QRCode(qrContainer, {
+                    text: qrData,
+                    width: 200,
+                    height: 200,
+                    colorDark: '#0a0a0f',
+                    colorLight: '#ffffff',
+                    correctLevel: QRCode.CorrectLevel.M
+                });
+
+                btn.disabled = false;
+                btn.textContent = 'Continue to Payment';
+                showStep(2);
+            })
+            .catch(function(err) {
+                btn.disabled = false;
+                btn.textContent = 'Continue to Payment';
+                alert('Failed to create session: ' + err.message);
             });
-
-            showStep(2);
         }
 
         // -- Step 3: Polling --
@@ -559,17 +641,26 @@
             fetch(API_BASE + '/' + sessionId)
                 .then(function(r) { return r.json(); })
                 .then(function(data) {
-                    if (data.status === 'paid' || data.status === 'queued') {
+                    if (data.status === 'payment_detected' || data.status === 'paid' || data.status === 'queued') {
                         updateStatus('Payment detected! Scan queued...', 'CrawDaddy is working on your report');
+                    } else if (data.status === 'scanning') {
+                        updateStatus('Scanning in progress...', 'CrawDaddy is analyzing your target');
                     } else if (data.status === 'complete' || data.status === 'delivered') {
                         updateStatus('Report incoming \u2014 check this chat', 'Scan complete');
                         clearInterval(pollTimer);
+                        localStorage.removeItem(SESSION_KEY);
                         document.getElementById('status-display').classList.add('status-done');
+                        if (data.download_url) {
+                            var dlLink = document.createElement('div');
+                            dlLink.style.cssText = 'text-align:center;margin-top:1rem;';
+                            dlLink.innerHTML = '<a href="' + data.download_url + '" style="color:var(--accent-green);font-family:var(--font-mono);font-size:0.8rem;">Download PDF Report</a>';
+                            document.getElementById('status-display').appendChild(dlLink);
+                        }
                         if (tg) {
                             tg.showAlert('Scan complete! Your report will appear in this chat.');
                         }
                     }
-                    // 'pending' or unknown = keep waiting
+                    // 'pending_payment' or unknown = keep waiting
                 })
                 .catch(function() {
                     // Network error — keep polling silently
